@@ -10,8 +10,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="Tes">
+    <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/btc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/callback_fasapay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fasapay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/help2pay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pm.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -91,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602598715690</updated>
       <workItem from="1602598722729" duration="2316000" />
-      <workItem from="1602603421193" duration="90000" />
+      <workItem from="1602603421193" duration="373000" />
     </task>
     <task id="LOCAL-00001" summary="Tes">
       <created>1602601013270</created>
@@ -100,7 +105,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602601013270</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tes">
+      <created>1602603586590</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603586590</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tes">
+      <created>1602603647036</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603647036</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,10 +151,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1602603551562" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602603584340">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602603644423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602603584340" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602603644423" />
     <state x="561" y="261" key="Github.ShareDialog" timestamp="1602598987879">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -148,10 +167,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602603525152" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602601019077">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602603655249">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602601019077" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602603655249" />
     <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1602603426006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
