@@ -3,7 +3,7 @@
 $NOTIF_JOB_OFFER = 1;
 $NOTIF_CHAT = 2;
 $NOTIF_HISTORY = 3;
-$BASE_URL = 'http://119.110.66.169';
+$BASE_URL = 'http://localhost';
 //$BASE_URL = 'http://vtal.id';
 // $UPLOAD_DIR = '/var/www/public_html/dev/image';
 $UPLOAD_DIR = '/var/www/html/public_html/image';
@@ -45,6 +45,6 @@ date_default_timezone_set("Asia/Jakarta");
     $lazada_url = 'https://api.lazada.co.id/rest';
     $lazada_appkey = '112345';
     $lazada_appSecret = 'qv9Y6ojEX4xREcmBV77qQnVnvQEQHHM2';
-    
-    
+
+
 ?>

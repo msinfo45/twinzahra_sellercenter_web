@@ -11,12 +11,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/core.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/Model_Core.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/core.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/btc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/callback_fasapay.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fasapay.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help2pay.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/create_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/create_order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/item_products_lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/item_products_lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/items_create_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_create_orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/items_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/order_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_pending.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/order_rts.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_rts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config_type.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config_type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lazada/logs/lazopsdk.log.2020-10-13" beforeDir="false" afterPath="$PROJECT_DIR$/config/lazada/logs/lazopsdk.log.2020-10-13" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/vtallogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/slidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/slidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/orders/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/products/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +69,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/include" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -62,8 +77,18 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\twinzahra\include" />
+      <recent name="C:\xampp\htdocs\twinzahra" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\twinzahra\include\classes" />
+      <recent name="C:\xampp\htdocs\twinzahra\api" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.grunt">
@@ -96,7 +121,12 @@
       <option name="presentableId" value="Default" />
       <updated>1602598715690</updated>
       <workItem from="1602598722729" duration="2316000" />
-      <workItem from="1602603421193" duration="373000" />
+      <workItem from="1602603421193" duration="1578000" />
+      <workItem from="1602605557591" duration="277000" />
+      <workItem from="1602605987721" duration="4040000" />
+      <workItem from="1602637383497" duration="2638000" />
+      <workItem from="1602686290799" duration="16156000" />
+      <workItem from="1602770987478" duration="5429000" />
     </task>
     <task id="LOCAL-00001" summary="Tes">
       <created>1602601013270</created>
@@ -119,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602603647036</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Delete File">
+      <created>1602603844106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603844106</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,21 +177,30 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Tes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tes" />
+    <MESSAGE value="Delete File" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete File" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602601149380">
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602604732147">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1602601149380" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1602604732147" />
     <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1602603551562">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1602603551562" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602603644423">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602776613420">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602603644423" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602776613420" />
+    <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey" timestamp="1602604331969">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1602604331969" />
+    <state x="461" y="121" key="FileChooserDialogImpl" timestamp="1602606139008">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="461" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1602606139008" />
     <state x="561" y="261" key="Github.ShareDialog" timestamp="1602598987879">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -163,17 +209,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="451" y="68" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1602598996759" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1602603525152">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1602606179106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602603525152" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602603655249">
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602606179106" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602603850063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602603655249" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602603850063" />
     <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1602603426006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="391" y="193" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1602603426006" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602772968948">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602772968948" />
   </component>
 </project>

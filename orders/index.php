@@ -2,7 +2,7 @@
 
 require '../include/head.php';
 require '../include/slidebar.php';
-
+//require '../config/config_type.php';
 //Check request content
 $content = $_GET['request'];
 
@@ -44,7 +44,7 @@ var displayProduct = 5;
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"https://sellercenter.twinzahra.com/class/create_order.php",
+         url:"<?php' . $BASE_URL .'?>/class/create_order.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -200,7 +200,7 @@ function loadRTS(){
 	
     function loadProducts(limit){
       $.ajax({
-         url:"https://sellercenter.twinzahra.com/class/order_rts.php",
+         url:"<?php"' . $BASE_URL .'"?>/class/order_rts.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -244,7 +244,7 @@ var displayProduct = 5;
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"https://sellercenter.twinzahra.com/class/order_pending.php",
+         url:"<?php"' . $BASE_URL .'"?>/class/order_pending.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -285,7 +285,7 @@ $(document).on("click", "#tab-0", function () {
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"https://sellercenter.twinzahra.com/class/order_pending.php",
+         url:"<?php"' . $BASE_URL .'"?>/class/order_pending.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -329,7 +329,7 @@ function sound_error() {
 		contentType: 'application/json',
 		processData: false,
 		data: '{"UserID": "5", "order_id": "'+OrderID+'"}',
-        url:'https://sellercenter.twinzahra.com/api/orders.php?request=set_ship',
+        url:'<?php"' . $BASE_URL .'"?>/api/orders.php?request=set_ship',
            
             beforeSend: function () {
                // $('.submitBtn').attr("disabled","disabled");
@@ -394,7 +394,7 @@ function sound_error() {
             <div class="modal-body">
                	<?php
 					$chAC = curl_init();
-					curl_setopt($chAC, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=get_shipment_providers');				
+					curl_setopt($chAC, CURLOPT_URL, '<?php"' . $BASE_URL .'"?>/api/lazada.php?request=get_shipment_providers');
 					curl_setopt( $chAC, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 					curl_setopt($chAC, CURLOPT_RETURNTRANSFER, 1);
 					$contentAC = curl_exec($chAC);
@@ -494,7 +494,7 @@ function sound_error() {
 										 
 										
 										
-										
+
 										  <div class="col-md-10">
 										  <label >Order ID</label>
 										   </div>
@@ -506,9 +506,7 @@ function sound_error() {
                                               
                                             </div>
                                         </div>
-										
-										
-										
+
 										
                                         <div class="col-md-10">
                                             <label >Nama Pelanggan</label>
@@ -519,12 +517,7 @@ function sound_error() {
                                                 Looks good!
                                             </div>
                                         </div>
-                                      
-										
-                                     
-                             
-								
-								
+
 										<?php
 									
 				
@@ -536,8 +529,8 @@ function sound_error() {
 				echo '<div class="table-responsive">';
 			
 				$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_order_items');
-					$payloadItem = json_encode( array( "order_id"=> "439468708859963" ) );
+					curl_setopt($chItems, CURLOPT_URL, '<?php"' . $BASE_URL .'"?>/api/orders.php?request=get_order_items');
+					$payloadItem = json_encode( array( "order_id"=> "null" ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 					curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
@@ -546,10 +539,7 @@ function sound_error() {
 
 					//mengubah data json menjadi data array asosiatif
 					$resultItem=json_decode($contentItem,true);
-					
-				
-					
-					 	  
+
 				
 			echo '<div class="card">
 			<table class="table table-striped table-hover">
@@ -576,33 +566,18 @@ function sound_error() {
 							echo '<div class="css-11v3zrg">';
 							echo $DataProduct['sku'];
 							echo '</div>';
-							
 							echo '<div class="css-11v3zrg">';
 							echo $DataProduct['name'] . " " . $DataProduct['ProductVariantDetailName'];
 							echo '</div>';
-							
 							echo '<div class="css-11v3zrg">';
 							echo $DataProduct['paid_price'];
 							echo '</div>';
-							
-	
-							
 							echo '</div></div>';
-							
-
-						
 							echo'</td>';
 							
 					
 						echo'</tr>';
-						
 
- 
-					
-	
-	
-					
-				
 					echo'</tbody>
 				</table>';
 				

@@ -527,7 +527,7 @@ loadClassProductDatabase(SearchProductDatabase);
     function loadProductsDatabase(limit){
 		
 		   $.ajax({
-     url:'https://sellercenter.twinzahra.com/class/items_product.php',
+     url:'/include/classes/items_product.php',
         method:"POST",
 		//data: '{"Search":"'+ Search +'","Page": Page}',
         data:{action: 'load_products', limit:limit , "Search":SearchProductDatabase,"Page": Page},
@@ -588,7 +588,7 @@ loadClassProductLazada(SearchProductLazada);
     function loadProductsLazada(limit){
 		
 		   $.ajax({
-     url:'http://sellercenter.twinzahra.com/class/item_products_lazada.php',
+     url:'/include/classes/item_products_lazada.php',
         method:"POST",
 		//data: '{"Search":"'+ Search +'","Page": Page}',
         data:{action: 'load_products', limit:limit , "Search":SearchProductLazada,"Page": Page},
@@ -624,7 +624,7 @@ $(document).on("click", ".SyncMarketplace", function () {
 		contentType: 'application/json',
 		processData: false,
 		data: '{"user_id": "5"}',
-        url:'http://sellercenter.twinzahra.com/api/lazada.php?request=sync_marketplace',
+        url:'/api/lazada.php?request=sync_marketplace',
            
             beforeSend: function () {
            $('.btn').attr("disabled","disabled");

@@ -12,7 +12,7 @@ echo'<html lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Wide selection of buttons that feature different styles for backgrounds, borders and hover options!">
     <meta name="msapplication-tap-highlight" content="no">';
- ?>
+?>
 <link href="/main.css" rel="stylesheet">
 <script type="text/javascript" src="https://sellercenter.twinzahra.com/assets/scripts/main.js"></script>
 
@@ -20,9 +20,12 @@ echo'<html lang="en">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
-<?php
-echo'</head>
+
+</head>
 <body>
+<?php
+echo'
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">

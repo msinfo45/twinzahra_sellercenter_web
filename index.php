@@ -1,13 +1,12 @@
-
 <?php
+
 
 require './include/head.php';
 require './include/slidebar.php';
-
+//require './include/core.php';
 
  	
  	function getOrders(){
-		
 
 	$halaman = 1;
 	$page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
@@ -15,7 +14,7 @@ require './include/slidebar.php';
 	
 	$ch = curl_init();
 
-		curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_orders');
+		curl_setopt($ch, CURLOPT_URL, '/api/orders.php?request=get_orders');
 		//$payload = json_encode( array( "Page"=> "1" ) );
 		$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "1"	
@@ -32,7 +31,7 @@ require './include/slidebar.php';
 
 
 	function getRts(){
-		
+
 
 	$halaman = 1;
 	$page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
@@ -40,7 +39,7 @@ require './include/slidebar.php';
 	
 	$ch = curl_init();
 
-		curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_rts');
+		curl_setopt($ch, CURLOPT_URL, '/api/orders.php?request=get_rts');
 		//$payload = json_encode( array( "Page"=> "1" ) );
 		$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "2"	

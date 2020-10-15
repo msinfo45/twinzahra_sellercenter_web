@@ -37,7 +37,7 @@ echo'	<div class="app-header__menu">
 echo'	<div class="scrollbar-sidebar">';
 echo'	<div class="app-sidebar__inner">';
 echo'	<ul class="vertical-nav-menu">';
-echo'	<li class="app-sidebar__heading">Dashboards</li>';
+echo'	<li class="app-sidebar__heading">Dashboard</li>';
 echo'	<li>
                                     <a href="/index.php">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
@@ -117,9 +117,7 @@ echo'	<li>
                             </ul>
                         </div>
                     </div>
-                </div>    <div class="app-main__outer">
-              
-    ';
+                </div>    <div class="app-main__outer">';
 
 
 

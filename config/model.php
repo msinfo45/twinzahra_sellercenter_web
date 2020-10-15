@@ -7412,29 +7412,24 @@ return $query;
 
 if ($search == null) {
 	
-	   $query = $this->conn->query("	SELECT * FROM 
-										products AS tp
-										LEFT JOIN product_variants AS pv 
-										ON tp.ProductID = pv.ProductID 
-										LEFT JOIN product_variant_details AS pvd
-										ON pv.ProductVariantID = pvd.ProductVariantID
-									
-										where tp.UserID =" . $user_id . "	and tp.Status =" . $status . "
-										Order by pvd.SkuID and pvd.Stock DESC LIMIT " . $limit . " OFFSET " . $p . " ");
+	   $query = $this->conn->query("SELECT * FROM 
+	                                products AS tp
+	                                LEFT JOIN image_products AS ip
+	                                ON tp.ProductID = ip.ProductID
+                                    where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1)
+                                    Order by tp.ProductID ASC LIMIT " . $limit . " OFFSET " . $p . " ");
 	
 	
 }else{
 	
-	   $query = $this->conn->query("	SELECT * FROM 
-										products AS tp
-										LEFT JOIN product_variants AS pv 
-										ON tp.ProductID = pv.ProductID 
-										LEFT JOIN product_variant_details AS pvd
-										ON pv.ProductVariantID = pvd.ProductVariantID
+	   $query = $this->conn->query("SELECT * FROM 
+	                                products AS tp
+	                                LEFT JOIN image_products AS ip
+	                                ON tp.ProductID = ip.ProductID
 									
-										where tp.UserID =" . $user_id . "	and tp.Status =" . $status . " and (tp.ProductName LIKE CONCAT('%','" . $search . "','%') OR pvd.ProductVariantDetailName LIKE CONCAT('%','" . $search . "','%'))
+										where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1) and tp.ProductName LIKE CONCAT('%','" . $search . "','%')
 										
-										Order by pvd.Stock DESC");
+										Order by tp.ProductID ASC");
 	
 }
 			
