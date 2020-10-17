@@ -164,7 +164,7 @@ require './include/slidebar.php';
 											$prices[] = $price['price'] ;
 											
 										   }
-										  echo array_sum($prices);
+										 // echo array_sum($prices);
 										  
 										  
 											

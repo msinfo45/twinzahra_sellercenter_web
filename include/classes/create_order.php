@@ -1,161 +1,182 @@
+<?php
+require_once "../../config/config_type.php";
+?>
 
-                     
-						<div class="main-card mb-3 card">
-                            <div class="card-body">
-                        
-                         
+    <div class="main-card mb-3 card">
+        <div class="card-body">
 
-									  <div class="col-md-5">
-										    <label >Market Place</label>
-											</div>
-										 	<div class="col-md-5 mb-3">
-                                          	<select class="form-control" name="marketplace" id="marketplace">
-											<option value="">Market Place</option>
-											<option value="LAZADA">LAZADA</option>
-											<option value="TOKOPEDIA">TOKOPEDIA</option>
-											<option value="SHOPEE">SHOPEE</option>
-											<option value="BUKALAPAK">BUKALAPAK</option>
-											<option value="OFFLINE">OFFLINE</option>
-											</select>
-   
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-										 
-										
-										
-										
-										  <div class="col-md-5">
-										  <label >Order Number</label>
-										   </div>
-										  
-										    <div class="col-md-5 mb-3">
-                                            
-                                            <input type="text" class="form-control" name="order_number" id="order_number" placeholder="Order Number" name="order_number" required>
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-										
-										
-										
-										
-                                        <div class="col-md-5">
-                                            <label >Nama Pelanggan</label>
-											 </div>
-											  <div class="col-md-5 mb-3">
-                                            <input type="text" class="form-control" id="name" placeholder="Masukan nama pelanggan" value="" name="name" required>
-                                            <div class="valid-feedback">
-                                                Looks good!
-                                            </div>
-                                        </div>
-                                      
-										
-                                     
-										
-										
-                             
+
+
+            <div class="input-group">
+
+                <div class="col-md-auto table-bordered ">
+
+
+                    <div class="input-group ">
+                        <label class="form-control-plaintext">Market Place</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select class="form-control col-md-8" name="marketplace" id="marketplace">
+                            <option value="">Market Place</option>
+                            <option value="LAZADA">LAZADA</option>
+                            <option value="TOKOPEDIA">TOKOPEDIA</option>
+                            <option value="SHOPEE">SHOPEE</option>
+                            <option value="BUKALAPAK">BUKALAPAK</option>
+                            <option value="OFFLINE">OFFLINE</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Order Number</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" name="order_number" id="order_number" placeholder="Order Number" name="order_number" required>
+                    </div>
+
+
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Nama Pelanggan</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" id="name" placeholder="Masukan nama pelanggan" value="" name="name"  onkeyup="this.value = this.value.toUpperCase();"required>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6 table-bordered ">
+
+                    <h2 class="center font-weight-bold color_red"> Total Bayar : Rp. 1000.000</h2>
+
+                </div>
+
+            </div>
 								
-								
-										<?php
-									
-				
-				echo '<div class="col-md-10">
+    <?php
+
+echo'<div class="table-bordered">';
+            echo '<div class="col-md-5">
                  <label >SKU</label>
-                  <input type="text" class="form-control" name=SkuID id="SkuID" onkeydown="search(this)" placeholder="Masukan SKU Produk " required>
+                  <div class="input-group">
+                  <input type="text" class="form-control" name=SkuID id="SkuID" onkeydown="search_items(this)" placeholder="Masukan SKU dan tekan Enter " onkeyup="this.value = this.value.toUpperCase();"required>
+				 <a data-toggle="modal" data-id="$order_id" data-merchant_name="$merchant_name" title="Cari Barang"  class="SearchItems btn btn-primary" href="#SearchItems">Cari</a>		
+				
+					</div>					 
 				</div>';
 				
-				echo '<div class="table-responsive">';
-			
-				
-				
-				echo '<div id="ResultItemOrders"></div></div>  ';
-			?>	
-				
-						
-			
-		
-			
-									<div class="col-md-9 mb-3">
-                                            <label for="validationCustom05">Jasa Expedisi</label>
-											<select class="form-control" name="shipping_provider" id="shipping_provider">
-											<option value="">Jasa Expedisi</option>
-											<option value="LELEXPRESS">LELEXPRESS</option>
-											<option value="NINJAXPRESS">NINJAXPRESS</option>
-											<option value="JNE REG">JNE REG</option>
-											<option value="JNT EXPRESS">JNT EXPRESS</option>
-											<option value="ANTER AJA">ANTER AJA</option>
-											<option value="ID EXPRESS">ID EXPRESS</option>
-											<option value="SICEPAT REG">SICEPAT REG</option>
-											<option value="SICEPAT EXPRESS">SICEPAT EXPRESS</option>
-											<option value="SICEPAT HALU">SICEPAT HALU</option>
-											</select>
-   
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-										
-										
-									
-									    <div class="col-md-6 mb-3">
-                                            <label for="validationCustom06">No Resi</label>
-                                            <input type="text" class="form-control" id="tracking_code" placeholder="No Resi" name="tracking_code" required>
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-                                    
-									    <div class="col-md-6 mb-3">
-                                            <label for="validationCustom07">Biaya Pengiriman</label>
-                                            <input type="text" class="form-control" id="shipping_amount" placeholder="Rp" name="shipping_amount" required>
-                                            <div class="invalid-feedback">
-                                            
-                                            </div>
-                                        </div>
-									
-									    <div class="col-md-6 mb-3">
-                                            <label for="validationCustom08">Kode Booking</label>
-                                            <input type="text" class="form-control" name="tracking_code_pre" id="tracking_code_pre" placeholder="0" name="tracking_code_pre" required>
-                                            <div class="invalid-feedback">
-                                           
-                                            </div>
-                                        </div>
-									
-									    <div class="col-md-6 mb-3">
-                                            <label for="validationCustom09">Catatan</label>
-                                            <input type="text" class="form-control" name="remark" id="remark" placeholder="Catatan" name="remark" required>
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-										
-											<div class="col-md-6 mb-3">
-                                            <label for="validationCustom10">Payment Method</label>
-											<select class="form-control" name="payment_method" id="payment_method">
-											<option value="">Metode Pembayaran</option>
-											<option value="NON COD">NON COD</option>
-											<option value="COD">COD</option>
-											<option value="CASH">CASH</option>
-											</select>
-   
-                                            <div class="invalid-feedback">
-                                              
-                                            </div>
-                                        </div>
-										
-										
-										
-									
-									     <button class="btn btn-primary create_orders" type="submit" name="ok" >Simpan</button>
-										 
+				echo '<div  id="ResultItemOrders">';
+            echo '</div> 
+    </div>';
+			?>
+
+
+            <div class="input-group">
+
+                <div class="col-md-5 table-bordered ">
+
+            <div class="input-group ">
+                <label class="form-control-plaintext">Jasa Expedisi</label>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <select class="form-control" name="shipping_provider" id="shipping_provider">
+                    <option value="">Jasa Expedisi</option>
+                    <option value="LELEXPRESS">LELEXPRESS</option>
+                    <option value="NINJAXPRESS">NINJAXPRESS</option>
+                    <option value="JNE REG">JNE REG</option>
+                    <option value="JNT EXPRESS">JNT EXPRESS</option>
+                    <option value="ANTER AJA">ANTER AJA</option>
+                    <option value="ID EXPRESS">ID EXPRESS</option>
+                    <option value="SICEPAT REG">SICEPAT REG</option>
+                    <option value="SICEPAT EXPRESS">SICEPAT EXPRESS</option>
+                    <option value="SICEPAT HALU">SICEPAT HALU</option>
+                </select>
+            </div>
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">No Resi</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" id="tracking_code" placeholder="No Resi" name="tracking_code" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Biaya Pengiriman</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" id="shipping_amount" placeholder="Rp" name="shipping_amount" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Kode Booking</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" name="tracking_code_pre" id="tracking_code_pre" placeholder="0" name="tracking_code_pre" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6 table-bordered ">
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Sub Total</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" id="sub_total" placeholder="0" name="sub_total" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Diskon</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" id="discount" placeholder="Rp" name="discount" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="form-control-plaintext">Grand Total</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" name="grand_total" id="grand_total" placeholder="0" name="grand_total" required>
+                    </div>
+
+                <div class="input-group">
+                    <label class="form-control-plaintext">Catatan</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" name="remark" id="remark" placeholder="Catatan" name="remark" required>
+                </div>
+            </div>
+
+                </div>
+
+
+        <div class="input-group table-bordered " >
+            <div class="col-md-12 ">
+
+                <div class="input-group ">
+                    <label class="form-control-plaintext">Metode Pembayaran</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <select class="form-control" name="payment_method" id="payment_method">
+                        <option value="">Metode Pembayaran</option>
+                        <option value="NON COD">NON COD</option>
+                        <option value="COD">COD</option>
+                        <option value="CASH">CASH</option>
+                        <option value="DEBIT">DEBIT</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="form-control-plaintext">Uang Bayar</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="pay_money" placeholder="Rp" name="pay_money" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="form-control-plaintext">Kembalian</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="change_money" placeholder="Rp" name="change_money" required>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+        <div class="input-group">
+		 <button class="btn btn-primary create_orders" type="submit" name="ok" >Simpan</button>
+            <button class="btn btn-custom-green clear_orders" type="submit" name="ok" >Batal</button>
+        </div>
 										  </div>
 											</div>
-										 
-										 
-				
-
 
 
 <script>
@@ -186,7 +207,7 @@
 		contentType: 'application/json',
 		processData: false,
 		data: '{"UserID": "5", "marketplace": "'+marketplace+'" , "order_id": "'+order_number+'", "name": "'+name+'", "shipping_provider": "'+shipping_provider+'", "tracking_code": "'+tracking_code+'", "shipping_amount": "'+shipping_amount+'", "tracking_code_pre": "'+tracking_code_pre+'", "remark": "'+remark+'", "payment_method": "'+payment_method+'"}',
-        url:'https://sellercenter.twinzahra.com/api/orders.php?request=created_order',
+        url: 'http://localhost/api/orders.php?request=created_order',
            
             beforeSend: function () {
               $('.create_orders').attr("disabled","disabled");
@@ -215,7 +236,7 @@
 					
                     //$('.statusMsg').html('<span style="color:green;"></p>' +data.message );
 					alert(data.message);
-					window.location.href = 'https://sellercenter.twinzahra.com/orders/?request=create_orders'; 
+					window.location.href = 'http://localhost/orders/?request=create_orders';
 					sound_add();
 					//loadDataItem(); 
 					
@@ -246,6 +267,21 @@
 
 <script>
 
+    $(document).on("click", ".search_items", function () {
+
+        var order_id = $(this).data('id');
+        var merchant_name = $(this).data('merchant_name');
+        $("#SearchItems .modal-body #order_id").val( order_id );
+        $("#SearchItems .modal-body #merchant_name").val( merchant_name );
+
+        // As pointed out in comments,
+        // it is unnecessary to have to manually call the modal.
+        $('#SearchItems').modal('show');
+
+</script>
+
+<script>
+
     function sound_error() {
         var audioElement = document.createElement('audio');
         audioElement.setAttribute('src', '/assets/music/beep_error.mp3');
@@ -264,7 +300,7 @@
 	
 	
  function loadDataItem(){
-var displayProduct = 5;
+    var displayProduct = 5;
 	$('#ResultItemOrders').html(createSkeleton(displayProduct));
 	
     setTimeout(function(){
@@ -294,7 +330,7 @@ var displayProduct = 5;
 	
     function loadItems(limit){
       $.ajax({
-         url:"https://sellercenter.twinzahra.com/class/items_create_orders.php",
+         url:'http://localhost/include/classes/items_create_orders.php',
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -319,8 +355,8 @@ loadDataItem();
 		contentType: 'application/json',
 		processData: false,
 		data: '{"UserID": "5", "SkuID": "'+SkuID+'"}',
-        url:'https://sellercenter.twinzahra.com/api/orders.php?request=add_cart_detail',
-           
+        url: 'http://localhost/api/orders.php?request=add_cart_detail',
+
             beforeSend: function () {
                // $('.submitBtn').attr("disabled","disabled");
                // $('.modal-body').css('opacity', '.5');
@@ -377,7 +413,7 @@ $(document).on("click", ".deleteItemCartDetail", function () {
 		contentType: 'application/json',
 		processData: false,
 		data: '{"CartDetailID": "'+ CartDetailID +'"}',
-        url:'https://sellercenter.twinzahra.com/api/orders.php?request=delete_cart_details',
+        url: 'http://localhost/api/orders.php?request=delete_cart_details',
            
             beforeSend: function () {
                 $('.deleteItemCartDetail').attr("disabled","disabled");

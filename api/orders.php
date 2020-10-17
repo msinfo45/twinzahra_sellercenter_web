@@ -44,22 +44,13 @@ if (isset($content) && $content != "") {
 		$sku_id = $post['SkuID'];	
 		//$sku_id = "WK-HTM-AB-S-HTM-39";
 	//Get Value For History Order details from post
-		
-		
-		
+
        if (isset($sku_id)) {
-
-			//cek user id
-            $getData = $db->checkProductBySKU($sku_id);
-			
-			if ($getData != null) {
-
-                        while ($row = $getData->fetch_assoc()) {
-                           $rows[] = $row;
-							
-							
-							
-						}
+       	$getData = $db->checkProductBySKU($sku_id);
+       	if ($getData != null) {
+       		while ($row = $getData->fetch_assoc()) {
+       			$rows[] = $row;
+       		}
 
 
 						foreach ($rows as $obj) {
@@ -98,18 +89,7 @@ if (isset($content) && $content != "") {
 									 "message" => "Stok Kosong"
 									);
 								}
-							
 
-					
-					
-                       
-							
-						
-			
-            
-				
-				
-				
                     } else {
                         $return = array(
                             "status" => 404,
@@ -132,9 +112,9 @@ if (isset($content) && $content != "") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;
-                    $user_id = null;
+                    $user_id = 5;
 				
-					$page = null;
+					$page = 1;
 					
                     $limit = 0;
 					
@@ -146,7 +126,9 @@ if (isset($content) && $content != "") {
                     if (isset($post['Page'])) {
                         $page = $post['Page'];
                     }
-					
+				$user_id = 5;
+
+				$page = 1;
 				
 					
 						

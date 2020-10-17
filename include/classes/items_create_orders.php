@@ -1,6 +1,8 @@
-
+<?php
+require_once "../../config/config_type.php";
+?>
 				
-			<div class="table-wrapper">
+			<div class="col-auto">
 	
 				<table class="table table-striped table-hover">
 					<thead>
@@ -13,8 +15,10 @@
 							</th>
 							<th>SKU</th>
 							<th>Nama Produk</th>
-							<th>Harga</th>
-							<th>Variant</th>
+							<th>Harga Satuan</th>
+                            <th>Jumlah</th>
+                            <th>Harga Akhir</th>
+                            <th>Opsi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -26,7 +30,7 @@
    // End script ambil data
 		$ch = curl_init();
 
-		curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_cart_details');
+		curl_setopt($ch, CURLOPT_URL, $BASE_URL.'/api/orders.php?request=get_cart_details');
 		$payload = json_encode( array( "Page"=> "1" ) );
 		$payload = json_encode( array( "UserID"=> "5" ) );
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -51,7 +55,7 @@
 							</td>';
 							
 							echo'<td>';
-							echo $DataProduct['SkuID'];
+							echo $DataProduct['SKU'];
 							echo '</td>';
 					
 					
@@ -67,10 +71,16 @@
 							echo'<td>';
 							echo $DataProduct['Price'];
 							echo '</td>';
+
+                            echo'<td>';
+                            echo $DataProduct['Quantity'];
+                            echo '</td>';
+
+                            echo'<td>';
+                            echo $DataProduct['Price'] * $DataProduct['Quantity'] ;
+                            echo '</td>';
 					
-							echo'<td>';
-							echo $DataProduct['ProductVariantName'] . " " . $DataProduct['ProductVariantDetailName'];
-							echo '</td>';
+
 							
 							
 							

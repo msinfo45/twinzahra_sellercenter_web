@@ -1,6 +1,7 @@
  
  <?php
- 
+ require_once "../../config/config_type.php";
+
  	function getOrders(){
 		
 
@@ -10,7 +11,7 @@
 	
 	$ch = curl_init();
 
-		curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_orders');
+		curl_setopt($ch, CURLOPT_URL, $BASE_URL.'/api/orders.php?request=get_orders');
 		//$payload = json_encode( array( "Page"=> "1" ) );
 		$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "1"	
@@ -29,7 +30,7 @@
  	function getOrderItems($DataProduct){
 		
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_order_items');
+					curl_setopt($chItems, CURLOPT_URL, $BASE_URL.'/api/orders.php?request=get_order_items');
 					$payloadItem = json_encode( array( "order_id"=> $DataProduct ) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
@@ -49,7 +50,7 @@
 	 	function cekStok($sku){
 		
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/products.php?request=cek_stok');
+					curl_setopt($chItems, CURLOPT_URL, $BASE_URL.'/api/products.php?request=cek_stok');
 					$payloadItem = json_encode( array( "sku"=> $sku ) );
 
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -75,7 +76,7 @@
 function getHistory($order_id){
 		
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=cek_history');
+					curl_setopt($chItems, CURLOPT_URL, $BASE_URL.'/api/orders.php?request=cek_history');
 					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
 
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -360,7 +361,7 @@ function SendAcceptOrders(){
 		contentType: 'application/json',
 		processData: false,
 		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
-        url:'https://sellercenter.twinzahra.com/api/orders.php?request=accept_order',
+        url:'/api/orders.php?request=accept_order',
            
             beforeSend: function () {
                 $('.btn').attr("disabled","disabled");

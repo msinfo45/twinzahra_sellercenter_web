@@ -11,27 +11,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/core.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/Model_Core.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/core.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/scripts/jquery.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/create_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/create_order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/item_products_lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/item_products_lazada.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/items_create_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_create_orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/items_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/order_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_pending.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/order_rts.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_rts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config_type.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config_type.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/lazada/logs/lazopsdk.log.2020-10-13" beforeDir="false" afterPath="$PROJECT_DIR$/config/lazada/logs/lazopsdk.log.2020-10-13" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/orders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/vtallogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/classes/create_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/create_order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/classes/items_create_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_create_orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/classes/order_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_pending.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/head.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/slidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/slidebar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orders/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/orders/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/products/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/products/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fcgi/fcgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fcgi/test.fcgi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fcgi/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/perl/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/perl/test.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/php/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/php/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/python/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/python/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssi/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssi/test.shtml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,20 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,7 +141,10 @@
       <workItem from="1602605987721" duration="4040000" />
       <workItem from="1602637383497" duration="2638000" />
       <workItem from="1602686290799" duration="16156000" />
-      <workItem from="1602770987478" duration="5429000" />
+      <workItem from="1602770987478" duration="5923000" />
+      <workItem from="1602809941064" duration="11253000" />
+      <workItem from="1602831915262" duration="11875000" />
+      <workItem from="1602889989676" duration="2670000" />
     </task>
     <task id="LOCAL-00001" summary="Tes">
       <created>1602601013270</created>
@@ -156,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602603844106</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update">
+      <created>1602776660780</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602776660780</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +203,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Tes" />
     <MESSAGE value="Delete File" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete File" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602604732147">
@@ -189,10 +215,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1602603551562" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602776613420">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602892757022">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602776613420" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602892757022" />
     <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey" timestamp="1602604331969">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -201,6 +227,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="461" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1602606139008" />
+    <state x="521" y="266" width="347" height="195" key="Github.CreateGistDialog" timestamp="1602812111592">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="521" y="266" width="347" height="195" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1602812111592" />
     <state x="561" y="261" key="Github.ShareDialog" timestamp="1602598987879">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -213,10 +243,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602606179106" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602603850063">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602776716019">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602603850063" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602776716019" />
     <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1602603426006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

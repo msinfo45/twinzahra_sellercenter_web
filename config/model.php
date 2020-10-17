@@ -312,14 +312,41 @@ class Model_user
             return false;
         }
     }
-	
-                                             public function createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id,$product_variant_detail_id)
-                                             {
-                                             
-                                             
-											
-                                             $insert = $this->conn->query("INSERT INTO cart_details
-                                                                          (CartID,
+
+    public function checkCartDetails($sku_id , $user_id)
+    {
+        $query = $this->conn->query("SELECT * FROM cart_details WHERE SKU = '" . $sku_id . "' AND UserID = '" . $user_id . "' ");
+
+        if (mysqli_num_rows($query) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public function createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id,$product_variant_detail_id)
+
+ {
+      //Lets process
+        $exist = $this->checkCartDetails($sku_id , $user_id);
+        if ($exist) {
+
+            $update = $this->conn->query("UPDATE cart_details SET 
+											Quantity 		= Quantity + 1
+										WHERE 
+											UserID = '" . $user_id . "' AND SKU = '" . $sku_id . "' ");
+            if ($update) {
+
+                return true;
+            } else {
+                return false;
+            }
+
+        }else{
+
+            $insert = $this->conn->query("INSERT INTO cart_details(CartID,
 																		  SKU,
 																		  ProductID,
 																		  Price,
@@ -341,17 +368,18 @@ class Model_user
 																		    '" . $user_id . "' ,
 																		  '" . $this->get_current_time() . "'
                                                                            )"
-                                                                          );
-                                             
-                                             
-                                             if ($insert) {
-                                             
-                        
-                                             return true;
-                                             } else {
-                                             return false;
-                                             }
-                                             }
+            );
+
+
+            if ($insert) {
+
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+ }
 											 
 							
                     public function createHistoryOrders(
@@ -7960,22 +7988,23 @@ ON pv.ProductID = tp.ProductID
                                                                          
                                                                       
 
-																				$query = $this->conn->query("SELECT * FROM cart_details AS a
-																				
-                                                                                                     LEFT JOIN products AS b
-                                                                                                     ON a.ProductID = b.ProductID
-                                                                                                     LEFT JOIN product_variants AS c 
-                                                                                                     ON a.ProductVariantID = c.ProductVariantID
-                                                                                                     LEFT JOIN product_variant_details AS d
-                                                                                                      ON a.ProductVariantDetailID = d.ProductVariantDetailID
-                                                                                                     WHERE  a.UserID = '" . $user_id . "'
-                                                                                                     Order by a.CreatedDate DESC " . $condition);																									
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
+	$query = $this->conn->query("SELECT 
+a.CartDetailID,
+a.SKU,
+	a.Price,
+	a.Quantity,
+	b.ProductName
+ FROM cart_details AS a
+ LEFT JOIN products AS b
+  ON a.ProductID = b.ProductID
+ WHERE  a.UserID = '" . $user_id . "'
+Order by a.CreatedDate DESC " . $condition);
+   if (mysqli_num_rows($query) > 0) {
+    return $query;
+     } else {
+     return null;
+   }
+   }
                                                                         
 																		
 																		public function getDataOrders($user_id, $page, $limit , $status_id)
