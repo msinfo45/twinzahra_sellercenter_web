@@ -44,7 +44,7 @@ var displayProduct = 5;
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"/include/classes/create_order.php",
+         url:"http://localhost/include/classes/create_order.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -200,7 +200,7 @@ function loadRTS(){
 	
     function loadProducts(limit){
       $.ajax({
-         url:"/include/classes/order_rts.php",
+         url:"http://localhost/include/classes/order_rts.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -244,7 +244,7 @@ var displayProduct = 5;
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"/include/classes/order_pending.php",
+         url:"http://localhost/include/classes/order_pending.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -285,7 +285,7 @@ $(document).on("click", "#tab-0", function () {
 	
     function loadOrderPending(limit){
       $.ajax({
-         url:"/include/classes/order_pending.php",
+         url:"http://localhost/include/classes/order_pending.php",
         method:"POST",
         data:{action: 'load_products', limit:limit},
         success:function(data) {
@@ -329,7 +329,7 @@ function sound_error() {
 		contentType: 'application/json',
 		processData: false,
 		data: '{"UserID": "5", "order_id": "'+OrderID+'"}',
-        url: $BASE_URL.'/api/orders.php?request=set_ship',
+        url: 'http://localhost/api/orders.php?request=set_ship',
            
             beforeSend: function () {
                // $('.submitBtn').attr("disabled","disabled");
@@ -394,7 +394,7 @@ function sound_error() {
             <div class="modal-body">
                	<?php
 					$chAC = curl_init();
-					curl_setopt($chAC, CURLOPT_URL, '/api/lazada.php?request=get_shipment_providers');
+					curl_setopt($chAC, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_shipment_providers');
 					curl_setopt( $chAC, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 					curl_setopt($chAC, CURLOPT_RETURNTRANSFER, 1);
 					$contentAC = curl_exec($chAC);
@@ -529,7 +529,7 @@ function sound_error() {
 				echo '<div class="table-responsive">';
 			
 				$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, $BASE_URL.'/api/orders.php?request=get_order_items');
+					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/orders.php?request=get_order_items');
 					$payloadItem = json_encode( array( "order_id"=> "null" ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

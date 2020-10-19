@@ -11,28 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/scripts/jquery.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/lazada.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/class.phpmailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/class.phpmailer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/class.smtp.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/class.smtp.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/classes/create_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/create_order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/classes/items_create_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_create_orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cron/sync_marketplace.php" beforeDir="false" afterPath="$PROJECT_DIR$/cron/sync_marketplace.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/classes/order_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/order_pending.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/head.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orders/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/orders/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fcgi/fcgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fcgi/test.fcgi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fcgi/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/perl/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/perl/test.pl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/php/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/php/test.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/python/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/python/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ssi/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ssi/test.shtml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +68,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -96,13 +85,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\twinzahra\include" />
-      <recent name="C:\xampp\htdocs\twinzahra" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\twinzahra\include\classes" />
       <recent name="C:\xampp\htdocs\twinzahra\api" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\twinzahra\include" />
+      <recent name="C:\xampp\htdocs\twinzahra" />
     </key>
   </component>
   <component name="RunManager">
@@ -144,7 +133,8 @@
       <workItem from="1602770987478" duration="5923000" />
       <workItem from="1602809941064" duration="11253000" />
       <workItem from="1602831915262" duration="11875000" />
-      <workItem from="1602889989676" duration="2670000" />
+      <workItem from="1602889989676" duration="4930000" />
+      <workItem from="1603022829307" duration="20034000" />
     </task>
     <task id="LOCAL-00001" summary="Tes">
       <created>1602601013270</created>
@@ -181,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602776660780</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Perbaikan halaman Create Order">
+      <created>1602892818091</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602892818091</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +201,8 @@
     <MESSAGE value="Tes" />
     <MESSAGE value="Delete File" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Perbaikan halaman Create Order" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan halaman Create Order" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602604732147">
@@ -215,10 +213,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1602603551562" />
-    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602892757022">
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1602892812710">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602892757022" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1602892812710" />
     <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey" timestamp="1602604331969">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -243,10 +241,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602606179106" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602776716019">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1602892836178">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602776716019" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1602892836178" />
     <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1602603426006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

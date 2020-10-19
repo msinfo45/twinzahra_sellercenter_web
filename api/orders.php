@@ -229,7 +229,7 @@ if (isset($content) && $content != "") {
 					
 				
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=get_orders');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_orders');
 					//$payload = json_encode( array( "order_number"=> $DataProduct['order_number'] ) );
 					//$payload = json_encode( array( "UserID"=> "5" ) );
 					//curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -244,7 +244,7 @@ if (isset($content) && $content != "") {
 
                         $getData = $db->getDataOrders($user_id, $page, $limit , $status_id);
 						
-						if ($getData != null && $resultLazada['status'] != 404) {
+						if ($getData != null && $resultLazada != null ) {
 							
 							
 							   while ($row = $getData->fetch_assoc()) {										
@@ -287,14 +287,14 @@ if (isset($content) && $content != "") {
                             );
 							
 							
-						}else if (($resultLazada['status'] != 404)) {
+						}else if (($resultLazada!= null )) {
 							
 			
 						$return = array(
                         "status" => 200,
                         "message" => "ok lazada",
                         "data" => $resultLazada
-						);	
+						);
 									
 								
 								
@@ -340,7 +340,7 @@ if (isset($content) && $content != "") {
 					
 				
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=get_order');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_order');
 					//$payload = json_encode( array( "order_number"=> $DataProduct['order_number'] ) );
 					$payload = json_encode( array( "order_id"=> $order_id ) );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -668,7 +668,7 @@ if (isset($content) && $content != "") {
 						
 					//Get data from lazada	
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=get_order_items');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_order_items');
 					$payload = json_encode( array( "order_id"=> $order_id,
 													"UserID"=> "5") );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -964,7 +964,7 @@ if (isset($content) && $content != "") {
 
 	
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=get_order');
+					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_order');
 					$payloadItem = json_encode( array( "order_id"=> $order_id,
 					"merchant_name"=> $merchant_name) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -1004,7 +1004,7 @@ if (isset($content) && $content != "") {
 					
 					//echo json_encode($order_number);die;
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_order_items');
+					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/orders.php?request=get_order_items');
 					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1232,7 +1232,7 @@ if (isset($content) && $content != "") {
 				$variant_details = array();
 						
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=get_order_items');
+					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/orders.php?request=get_order_items');
 					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1312,7 +1312,7 @@ if (isset($content) && $content != "") {
 						
 					//Set Pick						
 					$chpick = curl_init();
-					curl_setopt($chpick, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=set_pick');
+					curl_setopt($chpick, CURLOPT_URL, 'http://localhost/api/lazada.php?request=set_pick');
 					$payloadItem = json_encode( array( "order_item_ids"=> $order_item_ids,
 					"shipping_provider"=> $shipping_provider,
 					"delivery_type"=> $delivery_type,
@@ -1341,7 +1341,7 @@ if (isset($content) && $content != "") {
 							
 					//Set Invoice						
 					$chInvoice = curl_init();
-					curl_setopt($chInvoice, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=set_invoice');
+					curl_setopt($chInvoice, CURLOPT_URL, 'http://localhost/api/lazada.php?request=set_invoice');
 					$payloadInvoice = json_encode( array( "order_item_id"=> $order_item_id,
 					"user_id"=> $user_id,
 					"merchant_name"=> $merchant_name		
@@ -1366,7 +1366,7 @@ if (isset($content) && $content != "") {
 						
 												//Set Ready to Ship						
 					$chrts = curl_init();
-					curl_setopt($chrts, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=set_rts');
+					curl_setopt($chrts, CURLOPT_URL, 'http://localhost/api/lazada.php?request=set_rts');
 					$payloadRts = json_encode( array( "order_item_ids"=> $order_item_ids,
 					"shipping_provider"=> $shipping_provider,
 					"delivery_type"=> $delivery_type,
@@ -1404,7 +1404,7 @@ if (isset($content) && $content != "") {
 						);
 
 						$context  = stream_context_create( $options );
-						$result = file_get_contents( "https://sellercenter.twinzahra.com/api/orders.php?request=created_order", false, $context );
+						$result = file_get_contents( "http://localhost/api/orders.php?request=created_order", false, $context );
 						$response = json_decode($result, true );
 						
 						//print_r ($response);die;

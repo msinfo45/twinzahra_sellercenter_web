@@ -165,9 +165,75 @@ if (isset($content) && $content != "") {
                         }
                     echo json_encode($return);
                 }
-				
-				
-				
+
+    if ($content == "get_products_xml") {
+        header("Content-type: text/xml");
+        $modeHeader = 0;
+        $post = json_decode(file_get_contents("php://input"), true);
+
+        $user_id = 5;
+
+
+        //Mencari ProductID by user id
+        $getDataProduct = $db->getProductIDByUserID($user_id);
+
+
+        while ($rowProduct = $getDataProduct->fetch_assoc()) {
+
+            $rowProducts[] = $rowProduct['ProductID'];
+            $ProductID = $rowProducts;
+
+
+        }
+
+        foreach ($ProductID as $item) {
+
+            $xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+            $xml_output .= "<Request>\n";
+
+            $getDataVariant = $db->getDataProductVariants2($user_id, $item);
+
+            $xml_output .= "\t<Product>\n";
+
+            // $xml_output .= "\t<Attributes>\n";
+
+            // $xml_output .= "\t\t<name>" . $item . "</name>\n";
+            // $xml_output .= "\t\t<short_description>" . $rowProduct['ProductID'] . "</short_description>\n";
+
+
+            //  $xml_output .= "\t</Attributes>\n";
+
+            $xml_output .= "\t<Skus>\n";
+
+            while ($rowVariant = $getDataVariant->fetch_assoc()) {
+
+                $ProductName = $rowVariant['ProductName'];
+                $Description = $rowVariant['Description'];
+                $SkuID = $rowVariant['SkuID'];
+                $Stock = $rowVariant['Stock'];
+                $PriceRetail = $rowVariant['PriceRetail'];
+                $PriceReseller = $rowVariant['PriceReseller'];
+
+                $xml_output .= "\t<Sku>\n";
+                $xml_output .= "\t\t<SellerSku>" . $rowVariant['SkuID'] . "</SellerSku>\n";
+                $xml_output .= "\t\t<quantity>" . $rowVariant['Stock'] . "</quantity>\n";
+                $xml_output .= "\t\t<price>" . $rowVariant['PriceRetail'] . "</price>\n";
+                $xml_output .= "\t</Sku>\n";
+
+            }
+            $xml_output .= "\t</Skus>\n";
+            $xml_output .= "\t</Product>\n";
+
+
+            $xml_output .= "</Request>";
+        }
+
+
+
+        echo $xml_output;
+
+
+    }
 				if ($content == "check_products") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
@@ -327,7 +393,7 @@ if (isset($content) && $content != "") {
 
 			
 					  }
-					  
+
 					  
 					  
 					  

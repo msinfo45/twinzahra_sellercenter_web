@@ -7580,7 +7580,7 @@ if ($search == null) {
 		  
 
 			   
-			   $query = $this->conn->query("SELECT ProductID from products	where UserID = '" . $user_id . "'	and Status = 1
+			   $query = $this->conn->query("SELECT * from products	where UserID = '" . $user_id . "'	and Status = 1
                                         Order by ProductID ");
 			   
 			   
@@ -7699,7 +7699,7 @@ if ($search == null) {
 			   
 			   $query = $this->conn->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
 											   pvd.SkuID ,pvd.ProductVariantDetailName , pvd.Stock , 
-											   pvd.PriceRetail , mb.BrandName AS brand 
+											   pvd.PriceRetail , pvd.PriceReseller ,mb.BrandName AS brand 
 											   FROM
 											products AS p
 											LEFT JOIN product_variants AS pv 
@@ -7725,7 +7725,43 @@ if ($search == null) {
 			}
 			
 			}
-			
+
+    public function getDataProductVariants2($user_id, $item)
+    {
+
+
+
+
+
+        $query = $this->conn->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
+											   pvd.SkuID ,pvd.ProductVariantDetailName , pvd.Stock , 
+											   pvd.PriceRetail , pvd.PriceReseller ,mb.BrandName AS brand 
+											   FROM
+											products AS p
+											LEFT JOIN product_variants AS pv 
+											ON pv.ProductID = p.ProductID
+											LEFT JOIN product_variant_details AS pvd
+											ON pvd.ProductVariantID = pv.ProductVariantID
+											LEFT JOIN master_brand AS mb
+											ON p.BrandID = mb.BrandID
+
+										where (p.UserID =" . $user_id . " and p.Status =1) and (p.ProductID = " . $item . ")
+										");
+
+
+
+
+
+
+
+        if (mysqli_num_rows($query) > 0) {
+            return $query;
+        } else {
+            return null;
+        }
+
+    }
+
 				 public function getDataLazada($user_id)
     {
 		

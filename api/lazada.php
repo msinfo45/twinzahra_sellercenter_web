@@ -193,7 +193,7 @@ $rows = [];
 		$statuses= $datas->statuses;
 		$created_at= $datas->created_at;
 		$updated_at= $datas->updated_at;
-		$address_shipping=$datas>address_shipping;
+	//	$address_shipping=$datas>address_shipping;
 		$address_billing=$datas->address_billing;
 		
 					
@@ -232,18 +232,18 @@ $rows = [];
 					
 					"address_shipping"=>array(
 									"order_id"=> $order_id,
-									"first_name"=> $address_shipping->first_name,
-									"last_name"=> $address_shipping->last_name,
-									"country"=> $address_shipping->country,
-									"phone"=> $address_shipping->phone,
-									"phone2"=> $address_shipping->phone2,
-									"address1"=> $address_shipping->address1,
-									"address2"=> $address_shipping->address2,
-									"address3"=> $address_shipping->address3,
-									"address4"=> $address_shipping->address4,
-									"address5"=> $address_shipping->address5,
-									"city"=> $address_shipping->city,
-									"post_code"=> $address_shipping->post_code
+						//			"first_name"=> $address_shipping->first_name,
+							//		"last_name"=> $address_shipping->last_name,
+								//	"country"=> $address_shipping->country,
+								//	"phone"=> $address_shipping->phone,
+								//	"phone2"=> $address_shipping->phone2,
+								//	"address1"=> $address_shipping->address1,
+									//"address2"=> $address_shipping->address2,
+								//	"address3"=> $address_shipping->address3,
+								//	"address4"=> $address_shipping->address4,
+									//"address5"=> $address_shipping->address5,
+								//	"city"=> $address_shipping->city,
+								//	"post_code"=> $address_shipping->post_code
 					),
 					
 					"address_billing"=>array(
