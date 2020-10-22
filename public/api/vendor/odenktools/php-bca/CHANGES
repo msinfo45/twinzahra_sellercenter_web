@@ -1,0 +1,17 @@
+Version 2.1.1:
+ - perbaikan constructor
+ - Perbaikan readme dan unitest #2
+ - Perbaikan readme dan unitest
+ - add CHANGES FILE
+
+Version 2.2.1:
+ - perbaiki pipelines
+ - Merge branch 'master' into develop
+ - Merged in card-list-angsuran (pull request #40)
+ - add column nama_investor, investment_status, investment_amount to get list story borrower
+
+Version 2.1.0:
+
+
+Version 2.0.0:
+ - Stable Release

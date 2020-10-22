@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/api/promosi/discount.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/FAQ.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/changelog.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/__construct.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/acceptpagebreak.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/addfont.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/addlink.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/addpage.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/aliasnbpages.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/cell.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/close.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/error.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/footer.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/getpageheight.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/getpagewidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/getstringwidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/getx.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/gety.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/header.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/image.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/index.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/line.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/link.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/ln.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/multicell.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/output.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/pageno.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/rect.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setauthor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setautopagebreak.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setcompression.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setcreator.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setdisplaymode.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setdrawcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setfillcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setfont.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setfontsize.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setkeywords.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setleftmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setlinewidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setlink.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setmargins.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setrightmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setsubject.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/settextcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/settitle.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/settopmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setx.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/setxy.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/sety.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/text.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/doc/write.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/courier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/courierb.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/courierbi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/courieri.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/helvetica.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/helveticab.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/helveticabi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/helveticai.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/symbol.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/times.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/timesb.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/timesbi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/timesi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/font/zapfdingbats.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/fpdf.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/fpdf.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/install.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1250.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1251.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1252.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1253.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1254.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1255.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1257.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp1258.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/cp874.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-11.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-15.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-16.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-2.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-4.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-5.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-7.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/iso-8859-9.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/koi8-r.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/koi8-u.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/makefont.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/makefont/ttfparser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/20k_c1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/20k_c2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/calligra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/calligra.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/calligra.z" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/countries.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/index.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/makefont.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto1.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto1.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto2.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto2.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto3.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto3.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto4.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto4.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto5.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto5.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto6.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto6.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto7.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/fpdf/tutorial/tuto7.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Model_Config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Model_Discount.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/promosi/discount/classes/discount_list.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/promosi/discount/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/css/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/fonts/wysibbiconfont-wb.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/fonts/wysibbiconfont-wb.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/fonts/wysibbiconfont-wb.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/icons/404-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/icons/sprite.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/icons/user.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/ar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/en.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/id.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/ky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/lt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/pl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/ro.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/ru.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/uk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/uz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/flags/vi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/logo.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/logo_mobile.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/activity.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/add.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/album-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/album-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/album-3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/album-4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/award.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_bold.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_color.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_color_bg.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_italics.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_link.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_list.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_php.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_quote.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_smileys.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_sp.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_strike.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_underline.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bb_youtube.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/bg.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/block.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/contacts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/del.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/dl.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/dot.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/copyright.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/copyright_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/easy.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/file.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/gif.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/jar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/jpg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/mp3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/mp4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/png.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/rar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/top.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/txt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/vote.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/download/zip.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/empty.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/file.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/forbidden.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/green.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/guestbook.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/info.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/k_-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/k_-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/k_0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/k_1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/k_2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/label.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/logo.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/m.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/m_new.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/mail-inbox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/mail-info.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/mail-send.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/mail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/menu_cabinet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/menu_home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/menu_login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/menu_online.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/menu_registration.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/modules.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/network.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/np.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/op.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/photo.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/pt.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/rate.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/red.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/settings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.0-5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.1-5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.2-5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.3-5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.4-5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/star.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/stop.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/system/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/talk.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/tz.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/user-block.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/user-edit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/user-ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/users.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/vote.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/w.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/w_new.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old/write.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_menu_cabinet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_menu_home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_menu_login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_menu_online.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/images/old_user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/ua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/assets/wysibb/lang/vn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/css/magnific-popup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/css/prism.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/forum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/jquery.magnific-popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/modals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/prism.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/progress.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/slider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/js/wysibb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_album.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_animations.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_base_styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_homepage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_icons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_inputs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_lists.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_posts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_sections.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_sidebar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_slider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_user.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/_wbbtheme.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/src/scss/app.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/alert.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/bbcode.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/breadcrumbs.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/debug.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/model_paginator.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/pagination.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/sidebar-main-menu.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/app/sidebar-user-menu.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/error/404.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/layout/default.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/layouts/default.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/templates/changed_email_notification.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/templates/confirm_email_change.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/templates/registration.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/templates/restore_password.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/mail/templates/restore_password_complete.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/pages/comments_delete.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/pages/comments_form.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/pages/comments_list.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/pages/comments_reply.phtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/templates/system/pages/result.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config_type.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config_type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/db_connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/db_connection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/class/Products.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/config/Database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/51XVWrQCvBL.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/51dIT3DALsL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/61-rBuCls-L._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/61l1K8Zc-fL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/61w4SxGAbWL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/715KDuUxMhL._UY500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/71A9vgzYDCL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/71Apqt3vaBL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/71JQGZnfzDL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/71SbtW5k5vL._UL1500_.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/dblue-shreejivilla-xxl-original-imaejuafymgcxhq4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/duke1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/duke2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/nike1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/ratnavati.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/shonaya_1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/viva.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/images/viva2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/inc/container4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/inc/footer4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/inc/header4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/js/load_content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/load_action.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/16.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/17.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/18.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/19.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/20.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/21.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/22.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/23.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/24.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/products/wknavykrem.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/classes/items_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/classes/items_product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/slidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/slidebar.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="composer.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1ipJfyZkzDC7JtNh3xiclyVAGWx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.buildTools.grunt.grunt-cli.package" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/themes" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\twinzahra\themes" />
+      <recent name="C:\xampp\htdocs\twinzahra\config" />
+      <recent name="C:\xampp\htdocs\twinzahra\include\fpdf" />
+      <recent name="C:\xampp\htdocs\twinzahra\include" />
+      <recent name="C:\xampp\htdocs\twinzahra" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\twinzahra\promosi\discount" />
+      <recent name="C:\xampp\htdocs\twinzahra\include\classes" />
+      <recent name="C:\xampp\htdocs\twinzahra\api" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.grunt">
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6edd2e2-12bf-46fe-8610-052010a1aec9" name="Default Changelist" comment="" />
+      <created>1602598715690</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602598715690</updated>
+      <workItem from="1602598722729" duration="2316000" />
+      <workItem from="1602603421193" duration="1578000" />
+      <workItem from="1602605557591" duration="277000" />
+      <workItem from="1602605987721" duration="4040000" />
+      <workItem from="1602637383497" duration="2638000" />
+      <workItem from="1602686290799" duration="16156000" />
+      <workItem from="1602770987478" duration="5923000" />
+      <workItem from="1602809941064" duration="11253000" />
+      <workItem from="1602831915262" duration="11875000" />
+      <workItem from="1602889989676" duration="4930000" />
+      <workItem from="1603022829307" duration="20460000" />
+      <workItem from="1603115559163" duration="8436000" />
+      <workItem from="1603152135865" duration="14772000" />
+      <workItem from="1603195461107" duration="387000" />
+      <workItem from="1603200752166" duration="5478000" />
+      <workItem from="1603241630673" duration="5524000" />
+    </task>
+    <task id="LOCAL-00001" summary="Tes">
+      <created>1602601013270</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602601013270</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Tes">
+      <created>1602603586590</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603586590</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tes">
+      <created>1602603647036</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603647036</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Delete File">
+      <created>1602603844106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602603844106</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update">
+      <created>1602776660780</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602776660780</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Perbaikan halaman Create Order">
+      <created>1602892818091</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602892818091</updated>
+    </task>
+    <task id="LOCAL-00007" summary="repair cron job sync lazada">
+      <created>1603097353109</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603097353111</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Tes" />
+    <MESSAGE value="Delete File" />
+    <MESSAGE value="Update" />
+    <MESSAGE value="Perbaikan halaman Create Order" />
+    <MESSAGE value="repair cron job sync lazada" />
+    <option name="LAST_COMMIT_MESSAGE" value="repair cron job sync lazada" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602604732147">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1602604732147" />
+    <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603248058704">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1603248058704" />
+    <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1602603551562">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="434" y="225" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1602603551562" />
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1603097327195">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1603097327195" />
+    <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey" timestamp="1602604331969">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="467" y="258" width="432" height="242" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1602604331969" />
+    <state x="461" y="121" key="FileChooserDialogImpl" timestamp="1602606139008">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="461" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1602606139008" />
+    <state x="521" y="266" width="347" height="195" key="Github.CreateGistDialog" timestamp="1602812111592">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="521" y="266" width="347" height="195" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1602812111592" />
+    <state x="561" y="261" key="Github.ShareDialog" timestamp="1602598987879">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="561" y="261" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1602598987879" />
+    <state x="451" y="68" key="Github.UntrackedFilesDialog" timestamp="1602598996759">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="451" y="68" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1602598996759" />
+    <state x="517" y="296" key="NewPhpFileDialog" timestamp="1603159650120">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="517" y="296" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1603159650120" />
+    <state x="184" y="8" key="SettingsEditor" timestamp="1602606179106">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602606179106" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1603097388657">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1603097388657" />
+    <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1602603426006">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="391" y="193" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1602603426006" />
+    <state x="324" y="90" width="700" height="530" key="recent.locations.popup" timestamp="1603163166132">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="324" y="90" width="700" height="530" key="recent.locations.popup/0.0.1366.728@0.0.1366.728" timestamp="1603163166132" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1603201054565">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1603201054565" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602772968948">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602772968948" />
+  </component>
+</project>
