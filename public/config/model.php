@@ -7418,7 +7418,7 @@ return $query;
                                              return $query_get;
                                              }
                                              
-    public function getDataProduct($user_id ,$status, $page, $limit , $search)
+    public function getDataProduct($user_id ,$status, $page, $limit , $search ,$search_size, $search_color)
     {
 		
 		     $condition = '';
@@ -7438,17 +7438,7 @@ return $query;
         }
 		
 
-if ($search == null) {
-	
-	   $query = $this->conn->query("SELECT * FROM 
-	                                products AS tp
-	                                LEFT JOIN image_products AS ip
-	                                ON tp.ProductID = ip.ProductID
-                                    where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1)
-                                    Order by tp.ProductID ASC LIMIT " . $limit . " OFFSET " . $p . " ");
-	
-	
-}else{
+if ($search != null) {
 	
 	   $query = $this->conn->query("SELECT * FROM 
 	                                products AS tp
@@ -7458,6 +7448,38 @@ if ($search == null) {
 										where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1) and tp.ProductName LIKE CONCAT('%','" . $search . "','%')
 										
 										Order by tp.ProductID ASC");
+	
+
+
+} else if ($search_size != null) {
+
+
+
+  $query = $this->conn->query("
+  	SELECT * FROM 
+	                                products AS tp
+	                                LEFT JOIN image_products AS ip
+	                                ON tp.ProductID = ip.ProductID
+					LEFT JOIN product_variants AS pv
+					ON tp.ProductID = pv.ProductID	
+					LEFT JOIN product_variant_details AS pvd
+					ON pv.ProductVariantID = pvd.ProductVariantID			
+					WHERE (tp.UserID =" . $user_id . " AND  pvd.Stock > 0 ) AND (ip.isDefault = 1 AND tp.Status =" . $status . ") AND (pvd.ProductVariantDetailName LIKE CONCAT('%','" . $search_size . "','%'))
+										
+										Order by tp.ProductID ASC");
+
+
+}else{
+
+		   $query = $this->conn->query("SELECT * FROM 
+	                                products AS tp
+	                                LEFT JOIN image_products AS ip
+	                                ON tp.ProductID = ip.ProductID
+                                    where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1)
+                                    Order by tp.ProductID ASC LIMIT " . $limit . " OFFSET " . $p . " ");
+
+	
+	  
 	
 }
 			

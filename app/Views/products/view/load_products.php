@@ -5,7 +5,8 @@
 $user_id = null;
 $page = null;
 $search = null;
-
+$search_size = null;
+$search_color = null;
 
 if (isset($_POST['UserID'])) {
     $user_id = $_POST['UserID'];
@@ -21,13 +22,25 @@ if (isset($_POST['Search'])) {
 
 }
 
+if (isset($_POST['SearchSize'])) {
+    $search_size = $_POST['SearchSize'];
+
+}
+
+if (isset($_POST['SearchColor'])) {
+    $search_color = $_POST['SearchColor'];
+
+}
+
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, base_url('public/api/products.php?request=get_products'));
 $payload = json_encode( array( "Page"=> $page ,
     "UserID"=> 5 ,
     "Status"=> 1 ,
-    "Search"=> $search) );
+    "Search"=> $search,
+    "SearchSize"=> $search_size,
+    "SearchColor"=> $search_color) );
 curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -40,25 +53,28 @@ $result=json_decode($content,true);
 
 
 echo' 
+
             
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="example2" class="table table-bordered table-hover ">
             <tbody>';
 if ($result['total_rows'] > 0) {
 
     foreach($result['data'] as $DataProduct)
     {
         echo '<tr>';
-        echo '<td>   
+        echo '<td ><div class="input-group">   
 
 <div class="filtr-item col-sm-1" data-category="1" data-sort="'.$DataProduct['ProductName'].'">
                       <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
                         <img src="'.$DataProduct['ImageProductName'].'" class="img-fluid mb-2" alt="image"/>
                       </a>
                     </div>';
+
         echo '<div class="css-gjyepm">';
         echo '<div class="styPLCProductNameInfo"><h6>';
         echo $DataProduct['ProductName'];
-        echo '</h6></div>';
+        echo '</h6></div>
+        </div>';
 
         // echo '<div class="css-11v3zrg">';
         // echo $DataProduct['SkuID'];
@@ -76,9 +92,7 @@ if ($result['total_rows'] > 0) {
         echo '</div></div>';
 
 
-        echo ' <button class="btn btn-primary" data-toggle="collapse" data-target="#variant'.$DataProduct['ProductID'].'" >Lihat Variant</button>';
-
-
+        echo ' <button class="btn btn-primary col-auto" data-toggle="collapse" data-target="#variant'.$DataProduct['ProductID'].'" >Lihat Variant</button>';
 
         echo '<div id="variant'.$DataProduct['ProductID'].'" class="collapse">';
 
@@ -110,7 +124,7 @@ if ($result['total_rows'] > 0) {
                        <th style="width:5%">Stok</th>
                        <th style="width:10%">Barcode</th>
                        </tr>';
-        echo '<tr>';
+        echo '<tr >';
         if ($resultItem->total_rows > 0) {
 
           foreach ($resultItem -> data as $ProductItem) {
@@ -167,7 +181,7 @@ if ($result['total_rows'] > 0) {
             }
        }else{
 
-            echo json_encode($result['message']);
+ echo '<div class="card-body text-center" >'.$result['message'] .'</div>';
 
         }
         echo'</tbody>
@@ -182,45 +196,15 @@ if ($result['total_rows'] > 0) {
 
 }else{
 
-   echo json_encode($result['message']);
+   echo '<div class="card-body text-center" >'.$result['message'] .'</div>';
 
 }
 
 echo'</tbody>
                  </table>
+                 
                  </div> ';
 
 
 
 ?>
-<!-- jQuery -->
-<script src="<?= base_url('/public/plugins/jquery/jquery.min.js') ?>"></script>
-<!-- Bootstrap -->
-<script src="<?= base_url('/public/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>>
-<!-- jQuery UI -->
-<script src="<?= base_url('/public/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
-<!-- Ekko Lightbox -->
-<script src="<?= base_url('/public/plugins/ekko-lightbox/ekko-lightbox.min.js') ?>"></script>
-<!-- AdminLTE App -->
-<script src="<?= base_url('/public/dist/js/adminlte.min.js') ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?= base_url('/public/dist/js/demo.js') ?>"></script>
-<!-- Filterizr-->
-<script src="<?= base_url('/public/plugins/filterizr/jquery.filterizr.min.js') ?>"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-      event.preventDefault();
-      $(this).ekkoLightbox({
-        alwaysShowClose: true
-      });
-    });
-
-    $('.filter-container').filterizr({gutterPixels: 3});
-    $('.btn[data-filter]').on('click', function() {
-      $('.btn[data-filter]').removeClass('active');
-      $(this).addClass('active');
-    });
-  })
-</script>

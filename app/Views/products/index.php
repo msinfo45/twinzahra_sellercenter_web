@@ -2,11 +2,6 @@
 <?= $this->section('content') ?>
 <?php
 
-//require '../include/head.php';
-//require '../include/slidebar.php';
-
-
-
 //include "../config/db_connection.php";
 
 //include "../config/lazada/LazopSdk.php";
@@ -24,7 +19,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="<?= base_url('home') ?>">Home</a></li>
               <li class="breadcrumb-item active">Products</li>
             </ol>
           </div>
@@ -57,14 +52,61 @@
                 <div class="tab-content" id="custom-tabs-products-tabContent">
                   <div class="tab-pane fade show active" id="custom-tabs-products-database" role="tabpanel" aria-labelledby="custom-tabs-products-database-tab">
 
+ 
 
- <div class="input-group md-form form-sm form-2 pl-0">
+<div class="d-flex">
+      <div>
+        
+ 
+ <div class="input-group">
     <input class="form-control my-0 py-1 amber-border SearchProductDatabase" type="text" placeholder="search" aria-label="SearchProductDatabase" name="SearchProductDatabase">
     <div class="input-group-append">
     <span class="input-group-text amber lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
         aria-hidden="true"></i></span>
     </div>
+
+    
+
+       <div class="col-auto">
+                            <select class="form-control" name="search_size" id="search_size">
+                            <option value="" disabled selected>Pilih Ukuran</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                        </select>
+
+                         </div>
     </div>
+
+      
+
+      </div>
+
+  <div class="ml-auto">
+     
+  <div class="input-group">
+
+<div class="col-auto">
+
+
+<a data-toggle="modal"  title="Tambah Produk"  class="btn btn-primary" href="<?= base_url('products/add_product') ?>">Tambah Produk</a>    
+
+</div>
+
+<a data-toggle="modal"  title="Sync Marketplace"  class="SyncMarketplace btn btn-primary" href="#SyncMarketplace">Sync Marketplace</a>    
+
+
+</div>
+
+      </div>
+ </div>
+</br>
 
                     <div id="ResultProductDatabase"></div>
 
@@ -89,6 +131,10 @@
    </div>    
    </div>
    
+
+
+
+
   <script>
 
   LoadViewProducts();
@@ -113,15 +159,15 @@ $(document).on("click", "#tab-lazada", function () {
  
  var SearchProductDatabase = $('.SearchProductDatabase').val();
  
-LoadViewProducts(SearchProductDatabase);
+LoadViewProducts(SearchProductDatabase, "");
 
    }
 
     });
   
- function LoadViewProducts(SearchProductDatabase){
+ function LoadViewProducts(SearchProductDatabase , SearchSize){
   
-    var displayProduct = 5;
+    var displayProduct = 10;
     var Page = 1;
   $('#ResultProductDatabase').html(createSkeleton(displayProduct));
   
@@ -156,7 +202,7 @@ LoadViewProducts(SearchProductDatabase);
      url:'<?= base_url('products/load_products') ?>',
         method:"POST",
     //data: '{"Search":"'+ Search +'","Page": Page}',
-        data:{action: '<?= base_url('products/load_products') ?>', limit:limit , "Search":SearchProductDatabase,"Page": Page},
+        data:{action: '<?= base_url('products/load_products') ?>', limit:limit , "Search":SearchProductDatabase,"SearchSize":SearchSize,"Page": Page},
         success:function(data) {
       $('#ResultProductDatabase').html(data); 
         }
@@ -231,8 +277,6 @@ loadClassProductLazada(SearchProductLazada);
 
 
 
-
-
 $(document).on("click", ".SyncMarketplace", function () {
      var order_id = $(this).data('id');
      //$(".modal-body #order_id").val( order_id );
@@ -250,8 +294,8 @@ $(document).on("click", ".SyncMarketplace", function () {
     contentType: 'application/json',
     processData: false,
     data: '{"user_id": "5"}',
-        url:'http://sellercenter.twinzahra.com/api/lazada.php?request=sync_marketplace',
-           
+
+         url:'<?= base_url('v1/product/sync_marketplace') ?>',
             beforeSend: function () {
            $('.btn').attr("disabled","disabled");
               // $('.modal-body').css('opacity', '.5');
@@ -318,8 +362,16 @@ $(document).on("click", ".SyncMarketplace", function () {
   }
 
 
+ $(document).ready(function(){
+ 
+            $('#search_size').change(function(){ 
+                var id=$(this).val();
+      
+        LoadViewProducts("", id);
+            }); 
+             
+        });
 
-   
 
 </script>
 
@@ -329,4 +381,8 @@ $(document).on("click", ".SyncMarketplace", function () {
 
 //require '../include/modal/index.php';
 ?>
+
+
 <?= $this->endSection() ?>
+
+ <?= $this->include('products/modal/modal_sync_marketplace') ?>

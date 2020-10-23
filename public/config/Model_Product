@@ -22,7 +22,7 @@ class Model_Product
 
     }
 	
-	 public function getDataProduct($user_id , $page, $limit , $search_value)
+	 public function getDataProduct($user_id, $status, $page, $limit , $search ,$search_size , $search_color)
     {
 		
 		     $condition = '';
@@ -40,31 +40,7 @@ class Model_Product
 			
         }
 		
-		if ($search_value == null ) {
-				
-				
-          $query = $this->conn->query(" SELECT tp.ProductID,
-										pv.ProductVariantID,
-										pvd.SkuID,
-										pvd.Barcode,
-										tp.ProductName,									
-										pv.ProductVariantName,
-										pvd.ProductVariantDetailName,
-										pvd.PriceRetail,
-										pvd.Stock as Stock,
-										ipv.ImageProductVariantName as ImageVariantProduct
-										FROM products AS tp
-										LEFT JOIN product_variant_details AS pvd
-										ON tp.ProductID = pvd.ProductID
-										LEFT JOIN product_variants AS pv
-										ON pvd.ProductVariantID = pv.ProductVariantID
-										LEFT JOIN image_product_variants as ipv
-										ON pv.ProductVariantID = ipv.ProductVariantID		
-										where  tp.UserID = '" . $user_id . "' 										
-                                        Order by tp.ProductID and pvd.ProductVariantDetailName DESC " . $condition);
-										
-			
-			}else{
+		if ($search != null) {
 				
 				    $query = $this->conn->query(" SELECT tp.ProductID,
 										pv.ProductVariantID,
@@ -83,10 +59,59 @@ class Model_Product
 										ON pvd.ProductVariantID = pv.ProductVariantID
 										LEFT JOIN image_product_variants as ipv
 										ON pv.ProductVariantID = ipv.ProductVariantID		
-										where  tp.UserID = '" . $user_id . "' AND (tp.ProductName LIKE CONCAT('%','" . $search_value . "','%') OR pvd.ProductVariantDetailName LIKE CONCAT('%','" . $search_value . "','%'))
+										where  tp.UserID = '" . $user_id . "' AND (tp.ProductName LIKE CONCAT('%','" . $search . "','%') OR pvd.ProductVariantDetailName LIKE CONCAT('%','" . $search . "','%'))
                                         Order by tp.ProductID and pvd.Stock DESC " . $condition);
 										
+
+         
+										
+			
+			}else if ($search_size != null) {
+
+   				 $query = $this->conn->query("SELECT tp.ProductID,
+										pv.ProductVariantID,
+										pvd.SkuID,
+										pvd.Barcode,
+										tp.ProductName,									
+										pv.ProductVariantName,
+										pvd.ProductVariantDetailName,
+										pvd.PriceRetail,
+										pvd.Stock as Stock,
+										ipv.ImageProductVariantName as ImageVariantProduct
+										FROM products AS tp
+										LEFT JOIN product_variant_details AS pvd
+										ON tp.ProductID = pvd.ProductID
+										LEFT JOIN product_variants AS pv
+										ON pvd.ProductVariantID = pv.ProductVariantID
+										LEFT JOIN image_product_variants as ipv
+										ON pv.ProductVariantID = ipv.ProductVariantID		
+
+										WHERE  (tp.UserID = '" . $user_id . "' AND pvd.Stock > 0) AND (pvd.ProductVariantDetailName LIKE CONCAT('%','39','%'))
+                                        Order by tp.ProductID and pvd.Stock DESC " . $condition);
+										
+
+			}else{
 				
+				
+				 $query = $this->conn->query(" SELECT tp.ProductID,
+										pv.ProductVariantID,
+										pvd.SkuID,
+										pvd.Barcode,
+										tp.ProductName,									
+										pv.ProductVariantName,
+										pvd.ProductVariantDetailName,
+										pvd.PriceRetail,
+										pvd.Stock as Stock,
+										ipv.ImageProductVariantName as ImageVariantProduct
+										FROM products AS tp
+										LEFT JOIN product_variant_details AS pvd
+										ON tp.ProductID = pvd.ProductID
+										LEFT JOIN product_variants AS pv
+										ON pvd.ProductVariantID = pv.ProductVariantID
+										LEFT JOIN image_product_variants as ipv
+										ON pv.ProductVariantID = ipv.ProductVariantID		
+										where  tp.UserID = '" . $user_id . "' 										
+                                        Order by tp.ProductID and pvd.ProductVariantDetailName DESC " . $condition);
 			}
 			
 			

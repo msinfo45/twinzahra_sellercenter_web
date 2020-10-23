@@ -108,7 +108,9 @@ if (isset($content) && $content != "") {
                     $limit = 10;
 					
 					$status =1;
-					
+
+					$search_size = null;
+                    $search_color = null;
 					
 					
 					
@@ -124,9 +126,19 @@ if (isset($content) && $content != "") {
                     }
 				
 					
+                if (isset($post['SearchSize'])) {
+                    $search_size = $post['SearchSize'];
+
+                }
+
+                if (isset($post['SearchColor'])) {
+                    $search_color = $post['SearchColor'];
+
+                }
+
 						if (isset($user_id) && isset($status)) {
 
-                        $getData = $db->getDataProduct($user_id, $status, $page, $limit , $search);
+                        $getData = $db->getDataProduct($user_id, $status, $page, $limit , $search ,$search_size , $search_color );
                         if ($getData != null) {
 
                             while ($row = $getData->fetch_assoc()) {										
@@ -569,7 +581,7 @@ if (isset($content) && $content != "") {
 //                    $user_id = $userid_header;
                     $user_id = null;
 					$product_id = $post['ProductID'];
-				$product_id= 1;
+				//$product_id= 1;
 						
 						$rowProductVariant =  array();
 						$rowImageProductVariant =  array();

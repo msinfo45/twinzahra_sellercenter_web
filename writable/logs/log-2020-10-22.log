@@ -151,3 +151,256 @@ CRITICAL - 2020-10-22 01:51:46 --> syntax error, unexpected 'ImageProductName' (
 #4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
 #6 {main}
+CRITICAL - 2020-10-22 10:09:35 --> syntax error, unexpected end of file, expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/index', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(7): view('products/index')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->index()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 10:12:27 --> syntax error, unexpected 'public' (T_PUBLIC)
+#0 C:\xampp\htdocs\twinzahra\system\Router\Router.php(195): CodeIgniter\Router\Router->autoRoute('api/v1/products...')
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(797): CodeIgniter\Router\Router->handle('api/v1/products...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-22 10:17:59 --> syntax error, unexpected 'return' (T_RETURN), expecting ';' or '{'
+#0 C:\xampp\htdocs\twinzahra\system\Router\Router.php(195): CodeIgniter\Router\Router->autoRoute('v1/products')
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(797): CodeIgniter\Router\Router->handle('v1/products')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-22 10:18:59 --> include(../config/db_connection.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../conf...', 'C:\\xampp\\htdocs...', 3, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:19:21 --> include(../config/db_connection.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../conf...', 'C:\\xampp\\htdocs...', 3, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:22:48 --> include(../config/db_connection.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../conf...', 'C:\\xampp\\htdocs...', 3, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products('sync_marketplac...')
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:22:52 --> include(../config/db_connection.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../conf...', 'C:\\xampp\\htdocs...', 3, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products('sync_marketplac...')
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:23:22 --> include(../config/db_connection.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../conf...', 'C:\\xampp\\htdocs...', 3, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(3): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:26:23 --> include(App\Database\koneksi): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Dat...', 'C:\\xampp\\htdocs...', 2, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(2): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:28:43 --> include(App\Database\koneksi): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Dat...', 'C:\\xampp\\htdocs...', 2, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(2): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-22 10:28:49 --> Call to undefined function get_instance()
+#0 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include()
+#1 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-22 10:29:53 --> syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 10:30:42 --> Call to undefined function get_instance()
+#0 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include()
+#1 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(22): view('v1/products')
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-22 20:17:50 --> syntax error, unexpected 'message' (T_STRING), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 20:18:34 --> syntax error, unexpected 'json_encode' (T_STRING), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:50:53 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:51:00 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:51:01 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:51:20 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:51:41 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:51:45 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:53:48 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:53:58 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:54:11 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:55:04 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:55:06 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:55:07 --> syntax error, unexpected '"SearchColor"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:55:23 --> syntax error, unexpected ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-22 21:55:37 --> syntax error, unexpected ')'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(13): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
