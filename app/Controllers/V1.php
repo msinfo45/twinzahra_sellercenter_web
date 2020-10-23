@@ -17,8 +17,7 @@ class v1 extends BaseController
 	public function products()
 
 	{
-
-
+		
 	return view('v1/products');
 
 		//return view('products/view/load_products');

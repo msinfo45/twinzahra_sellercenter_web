@@ -1,6 +1,8 @@
 <?php
 
-class Model_user
+
+
+class Model_user 
 {
 
     private $conn;

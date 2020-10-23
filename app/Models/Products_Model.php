@@ -1,6 +1,7 @@
 <?php
 
-class Model_Product
+
+class Products_Model 
 {
 
     private $conn;
@@ -9,7 +10,7 @@ class Model_Product
     function __construct()
     {
         include "db_connection.php";
-        include "config_type.php";
+       include "config_type.php";
         $this->conn = $conn;
         $this->uploaddir = $UPLOAD_DIR_2;
         $this->smsuserkey = $SMS_USERKEY;
@@ -114,7 +115,15 @@ class Model_Product
                                         Order by tp.ProductID and pvd.ProductVariantDetailName DESC " . $condition);
 			}
 			
+													 
+																 
+			if (mysqli_num_rows($query) > 0) {
+            return $query;
+			} else {
+            return null;
+			}
 			
+			}
 			
 			 public function getDataSync($user_id, $product_id)
     {
@@ -158,15 +167,7 @@ class Model_Product
 
 																		 
 												 
-																 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
+		
 			
 			
 	

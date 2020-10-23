@@ -1,11 +1,10 @@
 
 
+
 <?php
 
-$CI =& get_instance();
-
-$CI->load->library('lazada');
-$CI->lazada->do_something();  
+include "public/config/db_connection.php";
+include "public/config/lazada/LazopSdk.php";
 
 $rows = array();
 $rows2 = array();
@@ -34,9 +33,10 @@ $content = $_GET['request'];
 if (isset($content) && $content != "") {
 
     //Load Models
-    include "../config/model.php";
 
-    $db = new Model_user();
+include "public/models/Products_Model.php";
+
+    $db = new Products_Model();
 
 
 			if ($content == "get_skus") {
@@ -97,6 +97,7 @@ if (isset($content) && $content != "") {
 				
     	
 				
+					
 				if ($content == "get_products") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
@@ -111,7 +112,9 @@ if (isset($content) && $content != "") {
                     $limit = 10;
 					
 					$status =1;
-					
+
+					$search_size = null;
+                    $search_color = null;
 					
 					
 					
@@ -127,9 +130,19 @@ if (isset($content) && $content != "") {
                     }
 				
 					
+                if (isset($post['SearchSize'])) {
+                    $search_size = $post['SearchSize'];
+
+                }
+
+                if (isset($post['SearchColor'])) {
+                    $search_color = $post['SearchColor'];
+
+                }
+
 						if (isset($user_id) && isset($status)) {
 
-                        $getData = $db->getDataProduct($user_id, $status, $page, $limit , $search);
+                        $getData = $db->getDataProduct($user_id, $status, $page, $limit , $search ,$search_size , $search_color );
                         if ($getData != null) {
 
                             while ($row = $getData->fetch_assoc()) {										
@@ -168,7 +181,6 @@ if (isset($content) && $content != "") {
                         }
                     echo json_encode($return);
                 }
-				
 				
 				
 				if ($content == "check_products") {
@@ -403,14 +415,169 @@ if (isset($content) && $content != "") {
 
                     echo json_encode($return);
                 }
+
+
+                	if ($content == "sync_marketplace") {
+                		$modeHeader = 0;
+                    $post = json_decode(file_get_contents("php://input"), true);
+//                    $user_id = $userid_header;
+                    $user_id = 5;
+
+				$rowProducts = array();
+				$rowVariants = array ();
+				$ProductID = array();
+				$xmlString = array();
+				
+					$product_id = null;
+					//$product_id = null;
+					
+					 if (isset($post['ProductID'])) {
+                        $product_id = $post['ProductID'];
+                    }
+
+
+
+                
+							//Mencari konfigurasi lazada by user id
+						$getConfigLazada = $db->getConfigLazada($user_id);
+					
+                        while ($rowLazada = $getConfigLazada->fetch_assoc()) {										
+				
+						$app_key =  $rowLazada['AppKey'];
+						$appSecret =  $rowLazada['AppSecret'];
+						$access_token =  $rowLazada['AccessToken'];	
+			
+						}
+					
+						//Mencari ProductID by user id
+						$getDataProduct = $db->getProducts($user_id);
+							
+                   
+							
+                        while ($rowProduct = $getDataProduct->fetch_assoc()) {	
+						
+						$rowProducts[] = $rowProduct;
+						//$ProductID = $rowProducts;
+
+					}
+	
+		foreach($rowProducts as $item) {
+
+			$ProductID = $item['ProductID'];
+			$ProductName = $item['ProductName'];
+			$Description = $item['Description'];
+
+
+			$xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+			$xml_output .= "<Request>\n";
+
+			$xml_output .= "\t<Product>\n";
+
+
+		 $xml_output .= "\t<Attributes>\n";
+
+		 $xml_output .= "\t\t<name>" . $ProductName . "</name>\n";
+			// $xml_output .= "\t\t<short_description>" . $Description . "</short_description>\n";
+
+
+		 $xml_output .= "\t</Attributes>\n";
+
+			$xml_output .= "\t<Skus>\n";
+
+			$getDataVariant = $db->getDataProductVariants2($user_id, $ProductID);
+
+			while ($rowVariant = $getDataVariant->fetch_assoc()) {
+
+
+				$SkuID = $rowVariant['SkuID'];
+				$Stock = $rowVariant['Stock'];
+				$PriceRetail = $rowVariant['PriceRetail'];
+				$PriceReseller = $rowVariant['PriceReseller'];
+
+				$xml_output .= "\t<Sku>\n";
+				$xml_output .= "\t\t<SellerSku>" . $rowVariant['SkuID'] . "</SellerSku>\n";
+				$xml_output .= "\t\t<quantity>" . $rowVariant['Stock'] . "</quantity>\n";
+				$xml_output .= "\t\t<price>" . $rowVariant['PriceRetail'] . "</price>\n";
+				$xml_output .= "\t</Sku>\n";
+
+			}
+
+
+
+			$xml_output .= "\t</Skus>\n";
+			$xml_output .= "\t</Product>\n";
+
+			$xml_output .= "</Request>";
+
+			$c = new LazopClient($url,$app_key,$appSecret);
+			$request = new LazopRequest('/product/update');
+			$request->addApiParam('payload', $xml_output);
+			
+			
+			$jdecode=json_decode($c->execute($request, $access_token));
+			$code = $jdecode->code;
+
+			$resultData = json_encode($jdecode , true);
+			
+		if ($code == 0) {
+				
+				$status = "Sukses";
+			$message = 'null';
+				
+			}else{
+				$status = "Gagal";
+			$message = $jdecode->message;
+			
+						
+						
+			}	
+			
+			$dataResult[]= array (
+						"ProductName"=>$ProductName,
+						"Status"=>$status,
+						"Msg"=>$message,
+						"Code"=>$code,
+						);
+
+
+		}
+				//	}
+
+
+//}
+						
+
+
+		$total = mysqli_num_rows($getDataProduct);
+
+						
+		//$dataResult = json_encode($dataResult , true);
+
+		$return = array(
+		"status" => 200,
+		"message" => "Sync ke marketplace berhasil",
+		"total_rows" => $total,
+		"data" => $dataResult
+			  
+               );
+
+			//sendEmail (json_encode($return));
+			
+          echo json_encode($return);
+
+                }
+				
+				
+				
+
 				
     // ---------------------------------------- API that need token below ------------------------------------------- //
     if ($modeHeader == 1) {
         //Check header token
-        $token_header = $_SERVER['HTTP_TOKEN'];
-        $userid_header = $_SERVER['HTTP_USER_ID'];
-        $version_code_header = $_SERVER['HTTP_VERSION_CODE'];
-        $version_name_header = $_SERVER['HTTP_VERSION_NAME'];
+       // $token_header = $_SERVER['HTTP_TOKEN'];
+        //$userid_header = $_SERVER['HTTP_USER_ID'];
+       // $version_code_header = $_SERVER['HTTP_VERSION_CODE'];
+       // $version_name_header = $_SERVER['HTTP_VERSION_NAME'];
         $version_check = 1;
 		
 		

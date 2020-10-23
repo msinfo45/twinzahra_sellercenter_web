@@ -10,6 +10,8 @@ class Products extends BaseController
 
 	public function load_products()
 	{
+		
+		
 		return view('products/view/load_products');
 		
 	}

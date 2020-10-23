@@ -99,7 +99,7 @@
 
 </div>
 
-<a data-toggle="modal"  title="Sync Marketplace"  class="SyncMarketplace btn btn-primary" href="#SyncMarketplace">Sync Marketplace</a>    
+<a data-toggle="modal"  target="_blank" title="Sync Marketplace"  class="btn btn-primary" href="<?= base_url('v1/products?request=sync_marketplace') ?>">Sync Marketplace</a>    
 
 
 </div>
@@ -134,6 +134,7 @@
 
 
 
+ <?= $this->include('products/modal/modal_sync_marketplace') ?>
 
   <script>
 
@@ -295,7 +296,7 @@ $(document).on("click", ".SyncMarketplace", function () {
     processData: false,
     data: '{"user_id": "5"}',
 
-         url:'<?= base_url('v1/product/sync_marketplace') ?>',
+         url:'<?= base_url('v1/products?request=sync_marketplace') ?>',
             beforeSend: function () {
            $('.btn').attr("disabled","disabled");
               // $('.modal-body').css('opacity', '.5');
@@ -307,12 +308,12 @@ $(document).on("click", ".SyncMarketplace", function () {
         console.log(data.data);
         
                 if(data.status == '200'){
-          
+           alert(data.message);
         $('#result_message').html('<span style="color:green;"></p>'+data.data);
           $('.btn').removeAttr("disabled");
           //$('.modal-body').css('opacity', '');
                 }else{
-          
+           alert(data.message);
           $('#result_message').html('<span style="color:red;"></p>'+data.data);
           $('.btn').removeAttr("disabled");
           //$('.modal-body').css('opacity', '');
@@ -328,7 +329,7 @@ $(document).on("click", ".SyncMarketplace", function () {
                 
             },
       error: function(){
-      alert("Cannot get data");
+      alert("error");
         $('.btn').removeAttr("disabled");
         //$('.modal-body').css('opacity', '');
       }
@@ -385,4 +386,3 @@ $(document).on("click", ".SyncMarketplace", function () {
 
 <?= $this->endSection() ?>
 
- <?= $this->include('products/modal/modal_sync_marketplace') ?>
