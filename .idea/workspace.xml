@@ -3,40 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Api.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/layout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/products.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/products/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/products/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/products/view/load_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/products/view/load_products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/config/Model_Product" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/Model_Product" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/load_content.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/load_tab_product_database.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356112.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356176.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356252.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356253.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356305.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356306.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356522.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356524.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356529.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356679.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356687.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356719.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356733.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356771.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356776.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356785.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356787.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356823.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356827.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356833.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356835.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356909.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1603356913.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/logs/log-2020-10-22.log" beforeDir="false" afterPath="$PROJECT_DIR$/writable/logs/log-2020-10-22.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +71,7 @@
       <updated>1603357216171</updated>
       <workItem from="1603357266023" duration="1168000" />
       <workItem from="1603361064277" duration="1426000" />
-      <workItem from="1603426733002" duration="106000" />
+      <workItem from="1603426733002" duration="411000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -121,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603362330716</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Penambahan fungsi pencarian by size di produk">
+      <created>1603426918092</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603426918092</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,20 +103,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Migration to framework codeigniter 4" />
     <MESSAGE value="Migration to framework codeigniter 4 (2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migration to framework codeigniter 4 (2)" />
+    <MESSAGE value="Penambahan fungsi pencarian by size di produk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Penambahan fungsi pencarian by size di produk" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1603362295455">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1603426907423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1603362295455" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1603426907423" />
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog" timestamp="1603361256408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1603362344209">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1603426922545">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1603362344209" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1603426922545" />
   </component>
 </project>
