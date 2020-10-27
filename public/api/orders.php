@@ -1,5 +1,6 @@
-<?php
 
+<?php
+error_reporting(error_reporting() & ~E_NOTICE);
 include "../config/db_connection.php";
 
 include "../config/lazada/LazopSdk.php";
@@ -64,15 +65,15 @@ if (isset($content) && $content != "") {
 							
 							if ($stock > 0) {
 	
-							$create = $db->createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id, $product_variant_detail_id);
+							$created = $db->createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id, $product_variant_detail_id);
 						
 							}
 						}
 							
 							
-							 
+
 							 //jika produk berhasil
-							  if ($create) {
+							  if ($created != null) {
 								   
 								 $return = array(
 											 "status" => 200,
@@ -229,7 +230,7 @@ if (isset($content) && $content != "") {
 					
 				
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_orders');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_orders');
 					//$payload = json_encode( array( "order_number"=> $DataProduct['order_number'] ) );
 					//$payload = json_encode( array( "UserID"=> "5" ) );
 					//curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -646,9 +647,9 @@ if (isset($content) && $content != "") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;
-                    //$user_id = 5;
+                    $user_id = 5;
 					$order_id =$post['order_id'];
-					//$order_id =10;
+					//$order_id =481702361920270;
 					$page = null;
 					
                     $limit = 0;
@@ -668,7 +669,7 @@ if (isset($content) && $content != "") {
 						
 					//Get data from lazada	
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_order_items');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_order_items');
 					$payload = json_encode( array( "order_id"=> $order_id,
 													"UserID"=> "5") );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );

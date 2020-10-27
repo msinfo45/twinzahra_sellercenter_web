@@ -1,12 +1,6 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-<?php
 
-//include "../config/db_connection.php";
-
-//include "../config/lazada/LazopSdk.php";
-
-  ?>
   <div class="content-wrapper">
                            
               <section class="content-header">
@@ -376,12 +370,7 @@ $(document).on("click", ".SyncMarketplace", function () {
 
 </script>
 
-<?php
-  
-//require '../include/footer.php';
 
-//require '../include/modal/index.php';
-?>
 
 
 <?= $this->endSection() ?>

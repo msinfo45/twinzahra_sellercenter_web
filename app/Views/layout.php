@@ -1,4 +1,13 @@
+<?php
 
+ if(session() ->get('HTTP_TOKEN') == "")
+{
+    header("Location: ".base_url('/'));
+
+   exit;
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +43,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('public/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
+
 <script src="<?= base_url('public/js/jquery-3.5.1.min.js') ?>"></script>
 <script src="<?= base_url('public/js/sprinkle.js') ?>"></script>
 
@@ -81,6 +88,9 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
+      </li>
+       <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?= base_url('v1/users?request=logout') ?>" class="nav-link">Logout</a>
       </li>
     </ul>
 

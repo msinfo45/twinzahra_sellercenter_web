@@ -53,10 +53,8 @@ $result=json_decode($content,true);
 
 
 echo' 
-
-            
-              <table id="example2" class="table table-bordered table-hover ">
-            <tbody>';
+<table id="example2" class="table table-bordered table-hover ">
+<tbody>';
 if ($result['total_rows'] > 0) {
 
     foreach($result['data'] as $DataProduct)

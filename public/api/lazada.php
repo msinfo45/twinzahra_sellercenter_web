@@ -549,7 +549,7 @@ $rows = [];
                     //$user_id = $post['UserID'];
 					$user_id = 5;
 					$order_id = $post['order_id'];;
-					//$order_id = 440803758531986;;		
+					//$order_id = 481862189929735;;		
 					
 					if (isset($user_id)) {
 
@@ -620,15 +620,15 @@ $rows = [];
 		$shipping_provider_type= $datas->shipping_provider_type;
 		$shipping_fee_original= $datas->shipping_fee_original;
 		$shipping_service_cost= $datas->shipping_service_cost;
-		$shipping_fee_discount_seller= $datas->shipping_fee_discount_seller;
+		//$shipping_fee_discount_seller= $datas->shipping_fee_discount_seller;
 		$shipping_amount= $datas->shipping_amount;
 		$is_digital= $datas->is_digital;
 		$voucher_amount= $datas->voucher_amount;
 		$voucher_seller= $datas->voucher_seller;
 		$voucher_code_seller= $datas->voucher_code_seller;
 		$voucher_code= $datas->voucher_code;
-		$voucher_code_platform->voucher_code_platform;
-		$voucher_platform= $voucher_platform;
+	//	$voucher_code_platform->voucher_code_platform;
+	//	$voucher_platform= $voucher_platform;
 		$order_flag= $datas->order_flag;
 		$promised_shipping_time= $datas->promised_shipping_time;
 		$digital_delivery_info= $datas->digital_delivery_info;
@@ -672,15 +672,15 @@ $rows = [];
 			"shipping_provider_type" =>$shipping_provider_type,
             "shipping_fee_original" =>$shipping_fee_original,
 			"shipping_service_cost " =>$shipping_service_cost,
-            "shipping_fee_discount_seller" =>$shipping_fee_discount_seller,
+           // "shipping_fee_discount_seller" =>$shipping_fee_discount_seller,
             "shipping_amount" =>$shipping_amount,
 			"is_digital" =>$is_digital,
 			"voucher_amount" =>$voucher_amount,
 			"voucher_seller" =>$voucher_seller,
             "voucher_code_seller" =>$voucher_code_seller,
             "voucher_code" =>$voucher_code,
-			"voucher_code_platform" =>$voucher_code_platform,
-			"voucher_platform" =>$voucher_platform,
+			//"voucher_code_platform" =>$voucher_code_platform,
+			//"voucher_platform" =>$voucher_platform,
 			"order_flag" =>$order_flag,
 			"promised_shipping_time" =>$promised_shipping_time,
 			"digital_delivery_info" =>$digital_delivery_info,
@@ -702,10 +702,10 @@ $rows = [];
 					
 			}else{
 						
-						// $return = array(
-                       //     "status" => 404,
-                       //     "message" => $jdecode->message
-                       // );
+						 $return = array(
+                          "status" => 404,
+                          "message" => $jdecode->message
+                        );
 						
 					}
 							
@@ -713,23 +713,23 @@ $rows = [];
          
 					
 			   } else {
-                        $return = array(
-                            "status" => 404,
-                            "message" => "Token Belum di setting"
-                        );
+                      $return = array(
+                          "status" => 404,
+                           "message" => "Token Belum di setting"
+                      );
                     }
 					   
 					   
                     
                     } else {
-                        $return = array(
-                            "status" => 404,
-                            "message" => "Oops sepertinya ada yang salah!"
-                        );
+                       $return = array(
+                         "status" => 404,
+                           "message" => "Oops sepertinya ada yang salah!"
+                      );
                     }
 					
 
-	                   echo json_encode($return);
+	                 echo json_encode($return);
 	
 
 

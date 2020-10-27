@@ -1,0 +1,418 @@
+CRITICAL - 2020-10-26 00:00:45 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:00:48 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:00:49 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:00:50 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:00:56 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:00:57 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:01:30 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:01:31 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:01:33 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:01:34 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:02:51 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:02:52 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:02:58 --> Undefined variable: ch
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 31, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(162): getItemsRts('DVD444DD')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-26 00:03:20 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(165): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:09 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:09 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:10 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:11 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:26 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:25:27 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:26:53 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(183): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 183, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:35:16 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 00:38:02 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 00:39:25 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(165): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:40:58 --> Illegal string offset 'sku'
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(165): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:44:14 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:47:40 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:49:52 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:49:55 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:51:13 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 00:51:17 --> Undefined variable: resultStok
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(196): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 196, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-26 02:32:57 --> syntax error, unexpected 'style' (T_STRING), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 02:33:20 --> syntax error, unexpected 'style' (T_STRING), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 02:33:35 --> syntax error, unexpected 'style' (T_STRING), expecting ',' or ';'
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 05:55:57 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\twinzahra\system\View\View.php(525): CodeIgniter\View\View->render('kasir/modal/mod...', NULL, true)
+#1 C:\xampp\htdocs\twinzahra\app\Views\kasir\index.php(467): CodeIgniter\View\View->include('kasir/modal/mod...')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('kasir/index', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\Kasir.php(7): view('kasir/index')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Kasir->index()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-26 05:56:46 --> Undefined variable: result
+#0 C:\xampp\htdocs\twinzahra\app\Views\kasir\modal\modal_search_product.php(22): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 22, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(525): CodeIgniter\View\View->render('kasir/modal/mod...', NULL, true)
+#3 C:\xampp\htdocs\twinzahra\app\Views\kasir\index.php(467): CodeIgniter\View\View->include('kasir/modal/mod...')
+#4 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('kasir/index', Array, true)
+#6 C:\xampp\htdocs\twinzahra\app\Controllers\Kasir.php(7): view('kasir/index')
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Kasir->index()
+#8 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir))
+#9 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-10-26 05:57:39 --> Undefined variable: page
+#0 C:\xampp\htdocs\twinzahra\app\Views\kasir\modal\modal_search_product.php(23): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 23, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(525): CodeIgniter\View\View->render('kasir/modal/mod...', NULL, true)
+#3 C:\xampp\htdocs\twinzahra\app\Views\kasir\index.php(467): CodeIgniter\View\View->include('kasir/modal/mod...')
+#4 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('kasir/index', Array, true)
+#6 C:\xampp\htdocs\twinzahra\app\Controllers\Kasir.php(7): view('kasir/index')
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Kasir->index()
+#8 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir))
+#9 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-10-26 11:53:08 --> syntax error, unexpected '<', expecting end of file
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 11:53:40 --> syntax error, unexpected '<', expecting end of file
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-26 11:57:32 --> Undefined variable: result
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\modal\accept_order.php(153): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 153, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(525): CodeIgniter\View\View->render('orders/modal/ac...', NULL, true)
+#3 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(355): CodeIgniter\View\View->include('orders/modal/ac...')
+#4 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#6 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(15): view('orders/view/loa...')
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#8 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#9 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-10-26 11:57:32 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "{0}". in C:\xampp\htdocs\twinzahra\system\Format\Exceptions\FormatException.php:9
+Stack trace:
+#0 C:\xampp\htdocs\twinzahra\system\Format\JSONFormatter.php(71): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(414): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(134): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\twinzahra\system\Debug\Exceptions.php(168): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-10-26 21:33:15 --> Undefined index: request
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\products.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 31, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/products', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(21): view('v1/products')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->products()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
