@@ -4,23 +4,24 @@
  	function getOrders(){
 		
 
-	$halaman = 1;
-	$page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
-	$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-	
 	$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_orders'));
-		//$payload = json_encode( array( "Page"=> "1" ) );
-		$payload = json_encode( array( "UserID"=> "5",
+					curl_setopt($ch, CURLOPT_URL, base_url('v1/orders?request=get_orders'));
+					$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "1"	
 										) );
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$content = curl_exec($ch);
-		curl_close($ch);
-		$result=json_decode($content,true);
-		return $result;
+					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$content = curl_exec($ch);
+					curl_close($ch);
+
+					//mengubah data json menjadi data array asosiatif
+					$result=json_decode($content,true);
+					
+					return $result;
+ 
+
+	
 		
 			}			
  
@@ -28,7 +29,7 @@
  	function getOrderItems($DataProduct){
 		
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
+					curl_setopt($chItems, CURLOPT_URL, base_url('v1/orders?request=get_order_items'));
 					$payloadItem = json_encode( array( "order_id"=> $DataProduct ) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
@@ -93,6 +94,8 @@ function getHistory($order_id){
 	
 
   $result = getOrders();
+
+ //echo json_encode($result);die;
 
  echo'<table id="TableOrders" class="table table-striped table-hover">
 	

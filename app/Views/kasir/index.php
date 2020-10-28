@@ -1,6 +1,18 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
 
+<?php
+
+
+function rupiah($angka){
+  
+  $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+  return $hasil_rupiah;
+ 
+}
+
+
+?>
 
 <div class="content-wrapper">
   <div class="content">
@@ -62,7 +74,7 @@
 
            <div class="col justify-content-center align-self-center">
 
-          <h3 class="center font-weight-bold color_red grand_total1" > Rp. 1000.000</h3>
+          <h3 id="total_bayar" class="center font-weight-bold color_red total_bayar" ></h3>
           </div>
 
         
@@ -143,7 +155,7 @@
                     <div class="input-group p-1">
                         <label class="form-control-plaintext">Diskon</label>
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" class="form-control" id="discount" placeholder="Rp" name="discount" required>
+                        <input type="text" class="form-control" id="discount" value=0 placeholder="" name="discount" readonly>
                     </div>
 
                     <div class="input-group p-1">
@@ -231,8 +243,8 @@
     dataType: 'json',
     contentType: 'application/json',
     processData: false,
-    data: '{"UserID": "5", "marketplace": "'+marketplace+'" , "order_id": "'+order_number+'", "name": "'+name+'", "shipping_provider": "'+shipping_provider+'", "tracking_code": "'+tracking_code+'", "shipping_amount": "'+shipping_amount+'", "tracking_code_pre": "'+tracking_code_pre+'", "remark": "'+remark+'", "payment_method": "'+payment_method+'"}',
-             url:'<?= base_url('public/api/orders.php?request=created_order') ?>',
+    data: '{"UserID": "5", "marketplace": "'+marketplace+'" , "order_id": "'+order_number+'", "name": "'+name+'", "shipping_provider": "'+shipping_provider+'", "tracking_code": "'+tracking_code+'", "shipping_amount": "'+shipping_amount+'", "tracking_code_pre": "'+tracking_code_pre+'", "remark": "'+remark+'", "payment_method": "'+payment_method+'" , "TokenSession": "<?= session() ->get('HTTP_TOKEN') ?>"}',
+             url:'<?= base_url('public/api/orders.php?request=created_kasir') ?>',
             beforeSend: function () {
               $('.create_orders').attr("disabled","disabled");
                $('.main-card').css('opacity', '.5');
@@ -261,7 +273,7 @@
                     //$('.statusMsg').html('<span style="color:green;"></p>' +data.message );
           alert(data.message);
   
-          window.location.href = '<?= base_url('public/api/orders.php?request=created_order') ?>',
+          window.location.href = '<?= base_url('kasir') ?>',
           sound_add();
           //loadDataItem(); 
           
@@ -303,6 +315,8 @@
         // it is unnecessary to have to manually call the modal.
         $('#SearchItems').modal('show');
 
+      });
+
 </script>
 
 <script>
@@ -323,46 +337,42 @@
     }
   
   
-  function getTotal(){
+ function getCart(){
 
-        $.ajax({
-        type: 'POST',
+
+ $.ajax({
+    type: 'POST',
     dataType: 'json',
     contentType: 'application/json',
     processData: false,
-    data: '{"Page": "1", "UserID": "5"}',
-          url:'<?= base_url('public/api/orders.php?request=get_cart_details') ?>',
+    data: '{"UserID": "5"}',
+    url:'<?= base_url('public/api/orders.php?request=get_cart_details') ?>',
 
-           
-           // beforeSend: function () {
-             //   $('.btn').attr("disabled","disabled");
-             //   $('#AcceptOrder .modal-body').css('opacity', '.5');
-           // },
             success:function(data){
         
         console.log(data.message);
         console.log(data.status);
         
-      
                 if(data.status == '200'){
-           
 
-                    $('#grand_total').text(1000);
+          $('#sub_total').val(data.sub_total);
 
-                }else{
+          $('#grand_total').val(data.sub_total);
+            $('.total_bayar').html(data.sub_total);        
+        
+
           
+                }else{
+         
         
-        }
-        
-        
-                
-    },
+              }  
+            },
       error: function(){
       alert("Cannot get data");
       }
       
         });
-    
+
 }
 
 
@@ -373,7 +383,10 @@
   
     setTimeout(function(){
       loadItems(displayProduct);
+      getCart();
     }, 0);
+
+
 
     function createSkeleton(limit){
       var skeletonHTML = '';
@@ -403,18 +416,19 @@
         data:{action: 'load_item_products', limit:limit},
         success:function(data) {
           $('#ResultItemOrders').html(data);
-          getTotal();
+
         }
       });
     }
  }
 
-//Load Data Items
+//Created Cart
 loadDataItem(); 
 
  $(document).on("keypress", "#SkuID", function(e){
 
-        if(e.which == 13){
+
+if(e.which == 13){
   
  
  var SkuID = $('#SkuID').val();
@@ -423,8 +437,8 @@ loadDataItem();
     dataType: 'json',
     contentType: 'application/json',
     processData: false,
-    data: '{"UserID": "5", "SkuID": "'+SkuID+'"}',
-    url:'<?= base_url('public/api/orders.php?request=add_cart_detail') ?>',
+    data: '{"UserID": "5", "SkuID": "'+SkuID+'", "TokenSession": "<?= session() ->get('HTTP_TOKEN') ?>"}',
+    url:'<?= base_url('public/api/orders.php?request=add_cart') ?>',
 
             beforeSend: function () {
                // $('.submitBtn').attr("disabled","disabled");
@@ -483,7 +497,8 @@ $(document).on("click", ".deleteItemCartDetail", function () {
     contentType: 'application/json',
     processData: false,
     data: '{"CartDetailID": "'+ CartDetailID +'"}',
-        url: 'http://localhost/api/orders.php?request=delete_cart_details',
+      url:'<?= base_url('public/api/orders.php?request=delete_cart_details') ?>',
+      
            
             beforeSend: function () {
                 $('.deleteItemCartDetail').attr("disabled","disabled");

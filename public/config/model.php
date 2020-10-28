@@ -1,8 +1,6 @@
 <?php
 
-
-
-class Model_user 
+class Model_user
 {
 
     private $conn;
@@ -40,11 +38,14 @@ class Model_user
         $token = $this->generateToken();
 
         $ref = "";
-        if ($referral_by != "") {
+        if ($referral_by != "")
+        {
             $ref = $referral_by;
         }
 
-        $insert = $this->conn->query("INSERT INTO users 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO users 
 									(FirstName, 
 									LastName, 
 									Email,
@@ -81,22 +82,24 @@ class Model_user
 									'1'
 									) ");
 
-        if ($insert) {
-           // $name = $firstname;
-           //$this->send_sms($email, $code, $name);
-
+        if ($insert)
+        {
+            // $name = $firstname;
+            //$this->send_sms($email, $code, $name);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-
-  public function saveCodeLazada($user_id, $code)
+    public function saveCodeLazada($user_id, $code)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO lazada 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO lazada 
 									(UserID,
 									Code,
 									CreatedDate
@@ -107,59 +110,62 @@ class Model_user
 									'" . $this->get_current_time() . "'
 									) ");
 
+        if ($insert)
+        {
 
-										
-		
-        if ($insert) {
-          
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
-	
-	public function updateCodeLazada($user_id, $code)
+
+    public function updateCodeLazada($user_id, $code)
     {
 
-    
-        $update = $this->conn->query("UPDATE lazada SET Code = '" . $code . "' , UpdateDate =  '" . $this->get_current_time() . "' 
+        $update = $this
+            ->conn
+            ->query("UPDATE lazada SET Code = '" . $code . "' , UpdateDate =  '" . $this->get_current_time() . "' 
 										where UserID = '" . $user_id . "'");
 
-        if ($update) {
-          
+        if ($update)
+        {
+
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
-	public function cekUserIDLazada($user_id)
+
+    public function cekUserIDLazada($user_id)
     {
 
-    
-        $insert = $this->conn->query("Select * from lazada where UserID = '".$user_id."'");
+        $insert = $this
+            ->conn
+            ->query("Select * from lazada where UserID = '" . $user_id . "'");
 
+        if (mysqli_num_rows($insert) > 0)
+        {
 
-										
-		
-         if (mysqli_num_rows($insert) > 0) {
-          
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-/**
+    /**
      * Create New User
      */
-    public function createToko($user_id, $toko_name ,$address , $phone , $category_toko_id, $email)
+    public function createToko($user_id, $toko_name, $address, $phone, $category_toko_id, $email)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO master_toko 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_toko 
 									(TokoName, 
 									Address, 
 									Phone,
@@ -170,47 +176,47 @@ class Model_user
 								VALUES 
 									('" . $toko_name . "', 
 									'" . $address . "',
-									'" . $phone. "',
+									'" . $phone . "',
 									'" . $category_toko_id . "',							
 									'1',
 									'" . $this->get_current_time() . "'
 									) ");
 
-
-										
-		
-        if ($insert) {
-           // $name = $firstname;
-           //$this->send_sms($email, $code, $name);
-			$dt = $this->getDataTokoByPhone($phone);
-			if ($dt != null) {
+        if ($insert)
+        {
+            // $name = $firstname;
+            //$this->send_sms($email, $code, $name);
+            $dt = $this->getDataTokoByPhone($phone);
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
-         
+
                 $toko_id = $dt['TokoID'];
-				$update = $this->conn->query("UPDATE users SET 
+                $update = $this
+                    ->conn
+                    ->query("UPDATE users SET 
 										TokoID = '" . $toko_id . "'
 									WHERE 
 										Email = '" . $email . "'");
-										
-              
+
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-
-
-/**
+    /**
      * Create New User
      */
-    public function insertStockOpname($user_id, $product_variant_name ,$product_variant_detail_name , $product_name  ,
-						$sku_id ,$barcode ,$unit ,$stock_system ,$stock_fisik ,$selisih, $reason)
+    public function insertStockOpname($user_id, $product_variant_name, $product_variant_detail_name, $product_name, $sku_id, $barcode, $unit, $stock_system, $stock_fisik, $selisih, $reason)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO stock_opname 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO stock_opname 
 									(ProductVariantName, 
 									ProductVariantDetailName, 
 									ProductName,
@@ -226,7 +232,7 @@ class Model_user
 								VALUES 
 									('" . $product_variant_name . "', 
 									'" . $product_variant_detail_name . "',
-									'" . $product_name. "',
+									'" . $product_name . "',
 									'" . $sku_id . "',							
 								'" . $barcode . "',	
 								'" . $unit . "',	
@@ -237,26 +243,26 @@ class Model_user
 									'" . $this->get_current_time() . "'
 									) ");
 
+        if ($insert)
+        {
 
-										
-		
-        if ($insert) {
-          
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
-/**
+
+    /**
      * Create New User
      */
-    public function createProduct($user_id, $product_name ,$deskripsi , $price , $stock , $weight,$price_sell  ,$category_id,  $brand_id)
+    public function createProduct($user_id, $product_name, $deskripsi, $price, $stock, $weight, $price_sell, $category_id, $brand_id)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO products
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO products
 									(UserID,
                                     SupplierID,
 									ProductName, 
@@ -277,78 +283,92 @@ class Model_user
                                      '0',
 									'" . $product_name . "', 
 									'" . $deskripsi . "',
-									'" . $price. "',
-									'" . $price_sell. "',
-									'" . $category_id. "',
-									'" . $brand_id. "',
+									'" . $price . "',
+									'" . $price_sell . "',
+									'" . $category_id . "',
+									'" . $brand_id . "',
 									'" . $stock . "',
 									'" . $weight . "',
 									'1',
                                     '1',
 									'" . $this->get_current_time() . "',
                                      '" . $this->get_current_time() . "'
-									)"
-									);
-		
-      
-	   if ($insert) {
-		   
-           // $name = $firstname;
-           //$this->send_sms($email, $code, $name);
-		   
-			//$dt = $this->getDataTokoByPhone($phone);
-			//if ($dt != null) {
-                //$dt = $dt->fetch_assoc();
-         
-               // $toko_id = $dt['TokoID'];
-				//$update = $this->conn->query(
-				//"UPDATE users SET 
-							//			TokoID = '" . $toko_id . "'
-							//		WHERE 
-								//		Email = '" . $email . "'");
-										
-              
+									)");
+
+        if ($insert)
+        {
+
+            // $name = $firstname;
+            //$this->send_sms($email, $code, $name);
+            //$dt = $this->getDataTokoByPhone($phone);
+            //if ($dt != null) {
+            //$dt = $dt->fetch_assoc();
+            // $toko_id = $dt['TokoID'];
+            //$update = $this->conn->query(
+            //"UPDATE users SET
+            //			TokoID = '" . $toko_id . "'
+            //		WHERE
+            //		Email = '" . $email . "'");
+            
+
             //}
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    public function checkCartDetails($sku_id , $user_id)
+    public function checkCartDetails($sku_id, $user_id)
     {
-        $query = $this->conn->query("SELECT * FROM cart_details WHERE SKU = '" . $sku_id . "' AND UserID = '" . $user_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM cart_details WHERE SKU = '" . $sku_id . "' AND UserID = '" . $user_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
+    public function createCartDetail($cart_id, $user_id, $sku_id, $product_id, $price, $quantity, $product_variant_id, $product_variant_detail_id)
 
+    {
+        //Lets process
+        $exist = $this->checkCartDetails($sku_id, $user_id);
+        if ($exist)
+        {
 
-    public function createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id,$product_variant_detail_id)
-
- {
-      //Lets process
-        $exist = $this->checkCartDetails($sku_id , $user_id);
-        if ($exist) {
-
-            $update = $this->conn->query("UPDATE cart_details SET 
-											Quantity 		= Quantity + 1
+            $update = $this
+                ->conn
+                ->query("UPDATE cart_details SET 
+											Quantity = Quantity + 1,
+											SubTotal = Price *  Quantity
 										WHERE 
 											UserID = '" . $user_id . "' AND SKU = '" . $sku_id . "' ");
-            if ($update) {
+            if ($update)
+            {
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        }else{
+        }
+        else
+        {
 
-            $insert = $this->conn->query("INSERT INTO cart_details(CartID,
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO cart_details(CartID,
+
 																		  SKU,
 																		  ProductID,
 																		  Price,
@@ -356,11 +376,12 @@ class Model_user
 																		  ProductVariantID,
 																		  ProductVariantDetailID,
 																		  UserID,
+																		  SubTotal,
 																		  CreatedDate
                                                                           
                                                                            )
                                                                           VALUES
-                                                                          ('0',
+                                                                          ('" . $cart_id . "' ,
 																		  '" . $sku_id . "' ,
 																		  '" . $product_id . "' ,
 																		  '" . $price . "' ,
@@ -368,61 +389,35 @@ class Model_user
 																		  '" . $product_variant_id . "' ,
 																		  '" . $product_variant_detail_id . "' ,
 																		    '" . $user_id . "' ,
+																		    '" . $price * $quantity . "' ,
 																		  '" . $this->get_current_time() . "'
-                                                                           )"
-            );
+                                                                           )");
 
-
-            if ($insert) {
-
+            if ($insert)
+            {
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
- }
-											 
-							
-                    public function createHistoryOrders(
-					$order_id,
-					$order_number,
-					$user_id,
-					$marketplace,
-					$branch_number,
-					$warehouse_code,
-					$customer_first_name,
-					$customer_last_name,
-					$price,
-					$items_count,
-					$payment_method,
-					$voucher,
-					$voucher_code,
-					$voucher_platform,
-					$voucher_seller,
-					$gift_option,
-					$gift_message,
-					$shipping_fee,
-					$shipping_fee_discount_seller,
-					$shipping_fee_discount_platform,
-					$promised_shipping_times,
-					$national_registration_number,
-					$tax_code,
-					$extra_attributes,
-					$remarks,
-					$delivery_info,
-					$statuses,
-					$created_at,
-					$updated_at)
-                                             {
-                                             
-                       if ($created_at == "" ) {
+    }
 
-						$created_at = $this->get_current_time();
+    public function createHistoryOrders($order_id, $order_number, $user_id, $marketplace, $branch_number, $warehouse_code, $customer_first_name, $customer_last_name, $price, $items_count, $payment_method, $voucher, $voucher_code, $voucher_platform, $voucher_seller, $gift_option, $gift_message, $shipping_fee, $shipping_fee_discount_seller, $shipping_fee_discount_platform, $promised_shipping_times, $national_registration_number, $tax_code, $extra_attributes, $remarks, $delivery_info, $statuses, $created_at, $updated_at)
+    {
 
-					   }
-					   
-                   $insert = $this->conn->query("INSERT INTO history_orders
+        if ($created_at == "")
+        {
+
+            $created_at = $this->get_current_time();
+
+        }
+
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO history_orders
                     (
 					order_id,
 					order_number,
@@ -474,7 +469,7 @@ class Model_user
 									'" . $gift_option . "' ,
 									'" . $gift_message . "' ,
 									'" . $shipping_fee . "' ,
-									'" . $shipping_fee_discount_seller. "' ,
+									'" . $shipping_fee_discount_seller . "' ,
 									'" . $shipping_fee_discount_platform . "' ,
 									'" . $promised_shipping_times . "' ,
 									'" . $national_registration_number . "' ,
@@ -485,43 +480,35 @@ class Model_user
 									'2',
 									'" . $created_at . "',
 									'" . $updated_at . "'
-                                   )"
-                                   );
-                                             
-                                             
-                                             if ($insert) {
-                                             
-                        
-                                             return true;
-                                             } else {
-                                             return false;
-                                             }
-                                             }
-						
-						
-				public function createHistoryOrderDetails(
-				$order_id ,
-				$history_order_details)
-                                             {
-                                             
-                //process insert batch
-        //$sql = array();
-		
-		
-		
-		
-		
-		//$obj1 = json_encode($history_order_details, true);
-		$obj = json_decode($history_order_details, true);
-	
-		foreach($obj as $item) {
-			
-		
-		
-			
+                                   )");
 
-			
-			 $insert = $this->conn->query("INSERT INTO history_order_details
+        if ($insert)
+        {
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function createHistoryOrderDetails($order_id, $history_order_details)
+    {
+
+        //process insert batch
+        //$sql = array();
+        
+
+        //$obj1 = json_encode($history_order_details, true);
+        $obj = json_decode($history_order_details, true);
+
+        foreach ($obj as $item)
+        {
+
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO history_order_details
 			(	
 			order_item_id,
 			order_id,
@@ -538,6 +525,7 @@ class Model_user
 			variation, 
 			item_price, 
 			paid_price,
+			qty,
 			currency, 
 			tax_amount, 
 			product_main_image, 
@@ -574,109 +562,186 @@ class Model_user
                                                                           
         )
        VALUES (
-			'".$item['order_item_id']."', 
-	   		'".$item['order_id']."', 
-			'".$item['purchase_order_id']."', 
-			'".$item['purchase_order_number']."', 
-			'".$item['invoice_number']."',
-			'".$item['sla_time_stamp']."', 
-			'".$item['package_id']."', 
-			'".$item['shop_id']."',
-			'".$item['order_type']."',
-			'".$item['shop_sku']."', 
-			'".$item['sku']."', 
-			'".$item['name']."', 
-			'".$item['variation']."', 
-			'".$item['item_price']."', 
-			'".$item['paid_price']."',
-			'".$item['currency']."', 
-			'".$item['tax_amount']."', 
-			'".$item['product_main_image']."', 
-			'".$item['product_detail_url']."', 
-			'".$item['shipment_provider']."', 
-			'".$item['tracking_code_pre']."', 
-			'".$item['tracking_code']."', 
-			'".$item['shipping_type']."', 
-			'".$item['shipping_provider_type']."', 
-            '".$item['shipping_fee_original']."', 
-			'".$item['shipping_service_cost']."' , 
-            '".$item['shipping_fee_discount_seller']."', 
-            '".$item['shipping_amount']."', 
-			'".$item['is_digital']."', 
-			'".$item['voucher_amount']."', 
-			'".$item['voucher_seller']."', 
-            '".$item['voucher_code_seller']."', 
-            '".$item['voucher_code']."', 
-			'".$item['voucher_code_platform']."', 
-			'".$item['voucher_platform']."', 
-			'".$item['order_flag']."', 
-			'".$item['promised_shipping_time']."', 
-			'".$item['digital_delivery_info']."', 
-            '".$item['extra_attributes']."', 
-			'".$item['cancel_return_initiator']."', 
-            '".$item['reason']."', 
-			'".$item['reason_detail']."', 
-            '".$item['stage_pay_status']."', 
-            '".$item['warehouse_code']."', 
-            '".$item['return_status']."', 
+			'" . $item['order_item_id'] . "', 
+	   		'" . $item['order_id'] . "', 
+			'" . $item['purchase_order_id'] . "', 
+			'" . $item['purchase_order_number'] . "', 
+			'" . $item['invoice_number'] . "',
+			'" . $item['sla_time_stamp'] . "', 
+			'" . $item['package_id'] . "', 
+			'" . $item['shop_id'] . "',
+			'" . $item['order_type'] . "',
+			'" . $item['shop_sku'] . "', 
+			'" . $item['sku'] . "', 
+			'" . $item['name'] . "', 
+			'" . $item['variation'] . "', 
+			'" . $item['item_price'] . "', 
+			'" . $item['paid_price'] . "',
+			'" . $item['qty'] . "',
+			'" . $item['currency'] . "', 
+			'" . $item['tax_amount'] . "', 
+			'" . $item['product_main_image'] . "', 
+			'" . $item['product_detail_url'] . "', 
+			'" . $item['shipment_provider'] . "', 
+			'" . $item['tracking_code_pre'] . "', 
+			'" . $item['tracking_code'] . "', 
+			'" . $item['shipping_type'] . "', 
+			'" . $item['shipping_provider_type'] . "', 
+            '" . $item['shipping_fee_original'] . "', 
+			'" . $item['shipping_service_cost'] . "' , 
+            '" . $item['shipping_fee_discount_seller'] . "', 
+            '" . $item['shipping_amount'] . "', 
+			'" . $item['is_digital'] . "', 
+			'" . $item['voucher_amount'] . "', 
+			'" . $item['voucher_seller'] . "', 
+            '" . $item['voucher_code_seller'] . "', 
+            '" . $item['voucher_code'] . "', 
+			'" . $item['voucher_code_platform'] . "', 
+			'" . $item['voucher_platform'] . "', 
+			'" . $item['order_flag'] . "', 
+			'" . $item['promised_shipping_time'] . "', 
+			'" . $item['digital_delivery_info'] . "', 
+            '" . $item['extra_attributes'] . "', 
+			'" . $item['cancel_return_initiator'] . "', 
+            '" . $item['reason'] . "', 
+			'" . $item['reason_detail'] . "', 
+            '" . $item['stage_pay_status'] . "', 
+            '" . $item['warehouse_code'] . "', 
+            '" . $item['return_status'] . "', 
             '2', 
-            '".$item['created_at']."', 
-            '".$item['updated_at']."'
+            '" . $item['created_at'] . "', 
+            '" . $item['updated_at'] . "'
 
 	   
 	   )");
-	   
-	   }
-                                              
-        if ($insert) {
-		return true;
-         } else {
-          return false;
-         }
 
-  
-	 
-			
-        
-                                             
-     
-         }
-						
-						
-						
-						
-											                         public function createCart($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id,$product_variant_detail_id)
-                                             {
-                                             
-                                             
-                                             $insert = $this->conn->query("INSERT INTO cart
-                                                                          (CustomerID
-                                                                          
-                                                                           )
-                                                                          VALUES
-                                                                          ('" . $customer_id . "'
-                                                                           )"
-                                                                          );
-                                             
-                                             
-                                             if ($insert) {
-                                             
-                        
-                                             return true;
-                                             } else {
-                                             return false;
-                                             }
-                                             }
-                                             
-	
-	/**
-     * Create New User
-     */
-    public function createCategory($user_id, $category_name , $category_code)
+        }
+
+        if ($insert)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public function checkTokenSessionCart($token_session, $user_id)
+    {
+        $query = $this
+            ->conn
+            ->query("SELECT CartID FROM cart WHERE 
+								UserID = '" . $user_id . "' AND TokenSession = '" . $token_session . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+
+        }
+        else
+        {
+
+            return false;
+
+        }
+    }
+
+    public function createCart($token_session, $customer_id, $user_id, $firstname, $lastname, $grand_total, $item_count)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO master_category
+        //Lets process
+        $exist = $this->checkTokenSessionCart($token_session, $user_id);
+
+        $cart_id = $exist;
+
+        if ($cart_id != null)
+        {
+
+            $update = $this
+                ->conn
+                ->query("UPDATE cart SET 
+								FirstName = '" . $firstname . "',
+                      			LastName = '" . $lastname . "',
+                  				GrandTotal = '" . $grand_total . "',
+              					ItemCount = '" . $item_count . "',
+								UpdatedDate = '" . $this->get_current_time() . "'
+								WHERE 
+								UserID = '" . $user_id . "' AND TokenSession = '" . $token_session . "' ");
+            if ($update)
+            {
+
+                while ($row = $cart_id->fetch_assoc())
+                {
+                    $rows = $row['CartID'];
+                }
+
+                return $rows;
+
+            }
+            else
+            {
+
+                return false;
+
+            }
+
+        }
+        else
+        {
+
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO cart
+                                 (TokenSession,
+                                 CustomerID,
+                                 UserID,
+                                 FirstName,
+                                 LastName,
+                                 GrandTotal,
+                                 ItemCount,                                
+                                 CreatedDate
+
+
+                                  )
+                                   VALUES
+                                  ('" . $token_session . "',
+                                 	'" . $customer_id . "',
+                              		'" . $user_id . "',
+                          			'" . $firstname . "',
+                      				'" . $lastname . "',
+                  					'" . $grand_total . "',
+              						'" . $item_count . "',
+
+              						'" . $this->get_current_time() . "'
+              					)");
+
+            if ($insert)
+            {
+
+                $id = mysqli_insert_id($this->conn);
+
+                return $id;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+    }
+
+    /**
+     * Create New User
+     */
+    public function createCategory($user_id, $category_name, $category_code)
+    {
+
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_category
 									(CategoryName,
 									Active,
 									CategoryCode,
@@ -689,30 +754,28 @@ class Model_user
 									'" . $category_code . "',
 									'0',								
 									'" . $this->get_current_time() . "'
-									)"
-									);
+									)");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-       
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	/**
+
+    /**
      * Create New User
      */
-    public function createBrand($user_id, $brand_name , $brand_code)
+    public function createBrand($user_id, $brand_name, $brand_code)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO master_brand
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_brand
 									(BrandName,
 									Active,
 									BrandCode,								
@@ -723,30 +786,28 @@ class Model_user
 									'0',
 									'" . $brand_code . "',							
 									'" . $this->get_current_time() . "'
-									)"
-									);
+									)");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-  
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	/**
+
+    /**
      * Create New User
      */
-    public function createColor($user_id, $color_name , $color_code)
+    public function createColor($user_id, $color_name, $color_code)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO master_color
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_color
 									(ColorName,
 									Active,
 									ColorCode,								
@@ -757,28 +818,25 @@ class Model_user
 									'0',
 									'" . $color_code . "',							
 									'" . $this->get_current_time() . "'
-									)"
-									);
+									)");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-  
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-                                             
-                                             public function createPaymentFasapay($fp_paidto, $fp_paidby , $fp_amnt ,$fp_fee_amnt , $fp_fee_mode ,  $fp_total ,$fp_currency ,           $fp_batchnumber ,$fp_store , $fp_timestamp , $fp_merchant_ref ,$fp_hash , $fp_hash_2 ,$trx_id , $fp_custom )
-                                             {
-                                             
-                                             
-                                             $insert = $this->conn->query("INSERT INTO fasapay
+
+    public function createPaymentFasapay($fp_paidto, $fp_paidby, $fp_amnt, $fp_fee_amnt, $fp_fee_mode, $fp_total, $fp_currency, $fp_batchnumber, $fp_store, $fp_timestamp, $fp_merchant_ref, $fp_hash, $fp_hash_2, $trx_id, $fp_custom)
+    {
+
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO fasapay
                                                                           (fp_paidto,
                                                                            fp_paidby,
                                                                            fp_amnt,
@@ -812,30 +870,28 @@ class Model_user
                                                                             '" . $trx_id . "',
                                                                            '" . $fp_custom . "'
                                                                            
-                                                                           )"
-                                                                          );
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             if ($insert) {
-                                             
-                                             
-                                             return true;
-                                             } else {
-                                             return false;
-                                             }
-                                             }
-                                             
-	/**
+                                                                           )");
+
+        if ($insert)
+        {
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * Create New User
      */
-    public function createVariant($user_id, $color_name , $color_code)
+    public function createVariant($user_id, $color_name, $color_code)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO variant
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO variant
 									(
 									UserID,
 									ColorName,
@@ -846,56 +902,51 @@ class Model_user
 									'" . $user_id . "',
 									'" . $color_name . "',
 									'" . $color_code . "'
-									)"
-									);
+									)");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-  
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	/**
+
+    /**
      * Create New User
      */
-    public function createDetailVariant($user_id, $size_name , $size_code)
+    public function createDetailVariant($user_id, $size_name, $size_code)
     {
 
-    
-        $insert = $this->conn->query("insert into detail_variant(ColorName,  SizeName , SizeCode , Stock) 
+        $insert = $this
+            ->conn
+            ->query("insert into detail_variant(ColorName,  SizeName , SizeCode , Stock) 
 		select ColorName, '" . $size_name . "',  '" . $size_code . "' , '1' 
-		from variant WHERE NOT EXISTS (SELECT ColorName from detail_variant WHERE SizeName = '" . $size_name . "'"
-									);
+		from variant WHERE NOT EXISTS (SELECT ColorName from detail_variant WHERE SizeName = '" . $size_name . "'");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-  
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
-	/**
+
+    /**
      * Create New User
      */
-    public function createSize($user_id, $size_name , $size_code)
+    public function createSize($user_id, $size_name, $size_code)
     {
 
-    
-        $insert = $this->conn->query("INSERT INTO master_size
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_size
 									(SizeName,
 									Active,
 									SizeCode,								
@@ -906,34 +957,32 @@ class Model_user
 									'0',
 									'" . $size_code . "',							
 									'" . $this->get_current_time() . "'
-									)"
-									);
+									)");
 
+        if ($insert)
+        {
 
-										
-		
-      
-	   if ($insert) {
-		   
-  
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
 
- /**
+    /**
      * Get user data by email
      */
     public function getDataTokoByPhone($phone)
     {
 
         $check = $this->checkTokoRegister($phone);
-        if ($check) {
-         
-            $query_get = $this->conn->query("SELECT 
+        if ($check)
+        {
+
+            $query_get = $this
+                ->conn
+                ->query("SELECT 
                                                    *
                                           FROM 
                                                     master_toko	
@@ -942,25 +991,31 @@ class Model_user
                                           Phone = '" . $phone . "' 
                                           AND Active=1");
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-	  /**
+
+    /**
      * Check if user exist
      */
     public function checkTokoRegister($phone)
     {
-        $query = $this->conn->query("SELECT * FROM master_toko WHERE Phone = '" . $phone . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_toko WHERE Phone = '" . $phone . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
 
     /**
      * Process Pending Order Nurse
@@ -979,12 +1034,14 @@ class Model_user
         $companyRevenue = $this->countPercentage($total_price, $companyRevenuePercent);
         $nurseRevenue = $total_price - $companyRevenue;
 
-
         //Lets process
         $exist = $this->checkPendingOrder($user_id);
-        if ($exist) {
+        if ($exist)
+        {
             //Order Pending Exist
-            $update = $this->conn->query("UPDATE nrz_orders_current SET 
+            $update = $this
+                ->conn
+                ->query("UPDATE nrz_orders_current SET 
 											OrderNo 		= '" . $order_no . "',
 											Latitude 		= '" . $latitude . "',
 											Longitude 		= '" . $longitude . "',
@@ -999,7 +1056,8 @@ class Model_user
 										WHERE 
 											UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
 
-            if ($update) {
+            if ($update)
+            {
                 $exist = $exist->fetch_assoc();
                 //create order log
                 $order_id = $exist['OrderID'];
@@ -1010,12 +1068,18 @@ class Model_user
 
                 $this->sendJobOffer($user_id, $category_id, $latitude, $longitude);
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             //Create New Order
-            $insert = $this->conn->query("INSERT INTO nrz_orders_current 
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO nrz_orders_current 
 										(OrderNo,
 										OrderDate,
 										UserID,
@@ -1091,9 +1155,11 @@ class Model_user
             // 						'".$this->get_current_time()."',
             // 						'".$unique_code."'
             // 						) ";
-            if ($insert) {
+            if ($insert)
+            {
                 //create order log
-                $order_id = $this->conn->insert_id;
+                $order_id = $this
+                    ->conn->insert_id;
                 $order_status_id = 1;
                 $description = 'Log Order Nurse, created by sistem api';
                 $nurse_id = 0;
@@ -1103,7 +1169,9 @@ class Model_user
                 $this->sendJobOffer($user_id, $category_id, $latitude, $longitude);
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -1115,11 +1183,16 @@ class Model_user
     public function checkPendingOrderPharmacy($user_id)
     {
 
-        $query = $this->conn->query("SELECT * FROM apt_orders WHERE UserID = '" . $user_id . "' AND AptOrderStatusID=1 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM apt_orders WHERE UserID = '" . $user_id . "' AND AptOrderStatusID=1 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -1138,10 +1211,13 @@ class Model_user
         //Lets process
         $exist = $this->checkPendingOrderPharmacy($user_id);
         // var_dump($exist->fetch_assoc());
-        if ($exist) {
+        if ($exist)
+        {
 
             //Order Pending Exist
-            $update = $this->conn->query("UPDATE apt_orders SET 
+            $update = $this
+                ->conn
+                ->query("UPDATE apt_orders SET 
 											OrderNo 		= '" . $order_no . "',
 											Latitude 		= '" . $latitude . "',
 											Longitude 		= '" . $longitude . "',
@@ -1152,7 +1228,8 @@ class Model_user
 											ModifiedDate	= '" . $this->get_current_time() . "'
 										WHERE 
 											UserID = '" . $user_id . "' AND AptOrderStatusID=1 AND Active=1 ");
-            if ($update) {
+            if ($update)
+            {
                 $exist = $exist->fetch_assoc();
                 //create order log
                 $order_id = $exist['AptOrderID'];
@@ -1164,14 +1241,19 @@ class Model_user
                 $this->sendJobOfferPharmacy($user_id, $latitude, $longitude);
                 $this->createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description);
 
-
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
 
-            $insert = $this->conn->query("INSERT INTO apt_orders 
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO apt_orders 
 										(OrderNo,
 										OrderDate,
 										UserID,
@@ -1198,9 +1280,11 @@ class Model_user
 										'" . $this->get_current_time() . "'
 										) ");
 
-            if ($insert) {
+            if ($insert)
+            {
                 //create order log
-                $order_id = $this->conn->insert_id;
+                $order_id = $this
+                    ->conn->insert_id;
                 $order_status_id = 1;
                 $description = 'Log Order Pharmacy, created by sistem api';
                 $pharmacy_id = 0;
@@ -1208,100 +1292,115 @@ class Model_user
                 $this->sendJobOfferPharmacy($user_id, $latitude, $longitude);
                 $this->createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description);
 
-
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
     }
 
-
     /**
      * Process Pending Order Pharmacy
      */
-//    public function processTrimaOrderPharmacy($order_id, $user_id)
-//    {
-//
-//        $order_no = 1;
-//
-//        //Count Transport Fare
-//        $transport_price = 0;
-//
-//
-//        // var_dump($exist->fetch_assoc());
-//        if ($exist) {
-//            //Order Pending Exist
-//            $update = $this->conn->query("UPDATE apt_orders SET
-//											OrderNo 		= '" . $order_no . "',
-//											AptOrderStatusID 		= '" . $order_status_id . "'
-//										WHERE
-//											UserID = '" . $user_id . "' AND AptOrderID= '" . $order_id . "'Active=1 ");
-//            if ($update) {
-//                $exist = $exist->fetch_assoc();
-//                //create order log
-//                //$order_id = $exist['AptOrderID'];
-//                $order_status_id = 3;
-//                $description = 'Log Order Pharmacy, created by sistem api';
-//                $pharmacy_id = 0;
-//                //$this->createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description);
-//
-//                //send push notif
-//                $this->sendTerimaPharmacy($user_id);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//
-//        }
-//
-//    }
-
+    //    public function processTrimaOrderPharmacy($order_id, $user_id)
+    //    {
+    //
+    //        $order_no = 1;
+    //
+    //        //Count Transport Fare
+    //        $transport_price = 0;
+    //
+    //
+    //        // var_dump($exist->fetch_assoc());
+    //        if ($exist) {
+    //            //Order Pending Exist
+    //            $update = $this->conn->query("UPDATE apt_orders SET
+    //											OrderNo 		= '" . $order_no . "',
+    //											AptOrderStatusID 		= '" . $order_status_id . "'
+    //										WHERE
+    //											UserID = '" . $user_id . "' AND AptOrderID= '" . $order_id . "'Active=1 ");
+    //            if ($update) {
+    //                $exist = $exist->fetch_assoc();
+    //                //create order log
+    //                //$order_id = $exist['AptOrderID'];
+    //                $order_status_id = 3;
+    //                $description = 'Log Order Pharmacy, created by sistem api';
+    //                $pharmacy_id = 0;
+    //                //$this->createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description);
+    //
+    //                //send push notif
+    //                $this->sendTerimaPharmacy($user_id);
+    //                return true;
+    //            } else {
+    //                return false;
+    //            }
+    //
+    //        }
+    //
+    //    }
+    
     /**
      * Process Cancel Order
      */
 
-    public function updateStokBySKU($variant_details , $qty)
-	
+    public function updateStokBySKU($variant_details)
+
     {
-		
-		$obj = json_decode($variant_details, true);
-	
-	//print_r ($variant_details);die;
-			
-foreach($obj as $item) {
-	
-        $update = $this->conn->query("UPDATE product_variant_details SET 
-										Stock = Stock - '" . $qty . "'
+
+        $obj = json_decode($variant_details, true);
+
+        //print_r ($variant_details);die;
+        foreach ($obj as $item)
+        {
+
+            $update = $this
+                ->conn
+                ->query("UPDATE product_variant_details SET 
+										Stock = Stock - '" . $item['qty'] . "'
 									WHERE 
 										SkuID = '" . $item['sku'] . "'");
-										
-}
 
-        if ($update) {
-     
+        }
+
+        if ($update)
+        {
+
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	 public function deleteCartDetailByUser($user_id )
+
+    public function deleteCartDetailByUser($user_id, $cart_id)
     {
 
-        $update = $this->conn->query("delete from  cart_details
+        $delete = $this
+            ->conn
+            ->query("delete from  cart
 									WHERE 
-										UserID = '" . $user_id . "'");
+										UserID = '" . $user_id . "' and CartID = '" . $cart_id . "'  ");
 
-        if ($update) {
-     
+        $update = $this
+            ->conn
+            ->query("delete from  cart_details
+								WHERE 
+										UserID = '" . $user_id . "' and CartID = '" . $cart_id . "'  ");
+
+        if ($update)
+        {
+
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Get Nurse Data From Order ID
@@ -1309,7 +1408,9 @@ foreach($obj as $item) {
     public function getPharmacyByOrderID($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.AptOrderID,
 											b.FirstName,
 											b.LastName,
@@ -1318,9 +1419,12 @@ foreach($obj as $item) {
 										INNER JOIN apt_users b ON a.PharmacyID = b.PharmacyID 
 										WHERE a.Active=1 AND a.AptOrderID='" . $order_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -1330,22 +1434,28 @@ foreach($obj as $item) {
      */
     public function checkPharmacyPendingOrder($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM apt_orders WHERE UserID = '" . $user_id . "' AND AptOrderStatusID=1 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM apt_orders WHERE UserID = '" . $user_id . "' AND AptOrderStatusID=1 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Order Logs
      */
     public function createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description)
     {
-        $q = $this->conn->query("INSERT INTO apt_order_logs 
+        $q = $this
+            ->conn
+            ->query("INSERT INTO apt_order_logs 
 									(AptOrderID,
 									CreatedDate,
 									AptOrderStatusID,
@@ -1359,9 +1469,13 @@ foreach($obj as $item) {
 									'" . $pharmacy_id . "',
 									'" . $description . "'
 									) ");
-        if ($q) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
@@ -1369,9 +1483,7 @@ foreach($obj as $item) {
     public function sendNotif_PatientAccept($order_id, $user_id)
     {
 
-
         //$row = $query->fetch_assoc();
-
         $custom_data = array(
             'type' => '92',
             'body' => "Ada Patient menerima tawaran anda",
@@ -1380,14 +1492,16 @@ foreach($obj as $item) {
             "url" => "",
             'AptOrderID' => $order_id
 
-
         );
 
         // var_dump($custom_data);
         //Notify Patient
-        $query_nrz = $this->conn->query("SELECT a.AptOrderID, b.FirebaseID FROM apt_orders a INNER JOIN master_users b ON b.UserID=a.UserID WHERE a.AptOrderID = '" . $order_id . "' ");
+        $query_nrz = $this
+            ->conn
+            ->query("SELECT a.AptOrderID, b.FirebaseID FROM apt_orders a INNER JOIN master_users b ON b.UserID=a.UserID WHERE a.AptOrderID = '" . $order_id . "' ");
 
-        if (mysqli_num_rows($query_nrz) > 0) {
+        if (mysqli_num_rows($query_nrz) > 0)
+        {
             $row_nrz = $query_nrz->fetch_assoc();
             $this->sendNotification_Pharmacy($row_nrz['FirebaseID'], $custom_data);
         }
@@ -1406,7 +1520,9 @@ foreach($obj as $item) {
         //if ($exist!=null) {
         //Order Offer Exist
         $order_status_id = 3;
-        $update = $this->conn->query("UPDATE apt_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE apt_orders SET 
 											AptOrderStatusID 		= '" . $order_status_id . "',
 											TotalPayment = '" . $total_payment . "',
 											AptUserID = '" . $apt_user_id . "'
@@ -1414,24 +1530,23 @@ foreach($obj as $item) {
 										WHERE 
 											AptOrderID = '" . $order_id . "'  and UserID = '" . $user_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             //$data = $exist->fetch_assoc();
-
             //create details
             //$this->processDetailOffer($data['OrderOfferID'], $details);
-
             //create order log
             // $order_id = $data['AptOrderID'];
             $order_status_id = 3;
             //$this->createOrderLog($order_id, $order_status_id, $pharmacy_id);
-
             //send notif to patient
             $this->sendNotif_PatientAccept($order_id, $user_id);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
-
 
     }
 
@@ -1441,7 +1556,9 @@ foreach($obj as $item) {
     public function getOrderPatientDetail($user_id, $order_id)
     {
 
-        $query_get = $this->conn->query("select 
+        $query_get = $this
+            ->conn
+            ->query("select 
                                             b.Name, 
                                             b.Address as Location , 
                                             a.Location as 'Address', 
@@ -1489,9 +1606,12 @@ foreach($obj as $item) {
 												a.Active = 1 and a.AptOrderID =  '" . $order_id . "'
 											");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -1502,7 +1622,6 @@ foreach($obj as $item) {
         //Get ID
         $order_id = $this->getPharmacyPendingOrderID($user_id);
 
-
         $custom_data = array(
             'type' => '91', //Job Offer Pharmacy
             'body' => "Hi, ada tawaran order nih ",
@@ -1511,7 +1630,9 @@ foreach($obj as $item) {
         );
 
         //Notify Online Pharmacy, within 30KM around
-        $query_nrz = $this->conn->query("SELECT a.*, a.Active,b.Active,c.Active,c.Verified,
+        $query_nrz = $this
+            ->conn
+            ->query("SELECT a.*, a.Active,b.Active,c.Active,c.Verified,
 												(3959 * acos(cos(radians(" . $latitude . "))*cos(radians(c.Latitude))*cos(radians(c.Longitude)-radians(" . $longitude . ")) + sin(radians(" . $latitude . "))*sin(radians(c.Latitude)))) AS distance
 											FROM apt_users a
 											INNER JOIN apt_user_location b ON b.AptUserID = a.AptUserID
@@ -1520,16 +1641,16 @@ foreach($obj as $item) {
 											HAVING 
 												distance <= 30  AND distance > 0");
 
-        if (mysqli_num_rows($query_nrz) > 0) {
+        if (mysqli_num_rows($query_nrz) > 0)
+        {
 
-
-            while ($row_nrz = $query_nrz->fetch_assoc()) {
+            while ($row_nrz = $query_nrz->fetch_assoc())
+            {
                 //$this->sendNotification_Pharmacy($row_nrz['FirebaseID'], $custom_data);
                 $this->sendNotification_Pharmacy($row_nrz['FirebaseID'], $custom_data);
             }
 
         }
-
 
     }
 
@@ -1538,51 +1659,63 @@ foreach($obj as $item) {
      */
     public function getPharmacyPendingPharmacyID($user_id)
     {
-        $query = $this->conn->query("SELECT * from apt_orders WHERE UserID = '" . $user_id . "'  AND Active=1 LIMIT 1");
+        $query = $this
+            ->conn
+            ->query("SELECT * from apt_orders WHERE UserID = '" . $user_id . "'  AND Active=1 LIMIT 1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['PharmacyID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
-
- /**
+    /**
      * Get pending order ID Pharmacy
      */
     public function getCurrentOrderID($user_id)
     {
-        $query = $this->conn->query("SELECT order_id FROM history_orders WHERE user_id = '" . $user_id . "' ORDER BY order_id DESC LIMIT 1");
+        $query = $this
+            ->conn
+            ->query("SELECT order_id FROM history_orders WHERE user_id = '" . $user_id . "' ORDER BY order_id DESC LIMIT 1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['order_id'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-	
-	
+
     /**
      * Get pending order ID Pharmacy
      */
     public function getPharmacyPendingOrderID($user_id)
     {
-        $query = $this->conn->query("SELECT * from apt_orders WHERE UserID = '" . $user_id . "'  AND AptOrderStatusID = 1 AND Active=1 LIMIT 1");
+        $query = $this
+            ->conn
+            ->query("SELECT * from apt_orders WHERE UserID = '" . $user_id . "'  AND AptOrderStatusID = 1 AND Active=1 LIMIT 1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['AptOrderID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -1595,8 +1728,9 @@ foreach($obj as $item) {
     function sendNotification_Pharmacy($firebase_id, $custom_data)
     {
 
-
-        $registrationIds = array($firebase_id);
+        $registrationIds = array(
+            $firebase_id
+        );
 
         $fields = array(
             'registration_ids' => $registrationIds,
@@ -1620,7 +1754,6 @@ foreach($obj as $item) {
 
     }
 
-
     /**
      * Process Detail Order Pharmacy
      */
@@ -1628,16 +1761,19 @@ foreach($obj as $item) {
     {
         //print_r($medicine_id);die();
         //delete first
-        $del = $this->conn->query("DELETE FROM apt_order_detail WHERE AptOrderID='" . $get_id . "' ");
+        $del = $this
+            ->conn
+            ->query("DELETE FROM apt_order_detail WHERE AptOrderID='" . $get_id . "' ");
 
         //process insert batch
         $sql = array();
 
         $m = new MultipleIterator();
-        $m->attachIterator(new ArrayIterator($medicine_id), 'medicine');
-        $m->attachIterator(new ArrayIterator($jumlah), 'jumlah');
+        $m->attachIterator(new ArrayIterator($medicine_id) , 'medicine');
+        $m->attachIterator(new ArrayIterator($jumlah) , 'jumlah');
 
-        foreach ($m as $item) {
+        foreach ($m as $item)
+        {
             //print_r($item[0]);die();
             $sql[] = '("' . $item[0] . '", ' . $get_id . ' , "' . $item[1] . '")';
         }
@@ -1645,16 +1781,19 @@ foreach($obj as $item) {
         // foreach ($medicine_id as $row) {
         // $sql[] = '("' . $row . '", ' . $get_id . ' , ' .$jumlah . ')';
         // }
-
         // print_r($sql);die();
-        $ins = $this->conn->query("INSERT INTO apt_order_detail (MedicineID, AptOrderID, Jumlah) VALUES " . implode(',', $sql) . "");
-        if ($ins) {
+        $ins = $this
+            ->conn
+            ->query("INSERT INTO apt_order_detail (MedicineID, AptOrderID, Jumlah) VALUES " . implode(',', $sql) . "");
+        if ($ins)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Process Pending Order Doctor
@@ -1667,12 +1806,14 @@ foreach($obj as $item) {
         //check doctor in range price
         // $q = $this->conn->query("SELECT * FROM doc_doctors WHERE Price >= $price_from AND price <= $price_to ");
         // 	if(mysqli_num_rows($q)){
-
         // }
         $exist = $this->checkPendingOrderDoctor($user_id);
-        if ($exist) {
+        if ($exist)
+        {
             //Order Pending Exist
-            $query = $this->conn->query("UPDATE doc_orders_current SET 
+            $query = $this
+                ->conn
+                ->query("UPDATE doc_orders_current SET 
 											OrderNo 		= '" . $order_no . "',
 											Latitude 		= '" . $latitude . "',
 											Longitude 		= '" . $longitude . "',
@@ -1686,7 +1827,8 @@ foreach($obj as $item) {
 										WHERE 
 											UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
 
-            if ($query) {
+            if ($query)
+            {
                 $exist = $exist->fetch_assoc();
                 //create order log
                 $order_id = $exist['OrderID'];
@@ -1698,12 +1840,18 @@ foreach($obj as $item) {
                 // send push notif
                 $this->sendJobOfferDoctor($user_id, $category_id, $price_from, $price_to);
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             //Create New Order
-            $query = $this->conn->query("INSERT INTO doc_orders_current 
+            $query = $this
+                ->conn
+                ->query("INSERT INTO doc_orders_current 
 										(OrderNo,
 										OrderDate,
 										UserID,
@@ -1730,9 +1878,11 @@ foreach($obj as $item) {
 										'" . $this->get_current_time() . "'
 										) ");
 
-            if ($query) {
+            if ($query)
+            {
                 //create order log
-                $order_id = $this->conn->insert_id;
+                $order_id = $this
+                    ->conn->insert_id;
                 $order_status_id = 1;
                 $description = 'Log Order Doctor, created by sistem api';
                 $doctor_id = 0;
@@ -1742,7 +1892,9 @@ foreach($obj as $item) {
                 $this->sendJobOfferDoctor($user_id, $category_id, $price_from, $price_to);
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -1750,12 +1902,11 @@ foreach($obj as $item) {
         // if ($query) {
         // 	$this->sendJobOfferDoctor($user_id, $category_id, $price_from, $price_to);
         // 	return true;
-
         // } else {
         // 	return false;
         // }
+        
     }
-
 
     //Job Offer Nurse
     public function sendJobOffer($user_id, $category_id, $latitude, $longitude)
@@ -1772,7 +1923,9 @@ foreach($obj as $item) {
 
         //Notify Online Nurses, within 10KM around
         // distance <= 10 AND  before
-        $query_nrz = $this->conn->query("SELECT a.*, b.Active,
+        $query_nrz = $this
+            ->conn
+            ->query("SELECT a.*, b.Active,
 												(3959 * acos(cos(radians(" . $latitude . "))*cos(radians(b.Latitude))*cos(radians(b.Longitude)-radians(" . $longitude . ")) + sin(radians(" . $latitude . "))*sin(radians(b.Latitude)))) AS distance
 											FROM nrz_nurses a
 											INNER JOIN nrz_nurse_location b ON b.NurseID = a.NurseID
@@ -1783,19 +1936,21 @@ foreach($obj as $item) {
 												a.Active=1 AND 
 												b.Active=1 AND 
 												a.Verified=1 ");
-        if (mysqli_num_rows($query_nrz) > 0) {
+        if (mysqli_num_rows($query_nrz) > 0)
+        {
 
-            while ($row_nrz = $query_nrz->fetch_assoc()) {
+            while ($row_nrz = $query_nrz->fetch_assoc())
+            {
                 //check nurse bill reach maximum limit
                 $nurse_max_bill = $this->checkNurseBillReachMaximum($row_nrz['NurseID']);
-                if (!$nurse_max_bill) {
+                if (!$nurse_max_bill)
+                {
                     $this->sendNotification_Nurse($row_nrz['FirebaseID'], $custom_data);
                 }
             }
 
         }
     }
-
 
     //Job Offer Doctor
     public function sendJobOfferDoctor($user_id, $category_id, $price_from, $price_to)
@@ -1811,20 +1966,23 @@ foreach($obj as $item) {
         );
 
         //Notify Online Doctors
-//        $query_nrz = $this->conn->query("SELECT a.* FROM doc_doctors a
-//											INNER JOIN doc_doctor_location b ON b.DoctorID = a.DoctorID
-//											WHERE a.CategoryID='" . $category_id . "' AND a.IsLogin = 1 AND a.FirebaseID IS NOT NULL AND a.Active=1 AND b.Active = 1 AND a.Verified=1 AND a.Price >= " . $price_from . " AND a.Price <= " . $price_to . "");
-        $query_nrz = $this->conn->query("SELECT a.* FROM doc_doctors a
+        //        $query_nrz = $this->conn->query("SELECT a.* FROM doc_doctors a
+        //											INNER JOIN doc_doctor_location b ON b.DoctorID = a.DoctorID
+        //											WHERE a.CategoryID='" . $category_id . "' AND a.IsLogin = 1 AND a.FirebaseID IS NOT NULL AND a.Active=1 AND b.Active = 1 AND a.Verified=1 AND a.Price >= " . $price_from . " AND a.Price <= " . $price_to . "");
+        $query_nrz = $this
+            ->conn
+            ->query("SELECT a.* FROM doc_doctors a
 											INNER JOIN doc_doctor_location b ON b.DoctorID = a.DoctorID
 											WHERE a.CategoryID='" . $category_id . "' AND a.IsLogin = 1 AND a.FirebaseID IS NOT NULL AND a.Active=1 AND b.Active = 1 AND a.Verified=1");
 
-        if (mysqli_num_rows($query_nrz) > 0) {
-            while ($row_nrz = $query_nrz->fetch_assoc()) {
+        if (mysqli_num_rows($query_nrz) > 0)
+        {
+            while ($row_nrz = $query_nrz->fetch_assoc())
+            {
                 $this->sendNotification_Doctor($row_nrz['FirebaseID'], $custom_data);
             }
         }
     }
-
 
     /**
      * Process Detail Order
@@ -1833,55 +1991,69 @@ foreach($obj as $item) {
     {
 
         //delete first
-        $del = $this->conn->query("DELETE FROM nrz_orders_detail WHERE OrderID='" . $order_id . "' ");
+        $del = $this
+            ->conn
+            ->query("DELETE FROM nrz_orders_detail WHERE OrderID='" . $order_id . "' ");
 
         //process insert batch
         $sql = array();
 
-        foreach ($action_id as $row) {
+        foreach ($action_id as $row)
+        {
             $sql[] = '("' . $row . '", ' . $order_id . ')';
         }
 
-        $ins = $this->conn->query('INSERT INTO nrz_orders_detail (ActionID, OrderID) VALUES ' . implode(',', $sql));
-        if ($ins) {
+        $ins = $this
+            ->conn
+            ->query('INSERT INTO nrz_orders_detail (ActionID, OrderID) VALUES ' . implode(',', $sql));
+        if ($ins)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
 
     }
-	
-	/**
+
+    /**
      * Process Detail Order
      */
-    public function processVariant( $product_variants, $product_id)
+    public function processVariant($product_variants, $product_id)
     {
-                                        
-      $dec = json_decode($product_variants);
-                                        
-      for($idx = 0; $idx < count($dec); $idx++){
-      $obj = (Array)$dec[$idx];
-      //echo $obj["ProductVariantID"];die;
-//      $sql[] = '( ' .$obj["ProductVariantID"] . ' ,' .$obj["UserID"] . ' , ' . $product_id . ' , "' .$obj["ProductVariantName"] . '")';
-      $sql[] = '( ' .$obj["UserID"] . ' , ' . $product_id . ' , "' .$obj["ProductVariantName"] . '")';
-      }
 
+        $dec = json_decode($product_variants);
 
-//        $ins = $this->conn->query('INSERT INTO product_variants (ProductVariantID , UserID , ProductID , ProductVariantName) VALUES ' . implode(',', $sql));
-    $ins = $this->conn->query('INSERT INTO product_variants (UserID , ProductID , ProductVariantName) VALUES ' . implode(',', $sql));
-        if ($ins) {
+        for ($idx = 0;$idx < count($dec);$idx++)
+        {
+            $obj = (Array)$dec[$idx];
+            //echo $obj["ProductVariantID"];die;
+            //      $sql[] = '( ' .$obj["ProductVariantID"] . ' ,' .$obj["UserID"] . ' , ' . $product_id . ' , "' .$obj["ProductVariantName"] . '")';
+            $sql[] = '( ' . $obj["UserID"] . ' , ' . $product_id . ' , "' . $obj["ProductVariantName"] . '")';
+        }
+
+        //        $ins = $this->conn->query('INSERT INTO product_variants (ProductVariantID , UserID , ProductID , ProductVariantName) VALUES ' . implode(',', $sql));
+        $ins = $this
+            ->conn
+            ->query('INSERT INTO product_variants (UserID , ProductID , ProductVariantName) VALUES ' . implode(',', $sql));
+        if ($ins)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
 
     }
 
-                                        public function processCartDetails($product_id , $quantity ,$product_variant_id , $product_variant_detail_id , $cart_id)
-                                        {
-                                        
-                                      
-                                        $insert = $this->conn->query("INSERT INTO cart_details
+    public function processCartDetails($product_id, $quantity, $product_variant_id, $product_variant_detail_id, $cart_id)
+    {
+
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO cart_details
                                                                      (ProductID,
                                                                       Quantity,
                                                                       ProductVariantID,
@@ -1897,87 +2069,101 @@ foreach($obj as $item) {
                                                                       '" . $product_variant_detail_id . "',
                                                                       '" . $cart_id . "',
                                                                       '" . $this->get_current_time() . "'
-                                                                      )"
-                                                                     );
-                                        
-                                        
-                                        if ($insert) {
-                                        
-                                        
-                                        return true;
-                                        } else {
-                                        return false;
-                                        }
-                                        
-                                        }
-                                        
+                                                                      )");
 
-                                        public function processImageProducts($image_products , $product_id)
-                                        {
-                                        
-                                        $dec = json_decode($image_products);
-                                        
-                                        for($idx = 0; $idx < count($dec); $idx++){
-                                        $obj = (Array)$dec[$idx];
-                                        //echo $obj["ProductVariantID"];die;
-                                        $sql[] = '( ' .$obj["UserID"] . ' , ' . $product_id . ' , "' .$obj["ImageProductName"] . '")';
-                                        }
-                                        
-                                        
-                                        $ins = $this->conn->query('INSERT INTO image_products (UserID , ProductID , ImageProductName) VALUES ' . implode(',', $sql));
-                                        if ($ins) {
-                                        return true;
-                                        } else {
-                                        return false;
-                                        }
-                                        
-                                        }
-                                        
-                                        public function processImageProductVariants($image_product_variants, $variant_id)
-                                        {
-                                        
-                                        $dec = json_decode($image_product_variants);
-                                        
-                                        for($idx = 0; $idx < count($dec); $idx++){
-                                        $obj = (Array)$dec[$idx];
-                                        //echo $obj["ProductVariantID"];die;
-                                        $sql[] = '( ' .$obj["UserID"] . ' , ' . $variant_id . ' , "' .$obj["ImageProductVariantName"] . '")';
-                                        }
-                                        
-                                        
-                                        $ins = $this->conn->query('INSERT INTO image_product_variants (UserID , ProductVariantID , ImageProductVariantName) VALUES ' . implode(',', $sql));
-                                        if ($ins) {
-                                        return true;
-                                        } else {
-                                        return false;
-                                        }
-                                        
-                                        }
+        if ($insert)
+        {
 
-/**
-     * Process Detail Order
-     */
-    public function processVariantDetail($product_id, $variant_id  , $product_variant_details)
-    {
-     $dec = json_decode($product_variant_details);
-                                        
-     for($idx = 0; $idx < count($dec); $idx++){
-     $obj = (Array)$dec[$idx];
-     $sql[] = '( ' .$obj["UserID"] . ' , '. $product_id .' ,' . $variant_id . ' , "' .$obj["ProductVariantDetailName"] . '" , "' .$obj["Price"] . '" ,   "' .$obj["PriceSell"] . '" , "' .$obj["Stock"] . '"
-     , "' .$obj["SKU"] . '", "' .$obj["Barcode"] . '")';
-     }
-                                 
-    $ins = $this->conn->query('INSERT INTO product_variant_details (UserID , ProductID, ProductVariantID , ProductVariantDetailName,
-                              Price , PriceSell , Stock , SKU , Barcode) VALUES ' . implode(',', $sql));
-    if ($ins) {
-     return true;
-     } else {
-     return false;
-     }
-                                        
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
-	
+    public function processImageProducts($image_products, $product_id)
+    {
+
+        $dec = json_decode($image_products);
+
+        for ($idx = 0;$idx < count($dec);$idx++)
+        {
+            $obj = (Array)$dec[$idx];
+            //echo $obj["ProductVariantID"];die;
+            $sql[] = '( ' . $obj["UserID"] . ' , ' . $product_id . ' , "' . $obj["ImageProductName"] . '")';
+        }
+
+        $ins = $this
+            ->conn
+            ->query('INSERT INTO image_products (UserID , ProductID , ImageProductName) VALUES ' . implode(',', $sql));
+        if ($ins)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public function processImageProductVariants($image_product_variants, $variant_id)
+    {
+
+        $dec = json_decode($image_product_variants);
+
+        for ($idx = 0;$idx < count($dec);$idx++)
+        {
+            $obj = (Array)$dec[$idx];
+            //echo $obj["ProductVariantID"];die;
+            $sql[] = '( ' . $obj["UserID"] . ' , ' . $variant_id . ' , "' . $obj["ImageProductVariantName"] . '")';
+        }
+
+        $ins = $this
+            ->conn
+            ->query('INSERT INTO image_product_variants (UserID , ProductVariantID , ImageProductVariantName) VALUES ' . implode(',', $sql));
+        if ($ins)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    /**
+     * Process Detail Order
+     */
+    public function processVariantDetail($product_id, $variant_id, $product_variant_details)
+    {
+        $dec = json_decode($product_variant_details);
+
+        for ($idx = 0;$idx < count($dec);$idx++)
+        {
+            $obj = (Array)$dec[$idx];
+            $sql[] = '( ' . $obj["UserID"] . ' , ' . $product_id . ' ,' . $variant_id . ' , "' . $obj["ProductVariantDetailName"] . '" , "' . $obj["Price"] . '" ,   "' . $obj["PriceSell"] . '" , "' . $obj["Stock"] . '"
+     , "' . $obj["SKU"] . '", "' . $obj["Barcode"] . '")';
+        }
+
+        $ins = $this
+            ->conn
+            ->query('INSERT INTO product_variant_details (UserID , ProductID, ProductVariantID , ProductVariantDetailName,
+                              Price , PriceSell , Stock , SKU , Barcode) VALUES ' . implode(',', $sql));
+        if ($ins)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
     /**
      * Get user data by email
      */
@@ -1985,11 +2171,13 @@ foreach($obj as $item) {
     {
 
         $check = $this->checkUserRegister($email);
-        if ($check) {
+        if ($check)
+        {
             // $query_get = $this->conn->query("SELECT *, '' AS Password FROM master_users WHERE Phone = '".$phone."' AND Active=1 ");
-
             // edit by elim
-            $query_get = $this->conn->query("SELECT 
+            $query_get = $this
+                ->conn
+                ->query("SELECT 
                                                a.UserID,
 											   a.TokoID,
 											   a.FirstName,
@@ -2017,7 +2205,9 @@ foreach($obj as $item) {
                                           a.Email = '" . $email . "' 
                                           AND a.Active=1");
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2029,17 +2219,24 @@ foreach($obj as $item) {
     {
 
         $check = $this->checkUserRegister($phone);
-        if ($check) {
-            $query_get = $this->conn->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND Active=1 ");
+        if ($check)
+        {
+            $query_get = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND Active=1 ");
 
             $user_id = $query_get->fetch_assoc();
 
             $UserID = $user_id['UserID'];
 
-            $query_get_emergency = $this->conn->query("SELECT * FROM master_patients WHERE UserID = '" . $UserID . "' AND Emergency = 1");
+            $query_get_emergency = $this
+                ->conn
+                ->query("SELECT * FROM master_patients WHERE UserID = '" . $UserID . "' AND Emergency = 1");
 
             return $query_get_emergency;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2049,7 +2246,9 @@ foreach($obj as $item) {
      */
     public function getNurseCategories()
     {
-        $query_get = $this->conn->query("SELECT * FROM nrz_categories WHERE Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT * FROM nrz_categories WHERE Active = 1");
         return $query_get;
     }
 
@@ -2059,10 +2258,13 @@ foreach($obj as $item) {
     public function getPaymentType($method = null)
     {
         $filter = "";
-        if ($method == 1) { //doctor
+        if ($method == 1)
+        { //doctor
             $filter = " AND PaymentTypeID NOT IN (1)";
         }
-        $query_get = $this->conn->query("SELECT *, '' AS Icon FROM master_payment_type WHERE Active = 1" . $filter);
+        $query_get = $this
+            ->conn
+            ->query("SELECT *, '' AS Icon FROM master_payment_type WHERE Active = 1" . $filter);
         return $query_get;
     }
 
@@ -2071,22 +2273,28 @@ foreach($obj as $item) {
      */
     public function getDoctorCategories()
     {
-        $query_get = $this->conn->query("SELECT CategoryID, Description AS CategoryName FROM doc_categories WHERE Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT CategoryID, Description AS CategoryName FROM doc_categories WHERE Active = 1");
         return $query_get;
     }
 
-  /**
+    /**
      * Get doctor categories
      */
     public function getMessageSetting($user_id)
     {
-        $query_get = $this->conn->query("SELECT MessageName  FROM message WHERE UserID = '" . $user_id . "'");
+        $query_get = $this
+            ->conn
+            ->query("SELECT MessageName  FROM message WHERE UserID = '" . $user_id . "'");
         return $query_get;
     }
-	
-	    public function loadData($user_id)
+
+    public function loadData($user_id)
     {
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.MessageName,
 											b.Phone
 										
@@ -2100,29 +2308,36 @@ foreach($obj as $item) {
      */
     public function getBanners()
     {
-        $query_get = $this->conn->query("SELECT BannerID, Title, Caption, App, CONCAT( '" . $this->uploaddir . "', '/banners/', BannerID,'.jpg') AS Url FROM master_banners WHERE App='3' AND Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT BannerID, Title, Caption, App, CONCAT( '" . $this->uploaddir . "', '/banners/', BannerID,'.jpg') AS Url FROM master_banners WHERE App='3' AND Active = 1");
         return $query_get;
     }
 
-   /**
+    /**
      * Get Profile
      */
     public function getProfile($user_id)
     {
-        $query_get = $this->conn->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' and  Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' and  Active = 1");
         return $query_get;
     }
-	
+
     /**
      * Get articles
      */
     public function getArticles($num = null)
     {
         $limit = "";
-        if ($num != null) {
+        if ($num != null)
+        {
             $limit = " LIMIT " . $num;
         }
-        $query_get = $this->conn->query("SELECT PublishedDate, ArticleID, Title, Caption, CreatedDate, CONCAT('" . $this->uploaddir . "', '/articles/', ArticleID,'.jpg') AS Url FROM master_articles WHERE Active = 1 AND TypeID = 3
+        $query_get = $this
+            ->conn
+            ->query("SELECT PublishedDate, ArticleID, Title, Caption, CreatedDate, CONCAT('" . $this->uploaddir . "', '/articles/', ArticleID,'.jpg') AS Url FROM master_articles WHERE Active = 1 AND TypeID = 3
 			ORDER BY PublishedDate DESC " . $limit);
         return $query_get;
     }
@@ -2132,7 +2347,9 @@ foreach($obj as $item) {
      */
     public function getArticleDetail($id)
     {
-        $query_get = $this->conn->query("SELECT ArticleID, Title, Caption, Content AS Description, CreatedDate, CONCAT( '" . $this->uploaddir . "', '/articles/', ArticleID,'.jpg') AS Url, Source FROM master_articles WHERE Active = 1 AND ArticleID = " . $id);
+        $query_get = $this
+            ->conn
+            ->query("SELECT ArticleID, Title, Caption, Content AS Description, CreatedDate, CONCAT( '" . $this->uploaddir . "', '/articles/', ArticleID,'.jpg') AS Url, Source FROM master_articles WHERE Active = 1 AND ArticleID = " . $id);
         return $query_get;
     }
 
@@ -2141,7 +2358,9 @@ foreach($obj as $item) {
      */
     public function getFeaturedPromos()
     {
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                         PromoID,
                                         Title,
                                         Harga,
@@ -2189,7 +2408,9 @@ foreach($obj as $item) {
      */
     public function getPromos()
     {
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                         PromoID,
                                         Title,
                                         Harga,
@@ -2236,11 +2457,16 @@ foreach($obj as $item) {
     public function checkPendingOrderPromo($promo_id, $user_id)
     {
         //cek yang status nya Pending
-        $query = $this->conn->query("SELECT * FROM promo_order WHERE UserID = '" . $user_id . "' AND PromoID = '" . $promo_id . "' AND PromoOrderStatusID=1 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM promo_order WHERE UserID = '" . $user_id . "' AND PromoID = '" . $promo_id . "' AND PromoOrderStatusID=1 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -2254,9 +2480,10 @@ foreach($obj as $item) {
         //Lets process
         $exist = $this->checkPendingOrderPromo($promo_id, $user_id);
         // var_dump($exist->fetch_assoc());
-
         //Create PromoOrderNo
-        $q = $this->conn->query("SELECT IFNULL(MAX(Right(PromoOrderNo,8)),0) AS OrderNo
+        $q = $this
+            ->conn
+            ->query("SELECT IFNULL(MAX(Right(PromoOrderNo,8)),0) AS OrderNo
 											FROM promo_order 
 											WHERE 
 												DATE_FORMAT(PromoOrderDate, '%m')='" . date('m') . "' AND 
@@ -2264,19 +2491,25 @@ foreach($obj as $item) {
 
         $data_promo_orderid = $q->fetch_assoc();
 
-        if ($data_promo_orderid['OrderNo'] == 0) {
+        if ($data_promo_orderid['OrderNo'] == 0)
+        {
             //Start From First
             $num = date('y') . date('m') . "0001";
             $order_no = "PR" . $num;
-        } else {
+        }
+        else
+        {
             //Continue Number +1
             $num = $data_promo_orderid['OrderNo'] + 1;
             $order_no = "PR" . $num;
         }
 
-        if ($exist) {
+        if ($exist)
+        {
             //Order Pending Exist
-            $update = $this->conn->query("UPDATE promo_order SET 
+            $update = $this
+                ->conn
+                ->query("UPDATE promo_order SET 
 											PromoOrderNo 		        = '" . $order_no . "',
 											UserID 		                = '" . $user_id . "',
 											AlamatPengiriman 		    = '" . $alamat_pengiriman . "',
@@ -2291,13 +2524,20 @@ foreach($obj as $item) {
 											AND
 											PromoID = '" . $promo_id . "' 
 											AND PromoOrderStatusID=1 AND Active=1 ");
-            if ($update) {
+            if ($update)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
-            $insert = $this->conn->query("INSERT INTO promo_order 
+        }
+        else
+        {
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO promo_order 
 										(PromoOrderNo,
 										PromoOrderDate,
 										PromoID,
@@ -2324,11 +2564,14 @@ foreach($obj as $item) {
 										'1'
 										) ");
 
-            if ($insert) {
+            if ($insert)
+            {
 
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -2339,26 +2582,35 @@ foreach($obj as $item) {
      */
     public function checkProductExist($product_id)
     {
-        $query = $this->conn->query("SELECT * FROM product WHERE ProductID = '" . $product_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM product WHERE ProductID = '" . $product_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	   public function checkProductBySKU($sku_id)
-    {
-        $query = $this->conn->query("SELECT * FROM product_variant_details WHERE SkuID = '" . $sku_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+    public function checkProductBySKU($sku_id)
+    {
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM product_variant_details WHERE SkuID = '" . $sku_id . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
 
     /**
      * Process Payment Promo Status By User
@@ -2367,16 +2619,19 @@ foreach($obj as $item) {
     {
 
         //Check If its free or no
-        $check_price = $this->conn->query("SELECT * FROM promo_order WHERE PromoOrderID='" . $promo_order_id . "' ");
+        $check_price = $this
+            ->conn
+            ->query("SELECT * FROM promo_order WHERE PromoOrderID='" . $promo_order_id . "' ");
         $data_price = $check_price->fetch_assoc();
         $total_payment = $data_price['TotalPayment'];
 
-
         $myStatus = "2"; //Menunggu Pembayaran
-
+        
 
         //Update
-        $update = $this->conn->query("UPDATE promo_order SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE promo_order SET 
 										PromoOrderStatusID = '" . $myStatus . "',
 										
 										PaymentTypeID = '" . $payment_type_id . "',
@@ -2385,9 +2640,11 @@ foreach($obj as $item) {
 									WHERE 
 										PromoOrderID = '" . $promo_order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getPromoByOrderID($promo_order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -2400,14 +2657,18 @@ foreach($obj as $item) {
             // $this->dealNotificationPharmacy($order_id);
             //$this->NoDealNotificationDoctor($order_id);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function createOrderLogPromo($promo_order_id, $order_status_id, $description)
     {
-        $q = $this->conn->query("INSERT INTO promo_order_logs 
+        $q = $this
+            ->conn
+            ->query("INSERT INTO promo_order_logs 
 									(PromoOrderID,
 									CreatedDate,
 									CreatedBy,
@@ -2423,9 +2684,13 @@ foreach($obj as $item) {
 								
 									'" . $description . "'
 									) ");
-        if ($q) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
@@ -2436,7 +2701,9 @@ foreach($obj as $item) {
     public function getPromoOrderData($promo_order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.*,
 											c.Firstname AS 'user_firstname',
 											c.LastName AS 'user_lastname',
@@ -2449,9 +2716,12 @@ foreach($obj as $item) {
 										LEFT JOIN master_promo d ON d.PromoID = a.PromoID
 										WHERE a.PromoOrderID = '" . $promo_order_id . "' AND a.Active = 1");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2462,7 +2732,9 @@ foreach($obj as $item) {
     public function getPromoByOrderID($promo_order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.PromoOrderID,
 											a.PromoID,
 											b.FirstName,
@@ -2474,9 +2746,12 @@ foreach($obj as $item) {
 										INNER JOIN master_users b ON a.UserID = b.UserID
 										WHERE a.Active=1 AND a.PromoOrderID='" . $promo_order_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2487,7 +2762,9 @@ foreach($obj as $item) {
     public function getAptOrderByOrderID($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.AptOrderID,
 											a.PharmacyID,
 											a.SubTotal,
@@ -2502,9 +2779,12 @@ foreach($obj as $item) {
 										INNER JOIN master_users b ON a.UserID = b.UserID
 										WHERE a.Active=1 AND a.AptOrderID='" . $order_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2516,18 +2796,22 @@ foreach($obj as $item) {
     public function deleteProduct($product_id)
     {
         //set PromoOrderStatusID to '6' means 'dibatalkan'
-
-        $update = $this->conn->query("DELETE from products
+        $update = $this
+            ->conn
+            ->query("DELETE from products
 									WHERE 
 										ProductID = '" . $product_id . "'");
 
-        if ($update) {
-           // $dt = $this->getPromoByOrderID($promo_order_id);
-           // if ($dt != null) {
-               // $dt = $dt->fetch_assoc();
-           // }
+        if ($update)
+        {
+            // $dt = $this->getPromoByOrderID($promo_order_id);
+            // if ($dt != null) {
+            // $dt = $dt->fetch_assoc();
+            // }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -2540,15 +2824,18 @@ foreach($obj as $item) {
     public function terimaBarang($promo_order_id)
     {
         //set PromoOrderStatusID to '6' means 'dibatalkan'
-
-        $update = $this->conn->query("UPDATE promo_order SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE promo_order SET 
 										PromoOrderStatusID = '5'
 									WHERE 
 										PromoOrderID = '" . $promo_order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getPromoByOrderID($promo_order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 $promo_order_id = $promo_order_id;
@@ -2560,22 +2847,26 @@ foreach($obj as $item) {
                 $user_id = $dt['UserID'];
                 $user = $this->getUserByID($user_id);
 
-                if ($user) {
+                if ($user)
+                {
                     $user = $user->fetch_assoc();
 
                     /*function point user*/
-                    $amount_per_point = $this->getConfig('amount_nominal_per_point_user')->fetch_assoc();
+                    $amount_per_point = $this->getConfig('amount_nominal_per_point_user')
+                        ->fetch_assoc();
                     $amount_per_point = $amount_per_point['Value'];
                     $total_point = 0;
                     $user_update = 0;
-                    if ($amount_per_point != null && $amount_per_point != 0) {
+                    if ($amount_per_point != null && $amount_per_point != 0)
+                    {
                         $point = (int)(($dt['TotalPayment'] - $dt['KodeUnik']) / $amount_per_point);
 
                         /*function udate user point*/
                         $deskripsi = 'Poin dari hasil Order Promo, created by system api';
                         $total_point = $user['Point'] + $point;
                         $user_update = $this->updateUserPoint($promo_order_id, $user_id, $total_point, $deskripsi);
-                        if ($user_update) {
+                        if ($user_update)
+                        {
                             $user_update = 1;
                         }
                         /*end function*/
@@ -2584,7 +2875,9 @@ foreach($obj as $item) {
                 }
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -2597,15 +2890,18 @@ foreach($obj as $item) {
     public function terimaBarangPharmacy($order_id)
     {
         //set AptOrderStatusID to '6' means 'Selesai'
-
-        $update = $this->conn->query("UPDATE apt_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE apt_orders SET 
 										AptOrderStatusID = '6'
 									WHERE 
 										AptOrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getAptOrderByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 $order_id = $order_id;
@@ -2617,15 +2913,18 @@ foreach($obj as $item) {
                 $user_id = $dt['UserID'];
                 $user = $this->getUserByID($user_id);
 
-                if ($user) {
+                if ($user)
+                {
                     $user = $user->fetch_assoc();
 
                     /*function point user*/
-                    $amount_per_point = $this->getConfig('amount_nominal_per_point_user')->fetch_assoc();
+                    $amount_per_point = $this->getConfig('amount_nominal_per_point_user')
+                        ->fetch_assoc();
                     $amount_per_point = $amount_per_point['Value'];
                     $total_point = 0;
                     $user_update = 0;
-                    if ($amount_per_point != null && $amount_per_point != 0) {
+                    if ($amount_per_point != null && $amount_per_point != 0)
+                    {
                         $point = (int)(($dt['SubTotal']) / $amount_per_point);
 
                         /*function udate user point*/
@@ -2633,14 +2932,14 @@ foreach($obj as $item) {
 
                         $total_point = $user['Point'] + $point;
                         $user_update = $this->updateUserPoint($order_id, $user_id, $total_point, $deskripsi);
-                        if ($user_update) {
+                        if ($user_update)
+                        {
                             $user_update = 1;
                         }
                         /*end function*/
                     }
 
                 }
-
 
                 $custom_data = array(
                     'type' => '5',
@@ -2651,24 +2950,27 @@ foreach($obj as $item) {
                     'PharmacyID' => $pharmacy_id,
                     'AptUserID' => $dt['AptUserID']
 
-
                 );
 
                 // var_dump($custom_data);
                 //Notify Pharmacy
-                $query_pharmacy = $this->conn->query("SELECT a.AptOrderID, b.FirebaseID FROM apt_orders a LEFT JOIN apt_users b ON b.AptUserID=a.AptUserID WHERE a.AptOrderID = '" . $order_id . "' ");
+                $query_pharmacy = $this
+                    ->conn
+                    ->query("SELECT a.AptOrderID, b.FirebaseID FROM apt_orders a LEFT JOIN apt_users b ON b.AptUserID=a.AptUserID WHERE a.AptOrderID = '" . $order_id . "' ");
 
-                if (mysqli_num_rows($query_pharmacy) > 0) {
+                if (mysqli_num_rows($query_pharmacy) > 0)
+                {
                     $row_pharmacy = $query_pharmacy->fetch_assoc();
                     $this->sendNotification_Pharmacy($row_pharmacy['FirebaseID'], $custom_data);
                 }
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Function update point user
@@ -2677,18 +2979,24 @@ foreach($obj as $item) {
      */
     public function updateUserPoint($order_id, $user_id, $user_total_point, $description)
     {
-        $q = $this->conn->query("UPDATE master_users SET
+        $q = $this
+            ->conn
+            ->query("UPDATE master_users SET
     							Point = " . $user_total_point . ",
 								PointModifiedDate = '" . $this->get_current_time() . "'
 								WHERE 
 								UserID=" . $user_id . "");
 
-        if ($q) {
+        if ($q)
+        {
             $q2 = $this->insertUserPointLog($order_id, $user_id, $user_total_point, $description);
 
-            if ($q2) {
+            if ($q2)
+            {
                 return $q2;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -2702,7 +3010,9 @@ foreach($obj as $item) {
     public function insertUserPointLog($order_id, $user_id, $amount, $description, $created_by = '9-')
     {
 
-        $q2 = $this->conn->query("INSERT INTO user_point_log
+        $q2 = $this
+            ->conn
+            ->query("INSERT INTO user_point_log
 								(
 									OrderID,
     								UserID,
@@ -2718,27 +3028,37 @@ foreach($obj as $item) {
 									'" . $this->get_current_time() . "',
 									'" . $created_by . "'								
 								)");
-        if ($q2) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q2)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
 
-
     public function getProvinsi()
     {
-        $query = $this->conn->query("SELECT * FROM master_provinsi");
-        if (mysqli_num_rows($query) > 0) {
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_provinsi");
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     public function getKabupaten($provinsi)
     {
-        $query = $this->conn->query("SELECT 
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                       master_kabupaten.KabupatenId, 
                                       master_kabupaten.kabupatenName 
                                       FROM 
@@ -2747,16 +3067,21 @@ foreach($obj as $item) {
                                       WHERE
                                       master_kabupaten.ProvinsiId = " . $provinsi . "
                                       ");
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     public function getKecamatan($provinsi, $kabupaten)
     {
-        $query = $this->conn->query("SELECT
+        $query = $this
+            ->conn
+            ->query("SELECT
                                         master_kecamatan.KecamatanId,
                                         master_kecamatan.KecamatanName 
                                     FROM
@@ -2768,16 +3093,21 @@ foreach($obj as $item) {
                                             AND
                                         master_kecamatan.KabupatenId = " . $kabupaten . "
                                       ");
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     public function getKelurahan($provinsi, $kabupaten, $kecamatan)
     {
-        $query = $this->conn->query("SELECT
+        $query = $this
+            ->conn
+            ->query("SELECT
                                             master_kelurahan.KelurahanId,
                                             master_kelurahan.KelurahanName,
                                             master_kelurahan.KodePos                                             
@@ -2793,9 +3123,12 @@ foreach($obj as $item) {
                                          AND
                                         master_kelurahan.KecamatanId = " . $kecamatan . "
                                       ");
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2805,77 +3138,102 @@ foreach($obj as $item) {
      */
     public function getProductID($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM products WHERE UserID = '" . $user_id . "' Order BY ProductID Desc LIMIT 1");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM products WHERE UserID = '" . $user_id . "' Order BY ProductID Desc LIMIT 1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['ProductID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-                                    /**
-                                     * Get pending order ID Nurse
-                                     */
-                                    public function getCartID($customer_id)
-                                    {
-                                    $query = $this->conn->query("SELECT * FROM cart WHERE CustomerID = '" . $customer_id . "' Order BY CartID Desc LIMIT 1");
-                                    
-                                    if (mysqli_num_rows($query) > 0) {
-                                    $row = $query->fetch_assoc();
-                                    $current_id = $row['CartID'];
-                                    
-                                    return $current_id;
-                                    } else {
-                                    return null;
-                                    }
-                                    }
-	   /**
+
+    /**
      * Get pending order ID Nurse
      */
-    public function getVariantID($user_id , $product_id)
+    public function getCartID($customer_id)
     {
-    $query = $this->conn->query("SELECT * FROM product_variants WHERE UserID = '" . $user_id . "' and ProductID = '" . $product_id . "'  LIMIT 1 ");
-                                    
-     if (mysqli_num_rows($query) > 0) {
-                                    $row = $query->fetch_assoc();
-     $current_id = $row['ProductVariantID'];
-                                    
-      return $current_id;
-      } else {
-      return null;
-      }
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM cart WHERE CustomerID = '" . $customer_id . "' Order BY CartID Desc LIMIT 1");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            $row = $query->fetch_assoc();
+            $current_id = $row['CartID'];
+
+            return $current_id;
+        }
+        else
+        {
+            return null;
+        }
     }
-	
-                                    public function getProductVariantID($product_id)
-                                    {
-                                    $query = $this->conn->query("SELECT * FROM product_variants WHERE ProductID = '" . $product_id . "'  LIMIT 1 ");
-                                    
-                                    if (mysqli_num_rows($query) > 0) {
-                                    $row = $query->fetch_assoc();
-                                    $current_id = $row['ProductVariantID'];
-                                    
-                                    return $current_id;
-                                    } else {
-                                    return null;
-                                    }
-                                    }
+    /**
+     * Get pending order ID Nurse
+     */
+    public function getVariantID($user_id, $product_id)
+    {
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM product_variants WHERE UserID = '" . $user_id . "' and ProductID = '" . $product_id . "'  LIMIT 1 ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            $row = $query->fetch_assoc();
+            $current_id = $row['ProductVariantID'];
+
+            return $current_id;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductVariantID($product_id)
+    {
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM product_variants WHERE ProductID = '" . $product_id . "'  LIMIT 1 ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            $row = $query->fetch_assoc();
+            $current_id = $row['ProductVariantID'];
+
+            return $current_id;
+        }
+        else
+        {
+            return null;
+        }
+    }
     /**
      * Get pending order ID Nurse
      */
     public function getPendingOrderID($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['OrderID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2885,11 +3243,16 @@ foreach($obj as $item) {
      */
     public function checkConfirmPaymentPendingPromo($promo_order_id)
     {
-        $query = $this->conn->query("SELECT * FROM promo_payment_transfer WHERE PromoOrderID = '" . $promo_order_id . "' AND Status=0 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM promo_payment_transfer WHERE PromoOrderID = '" . $promo_order_id . "' AND Status=0 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -2899,14 +3262,19 @@ foreach($obj as $item) {
      */
     public function getPendingPromoOrderID($promo_id, $user_id)
     {
-        $query = $this->conn->query("SELECT PromoOrderID as 'OrderID' FROM promo_order WHERE UserID = '" . $user_id . "' AND PromoID = '" . $promo_id . "' AND PromoOrderStatusID=1 AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT PromoOrderID as 'OrderID' FROM promo_order WHERE UserID = '" . $user_id . "' AND PromoID = '" . $promo_id . "' AND PromoOrderStatusID=1 AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['OrderID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -2916,7 +3284,9 @@ foreach($obj as $item) {
      */
     public function getPromoDetail($id)
     {
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                         PromoID,
                                         Title,
                                         Content,
@@ -2957,13 +3327,17 @@ foreach($obj as $item) {
     public function confirmPaymentTransferPromo($user_id, $payment_accound_id, $promo_order_id, $bank_name, $account_name, $account_no, $trf_date, $total)
     {
         //7 Menuggu Verifikasi
-        $update = $this->conn->query("UPDATE promo_order SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE promo_order SET 
 											PromoOrderStatusID 		= '7'
 										WHERE 
 											PromoOrderID = '" . $promo_order_id . "'");
 
         //Status nya '0' artinya sudah siap di verifikasi oleh admin
-        $insert = $this->conn->query("INSERT INTO promo_payment_transfer 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO promo_payment_transfer 
 										(PromoOrderID,								
 										PaymentTypeID,
 										SenderBankName,
@@ -2991,11 +3365,13 @@ foreach($obj as $item) {
 										'" . $this->get_current_time() . "'
 										) ");
 
-
-        if ($insert) {
-            $insert_id = $this->conn->insert_id;
+        if ($insert)
+        {
+            $insert_id = $this
+                ->conn->insert_id;
             $dt = $this->getPromoByOrderID($promo_order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -3006,7 +3382,9 @@ foreach($obj as $item) {
                 $this->createOrderLogPromo($promo_order_id, $order_status_id, $description);
             }
             return $insert_id;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -3017,7 +3395,9 @@ foreach($obj as $item) {
     public function getOrderPromo($user_id, $promo_id)
     {
 
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                             a.AlamatPengiriman,
                                             a.UserID,
                                             a.PromoOrderStatusID,
@@ -3044,9 +3424,12 @@ foreach($obj as $item) {
                                             a.PromoID =  '" . $promo_id . "'
 											");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3057,7 +3440,9 @@ foreach($obj as $item) {
     public function getImageProduct($product_id)
     {
 
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                            *
                                         from
                                         image_products
@@ -3068,13 +3453,15 @@ foreach($obj as $item) {
                                          
 											");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Get Promo Order Detail
@@ -3082,7 +3469,9 @@ foreach($obj as $item) {
     public function getPromoOrderDetail($promo_id, $user_id)
     {
 
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                             a.AlamatPengiriman,
                                             a.UserID,
                                             a.PromoOrderStatusID as 'OrderStatusID',
@@ -3115,13 +3504,15 @@ foreach($obj as $item) {
                                          
 											");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Get Top Up User Detail
@@ -3129,16 +3520,21 @@ foreach($obj as $item) {
     public function getTopUpUserDetail($user_id, $amount)
     {
 
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                             *
                                             FROM
                                             user_wallet_topup
                                             LEFT JOIN user_wallet_topup_status ON user_wallet_topup.TopUpStatusID = user_wallet_topup_status.UserWalletStatusID 
                                             WHERE UserID = '" . $user_id . "' AND Amount = '" . $amount . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3149,7 +3545,9 @@ foreach($obj as $item) {
     public function getTopUpUser($user_id)
     {
 
-        $query_get = $this->conn->query("SELECT
+        $query_get = $this
+            ->conn
+            ->query("SELECT
                                             a.*,
                                             b.StatusName
                                             FROM
@@ -3160,9 +3558,12 @@ foreach($obj as $item) {
                                             ORDER BY a.OrderID DESC
                                             ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3172,7 +3573,9 @@ foreach($obj as $item) {
      */
     public function getPharmacies($latitude, $longitude)
     {
-        $query_get = $this->conn->query("SELECT *, 
+        $query_get = $this
+            ->conn
+            ->query("SELECT *, 
 												CONCAT( '" . $this->uploaddir . "', '/pharmacies/', PharmacyID,'.jpg') AS Image,
 												ROUND((3959 * acos(cos(radians(" . $latitude . "))*cos(radians(Latitude))*cos(radians(Longitude)-radians(" . $longitude . ")) + sin(radians(" . $latitude . "))*sin(radians(Latitude)))), 2) AS distance
 										 FROM apt_pharmacies 
@@ -3188,7 +3591,9 @@ foreach($obj as $item) {
      */
     public function getLaboratoriumByLocation($latitude, $longitude)
     {
-        $query_get = $this->conn->query("SELECT *, 
+        $query_get = $this
+            ->conn
+            ->query("SELECT *, 
 												CONCAT( '" . $this->uploaddir . "', '/labs/', LabID,'.jpg') AS Image,
 												ROUND((3959 * acos(cos(radians(" . $latitude . "))*cos(radians(Latitude))*cos(radians(Longitude)-radians(" . $longitude . ")) + sin(radians(" . $latitude . "))*sin(radians(Latitude)))), 2) AS distance
 										 FROM lab_laboratoriums 
@@ -3203,14 +3608,19 @@ foreach($obj as $item) {
      */
     public function getPaymentAccount()
     {
-        $q = $this->conn->query("SELECT a.AccountName, a.AccountNumber, a.Branch,b.BankName AS Bank, b.BankID, CONCAT( '" . $this->uploaddir . "', '/banks/', b.image) as image
+        $q = $this
+            ->conn
+            ->query("SELECT a.AccountName, a.AccountNumber, a.Branch,b.BankName AS Bank, b.BankID, CONCAT( '" . $this->uploaddir . "', '/banks/', b.image) as image
  			FROM master_payment_account a
  			JOIN master_bank b ON a.BankID = b.BankID
  			WHERE a.Active = 1 AND b.Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -3222,12 +3632,17 @@ foreach($obj as $item) {
      */
     public function getConfig($configName)
     {
-        $q = $this->conn->query("SELECT * FROM master_config 
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM master_config 
 			WHERE ConfigName = '" . $configName . "' AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -3237,7 +3652,9 @@ foreach($obj as $item) {
      */
     public function getNurseActions($category_id)
     {
-        $query_get = $this->conn->query("SELECT * FROM nrz_actions WHERE CategoryID='" . $category_id . "' AND Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT * FROM nrz_actions WHERE CategoryID='" . $category_id . "' AND Active = 1");
         return $query_get;
     }
 
@@ -3249,10 +3666,11 @@ foreach($obj as $item) {
         //get nurse rating order success
         $rating = $this->getRating($nurse_id);
 
-        $query_get = $this->conn->query("SELECT NurseID,FirstName,LastName,Phone,Email,Degree,BirthDate,No_STR,YearExperience,Location, $rating AS Rating  FROM nrz_nurses WHERE NurseID = '" . $nurse_id . "' AND Active=1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT NurseID,FirstName,LastName,Phone,Email,Degree,BirthDate,No_STR,YearExperience,Location, $rating AS Rating  FROM nrz_nurses WHERE NurseID = '" . $nurse_id . "' AND Active=1");
         return $query_get;
     }
-
 
     /**
      * Get doctor data detail
@@ -3260,7 +3678,9 @@ foreach($obj as $item) {
     public function getPharmacyDetail($PharmacyID)
     {
         //get pharmacy detail
-        $query_get = $this->conn->query("SELECT *  FROM apt_pharmacies WHERE PharmacyID = '" . $PharmacyID . "'");
+        $query_get = $this
+            ->conn
+            ->query("SELECT *  FROM apt_pharmacies WHERE PharmacyID = '" . $PharmacyID . "'");
         return $query_get;
     }
 
@@ -3272,7 +3692,9 @@ foreach($obj as $item) {
         //get nurse rating order success
         $rating = $this->getRatingDoctor($doctor_id);
 
-        $query_get = $this->conn->query("SELECT DoctorID,FirstName,LastName,Phone,Email,Degree,BirthDate,No_STR,YearExperience,Location, $rating AS Rating  FROM doc_doctors WHERE DoctorID = '" . $doctor_id . "' AND Active=1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT DoctorID,FirstName,LastName,Phone,Email,Degree,BirthDate,No_STR,YearExperience,Location, $rating AS Rating  FROM doc_doctors WHERE DoctorID = '" . $doctor_id . "' AND Active=1");
         return $query_get;
     }
 
@@ -3283,8 +3705,9 @@ foreach($obj as $item) {
     {
         //get nurse rating order success
         //$rating = $this->getRatingPharmacy($pharmacy_id);
-
-        $query_get = $this->conn->query("SELECT PharmacyID,FirstName,LastName,Phone,Email,BirthDate AS Rating  FROM apt_users WHERE PharmacyID = '" . $pharmacy_id . "' AND Active=1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT PharmacyID,FirstName,LastName,Phone,Email,BirthDate AS Rating  FROM apt_users WHERE PharmacyID = '" . $pharmacy_id . "' AND Active=1");
         return $query_get;
     }
 
@@ -3294,7 +3717,9 @@ foreach($obj as $item) {
     public function getNurseEducation($nurse_id)
     {
 
-        $query_get = $this->conn->query("SELECT NurseEducationID,University,Degree,GraduationYear FROM nrz_nurse_educations WHERE NurseID = '" . $nurse_id . "' AND Active=1 ORDER BY NurseEducationID DESC");
+        $query_get = $this
+            ->conn
+            ->query("SELECT NurseEducationID,University,Degree,GraduationYear FROM nrz_nurse_educations WHERE NurseID = '" . $nurse_id . "' AND Active=1 ORDER BY NurseEducationID DESC");
         return $query_get;
     }
 
@@ -3304,11 +3729,14 @@ foreach($obj as $item) {
     public function getBankAccount($payment_accound_id = '')
     {
         $condition = '';
-        if ($payment_accound_id != '') {
+        if ($payment_accound_id != '')
+        {
             $condition .= ' && a.PaymentAccountID =' . $payment_accound_id;
         }
 
-        $query_get = $this->conn->query("SELECT a.*, 
+        $query_get = $this
+            ->conn
+            ->query("SELECT a.*, 
 					(CASE WHEN Image IS NOT NULL THEN CONCAT( '" . $this->uploaddir . "', '/banks/', b.Image) 
 					ELSE CONCAT( '" . $this->uploaddir . "', '/banks/', 'default', '.jpg') 
 					END) AS image
@@ -3317,8 +3745,6 @@ foreach($obj as $item) {
 					WHERE a.Active = 1 && b.Active = 1" . $condition);
         return $query_get;
     }
-	
-	
 
     /**
      * Get doctor education
@@ -3326,7 +3752,9 @@ foreach($obj as $item) {
     public function getDoctorEducation($doctor_id)
     {
 
-        $query_get = $this->conn->query("SELECT DoctorEducationID,University,Degree,GraduationYear FROM doc_doctor_educations WHERE DoctorID = '" . $doctor_id . "' AND Active=1 ORDER BY DoctorEducationID DESC");
+        $query_get = $this
+            ->conn
+            ->query("SELECT DoctorEducationID,University,Degree,GraduationYear FROM doc_doctor_educations WHERE DoctorID = '" . $doctor_id . "' AND Active=1 ORDER BY DoctorEducationID DESC");
         return $query_get;
     }
 
@@ -3336,7 +3764,9 @@ foreach($obj as $item) {
     public function getNurseExperience($nurse_id)
     {
 
-        $query_get = $this->conn->query("SELECT NurseExperienceID, InstituteName, EntryDate, OutDate, JobDesk FROM nrz_nurse_experiences WHERE NurseID = '" . $nurse_id . "' AND Active=1 ORDER BY NurseExperienceID DESC");
+        $query_get = $this
+            ->conn
+            ->query("SELECT NurseExperienceID, InstituteName, EntryDate, OutDate, JobDesk FROM nrz_nurse_experiences WHERE NurseID = '" . $nurse_id . "' AND Active=1 ORDER BY NurseExperienceID DESC");
         return $query_get;
     }
 
@@ -3346,40 +3776,47 @@ foreach($obj as $item) {
     public function getDoctorExperience($doctor_id)
     {
 
-        $query_get = $this->conn->query("SELECT DoctorExperienceID, InstituteName, EntryDate, OutDate, JobDesk FROM doc_doctor_experiences WHERE DoctorID = '" . $doctor_id . "' AND Active=1 ORDER BY DoctorExperienceID DESC");
+        $query_get = $this
+            ->conn
+            ->query("SELECT DoctorExperienceID, InstituteName, EntryDate, OutDate, JobDesk FROM doc_doctor_experiences WHERE DoctorID = '" . $doctor_id . "' AND Active=1 ORDER BY DoctorExperienceID DESC");
         return $query_get;
     }
 
     /**
      * Get pending order ID Nurse
      */
-//    public function getPendingOrderID($user_id)
-//    {
-//        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
-//
-//        if (mysqli_num_rows($query) > 0) {
-//            $row = $query->fetch_assoc();
-//            $current_id = $row['OrderID'];
-//
-//            return $current_id;
-//        } else {
-//            return null;
-//        }
-//    }
-
+    //    public function getPendingOrderID($user_id)
+    //    {
+    //        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
+    //
+    //        if (mysqli_num_rows($query) > 0) {
+    //            $row = $query->fetch_assoc();
+    //            $current_id = $row['OrderID'];
+    //
+    //            return $current_id;
+    //        } else {
+    //            return null;
+    //        }
+    //    }
+    
     /**
      * Get pending order ID Doctor
      */
     public function getDoctorPendingOrderID($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $current_id = $row['OrderID'];
 
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3389,14 +3826,19 @@ foreach($obj as $item) {
      */
     public function getFileChatNurse($chat_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_chat WHERE ChatID = '" . $chat_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_chat WHERE ChatID = '" . $chat_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $filename = $row['Filename'];
 
             return $filename;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3406,14 +3848,19 @@ foreach($obj as $item) {
      */
     public function getFileChatDoctor($chat_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_chat WHERE ChatID = '" . $chat_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_chat WHERE ChatID = '" . $chat_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $filename = $row['Filename'];
 
             return $filename;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3424,21 +3871,27 @@ foreach($obj as $item) {
     public function getOrderData($order_id, $nurse_id = null)
     {
 
-        if ($nurse_id != null) {
+        if ($nurse_id != null)
+        {
             //Count estimation transport fare
-            $perKM = $this->getConfig('biaya_transportasi_per_km')->fetch_assoc();
+            $perKM = $this->getConfig('biaya_transportasi_per_km')
+                ->fetch_assoc();
             $current_price = 0;
             $current_lat = 0;
             $current_lng = 0;
             $current_distance = 0;
 
-            $queryID = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1");
+            $queryID = $this
+                ->conn
+                ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1");
             $rowID = $queryID->fetch_assoc();
             $current_lat = $rowID['Latitude'];
             $current_lng = $rowID['Longitude'];
             $current_price = $rowID['TotalPrice'];
             //get distance from nurse location to user location
-            $queryTransport = $this->conn->query("SELECT 
+            $queryTransport = $this
+                ->conn
+                ->query("SELECT 
 													(3959 * acos(cos(radians(" . $current_lat . "))*cos(radians(Latitude))*cos(radians(Longitude)-radians(" . $current_lng . ")) + sin(radians(" . $current_lat . "))*sin(radians(Latitude)))) AS distance
 												FROM nrz_nurse_location 
 												WHERE NurseID='" . $nurse_id . "' ");
@@ -3447,17 +3900,22 @@ foreach($obj as $item) {
             // transaport price nurse per KM
             $transportTotal = ($perKM['Value'] * $current_distance);
 
-            if ($transportTotal < 7000) {
+            if ($transportTotal < 7000)
+            {
                 $transportTotal = 8000;
             }
 
             $orderTotal = ($current_price + $transportTotal);
-        } else {
+        }
+        else
+        {
             $transportTotal = "a.TransportPrice";
             $orderTotal = "a.TotalPayment";
         }
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.OrderID,
 											a.OrderDate,
 											a.Notes,
@@ -3481,13 +3939,15 @@ foreach($obj as $item) {
 										INNER JOIN master_users c ON c.UserID = a.UserID
 										WHERE a.OrderID = '" . $order_id . "' AND a.Active = 1");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Get Order Data Doctor
@@ -3495,7 +3955,9 @@ foreach($obj as $item) {
     public function getPharmacyOrderData($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.*,
 											-- a.OrderID,
 											-- a.OrderDate,
@@ -3515,13 +3977,15 @@ foreach($obj as $item) {
 										LEFT JOIN master_users c ON c.UserID = a.UserID
 										WHERE a.OrderID = '" . $order_id . "' AND a.Active = 1");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Get Order Data Doctor
@@ -3529,7 +3993,9 @@ foreach($obj as $item) {
     public function getDoctorOrderData($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.*,
 											-- a.OrderID,
 											-- a.OrderDate,
@@ -3553,9 +4019,12 @@ foreach($obj as $item) {
 										LEFT JOIN master_users c ON c.UserID = a.UserID
 										WHERE a.OrderID = '" . $order_id . "' AND a.Active = 1");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3567,22 +4036,29 @@ foreach($obj as $item) {
     {
 
         $filter = "";
-        if ($order_id != null) {
+        if ($order_id != null)
+        {
             $filter = " AND a.OrderID = '" . $order_id . "' ";
         }
 
         $condition = '';
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
             $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
         }
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.OrderID,
 											a.OrderNo,
 											DATE(a.OrderDate) AS OrderDate,
@@ -3613,9 +4089,12 @@ foreach($obj as $item) {
 										WHERE a.UserID = '" . $user_id . "' " . $filter . " AND a.OrderStatusID NOT IN (1) AND a.Active = 1
 										ORDER BY a.OrderID DESC " . $condition);
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3627,22 +4106,29 @@ foreach($obj as $item) {
     {
 
         $filter = "";
-        if ($order_id != null) {
+        if ($order_id != null)
+        {
             $filter = " AND a.OrderID = '" . $order_id . "' ";
         }
 
         $condition = '';
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
             $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
         }
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.*,
 											-- a.OrderID,
 											-- a.OrderNo,
@@ -3668,9 +4154,12 @@ foreach($obj as $item) {
 										WHERE a.UserID = '" . $user_id . "' " . $filter . " AND a.OrderStatusID NOT IN (1) AND a.Active = 1
 										ORDER BY a.OrderID DESC " . $condition);
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3680,15 +4169,19 @@ foreach($obj as $item) {
      */
     public function checkOrderStatusById($id)
     {
-        $query = $this->conn->query("SELECT aptOrderStatusID from apt_orders WHERE UserID = '" . $id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT aptOrderStatusID from apt_orders WHERE UserID = '" . $id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query->fetch_assoc();;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Get Order Pharmacy History
@@ -3697,24 +4190,30 @@ foreach($obj as $item) {
     {
 
         $filter = "";
-        if ($promo_order_id != null) {
+        if ($promo_order_id != null)
+        {
             $filter = " AND a.PromoOrderID = '" . $promo_order_id . "' ";
         }
 
         $condition = '';
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
             $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
         }
 
-
         // $a = "a.PharmacyID"
-        $query_get = $this->conn->query("SELECT 
+        $query_get = $this
+            ->conn
+            ->query("SELECT 
 										a.PromoOrderID,
 										a.PromoOrderNo, 
 										a.PromoID,
@@ -3736,13 +4235,15 @@ foreach($obj as $item) {
 										WHERE a.UserID = '" . $user_id . "' " . $filter . " AND a.Active = 1
 										ORDER BY a.promoOrderID DESC " . $condition);
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Get Order Pharmacy History
@@ -3751,24 +4252,30 @@ foreach($obj as $item) {
     {
 
         $filter = "";
-        if ($order_id != null) {
+        if ($order_id != null)
+        {
             $filter = " AND a.AptOrderID = '" . $order_id . "' ";
         }
 
         $condition = '';
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
             $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
         }
 
-
         // $a = "a.PharmacyID"
-        $query_get = $this->conn->query("SELECT 
+        $query_get = $this
+            ->conn
+            ->query("SELECT 
 										a.AptOrderID,
 										a.OrderNo, 
 										DATE(a.OrderDate) AS OrderDate,
@@ -3786,9 +4293,12 @@ foreach($obj as $item) {
 										WHERE a.UserID = '" . $user_id . "' " . $filter . " AND a.Active = 1 And a.PharmacyID != '0'
 										ORDER BY a.AptOrderID DESC " . $condition);
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3800,22 +4310,29 @@ foreach($obj as $item) {
     {
 
         $filter = "";
-        if ($order_id != null) {
+        if ($order_id != null)
+        {
             $filter = " AND a.EmergencyOrderID = '" . $order_id . "' ";
         }
 
         $condition = '';
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
             $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
         }
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.EmergencyOrderID,
 											a.OrderNo,
 											DATE(a.OrderDate) AS OrderDate,
@@ -3835,9 +4352,12 @@ foreach($obj as $item) {
 										WHERE a.UserID = '" . $user_id . "' " . $filter . " AND a.EmergencyStatusID NOT IN (1) AND a.Active = 1
 										ORDER BY a.EmergencyOrderID DESC " . $condition);
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3848,7 +4368,9 @@ foreach($obj as $item) {
     public function getOrderAction($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.ActionID,
 											b.ActionName,
 											b.ActionPrice
@@ -3864,7 +4386,9 @@ foreach($obj as $item) {
     public function getPharmacyOrderAction($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											d.Name,
 											d.Address,
 											c.MedicineID,
@@ -3886,7 +4410,9 @@ foreach($obj as $item) {
     public function getChat($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											ChatID,
 											Message,
 											ChatDate,
@@ -3898,9 +4424,12 @@ foreach($obj as $item) {
 										WHERE OrderID = '" . $order_id . "'
 										ORDER BY ChatID ASC");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3911,7 +4440,9 @@ foreach($obj as $item) {
     public function getChatDoctor($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											ChatID,
 											Message,
 											ChatDate,
@@ -3922,9 +4453,12 @@ foreach($obj as $item) {
 										WHERE OrderID = '" . $order_id . "'
 										ORDER BY ChatID ASC");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3935,13 +4469,18 @@ foreach($obj as $item) {
     public function getHistoryOrder($user_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											order_id from history_orders
 										WHERE user_id='" . $user_id . "' and marketplace='LAZADA' and statuses < 4  LIMIT 20");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3952,7 +4491,9 @@ foreach($obj as $item) {
     public function getDoctorByOrderID($order_id)
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.OrderID,
 											b.FirstName,
 											b.LastName,
@@ -3961,9 +4502,12 @@ foreach($obj as $item) {
 										INNER JOIN doc_doctors b ON a.DoctorID = b.DoctorID 
 										WHERE a.Active=1 AND a.OrderID='" . $order_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -3973,32 +4517,47 @@ foreach($obj as $item) {
      */
     public function checkUserLogin($email, $password)
     {
-        $check = $this->conn->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active=1 ");
+        $check = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active=1 ");
 
-        if (mysqli_num_rows($check) > 0) {
+        if (mysqli_num_rows($check) > 0)
+        {
 
             $row = $check->fetch_assoc();
             //$salt = $row['PasswordSalt'];
-			   $salt = '38ebeaedce';
-           $encrypted_password = $this->checkhashSSHA($salt, $password);
+            $salt = '38ebeaedce';
+            $encrypted_password = $this->checkhashSSHA($salt, $password);
 
-            $check_pass = $this->conn->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Password='" . $password . "' AND Active=1");
+            $check_pass = $this
+                ->conn
+                ->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Password='" . $password . "' AND Active=1");
 
-            if (mysqli_num_rows($check_pass) > 0) {
+            if (mysqli_num_rows($check_pass) > 0)
+            {
                 //Generate new token
                 $new_token = $this->generateToken();
-                $upd = $this->conn->query("UPDATE users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND Active=1 ");
+                $upd = $this
+                    ->conn
+                    ->query("UPDATE users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND Active=1 ");
 
-                if ($upd) {
+                if ($upd)
+                {
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4009,22 +4568,31 @@ foreach($obj as $item) {
      */
     public function checkUserLoginGoogle($email, $google_user_id)
     {
-        $check = $this->conn->query("SELECT * FROM master_users WHERE Email = '" . $email . "' AND GoogleUserID = '" . $google_user_id . "' ");
+        $check = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE Email = '" . $email . "' AND GoogleUserID = '" . $google_user_id . "' ");
 
-        if (mysqli_num_rows($check) > 0) {
+        if (mysqli_num_rows($check) > 0)
+        {
             //Generate new token
             $new_token = $this->generateToken();
-            $upd = $this->conn->query("UPDATE master_users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND GoogleUserID= '" . $google_user_id . "' ");
+            $upd = $this
+                ->conn
+                ->query("UPDATE master_users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND GoogleUserID= '" . $google_user_id . "' ");
 
-
-            if ($upd) {
+            if ($upd)
+            {
                 $q = $this->checkUserRegister2($email, $google_user_id);
                 return $q;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4033,12 +4601,17 @@ foreach($obj as $item) {
     {
         //Generate new token
         $new_token = $this->generateToken();
-        $upd = $this->conn->query("UPDATE master_users SET IsLogin=1, Token='" . $new_token . "', GoogleUserID= '" . $google_user_id . "' WHERE Email='" . $email . "'");
+        $upd = $this
+            ->conn
+            ->query("UPDATE master_users SET IsLogin=1, Token='" . $new_token . "', GoogleUserID= '" . $google_user_id . "' WHERE Email='" . $email . "'");
 
-        if ($upd) {
+        if ($upd)
+        {
             $q = $this->checkUserRegister2($email, $google_user_id);
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4049,35 +4622,45 @@ foreach($obj as $item) {
      */
     public function checkIsProfileComplete($email)
     {
-        $check_pass = $this->conn->query("SELECT TokoID FROM users WHERE Email='" . $email . "' AND Active=1");
+        $check_pass = $this
+            ->conn
+            ->query("SELECT TokoID FROM users WHERE Email='" . $email . "' AND Active=1");
 
-        if (mysqli_num_rows($check_pass) > "0") {
+        if (mysqli_num_rows($check_pass) > "0")
+        {
             //profile not complete
             return 0;
-        } else {
+        }
+        else
+        {
             //profile complete
             return 1;
         }
     }
 
     // Create by elim
-
+    
     /** Check profile is complete
      */
     public function checkIsProfileComplete2($email, $google_user_id)
     {
-        $check_pass = $this->conn->query("SELECT * FROM master_users WHERE Email='" . $email . "' AND GoogleUserID = '" . $google_user_id . "' AND Active=1 AND BirthDate IS NULL AND BirthPlace='' AND Email='' AND Address='' AND Height=0 AND Weight=0 ");
+        $check_pass = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE Email='" . $email . "' AND GoogleUserID = '" . $google_user_id . "' AND Active=1 AND BirthDate IS NULL AND BirthPlace='' AND Email='' AND Address='' AND Height=0 AND Weight=0 ");
 
-        if (mysqli_num_rows($check_pass) > 0) {
+        if (mysqli_num_rows($check_pass) > 0)
+        {
             //profile not complete
             return 0;
-        } else {
+        }
+        else
+        {
             //profile complete
             return 1;
         }
     }
     // End create by elim
-
+    
     /**
      * Check login by new generated pass (forgot pass)
      */
@@ -4086,17 +4669,27 @@ foreach($obj as $item) {
 
         $now = $this->get_chat_time();
 
-        $check_pass = $this->conn->query("SELECT * FROM users WHERE Email = '" . $email . "' AND ForgotPassword='" . $password . "' AND ForgotPasswordExpired > STR_TO_DATE('" . $now . "', '%Y-%m-%d %H:%i:%s') AND Active=1 ");
+        $check_pass = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Email = '" . $email . "' AND ForgotPassword='" . $password . "' AND ForgotPasswordExpired > STR_TO_DATE('" . $now . "', '%Y-%m-%d %H:%i:%s') AND Active=1 ");
 
-        if (mysqli_num_rows($check_pass) > 0) {
+        if (mysqli_num_rows($check_pass) > 0)
+        {
             $new_token = $this->generateToken();
-            $upd = $this->conn->query("UPDATE users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND Active=1 ");
-            if ($upd) {
+            $upd = $this
+                ->conn
+                ->query("UPDATE users SET IsLogin=1, Token='" . $new_token . "' WHERE Email='" . $email . "' AND Active=1 ");
+            if ($upd)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4106,23 +4699,33 @@ foreach($obj as $item) {
      */
     public function checkUserPassword($user_id, $password)
     {
-        $check = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Active=1 ");
+        $check = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($check) > 0) {
+        if (mysqli_num_rows($check) > 0)
+        {
 
             $row = $check->fetch_assoc();
             $salt = $row['PasswordSalt'];
             $encrypted_password = $this->checkhashSSHA($salt, $password);
 
-            $check_pass = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Password='" . $encrypted_password . "' ");
+            $check_pass = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Password='" . $encrypted_password . "' ");
 
-            if (mysqli_num_rows($check_pass) > 0) {
+            if (mysqli_num_rows($check_pass) > 0)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4132,19 +4735,29 @@ foreach($obj as $item) {
      */
     public function checkUserPasswordForgot($user_id, $password)
     {
-        $check = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Active=1 ");
+        $check = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($check) > 0) {
+        if (mysqli_num_rows($check) > 0)
+        {
 
-            $check_pass = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND ForgotPassword='" . $password . "' ");
+            $check_pass = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID = '" . $user_id . "' AND ForgotPassword='" . $password . "' ");
 
-            if (mysqli_num_rows($check_pass) > 0) {
+            if (mysqli_num_rows($check_pass) > 0)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4154,168 +4767,224 @@ foreach($obj as $item) {
      */
     public function checkUserRegister($email)
     {
-        $query = $this->conn->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	  /**
+
+    /**
      * Check if user exist
      */
     public function checkUserByUserIDRegister($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' AND Active=1");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' AND Active=1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-		  /**
+
+    /**
      * Check if user exist
      */
-    public function checkHistoryOrderByOrder($order_id , $user_id)
+    public function checkHistoryOrderByOrder($order_id, $user_id)
     {
-        $query = $this->conn->query("SELECT * from history_orders WHERE order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * from history_orders WHERE order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
 
-	if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
-		
-     
-     
-    }
-	
-	
-	    public function checkOrderNumber($order_number)
-    {
-        $query = $this->conn->query("Select * from history_orders WHERE order_number = '" . $order_number . "'");
 
-return $query;
-	  
     }
-	
-	
-	    public function checkCartDetailByUserID ($user_id)
-    {
-        $query = $this->conn->query("SELECT *
-FROM cart_details AS a
-LEFT JOIN product_variant_details AS b
-ON a.SKU = b.SkuID 
-LEFT JOIN product_variants AS c
-ON b.ProductVariantID = c.ProductVariantID
-LEFT JOIN products AS d
-ON c.ProductID = d.ProductID 
-LEFT JOIN image_product_variants AS e
-ON c.ProductVariantID = e.ProductVariantID
-WHERE a.UserID = '" . $user_id . "'");
 
-return $query;
-	     //if (mysqli_num_rows($query) > 0) {
-          //  return true;
-       // } else {
-        //    return false;
-        //}
+    public function checkOrderNumber($order_number)
+    {
+        $query = $this
+            ->conn
+            ->query("Select * from history_orders WHERE order_number = '" . $order_number . "'");
+
+        return $query;
+
     }
-	
-	
-	
-	
-	
-	
-		  /**
+
+    public function checkCart($user_id, $token_session)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
+p.ProductName,
+c.CartID,
+cd.SKU,
+cd.Price,
+cd.Quantity,
+pv.ProductVariantName,
+pvd.ProductVariantDetailName,
+ipv.ImageProductVariantName
+FROM cart AS c
+LEFT JOIN cart_details AS cd
+ON c.CartID = cd.CartID
+LEFT JOIN product_variant_details AS pvd
+ON cd.SKU = pvd.SkuID 
+LEFT JOIN product_variants AS pv
+ON pvd.ProductVariantID = pv.ProductVariantID
+LEFT JOIN products AS p
+ON pv.ProductID = p.ProductID 
+LEFT JOIN image_product_variants AS ipv
+ON pv.ProductVariantID = ipv.ProductVariantID
+WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession = '" . $token_session . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * Check if user exist
      */
     public function checkCategoryName($category_name)
     {
-        $query = $this->conn->query("SELECT * FROM master_category WHERE CategoryName = '" . $category_name . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_category WHERE CategoryName = '" . $category_name . "'");
 
+        if (mysqli_num_rows($query) > 0)
+        {
 
-        if (mysqli_num_rows($query) > 0) {
-			
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	  public function checkBrandName($brand_name)
+
+    public function checkBrandName($brand_name)
     {
-        $query = $this->conn->query("SELECT * FROM master_brand WHERE BrandName = '" . $brand_name . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_brand WHERE BrandName = '" . $brand_name . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-		 public function checkVariantName($color_name ,$color_code)
+
+    public function checkVariantName($color_name, $color_code)
     {
-        $query = $this->conn->query("SELECT * FROM variant WHERE ColorName = '" . $color_name . "' and ColorCode = '" . $color_code . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM variant WHERE ColorName = '" . $color_name . "' and ColorCode = '" . $color_code . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	
-	 public function checkColorName($color_name)
+
+    public function checkColorName($color_name)
     {
-        $query = $this->conn->query("SELECT * FROM master_color WHERE ColorName = '" . $color_name . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_color WHERE ColorName = '" . $color_name . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-		 public function checkSizeName($size_name)
+
+    public function checkSizeName($size_name)
     {
-        $query = $this->conn->query("SELECT * FROM master_size WHERE SizeName = '" . $size_name . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_size WHERE SizeName = '" . $size_name . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-	    /**
+
+    /**
      * Check if user exist
      */
     public function checkTokoIDRegister($user_id)
     {
-        $query = $this->conn->query("SELECT TokoID from users WHERE UserID = '" . $user_id . "' AND Active=1");
+        $query = $this
+            ->conn
+            ->query("SELECT TokoID from users WHERE UserID = '" . $user_id . "' AND Active=1");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
-		    /**
+
+    /**
      * Check if user exist
      */
     public function checkPhoneTokoRegister($phone)
     {
-        $query = $this->conn->query("SELECT * from master_toko WHERE Phone = '" . $phone . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * from master_toko WHERE Phone = '" . $phone . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4325,27 +4994,36 @@ return $query;
      */
     public function checkEmailbyPhone($phone)
     {
-        $query = $this->conn->query("SELECT Email, FirstName, LastName FROM master_users WHERE Phone = '" . $phone . "' AND Active=1 limit 1");
+        $query = $this
+            ->conn
+            ->query("SELECT Email, FirstName, LastName FROM master_users WHERE Phone = '" . $phone . "' AND Active=1 limit 1");
         $row = $query->fetch_assoc();
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $row;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Check if token exist
      */
     public function checkToken($token, $user_id)
     {
-        $query = $this->conn->query("SELECT * FROM users WHERE Token = '" . $token . "' AND UserID = '" . $user_id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Token = '" . $token . "' AND UserID = '" . $user_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4355,11 +5033,16 @@ return $query;
      */
     public function checkPendingOrder($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4369,11 +5052,16 @@ return $query;
      */
     public function checkFinishOrder($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND OrderStatusID=7 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND OrderStatusID=7 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4383,11 +5071,16 @@ return $query;
      */
     public function checkFinishOrderDoctor($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND OrderStatusID=6 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND OrderStatusID=6 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4397,11 +5090,16 @@ return $query;
      */
     public function checkPendingOrderDoctor($user_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE UserID = '" . $user_id . "' AND OrderStatusID=1 AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4411,11 +5109,16 @@ return $query;
      */
     public function checkOrderExist($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4425,11 +5128,16 @@ return $query;
      */
     public function checkTopUpExist($topup_id)
     {
-        $query = $this->conn->query("SELECT * FROM user_wallet_topup WHERE OrderID = '" . $topup_id . "'");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM user_wallet_topup WHERE OrderID = '" . $topup_id . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4439,11 +5147,16 @@ return $query;
      */
     public function checkOrderExist2($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4453,22 +5166,32 @@ return $query;
      */
     public function checkDoctorOrderExist($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function checkPharmacyOrderExist($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM apt_orders WHERE AptOrderID = '" . $order_id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM apt_orders WHERE AptOrderID = '" . $order_id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4478,11 +5201,16 @@ return $query;
      */
     public function checkDetailOrder($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_orders_detail WHERE OrderID = '" . $order_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_detail WHERE OrderID = '" . $order_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4492,11 +5220,16 @@ return $query;
      */
     public function checkUserById($id)
     {
-        $query = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID = '" . $id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4506,11 +5239,16 @@ return $query;
      */
     public function checkNurseById($id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_nurses WHERE NurseID = '" . $id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_nurses WHERE NurseID = '" . $id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4520,26 +5258,35 @@ return $query;
      */
     public function checkDoctorById($id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_doctors WHERE DoctorID = '" . $id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_doctors WHERE DoctorID = '" . $id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Check pharmacy by ID
      */
     public function checkPharmacyById($id)
     {
-        $query = $this->conn->query("SELECT * FROM apt_users WHERE PharmacyID = '" . $id . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM apt_users WHERE PharmacyID = '" . $id . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4552,40 +5299,60 @@ return $query;
         $year = date("Y");
         $month = date("m");
 
-        $query = $this->conn->query("SELECT * FROM `nrz_orders_current` WHERE YEAR(OrderDate)='" . $year . "' AND MONTH(OrderDate) = '" . $month . "' AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM `nrz_orders_current` WHERE YEAR(OrderDate)='" . $year . "' AND MONTH(OrderDate) = '" . $month . "' AND Active=1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     /**
      * Check Activation Code
-     **/
+     *
+     */
     public function checkActivationCode($phone, $code)
     {
-        $query = $this->conn->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $referal_id = $this->generateToken(8);
-            $this->conn->query("UPDATE master_users SET Active = 1, IsLogin=1, ReferralID='" . $referal_id . "' WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
+            $this
+                ->conn
+                ->query("UPDATE master_users SET Active = 1, IsLogin=1, ReferralID='" . $referal_id . "' WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function checkActivationCode2($phone, $code)
     {
-        $query = $this->conn->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $referal_id = $this->generateToken(8);
-            $this->conn->query("UPDATE master_users SET Active = 1, IsLogin=1, Verified =1, ReferralID='" . $referal_id . "' WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
+            $this
+                ->conn
+                ->query("UPDATE master_users SET Active = 1, IsLogin=1, Verified =1, ReferralID='" . $referal_id . "' WHERE Phone = '" . $phone . "' AND ActivationCode='" . $code . "' ");
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4596,73 +5363,79 @@ return $query;
     public function resendActivationCode($phone)
     {
         // echo 'test 3';
-        $query_sms = $this->conn->query("SELECT FirstName, Phone, ActivationCode, Active FROM master_users WHERE Phone = '" . $phone . "' ");
+        $query_sms = $this
+            ->conn
+            ->query("SELECT FirstName, Phone, ActivationCode, Active FROM master_users WHERE Phone = '" . $phone . "' ");
         // var_dump($query_sms);
-        if (mysqli_num_rows($query_sms) > 0) {
+        if (mysqli_num_rows($query_sms) > 0)
+        {
             // var_dump($row_sms);
             $row_sms = $query_sms->fetch_assoc();
             $name = $row_sms['FirstName'];
             $code = $row_sms['ActivationCode'];
             $is_active = $row_sms['Active'];
 
-            if ($is_active == "0") {
+            if ($is_active == "0")
+            {
                 $this->send_sms($phone, $code, $name);
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
-        } else {
+        }
+        else
+        {
             return false;
         }
 
     }
-	
-	   /**
+
+    /**
      * Resend Activation Code
      */
-    public function sendMessage($phone , $message)
+    public function sendMessage($phone, $message)
     {
-		
-	
-				
-				
+
         // echo 'test 3';
-       // $query_sms = $this->conn->query("SELECT FirstName, Phone, ActivationCode, Active FROM master_users WHERE Phone = '" . $phone . "' ");
+        // $query_sms = $this->conn->query("SELECT FirstName, Phone, ActivationCode, Active FROM master_users WHERE Phone = '" . $phone . "' ");
         // var_dump($query_sms);
-       // if (mysqli_num_rows($query_sms) > 0) {
-            // var_dump($row_sms);
-           // $row_sms = $query_sms->fetch_assoc();
-           // $name = $row_sms['FirstName'];
-            ///$code = $row_sms['ActivationCode'];
-            //$is_active = $row_sms['Active'];
-
-           // if ($is_active == "0") {
-              //  $this->send_sms($phone, $code, $name);
-
-                return true;
-           // } else {
-              //  return false;
-            //}
-
-        //} else {
-            //return false;
+        // if (mysqli_num_rows($query_sms) > 0) {
+        // var_dump($row_sms);
+        // $row_sms = $query_sms->fetch_assoc();
+        // $name = $row_sms['FirstName'];
+        ///$code = $row_sms['ActivationCode'];
+        //$is_active = $row_sms['Active'];
+        // if ($is_active == "0") {
+        //  $this->send_sms($phone, $code, $name);
+        return true;
+        // } else {
+        //  return false;
         //}
-
+        //} else {
+        //return false;
+        //}
+        
     }
-
 
     /**
      * Check if payment confirmation exist (Nurse Order)
      */
     public function checkConfirmPaymentPending($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM nrz_payment_transfers WHERE OrderID = '" . $order_id . "' AND Status=0 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_payment_transfers WHERE OrderID = '" . $order_id . "' AND Status=0 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4672,12 +5445,17 @@ return $query;
      */
     public function checkConfirmPaymentPendingTopUp($topup_id)
     {
-//        0: "ready confirmation by admin";1: accepted; 2: decline
-        $query = $this->conn->query("SELECT * FROM user_wallet_topup_payment_transfer WHERE TopUpID = '" . $topup_id . "' AND Status=0 ");
+        //        0: "ready confirmation by admin";1: accepted; 2: decline
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM user_wallet_topup_payment_transfer WHERE TopUpID = '" . $topup_id . "' AND Status=0 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4687,11 +5465,16 @@ return $query;
      */
     public function checkConfirmPaymentPendingPharmacy($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM apt_payment_transfers WHERE AptOrderID = '" . $order_id . "' AND Status=0 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM apt_payment_transfers WHERE AptOrderID = '" . $order_id . "' AND Status=0 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4701,11 +5484,16 @@ return $query;
      */
     public function checkConfirmPaymentPendingDoctor($order_id)
     {
-        $query = $this->conn->query("SELECT * FROM doc_payment_transfers WHERE OrderID = '" . $order_id . "' AND Status=0 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_payment_transfers WHERE OrderID = '" . $order_id . "' AND Status=0 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4716,78 +5504,91 @@ return $query;
     public function updateFirebase($email, $firebase_id)
     {
 
-        $update = $this->conn->query("UPDATE master_users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										FirebaseID 		= '" . $firebase_id . "'
 									WHERE 
 										Email = '" . $email . "'");
 
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-
-   /**
+    /**
      * Update FirebaseID
      */
     public function acceptOrders($user_id, $order_id)
     {
 
-        $update = $this->conn->query("UPDATE history_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
 										statuses 		= 2
 									WHERE 
 										order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
 
-
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-
-   /**
+    /**
      * Update FirebaseID
      */
     public function setShip($user_id, $order_id)
     {
 
-        $update = $this->conn->query("UPDATE history_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
 										statuses 		= 3
 									WHERE 
 										order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
 
-
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
 
-   /**
+    /**
      * Update FirebaseID
      */
     public function setDelivery($user_id, $order_id)
     {
 
-        $update = $this->conn->query("UPDATE history_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
 										statuses 		= 4
 									WHERE 
 										order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
 
-
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-	
 
     /**
      * Update FirebaseID2
@@ -4795,15 +5596,20 @@ return $query;
     public function updateFirebase2($email, $google_user_id, $firebase_id)
     {
 
-        $update = $this->conn->query("UPDATE master_users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										FirebaseID 		= '" . $firebase_id . "'
 									WHERE 
 										Email = '" . $email . "'
 										AND GoogleUserID = '" . $google_user_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4817,16 +5623,20 @@ return $query;
         $hash = $this->hashSSHA($new_password);
         $encrypted_password = $hash["encrypted"]; // encrypted new password
         $salt_password = $hash["salt"]; // salt new
-
-        $update = $this->conn->query("UPDATE master_users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										Password	 = '" . $encrypted_password . "',
 										PasswordSalt = '" . $salt_password . "'
 									WHERE 
 										UserID = '" . $user_id . "' AND Active=1 ");
 
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4840,16 +5650,21 @@ return $query;
         $new_pass = $this->randomPassword(8);
         $expired_date = date('Y-m-d h:i:s', strtotime('+1 days'));
 
-        $update = $this->conn->query("UPDATE master_users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										ForgotPassword	 		= '" . $new_pass . "',
 										ForgotPasswordExpired 	= '" . $expired_date . "'
 									WHERE 
 										Phone = '" . $phone . "' AND Active=1 ");
 
-        if ($update) {
+        if ($update)
+        {
             $this->send_sms_password($phone, $new_pass);
             return $new_pass;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4861,8 +5676,11 @@ return $query;
     {
 
         $check = $this->checkUserById($user_id);
-        if ($check) {
-            $update = $this->conn->query("UPDATE master_users SET 
+        if ($check)
+        {
+            $update = $this
+                ->conn
+                ->query("UPDATE master_users SET 
 											FirstName 	= '" . $firstname . "',
 											LastName 	= '" . $lastname . "',
 											Phone 		= '" . $phone . "',
@@ -4880,12 +5698,17 @@ return $query;
 										WHERE 
 											UserID = '" . $user_id . "'");
 
-            if ($update) {
+            if ($update)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4896,13 +5719,16 @@ return $query;
     public function chooseNurse($order_id, $nurse_id)
     {
 
-        $update = $this->conn->query("UPDATE nrz_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current SET 
 										NurseID 		= '" . $nurse_id . "',
 										OrderStatusID 	= 2
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             // create order log
             $order_id = $order_id;
             $order_status_id = 2;
@@ -4910,11 +5736,12 @@ return $query;
             $nurse_id = 0;
             $this->createOrderLog($order_id, $order_status_id, $nurse_id, $description);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Choose Pharmacy By User
@@ -4922,13 +5749,16 @@ return $query;
     public function choosePharmacy($order_id, $pharmacy_id)
     {
 
-        $update = $this->conn->query("UPDATE apt_orders SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE apt_orders SET 
 										PharmacyID 		= '" . $pharmacy_id . "',
 										OrderStatusID 	= 2
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             // create order log
             $order_id = $order_id;
             $order_status_id = 2;
@@ -4936,7 +5766,9 @@ return $query;
             $pharmacy_id = 0;
             $this->createOrderLog($order_id, $order_status_id, $pharmacy_id, $description);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -4947,12 +5779,16 @@ return $query;
     public function chooseDoctor($order_id, $doctor_id)
     {
 
-        $query_get = $this->conn->query("SELECT DoctorID, Price FROM doc_doctors WHERE DoctorID = '" . $doctor_id . "' ");
-        $q = $this->getConfig('company_fee_percent')->fetch_assoc();
+        $query_get = $this
+            ->conn
+            ->query("SELECT DoctorID, Price FROM doc_doctors WHERE DoctorID = '" . $doctor_id . "' ");
+        $q = $this->getConfig('company_fee_percent')
+            ->fetch_assoc();
         $company_fee_percent = $q['Value'];
 
         $total = "0";
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             $row = $query_get->fetch_assoc();
             $total = $row['Price'];
         }
@@ -4960,7 +5796,9 @@ return $query;
         $doctor_fee_percent = 100 - $company_fee_percent;
         $doctor_fee_nominal = $total - $company_fee_nominal;
 
-        $update = $this->conn->query("UPDATE doc_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE doc_orders_current SET 
 										DoctorID = '" . $doctor_id . "',
 										TotalPrice = '" . $total . "',
 										CompanyFeePercent = '" . $company_fee_percent . "',
@@ -4971,7 +5809,8 @@ return $query;
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             //create order log
             $order_id = $order_id;
             $order_status_id = 2;
@@ -4980,11 +5819,12 @@ return $query;
             $this->createOrderLogDoctor($order_id, $order_status_id, $doctor_id, $description);
 
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Process Cancel Nurse Status By User
@@ -4992,14 +5832,18 @@ return $query;
     public function cancelNurse($order_id)
     {
 
-        $update = $this->conn->query("UPDATE nrz_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current SET 
 										OrderStatusID = '8'
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getNurseByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
                 // create order log
                 $order_id = $order_id;
@@ -5009,7 +5853,9 @@ return $query;
                 $this->createOrderLog($order_id, $order_status_id, $nurse_id, $description);
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5020,14 +5866,18 @@ return $query;
     public function cancelDoctor($order_id)
     {
 
-        $update = $this->conn->query("UPDATE doc_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE doc_orders_current SET 
 										OrderStatusID = '7'
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getDoctorByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
                 // create order log
                 $order_id = $order_id;
@@ -5037,7 +5887,9 @@ return $query;
                 $this->createOrderLogDoctor($order_id, $order_status_id, $doctor_id, $description);
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5049,39 +5901,50 @@ return $query;
     {
 
         //Count Total Payment
-        if ($nominal == '') {
+        if ($nominal == '')
+        {
             $nominal = 0;
         }
         $total_payment = ($total_price + $total_transport + $unique_code - $nominal);
 
         //Check Payment Status
-        if ($payment_type_id == "1") {
+        if ($payment_type_id == "1")
+        {
             $payment_status = "4";
-        } else {
+        }
+        else
+        {
             $payment_status = "3";
         }
 
         /* Generate Order No (Invoice Number) */
         //Get Last Order ID +1
-        $check_orderid = $this->conn->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
+        $check_orderid = $this
+            ->conn
+            ->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
 											FROM nrz_orders_current 
 											WHERE 
 												DATE_FORMAT(OrderDate, '%m')='" . date('m') . "' AND 
 												DATE_FORMAT(OrderDate, '%Y')='" . date('Y') . "'");
         $data_orderid = $check_orderid->fetch_assoc();
 
-        if ($data_orderid['OrderNo'] == 0) {
+        if ($data_orderid['OrderNo'] == 0)
+        {
             //Start From First
             $num = date('y') . date('m') . "1001";
             $order_no = "NRZ" . $num;
-        } else {
+        }
+        else
+        {
             //Continue Number +1
             $num = $data_orderid['OrderNo'] + 1;
             $order_no = "NRZ" . $num;
         }
         /* End generate */
 
-        $update = $this->conn->query("UPDATE nrz_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current SET 
 										OrderStatusID = '" . $payment_status . "',
 										OrderNo = '" . $order_no . "',
 										TotalPayment = '" . $total_payment . "',
@@ -5093,9 +5956,11 @@ return $query;
 									WHERE 
 										OrderID = '" . $order_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getNurseByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -5108,7 +5973,9 @@ return $query;
             $this->dealNotification($order_id);
             $this->NoDealNotification($order_id);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5119,7 +5986,9 @@ return $query;
     public function processPaymentTopUp($topup_id, $kode_unik, $payment_type_id, $totalpayment)
     {
 
-        $update = $this->conn->query("UPDATE 
+        $update = $this
+            ->conn
+            ->query("UPDATE 
                                           user_wallet_topup 
                                         SET 
                                         PaymentTypeID =  '" . $payment_type_id . "',
@@ -5129,12 +5998,16 @@ return $query;
 										AND TopUpStatusID = '1'
 										");
 
-        if ($update) {
+        if ($update)
+        {
             $user = $this->getUserByOrderID($topup_id);
-            if ($user != null) {
+            if ($user != null)
+            {
                 return $user;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5145,22 +6018,28 @@ return $query;
     public function processCancelTopUp($topup_id)
     {
 
-        $update = $this->conn->query("UPDATE user_wallet_topup SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE user_wallet_topup SET 
 										TopUpStatusID = '5'									
 									WHERE 
 										OrderID = '" . $topup_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-
     public function getUserByOrderID($topup_id)
     {
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											a.OrderID,
 											a.OrderNo,
 											a.Amount,
@@ -5174,13 +6053,15 @@ return $query;
 										INNER JOIN master_users b ON a.UserID = b.UserID
 										WHERE a.OrderID='" . $topup_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-
 
     /**
      * Create Payment Confirmation (Nurse Order)
@@ -5188,10 +6069,14 @@ return $query;
     public function confirmPaymentTransfer($user_id, $order_id, $payment_accound_id, $bank_name, $account_name, $account_no, $trf_date, $total)
     {
 
-        $upd = $this->conn->query("UPDATE nrz_orders_current 
+        $upd = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current 
 									SET OrderStatusID = 10
 									WHERE OrderID = '" . $order_id . "'");
-        $insert = $this->conn->query("INSERT INTO nrz_payment_transfers 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO nrz_payment_transfers 
 										(OrderID,
 										SenderBankName,
 										SenderBankAccName,
@@ -5216,10 +6101,13 @@ return $query;
 										'" . $this->get_current_time() . "'
 										) ");
 
-        if ($insert) {
-            $insert_id = $this->conn->insert_id;
+        if ($insert)
+        {
+            $insert_id = $this
+                ->conn->insert_id;
             $dt = $this->getNurseByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -5230,7 +6118,9 @@ return $query;
                 $this->createOrderLog($order_id, $order_status_id, $nurse_id, $description);
             }
             return $insert_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5240,11 +6130,15 @@ return $query;
      */
     public function confirmPaymentTransferTopUp($user_id, $topup_id, $payment_accound_id, $bank_name, $account_name, $account_no, $trf_date, $total, $kode_unik)
     {
-//        4 (Menunggu Verifikasi
-        $upd = $this->conn->query("UPDATE user_wallet_topup 
+        //        4 (Menunggu Verifikasi
+        $upd = $this
+            ->conn
+            ->query("UPDATE user_wallet_topup 
 									SET TopUpStatusID = 4
 									WHERE OrderID = '" . $topup_id . "'");
-        $insert = $this->conn->query("INSERT INTO user_wallet_topup_payment_transfer 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO user_wallet_topup_payment_transfer 
 										(TopUpID,
 										SenderBankName,
 										SenderBankAccName,
@@ -5273,10 +6167,14 @@ return $query;
 										'" . $this->get_current_time() . "'
 										) ");
 
-        if ($insert) {
-            $insert_id = $this->conn->insert_id;
+        if ($insert)
+        {
+            $insert_id = $this
+                ->conn->insert_id;
             return $insert_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5287,10 +6185,14 @@ return $query;
     public function confirmPaymentTransferPharmacy($user_id, $order_id, $payment_accound_id, $bank_name, $account_name, $account_no, $trf_date, $total)
     {
         //set AptOrderStatusID = 9 Menunggu Verifikasi
-        $upd = $this->conn->query("UPDATE apt_orders 
+        $upd = $this
+            ->conn
+            ->query("UPDATE apt_orders 
 									SET AptOrderStatusID = 9
 									WHERE AptOrderID = '" . $order_id . "'");
-        $insert = $this->conn->query("INSERT INTO apt_payment_transfers 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO apt_payment_transfers 
 										(AptOrderID,
 										SenderBankName,
 										SenderBankAccName,
@@ -5315,10 +6217,13 @@ return $query;
 										'" . $this->get_current_time() . "'
 										) ");
 
-        if ($insert) {
-            $insert_id = $this->conn->insert_id;
+        if ($insert)
+        {
+            $insert_id = $this
+                ->conn->insert_id;
             $dt = $this->getPharmacyByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -5329,7 +6234,9 @@ return $query;
                 $this->createOrderLogPharmacy($order_id, $order_status_id, $pharmacy_id, $description);
             }
             return $insert_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5342,18 +6249,23 @@ return $query;
 
         /* Generate Order No (Invoice Number) */
         //Get Last Order ID +1
-        $check_orderid = $this->conn->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
+        $check_orderid = $this
+            ->conn
+            ->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
 											FROM doc_orders_current 
 											WHERE 
 												DATE_FORMAT(OrderDate, '%m')='" . date('m') . "' AND 
 												DATE_FORMAT(OrderDate, '%Y')='" . date('Y') . "'");
         $data_orderid = $check_orderid->fetch_assoc();
 
-        if ($data_orderid['OrderNo'] == 0) {
+        if ($data_orderid['OrderNo'] == 0)
+        {
             //Start From First
             $num = date('y') . date('m') . "1001";
             $order_no = "DOC" . $num;
-        } else {
+        }
+        else
+        {
             //Continue Number +1
             $num = $data_orderid['OrderNo'] + 1;
             $order_no = "DOC" . $num;
@@ -5361,20 +6273,27 @@ return $query;
         /* End generate */
 
         //Check If its free or no
-        $check_price = $this->conn->query("SELECT * FROM doc_orders_current WHERE OrderID='" . $order_id . "' ");
+        $check_price = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE OrderID='" . $order_id . "' ");
         $data_price = $check_price->fetch_assoc();
         $order_price = $data_price['TotalPrice'];
         $total_payment = $order_price + $unique_code;
 
         // if order price '0', payment type id cash
-        if ($order_price == 0) {
+        if ($order_price == 0)
+        {
             $myStatus = "4";
-        } else {
+        }
+        else
+        {
             $myStatus = "3";
         }
 
         //Update
-        $update = $this->conn->query("UPDATE doc_orders_current SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE doc_orders_current SET 
 										OrderStatusID = '" . $myStatus . "',
 										OrderNo = '" . $order_no . "',
 										PaymentTypeID = '" . $payment_type_id . "',
@@ -5390,9 +6309,11 @@ return $query;
         // 							TotalPrice = ".$total_payment."
         // 						WHERE
         // 							OrderID = '".$order_id."'";
-        if ($update) {
+        if ($update)
+        {
             $dt = $this->getDoctorByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -5405,7 +6326,9 @@ return $query;
             $this->dealNotificationDoctor($order_id);
             $this->NoDealNotificationDoctor($order_id);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5416,8 +6339,12 @@ return $query;
     public function confirmPaymentTransferDoctor($user_id, $order_id, $payment_accound_id, $bank_name, $account_name, $account_no, $trf_date, $total)
     {
 
-        $this->conn->query("UPDATE doc_orders_current SET OrderStatusID = 9	WHERE OrderID = '" . $order_id . "'");
-        $insert = $this->conn->query("INSERT INTO doc_payment_transfers 
+        $this
+            ->conn
+            ->query("UPDATE doc_orders_current SET OrderStatusID = 9	WHERE OrderID = '" . $order_id . "'");
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO doc_payment_transfers 
 										(OrderID,
 										SenderBankName,
 										SenderBankAccName,
@@ -5442,10 +6369,13 @@ return $query;
 										'" . $this->get_current_time() . "'
 										) ");
 
-        if ($insert) {
-            $insert_id = $this->conn->insert_id;
+        if ($insert)
+        {
+            $insert_id = $this
+                ->conn->insert_id;
             $dt = $this->getDoctorByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -5456,7 +6386,9 @@ return $query;
                 $this->createOrderLogDoctor($order_id, $order_status_id, $doctor_id, $description);
             }
             return $insert_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5467,7 +6399,9 @@ return $query;
     public function createChat($order_id, $message, $from, $to)
     {
 
-        $insert = $this->conn->query("INSERT INTO nrz_chat 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO nrz_chat 
 									(OrderID, 
 									Message, 
 									ChatFrom,
@@ -5482,10 +6416,13 @@ return $query;
 									'" . $this->get_current_time() . "'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
             $this->chatNotification($order_id, $message, $to);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5496,7 +6433,9 @@ return $query;
     public function createChatFile($order_id, $message, $from, $to, $filename)
     {
 
-        $insert = $this->conn->query("INSERT INTO nrz_chat 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO nrz_chat 
 									(OrderID, 
 									Message, 
 									ChatFrom,
@@ -5515,25 +6454,32 @@ return $query;
 									'" . $filename . "'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
 
             $url = "";
-            $current_id = $this->conn->insert_id;
+            $current_id = $this
+                ->conn->insert_id;
 
-            $query_get = $this->conn->query("SELECT   
+            $query_get = $this
+                ->conn
+                ->query("SELECT   
 											ChatID,
 											(CASE WHEN Filename IS NOT NULL THEN CONCAT( '" . $this->uploaddir . "', '/chats/nurse_orders/', OrderID,'/',Filename) ELSE '' END) AS url
 										FROM nrz_chat
 										WHERE ChatID = '" . $current_id . "'");
 
-            if (mysqli_num_rows($query_get) > 0) {
+            if (mysqli_num_rows($query_get) > 0)
+            {
                 $row = $query_get->fetch_assoc();
                 $url = $row['url'];
             }
 
             $this->chatNotification($order_id, $message, $to, $url);
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5544,7 +6490,9 @@ return $query;
     public function createChatDoctor($order_id, $message, $from, $to)
     {
 
-        $insert = $this->conn->query("INSERT INTO doc_chat 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO doc_chat 
 									(OrderID, 
 									Message, 
 									ChatFrom,
@@ -5559,10 +6507,13 @@ return $query;
 									'" . $this->get_current_time() . "'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
             $this->chatDoctorNotification($order_id, $message, $to);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5573,7 +6524,9 @@ return $query;
     public function createChatFileDoctor($order_id, $message, $from, $to, $filename)
     {
 
-        $insert = $this->conn->query("INSERT INTO doc_chat 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO doc_chat 
 									(OrderID, 
 									Message, 
 									ChatFrom,
@@ -5592,25 +6545,32 @@ return $query;
 									'" . $filename . "'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
 
             $url = "";
-            $current_id = $this->conn->insert_id;
+            $current_id = $this
+                ->conn->insert_id;
 
-            $query_get = $this->conn->query("SELECT   
+            $query_get = $this
+                ->conn
+                ->query("SELECT   
 											ChatID,
 											(CASE WHEN Filename IS NOT NULL THEN CONCAT( '" . $this->uploaddir . "', '/chats/doctor_orders/', OrderID,'/',Filename) ELSE '' END) AS url
 										FROM doc_chat
 										WHERE ChatID = '" . $current_id . "'");
 
-            if (mysqli_num_rows($query_get) > 0) {
+            if (mysqli_num_rows($query_get) > 0)
+            {
                 $row = $query_get->fetch_assoc();
                 $url = $row['url'];
             }
 
             $this->chatDoctorNotification($order_id, $message, $to, $url);
             return $current_id;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -5621,15 +6581,20 @@ return $query;
     public function giveRating($order_id, $rate, $feedback)
     {
 
-        $upd = $this->conn->query("UPDATE nrz_orders_current SET 
+        $upd = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current SET 
 										Rating 		= '" . $rate . "',
 										Feedback 	= '" . $feedback . "'
 									WHERE 
 										OrderID = '" . $order_id . "' ");
 
-        if ($upd) {
+        if ($upd)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5640,15 +6605,20 @@ return $query;
     public function giveRatingDoctor($order_id, $rate, $feedback)
     {
 
-        $upd = $this->conn->query("UPDATE doc_orders_current SET 
+        $upd = $this
+            ->conn
+            ->query("UPDATE doc_orders_current SET 
 										Rating 		= '" . $rate . "',
 										Feedback 	= '" . $feedback . "'
 									WHERE 
 										OrderID = '" . $order_id . "' ");
 
-        if ($upd) {
+        if ($upd)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -5660,7 +6630,7 @@ return $query;
             'type' => '2', //Notification Chat Nurse
             'body' => $message,
             'title' => "Pesan Baru",
-            'ChatDate' => $this->get_chat_time(),
+            'ChatDate' => $this->get_chat_time() ,
             'ChatFrom' => '0',
             'Message' => $message,
             'OrderID' => $order_id,
@@ -5670,18 +6640,27 @@ return $query;
         $type = $this->str_before($to, ':');
         $send_to = $this->str_after($to, ':');
 
-        if ($type == "nrz") {
+        if ($type == "nrz")
+        {
             //Notify Nurse
-            $query_nrz = $this->conn->query("SELECT * FROM nrz_nurses WHERE NurseID='" . $send_to . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM nrz_nurses WHERE NurseID='" . $send_to . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Nurse($row_nrz['FirebaseID'], $custom_data);
             }
-        } else if ($type == "usr") {
+        }
+        else if ($type == "usr")
+        {
             //Notify User
-            $query_nrz = $this->conn->query("SELECT * FROM master_users WHERE UserID='" . $send_to . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID='" . $send_to . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Patient($row_nrz['FirebaseID'], $custom_data);
@@ -5696,7 +6675,7 @@ return $query;
             'type' => '32', //Notification Chat Doctor
             'body' => $message,
             'title' => "Pesan Baru",
-            'ChatDate' => $this->get_chat_time(),
+            'ChatDate' => $this->get_chat_time() ,
             'ChatFrom' => '0',
             'Message' => $message,
             'OrderID' => $order_id,
@@ -5706,18 +6685,27 @@ return $query;
         $type = $this->str_before($to, ':');
         $send_to = $this->str_after($to, ':');
 
-        if ($type == "doc") {
+        if ($type == "doc")
+        {
             //Notify Doctor
-            $query_nrz = $this->conn->query("SELECT * FROM doc_doctors WHERE DoctorID='" . $send_to . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM doc_doctors WHERE DoctorID='" . $send_to . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Doctor($row_nrz['FirebaseID'], $custom_data);
             }
-        } else if ($type == "usr") {
+        }
+        else if ($type == "usr")
+        {
             //Notify User
-            $query_nrz = $this->conn->query("SELECT * FROM master_users WHERE UserID='" . $send_to . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID='" . $send_to . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Patient($row_nrz['FirebaseID'], $custom_data);
@@ -5729,14 +6717,20 @@ return $query;
     public function dealNotification($order_id)
     {
 
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $nurse_id = $row['NurseID'];
-            $q = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
+            $q = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
             $user_name = '';
-            if (mysqli_num_rows($q) > 0) {
+            if (mysqli_num_rows($q) > 0)
+            {
                 $q = $q->fetch_assoc();
                 $user_name = $q['FirstName'] . ' ' . $q['LastName'];
             }
@@ -5749,8 +6743,11 @@ return $query;
             );
 
             //Notify User
-            $query_nrz = $this->conn->query("SELECT * FROM nrz_nurses WHERE NurseID='" . $nurse_id . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM nrz_nurses WHERE NurseID='" . $nurse_id . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Nurse($row_nrz['FirebaseID'], $custom_data);
@@ -5761,14 +6758,20 @@ return $query;
     public function dealNotificationDoctor($order_id)
     {
 
-        $query = $this->conn->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $doctor_id = $row['DoctorID'];
-            $q = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
+            $q = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
             $user_name = '';
-            if (mysqli_num_rows($q) > 0) {
+            if (mysqli_num_rows($q) > 0)
+            {
                 $q = $q->fetch_assoc();
                 $user_name = $q['FirstName'] . ' ' . $q['LastName'];
             }
@@ -5780,8 +6783,11 @@ return $query;
             );
 
             //Notify User
-            $query_nrz = $this->conn->query("SELECT * FROM doc_doctors WHERE DoctorID='" . $doctor_id . "' AND Active=1 ");
-            if (mysqli_num_rows($query_nrz) > 0) {
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT * FROM doc_doctors WHERE DoctorID='" . $doctor_id . "' AND Active=1 ");
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 $row_nrz = $query_nrz->fetch_assoc();
 
                 $this->sendNotification_Doctor($row_nrz['FirebaseID'], $custom_data);
@@ -5795,22 +6801,27 @@ return $query;
     public function processLogout($user_id)
     {
 
-        $update = $this->conn->query("UPDATE users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE users SET 
 										IsLogin = '0',
 										FirebaseID = '',
 										Token 	= ''
 									WHERE 
 										UserID = '" . $user_id . "'");
 
-        if ($update) {
+        if ($update)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     //-------------------------------- Another Function Goes Here ------------------------//
-
+    
     /**
      * Encrypting password
      * @param password
@@ -5822,7 +6833,10 @@ return $query;
         $salt = sha1(rand());
         $salt = substr($salt, 0, 10);
         $encrypted = base64_encode(sha1($password . $salt, true) . $salt);
-        $hash = array("salt" => $salt, "encrypted" => $encrypted);
+        $hash = array(
+            "salt" => $salt,
+            "encrypted" => $encrypted
+        );
         return $hash;
     }
 
@@ -5867,7 +6881,6 @@ return $query;
         // $myDateTime = new DateTime(date('Y-m-d H:i:s'), new DateTimeZone('GMT'));
         // $myDateTime->setTimezone(new DateTimeZone('Asia/Jakarta'));
         // $now = $myDateTime->format('Y-m-d H:i:s');
-
         $now = date("Y-m-d H:i:s");
         return $now;
     }
@@ -5880,10 +6893,8 @@ return $query;
     function str_after($string, $substring)
     {
         $pos = strpos($string, $substring);
-        if ($pos === false)
-            return $string;
-        else
-            return (substr($string, $pos + strlen($substring)));
+        if ($pos === false) return $string;
+        else return (substr($string, $pos + strlen($substring)));
     }
 
     /**
@@ -5894,10 +6905,8 @@ return $query;
     function str_before($string, $substring)
     {
         $pos = strpos($string, $substring);
-        if ($pos === false)
-            return $string;
-        else
-            return (substr($string, 0, $pos));
+        if ($pos === false) return $string;
+        else return (substr($string, 0, $pos));
     }
 
     /**
@@ -5923,8 +6932,8 @@ return $query;
         $results = curl_exec($curlHandle);
         curl_close($curlHandle);
     }
-	
-	    /**
+
+    /**
      * Function Send SMS code
      * @param : Phone, Code, Name
      * returns boolean
@@ -5981,7 +6990,8 @@ return $query;
     {
         $i = 0;
         $pin = "";
-        while ($i < $digits) {
+        while ($i < $digits)
+        {
             //generate a random number between 0 and 9.
             $pin .= mt_rand(0, 9);
             $i++;
@@ -5998,8 +7008,9 @@ return $query;
     {
         $str = '';
         $max = mb_strlen($keyspace, '8bit') - 1;
-        for ($i = 0; $i < $length; ++$i) {
-            $str .= $keyspace[random_int(0, $max)];
+        for ($i = 0;$i < $length;++$i)
+        {
+            $str .= $keyspace[random_int(0, $max) ];
         }
         return $str;
     }
@@ -6014,8 +7025,9 @@ return $query;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        for ($i = 0;$i < $length;$i++)
+        {
+            $randomString .= $characters[rand(0, $charactersLength - 1) ];
         }
         return $randomString;
     }
@@ -6029,7 +7041,11 @@ return $query;
     {
         $a = getimagesize($path);
         $image_type = $a[2];
-        if (in_array($image_type, array(IMAGETYPE_JPEG, IMAGETYPE_PNG))) {
+        if (in_array($image_type, array(
+            IMAGETYPE_JPEG,
+            IMAGETYPE_PNG
+        )))
+        {
             return true;
         }
         return false;
@@ -6043,7 +7059,9 @@ return $query;
     function sendNotification_Nurse($firebase_id, $custom_data)
     {
 
-        $registrationIds = array($firebase_id);
+        $registrationIds = array(
+            $firebase_id
+        );
 
         $fields = array(
             'registration_ids' => $registrationIds,
@@ -6066,6 +7084,7 @@ return $query;
         $result = curl_exec($ch);
         curl_close($ch);
         //echo $result;exit;
+        
     }
 
     /**
@@ -6076,7 +7095,9 @@ return $query;
     function sendNotification_Patient($firebase_id, $custom_data)
     {
 
-        $registrationIds = array($firebase_id);
+        $registrationIds = array(
+            $firebase_id
+        );
 
         $fields = array(
             'registration_ids' => $registrationIds,
@@ -6098,6 +7119,7 @@ return $query;
         $result = curl_exec($ch);
         curl_close($ch);
         //echo $result;exit;
+        
     }
 
     /**
@@ -6108,7 +7130,9 @@ return $query;
     function sendNotification_Doctor($firebase_id, $custom_data)
     {
 
-        $registrationIds = array($firebase_id);
+        $registrationIds = array(
+            $firebase_id
+        );
 
         $fields = array(
             'registration_ids' => $registrationIds,
@@ -6130,6 +7154,7 @@ return $query;
         $result = curl_exec($ch);
         curl_close($ch);
         // echo $result;exit;
+        
     }
 
     /** Created by elim
@@ -6139,13 +7164,17 @@ return $query;
      */
     function getConfigForceUpdate($configName)
     {
-        $q = $this->conn->query("SELECT * FROM master_config 
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM master_config 
 			WHERE ConfigName = '" . $configName . "' AND Active = 1");
 
-
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6157,16 +7186,21 @@ return $query;
      */
     public function getRating($nurse_id)
     {
-        $query = $this->conn->query("SELECT COUNT(OrderID) AS total_order, SUM(Rating) AS total_rating FROM nrz_orders_current WHERE NurseID = '" . $nurse_id . "' AND OrderStatusID=7 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT COUNT(OrderID) AS total_order, SUM(Rating) AS total_rating FROM nrz_orders_current WHERE NurseID = '" . $nurse_id . "' AND OrderStatusID=7 AND Active=1 ");
 
         $row = $query->fetch_assoc();
         $order = $row['total_order'];
         $rate = $row['total_rating'];
 
-        if ($order > 0) {
+        if ($order > 0)
+        {
             $dataRating = round($rate / $order, 1);
             return $dataRating;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -6178,16 +7212,21 @@ return $query;
      */
     public function getRatingDoctor($doctor_id)
     {
-        $query = $this->conn->query("SELECT COUNT(OrderID) AS total_order, SUM(Rating) AS total_rating FROM doc_orders_current WHERE DoctorID = '" . $doctor_id . "' AND OrderStatusID=6 AND Active=1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT COUNT(OrderID) AS total_order, SUM(Rating) AS total_rating FROM doc_orders_current WHERE DoctorID = '" . $doctor_id . "' AND OrderStatusID=6 AND Active=1 ");
 
         $row = $query->fetch_assoc();
         $order = $row['total_order'];
         $rate = $row['total_rating'];
 
-        if ($order > 0) {
+        if ($order > 0)
+        {
             $dataRating = round($rate / $order, 1);
             return $dataRating;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -6195,14 +7234,20 @@ return $query;
     public function NoDealNotification($order_id)
     {
 
-        $query = $this->conn->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_current WHERE OrderID = '" . $order_id . "' AND Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $nurse_id = $row['NurseID'];
-            $q = $this->conn->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
+            $q = $this
+                ->conn
+                ->query("SELECT * FROM master_users WHERE UserID = '" . $row['UserID'] . "'");
             $user_name = '';
-            if (mysqli_num_rows($q) > 0) {
+            if (mysqli_num_rows($q) > 0)
+            {
                 $q = $q->fetch_assoc();
                 $user_name = $q['FirstName'] . ' ' . $q['LastName'];
             }
@@ -6215,15 +7260,18 @@ return $query;
             );
 
             //Notify User
-            $query_nrz = $this->conn->query("SELECT a.NurseID, b.FirebaseID 
+            $query_nrz = $this
+                ->conn
+                ->query("SELECT a.NurseID, b.FirebaseID 
 				FROM nrz_orders_nurse_accept a 
 				JOIN nrz_nurses b ON a.NurseID = b.NurseID
 				WHERE a.OrderID='" . $order_id . "' AND a.NurseID != '" . $nurse_id . "' ");
 
-            if (mysqli_num_rows($query_nrz) > 0) {
+            if (mysqli_num_rows($query_nrz) > 0)
+            {
                 // $row_nrz = $query_nrz->fetch_assoc();
-
-                while ($row_nrz = $query_nrz->fetch_assoc()) {
+                while ($row_nrz = $query_nrz->fetch_assoc())
+                {
                     $this->sendNotification_Nurse($row_nrz['FirebaseID'], $custom_data);
                 }
             }
@@ -6232,7 +7280,9 @@ return $query;
 
     public function NoDealNotificationDoctor($order_id)
     {
-        $query = $this->conn->query("SELECT a.*,
+        $query = $this
+            ->conn
+            ->query("SELECT a.*,
 										b.FirstName,
 										b.LastName 
 										FROM doc_orders_current a
@@ -6240,7 +7290,8 @@ return $query;
 										WHERE a.OrderID = '" . $order_id . "' 
 										AND a.Active=1 LIMIT 1 ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             $row = $query->fetch_assoc();
             $doctor_id = $row['DoctorID'];
             $user_name = $row['FirstName'] . ' ' . $row['LastName'];
@@ -6252,14 +7303,18 @@ return $query;
             );
 
             //Notify User
-            $query2 = $this->conn->query("SELECT a.DoctorID, b.FirebaseID 
+            $query2 = $this
+                ->conn
+                ->query("SELECT a.DoctorID, b.FirebaseID 
 				FROM doc_orders_doctor_accept a 
 				JOIN doc_doctors b ON a.DoctorID = b.DoctorID
 				WHERE a.OrderID='" . $order_id . "' AND a.DoctorID != '" . $doctor_id . "' ");
 
-            if (mysqli_num_rows($query2) > 0) {
+            if (mysqli_num_rows($query2) > 0)
+            {
 
-                while ($row2 = $query2->fetch_assoc()) {
+                while ($row2 = $query2->fetch_assoc())
+                {
                     $this->sendNotification_Doctor($row2['FirebaseID'], $custom_data);
                 }
             }
@@ -6282,8 +7337,9 @@ return $query;
         // if($referral_by!=""){
         // 	$ref = $referral_by;
         // }
-
-        $insert = $this->conn->query("INSERT INTO users 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO users 
 									(FirstName, 
 									LastName, 
 									Token,
@@ -6314,11 +7370,13 @@ return $query;
 									'" . $email . "'
 									) ");
 
-        $q2 = $this->conn->query("SELECT * FROM users WHERE Email= '" . $email . "' AND GoogleUserID = '" . $google_user_id . "' ");
-        if ($insert) {
+        $q2 = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Email= '" . $email . "' AND GoogleUserID = '" . $google_user_id . "' ");
+        if ($insert)
+        {
             // $name = $firstname;
             // $this->send_sms($phone, $code, $name);
-
             // $arr[] = array(
             // 	"FirstName" 	=> $firstname,
             // 	"LastName" 		=> $lastname,
@@ -6337,7 +7395,9 @@ return $query;
             // );
             $arr[] = $q2->fetch_assoc();
             return $arr;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -6347,7 +7407,9 @@ return $query;
      */
     public function checkUserRegister2($email, $google_user_id)
     {
-        $query = $this->conn->query("SELECT 
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                       master_users.*, 
                                       master_patients.PatientName as NameEmergency,
                                       master_patients.Email as EmailEmergency,
@@ -6358,9 +7420,12 @@ return $query;
                                   WHERE master_users.Email = '" . $email . "' 
                                   AND master_users.GoogleUserID = '" . $google_user_id . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -6370,27 +7435,38 @@ return $query;
      */
     public function checkUserRegister3($email, $google_user_id)
     {
-        $query = $this->conn->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active = 1 OR GoogleUserID = '" . $google_user_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE Email = '" . $email . "' AND Active = 1 OR GoogleUserID = '" . $google_user_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     public function updateUserPhone($user_id, $phone)
     {
-        $q = $this->conn->query("UPDATE master_users SET 
+        $q = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										Phone 		= '" . $phone . "',
 									WHERE 
 										UserID = '" . $user_id . "' ");
 
-        $q2 = $this->conn->query("SELECT * FROM master_users 
+        $q2 = $this
+            ->conn
+            ->query("SELECT * FROM master_users 
     		WHERE UserID = '" . $user_id . "' ");
-        if ($q) {
+        if ($q)
+        {
 
-            if (mysqli_num_rows($q2) > 0) {
+            if (mysqli_num_rows($q2) > 0)
+            {
                 $q2 = $q2->fetch_assoc();
                 $name = $q2->FirstName;
                 $code = $q2->ActivationCode;
@@ -6398,7 +7474,9 @@ return $query;
             }
 
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
 
@@ -6409,28 +7487,35 @@ return $query;
      */
     public function getUserByID($user_id)
     {
-        $query_get = $this->conn->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' ");
+        $query_get = $this
+            ->conn
+            ->query("SELECT * FROM users WHERE UserID = '" . $user_id . "' ");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
-
-
     public function getUserByEmailExceptUserID($user_id, $email)
     {
-        $query_get = $this->conn->query("SELECT * FROM  users WHERE Email = '" . $email . "' AND UserID != '" . $user_id . "' AND Active = 1");
+        $query_get = $this
+            ->conn
+            ->query("SELECT * FROM  users WHERE Email = '" . $email . "' AND UserID != '" . $user_id . "' AND Active = 1");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Update user profile and send sms verification
@@ -6438,7 +7523,9 @@ return $query;
     public function updateProfileSendSMS($user_id, $firstname, $lastname, $phone, $email, $birthdate, $gender, $nik, $birthplace, $address, $height, $weight, $Referral_by)
     {
 
-        $update = $this->conn->query("UPDATE master_users SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users SET 
 										FirstName 	= '" . $firstname . "',
 										LastName 	= '" . $lastname . "',
 										Phone 		= '" . $phone . "',
@@ -6456,23 +7543,28 @@ return $query;
 									WHERE 
 										UserID = '" . $user_id . "'");
 
-
-        if ($update) {
+        if ($update)
+        {
             $q2 = $this->getUserByID($user_id);
-            if ($q2 != null) {
+            if ($q2 != null)
+            {
                 $q3 = $q2->fetch_assoc();
-                if ($q3['Active'] == 0) {
+                if ($q3['Active'] == 0)
+                {
                     $name = $q3['FirstName'];
                     $code = $q3['ActivationCode'];
                     $this->send_sms($phone, $code, $name);
                 }
                 return $q3;
-            } else {
+            }
+            else
+            {
                 return 'not_found';
             }
 
-
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -6482,11 +7574,16 @@ return $query;
      */
     public function checkToken2($token, $user_id)
     {
-        $query = $this->conn->query("SELECT * FROM master_users WHERE Token = '" . $token . "' AND UserID = '" . $user_id . "' ");
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE Token = '" . $token . "' AND UserID = '" . $user_id . "' ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6496,10 +7593,13 @@ return $query;
      */
     public function pushNotifCancelNurse($order_id, $user_id)
     {
-        $q = $this->conn->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
 
         $user_name = '';
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $q = $q->fetch_assoc();
             $user_name = $q['FirstName'] . ' ' . $q['LastName'];
         }
@@ -6512,12 +7612,16 @@ return $query;
         );
 
         //Notify User
-        $q2 = $this->conn->query("SELECT a.*, b.FirebaseID FROM nrz_orders_nurse_accept a
+        $q2 = $this
+            ->conn
+            ->query("SELECT a.*, b.FirebaseID FROM nrz_orders_nurse_accept a
 			JOIN nrz_nurses b
 			ON b.NurseID = a.NurseID
 			WHERE a.OrderID='" . $order_id . "'");
-        if (mysqli_num_rows($q2) > 0) {
-            while ($row = $q2->fetch_assoc()) {
+        if (mysqli_num_rows($q2) > 0)
+        {
+            while ($row = $q2->fetch_assoc())
+            {
                 $this->sendNotification_Nurse($row['FirebaseID'], $custom_data);
             }
         }
@@ -6528,10 +7632,13 @@ return $query;
      */
     public function pushNotifCancelDoctor($order_id, $user_id)
     {
-        $q = $this->conn->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
 
         $user_name = '';
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $q = $q->fetch_assoc();
             $user_name = $q['FirstName'] . ' ' . $q['LastName'];
         }
@@ -6544,12 +7651,16 @@ return $query;
         );
 
         //Notify User
-        $q2 = $this->conn->query("SELECT a.*, b.FirebaseID FROM doc_orders_doctor_accept a
+        $q2 = $this
+            ->conn
+            ->query("SELECT a.*, b.FirebaseID FROM doc_orders_doctor_accept a
 			JOIN doc_doctors b
 			ON b.DoctorID = a.DoctorID
 			WHERE a.OrderID='" . $order_id . "'");
-        if (mysqli_num_rows($q2) > 0) {
-            while ($row = $q2->fetch_assoc()) {
+        if (mysqli_num_rows($q2) > 0)
+        {
+            while ($row = $q2->fetch_assoc())
+            {
                 // echo $row['FirebaseID'];
                 $this->sendNotification_Doctor($row['FirebaseID'], $custom_data);
             }
@@ -6561,10 +7672,13 @@ return $query;
      */
     public function pushNotifBidCancelNurse($order_id, $user_id, $nurse_id_deal)
     {
-        $q = $this->conn->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM master_users WHERE UserID='" . $user_id . "'");
 
         $user_name = '';
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $q = $q->fetch_assoc();
             $user_name = $q['FirstName'] . ' ' . $q['LastName'];
         }
@@ -6577,13 +7691,17 @@ return $query;
         );
 
         //Notify User
-        $q2 = $this->conn->query("SELECT a.*, b.FirebaseID FROM nrz_orders_nurse_accept a
+        $q2 = $this
+            ->conn
+            ->query("SELECT a.*, b.FirebaseID FROM nrz_orders_nurse_accept a
 			JOIN nrz_nurses b
 			ON b.NurseID = a.NurseID
 			WHERE a.OrderID='" . $order_id . "'
 			AND a.NurseID != '" . $nurse_id_deal . "'");
-        if (mysqli_num_rows($q2) > 0) {
-            while ($row = $q2->fetch_assoc()) {
+        if (mysqli_num_rows($q2) > 0)
+        {
+            while ($row = $q2->fetch_assoc())
+            {
                 $this->sendNotification_Nurse($row['FirebaseID'], $custom_data);
             }
         }
@@ -6594,19 +7712,26 @@ return $query;
      */
     public function getBills($nurse_id)
     {
-        $query_total = $this->conn->query("SELECT IFNULL(SUM(CompanyRevenue),0) AS total_bill FROM nrz_orders_current WHERE NurseID = '" . $nurse_id . "' AND OrderStatusID=7 AND Active=1 AND PaymentTypeID=1 ");
+        $query_total = $this
+            ->conn
+            ->query("SELECT IFNULL(SUM(CompanyRevenue),0) AS total_bill FROM nrz_orders_current WHERE NurseID = '" . $nurse_id . "' AND OrderStatusID=7 AND Active=1 AND PaymentTypeID=1 ");
         $row1 = $query_total->fetch_assoc();
 
-        $query_paid = $this->conn->query("SELECT IFNULL(SUM(Total),0) AS total_paid FROM nrz_payment_confirmations WHERE NurseID = '" . $nurse_id . "' AND Status=1 ");
+        $query_paid = $this
+            ->conn
+            ->query("SELECT IFNULL(SUM(Total),0) AS total_paid FROM nrz_payment_confirmations WHERE NurseID = '" . $nurse_id . "' AND Status=1 ");
         $row2 = $query_paid->fetch_assoc();
 
         $total_bill = $row1['total_bill'];
         $total_paid = $row2['total_paid'];
 
-        if ($total_bill > 0) {
+        if ($total_bill > 0)
+        {
             $total = ($total_bill - $total_paid);
             return $total;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -6614,19 +7739,25 @@ return $query;
     function checkNurseBillReachMaximum($nurse_id)
     {
         $bills = $this->getBills($nurse_id);
-        $max_bill = $this->getConfig('nurse_maximum_bill')->fetch_assoc();
+        $max_bill = $this->getConfig('nurse_maximum_bill')
+            ->fetch_assoc();
 
         $max_bill = $max_bill['Value'];
-        if ($bills > $max_bill) {
+        if ($bills > $max_bill)
+        {
             return 1;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
 
     public function createOrderLog($order_id, $order_status_id, $nurse_id, $description)
     {
-        $q = $this->conn->query("INSERT INTO nrz_orders_logs 
+        $q = $this
+            ->conn
+            ->query("INSERT INTO nrz_orders_logs 
 									(OrderID,
 									CreatedDate,
 									CreatedBy,
@@ -6643,16 +7774,22 @@ return $query;
 									'" . $description . "'
 									) ");
 
-        if ($q) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
 
     public function createOrderLogDoctor($order_id, $order_status_id, $doctor_id, $description)
     {
-        $q = $this->conn->query("INSERT INTO doc_orders_logs 
+        $q = $this
+            ->conn
+            ->query("INSERT INTO doc_orders_logs 
 									(OrderID,
 									CreatedDate,
 									CreatedBy,
@@ -6668,39 +7805,53 @@ return $query;
 									'" . $doctor_id . "',
 									'" . $description . "'
 									) ");
-        if ($q) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
 
     public function getOrderLogNurseByOrderId($order_id, $order_status_id)
     {
-        $q = $this->conn->query("SELECT * FROM nrz_orders_logs 
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM nrz_orders_logs 
     							WHERE OrderID = " . $order_id . " AND OrderStatusID = " . $order_status_id . "
     							ORDER BY LogID DESC
     							LIMIT 1
     						");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function getOrderLogDoctorByOrderId($order_id, $order_status_id)
     {
-        $q = $this->conn->query("SELECT * FROM doc_orders_logs 
+        $q = $this
+            ->conn
+            ->query("SELECT * FROM doc_orders_logs 
     							WHERE OrderID = " . $order_id . " AND OrderStatusID = " . $order_status_id . "
     							ORDER BY LogID DESC
     							LIMIT 1
     						");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6712,21 +7863,28 @@ return $query;
      */
     public function getLabPackageByLabId($lab_id)
     {
-        $q = $this->conn->query("SELECT lab_products.*,
+        $q = $this
+            ->conn
+            ->query("SELECT lab_products.*,
 									(CASE WHEN Image IS NOT NULL THEN CONCAT( '" . $this->uploaddir . "', '/labproducts/', LabID,'/',Image) ELSE '' END) AS Image
 								 FROM lab_products
 								 WHERE LabID = " . $lab_id . "
 								 AND Active = 1");
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function insertLabOrder($user_id, $lab_id, $lab_products_id, $description, $price)
     {
-        $q = $this->conn->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
+        $q = $this
+            ->conn
+            ->query("SELECT IFNULL(MAX(Right(OrderNo,8)),0) AS OrderNo
 											FROM lab_orders 
 											WHERE 
 												DATE_FORMAT(OrderDate, '%m')='" . date('m') . "' AND 
@@ -6734,17 +7892,22 @@ return $query;
 
         $data_orderid = $q->fetch_assoc();
 
-        if ($data_orderid['OrderNo'] == 0) {
+        if ($data_orderid['OrderNo'] == 0)
+        {
             //Start From First
             $num = date('y') . date('m') . "0001";
             $order_no = "LO" . $num;
-        } else {
+        }
+        else
+        {
             //Continue Number +1
             $num = $data_orderid['OrderNo'] + 1;
             $order_no = "LO" . $num;
         }
 
-        $q2 = $this->conn->query("INSERT INTO lab_orders
+        $q2 = $this
+            ->conn
+            ->query("INSERT INTO lab_orders
 								(OrderNo, 
 								OrderDate, 
 								UserID, 
@@ -6769,10 +7932,15 @@ return $query;
 								'9-',
 								'" . $this->get_current_time() . "')");
 
-        if ($q2) {
-            $q3 = $this->getLaboratoriumOrderById($this->conn->insert_id);
+        if ($q2)
+        {
+            $q3 = $this->getLaboratoriumOrderById($this
+                ->conn
+                ->insert_id);
             return $q3;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6784,14 +7952,19 @@ return $query;
      */
     public function getHospitalById($HospitalID)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM master_hospitals 
 								 WHERE HospitalID = " . $HospitalID . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6803,14 +7976,19 @@ return $query;
      */
     public function getLaboratoriumById($lab_id)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM lab_laboratoriums 
 								 WHERE LabID = " . $lab_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6822,14 +8000,19 @@ return $query;
      */
     public function getLaboratoriumOrderById($order_id)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM lab_orders 
 								 WHERE OrderID = " . $order_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6841,14 +8024,19 @@ return $query;
      */
     public function getLaboratoriumOrderByUserId($user_id)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM lab_orders 
 								 WHERE UserID = " . $user_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6860,7 +8048,8 @@ return $query;
         $month = date('m');
         $no = $last_no;
 
-        if ($last_year == $year && $last_month == $month) {
+        if ($last_year == $year && $last_month == $month)
+        {
             $no = (int)$no + 1;
         }
 
@@ -6875,13 +8064,18 @@ return $query;
     public function getNominalTopUp()
     {
 
-        $query_get = $this->conn->query("SELECT   
+        $query_get = $this
+            ->conn
+            ->query("SELECT   
 											*
 										FROM nominal_topup");
 
-        if (mysqli_num_rows($query_get) > 0) {
+        if (mysqli_num_rows($query_get) > 0)
+        {
             return $query_get;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -6893,14 +8087,19 @@ return $query;
      */
     public function getUserWalletByUserId($user_id)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM user_wallet 
 								 WHERE UserID = " . $user_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -6908,16 +8107,21 @@ return $query;
     public function createWalletLog($user_id, $amount)
     {
         //Insert ke table user_wallet_log
-        $data_wallet = $this->conn->query("select * from user_wallet where UserID = $user_id");
-        if (mysqli_num_rows($data_wallet) > 0) {
+        $data_wallet = $this
+            ->conn
+            ->query("select * from user_wallet where UserID = $user_id");
+        if (mysqli_num_rows($data_wallet) > 0)
+        {
             //Jika user nya sudah ada, maka update Total topup nya
             $data_wallet_result = $data_wallet->fetch_assoc();
             $wallet_id = $data_wallet_result['WalletID'];
         }
 
-
-        $data_log = $this->conn->query("select * from user_wallet_log order by WalletLogID desc LIMIT 1");
-        if (mysqli_num_rows($data_log) > 0) {
+        $data_log = $this
+            ->conn
+            ->query("select * from user_wallet_log order by WalletLogID desc LIMIT 1");
+        if (mysqli_num_rows($data_log) > 0)
+        {
             //Jika user nya sudah ada, maka update Total topup nya
             $data_result = $data_log->fetch_assoc();
             $order_number = $data_result['OrderNo'];
@@ -6928,17 +8132,19 @@ return $query;
         $last_year = date('y');
         $last_month = date('m');
         $last_no = (int)10000;
-        if ($data_log != null) {
+        if ($data_log != null)
+        {
             $last_order_no = $order_number;
             $last_no = substr($last_order_no, 7);
             $last_month = substr($last_order_no, 5, 2);
             $last_year = substr($last_order_no, 3, 2);
         }
 
-
         $order_no = $this->generateOrderNoByYearMonth($prefix, $last_no, $last_year, $last_month);
 
-        $q_wallet_log = $this->conn->query("INSERT INTO user_wallet_log(
+        $q_wallet_log = $this
+            ->conn
+            ->query("INSERT INTO user_wallet_log(
 									WalletID,
 									OrderNo,
 									UserID,
@@ -6970,12 +8176,17 @@ return $query;
         $total = $amount;
 
         //Jika user nya sudah ada, maka update Total topup nya
-        $data_log = $this->conn->query("select * from user_wallet_topup order by OrderID desc LIMIT 1");
+        $data_log = $this
+            ->conn
+            ->query("select * from user_wallet_topup order by OrderID desc LIMIT 1");
 
-        if (mysqli_num_rows($data_log) > 0) {
+        if (mysqli_num_rows($data_log) > 0)
+        {
             $data_result = $data_log->fetch_assoc();
             $order_number = $data_result['OrderNo'];
-        } else {
+        }
+        else
+        {
             $last_year = date('y');
             $last_month = date('m');
             $order_number = 'USW' . $last_year . $last_month . '10000';
@@ -6986,7 +8197,8 @@ return $query;
         $last_year = date('y');
         $last_month = date('m');
         $last_no = (int)10000;
-        if ($data_log != null) {
+        if ($data_log != null)
+        {
             $last_order_no = $order_number;
             $last_no = substr($last_order_no, 7);
             $last_month = substr($last_order_no, 5, 2);
@@ -6995,8 +8207,9 @@ return $query;
 
         $generate_order_no = $this->generateOrderNoByYearMonth($prefix, $last_no, $last_year, $last_month);
 
-
-        $q2 = $this->conn->query("INSERT INTO user_wallet_topup(
+        $q2 = $this
+            ->conn
+            ->query("INSERT INTO user_wallet_topup(
 									UserID,
 									Amount,
 									CreatedDate,
@@ -7017,9 +8230,13 @@ return $query;
 									)
 								");
 
-        if ($q2) {
-            return $this->conn->insert_id;
-        } else {
+        if ($q2)
+        {
+            return $this
+                ->conn->insert_id;
+        }
+        else
+        {
             return false;
         }
     }
@@ -7031,14 +8248,19 @@ return $query;
      */
     public function getOrderID($topup_id)
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM user_wallet_topup
 								 WHERE OrderID = " . $topup_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7050,18 +8272,22 @@ return $query;
      */
     public function getUserPoinByUserId($user_id)
     {
-        $q = $this->conn->query("SELECT Point
+        $q = $this
+            ->conn
+            ->query("SELECT Point
 								 FROM master_users
 								 WHERE UserID = " . $user_id . "
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     /**
      * Get nurse order pending transfer
@@ -7070,15 +8296,20 @@ return $query;
      */
     public function getOrderPendingTransfer()
     {
-        $q = $this->conn->query("SELECT *
+        $q = $this
+            ->conn
+            ->query("SELECT *
 								 FROM nrz_orders_current 
 								 WHERE OrderStatusID = 3
 								 AND PaymentTypeID = 2
 								 AND Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7090,16 +8321,19 @@ return $query;
      */
     public function updateNrzOrderStatus($order_id, $order_status_id)
     {
-        $q = $this->conn->query("UPDATE nrz_orders_current SET 
+        $q = $this
+            ->conn
+            ->query("UPDATE nrz_orders_current SET 
 									OrderStatusID 		= '" . $order_status_id . "',
 									ModifiedBy 			= '9-'
 								WHERE 
 									OrderID = '" . $order_id . "' ");
 
-
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $dt = $this->getNurseByOrderID($order_id);
-            if ($dt != null) {
+            if ($dt != null)
+            {
                 $dt = $dt->fetch_assoc();
 
                 //create order log
@@ -7109,7 +8343,9 @@ return $query;
                 $this->createOrderLog($order_id, $order_status_id, $nurse_id, $description);
             }
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7117,24 +8353,31 @@ return $query;
     public function checkEmergencyContactExist($user_id)
     {
 
-        $insert = $this->conn->query("SELECT * FROM master_patients
+        $insert = $this
+            ->conn
+            ->query("SELECT * FROM master_patients
 									WHERE Emergency = 1 AND UserID = " . $user_id . " ");
 
-        if (mysqli_num_rows($insert) > 0) {
+        if (mysqli_num_rows($insert) > 0)
+        {
             return true;
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
 
     public function setEmergencyContact($Name, $user_id, $Phone, $Email, $Gender)
     {
         $check_emergency_contact = $this->checkEmergencyContactExist($user_id);
 
-        if ($check_emergency_contact) {
-            $update = $this->conn->query("UPDATE master_patients SET 
+        if ($check_emergency_contact)
+        {
+            $update = $this
+                ->conn
+                ->query("UPDATE master_patients SET 
 									PatientName 		= '" . $Name . "',
 									Telp 		= '" . $Phone . "',
 									Email 		= '" . $Email . "',
@@ -7142,14 +8385,21 @@ return $query;
 									ModifiedBy 			= '9-'
 								WHERE 
 									UserID = '" . $user_id . "' AND Emergency = 1 ");
-            if ($update) {
+            if ($update)
+            {
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
-            $insert = $this->conn->query("INSERT INTO master_patients 
+        }
+        else
+        {
+            $insert = $this
+                ->conn
+                ->query("INSERT INTO master_patients 
 										(PatientName,
 										Telp,
 										Email,
@@ -7167,17 +8417,18 @@ return $query;
 										'" . $this->get_current_time() . "',
 										'1'
 										) ");
-            if ($insert) {
+            if ($insert)
+            {
                 return true;
 
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
 
-
     }
-
 
     /**
      * Get emergency contact
@@ -7186,7 +8437,9 @@ return $query;
      */
     public function getEmergencyContact($user_id, $latitude, $longitude)
     {
-        $q = $this->conn->query("SELECT
+        $q = $this
+            ->conn
+            ->query("SELECT
                                     a.PatientName as EmergencyContactName,
                                     a.PatientID,
                                     a.Telp as EmergencyContactTelp,
@@ -7204,7 +8457,8 @@ return $query;
 								 a.Active = 1
 								 LIMIT 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $q = $q->fetch_assoc();
             //create order log
             $EmergencyContactName = $q['EmergencyContactName'];
@@ -7219,7 +8473,9 @@ return $query;
             $this->saveEmergencyContactLog($EmergencyContactTelp, $EmergencyID, $UserID, $Phone, $latitude, $longitude);
 
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7250,7 +8506,9 @@ return $query;
 
     public function saveEmergencyContactLog($EmergencyContactTelp, $EmergencyID, $UserID, $Phone, $latitude, $longitude)
     {
-        $insert = $this->conn->query("INSERT INTO emergency_button_log 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO emergency_button_log 
 									(from_id, 
 									from_telp, 
 									to_id,
@@ -7271,9 +8529,12 @@ return $query;
 									'1'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7281,7 +8542,9 @@ return $query;
     public function checkReferralByExist($user_id, $referral_by)
     {
         //check ReferralBy exist on master_users
-        $q = $this->conn->query("SELECT ReferralBy
+        $q = $this
+            ->conn
+            ->query("SELECT ReferralBy
 								 FROM master_users 
 								 WHERE UserID = '" . $user_id . "'
 								 AND
@@ -7289,46 +8552,67 @@ return $query;
 								 LIMIT 1
 							    ");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             $q_find = $q->fetch_assoc();
             $ref_by = $q_find['ReferralBy'];
-            if ($ref_by == $referral_by || $ref_by == '' || $ref_by == '0' || $ref_by == NULL) {
-                return $this->conn->query("SELECT ReferralBy
+            if ($ref_by == $referral_by || $ref_by == '' || $ref_by == '0' || $ref_by == NULL)
+            {
+                return $this
+                    ->conn
+                    ->query("SELECT ReferralBy
 								 FROM master_users 
 								 WHERE UserID = '" . $user_id . "'
 								 AND
 								 (ReferralBy != '' OR ReferralBy = '" . $referral_by . "')
 								 LIMIT 1
 							    ");
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             $check_v_number = substr($referral_by, 0, 2);
             //echo $check_v_number;die();
-            if ($check_v_number == 'V-') {
+            if ($check_v_number == 'V-')
+            {
                 //Jika referral_by nya tidak ada di master_users tetapi depannya "V-" check ke table referral_code_perusahaan['ReferralID']
-                $referralby = $this->conn->query("SELECT ReferralID as ReferralBy
+                $referralby = $this
+                    ->conn
+                    ->query("SELECT ReferralID as ReferralBy
 								 FROM referral_code_perusahaan 
 								 WHERE ReferralID = '" . $referral_by . "' AND Active = 1
 								 LIMIT 1
 							    ");
-                if (mysqli_num_rows($referralby) > 0) {
+                if (mysqli_num_rows($referralby) > 0)
+                {
                     return $referralby;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 //check ReferralID exist on master_users
-                $q_2 = $this->conn->query("SELECT ReferralID as ReferralBy
+                $q_2 = $this
+                    ->conn
+                    ->query("SELECT ReferralID as ReferralBy
 								 FROM master_users 
 								 WHERE
 								 ReferralID = '" . $referral_by . "'
 								 LIMIT 1
 							    ");
-                if (mysqli_num_rows($q_2) > 0) {
+                if (mysqli_num_rows($q_2) > 0)
+                {
                     return $q_2;
-                } else {
+                }
+                else
+                {
                     //bukan referral code yang benar/invalid ReferralBY
                     return false;
                 }
@@ -7340,7 +8624,9 @@ return $query;
     public function checkKodeVoucher($kode_voucher)
     {
         //Pertama cek ke table vocher_promo ada apa nggak voucher promo tersebut
-        $query = $this->conn->query("SELECT
+        $query = $this
+            ->conn
+            ->query("SELECT
                                         a.voucher_code,
                                         b.nominal,
                                         b.potongan_persen
@@ -7351,9 +8637,12 @@ return $query;
                                 
                                         a.voucher_code = '" . $kode_voucher . "' AND a.used = 0");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -7361,7 +8650,9 @@ return $query;
     public function checkKodeVoucherAptKanopiAndNrzOrder($kode_voucher)
     {
         //Pertama cek ke table apt_orders
-        $query = $this->conn->query("SELECT
+        $query = $this
+            ->conn
+            ->query("SELECT
                                         voucher_code
                                     FROM
                                         apt_orders
@@ -7370,11 +8661,16 @@ return $query;
                                 
                                         voucher_code = '" . $kode_voucher . "'");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return false;
-        } else {
+        }
+        else
+        {
             //kedua cek ke table nrz_orders_current
-            $query2 = $this->conn->query("SELECT
+            $query2 = $this
+                ->conn
+                ->query("SELECT
                                         voucher_code
                                     FROM
                                         nrz_orders_current
@@ -7383,11 +8679,16 @@ return $query;
                                 
                                         voucher_code = '" . $kode_voucher . "'");
 
-            if (mysqli_num_rows($query2) > 0) {
+            if (mysqli_num_rows($query2) > 0)
+            {
                 return false;
-            } else {
+            }
+            else
+            {
                 //ketiga cek ke table kanopi_nrz_orders_current
-                $query3 = $this->conn->query("SELECT
+                $query3 = $this
+                    ->conn
+                    ->query("SELECT
                                         voucher_code
                                     FROM
                                         kanopi_nrz_orders_current
@@ -7396,9 +8697,12 @@ return $query;
                                 
                                         voucher_code = '" . $kode_voucher . "'");
 
-                if (mysqli_num_rows($query3) > 0) {
+                if (mysqli_num_rows($query3) > 0)
+                {
                     return false;
-                } else {
+                }
+                else
+                {
                     return $query3;
                 }
             }
@@ -7410,39 +8714,47 @@ return $query;
      */
     public function getMasterCategory()
     {
-        $query_get = $this->conn->query("SELECT CategoryID, CategoryName from master_category where Active = 1 ORDER BY CategoryName ASC");
+        $query_get = $this
+            ->conn
+            ->query("SELECT CategoryID, CategoryName from master_category where Active = 1 ORDER BY CategoryName ASC");
         return $query_get;
     }
 
-                                             public function getDataSuppliers($user_id)
-                                             {
-                                             $query_get = $this->conn->query("SELECT * from suppliers where UserID = '" . $user_id . "' order by SupplierID DESC");
-                                             return $query_get;
-                                             }
-                                             
-    public function getDataProduct($user_id ,$status, $page, $limit , $search ,$search_size, $search_color)
+    public function getDataSuppliers($user_id)
     {
-		
-		     $condition = '';
-			 $where = '';
-		
-        if ($page != '' && $limit != '') {
-            if ($page == 1) {
+        $query_get = $this
+            ->conn
+            ->query("SELECT * from suppliers where UserID = '" . $user_id . "' order by SupplierID DESC");
+        return $query_get;
+    }
+
+    public function getDataProduct($user_id, $status, $page, $limit, $search, $search_size, $search_color)
+    {
+
+        $condition = '';
+        $where = '';
+
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
                 $p = 0;
-            } else {
+            }
+            else
+            {
                 $p = ($page - 1) * $limit;
             }
 
-          $condition .= "Order by pvd.Stock and pvd.Stock DESC LIMIT " . $limit . " OFFSET " . $p . " ";
-			
-		
-			
-        }
-		
+            $condition .= "Order by pvd.Stock and pvd.Stock DESC LIMIT " . $limit . " OFFSET " . $p . " ";
 
-if ($search != null) {
-	
-	   $query = $this->conn->query("SELECT * FROM 
+        }
+
+        if ($search != null)
+        {
+
+            $query = $this
+                ->conn
+                ->query("SELECT * FROM 
 	                                products AS tp
 	                                LEFT JOIN image_products AS ip
 	                                ON tp.ProductID = ip.ProductID
@@ -7450,14 +8762,14 @@ if ($search != null) {
 										where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1) and tp.ProductName LIKE CONCAT('%','" . $search . "','%')
 										
 										Order by tp.ProductID ASC");
-	
 
+        }
+        else if ($search_size != null)
+        {
 
-} else if ($search_size != null) {
-
-
-
-  $query = $this->conn->query("
+            $query = $this
+                ->conn
+                ->query("
   	SELECT * FROM 
 	                                products AS tp
 	                                LEFT JOIN image_products AS ip
@@ -7470,98 +8782,95 @@ if ($search != null) {
 										
 										Order by tp.ProductID ASC");
 
+        }
+        else
+        {
 
-}else{
-
-		   $query = $this->conn->query("SELECT * FROM 
+            $query = $this
+                ->conn
+                ->query("SELECT * FROM 
 	                                products AS tp
 	                                LEFT JOIN image_products AS ip
 	                                ON tp.ProductID = ip.ProductID
                                     where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1)
                                     Order by tp.ProductID ASC LIMIT " . $limit . " OFFSET " . $p . " ");
 
-	
-	  
-	
-}
-			
-				
-      											 
-												 
-																 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			  public function updateProducts($user_id, $skus , $quantity)
-		{
-		
+        }
 
-          $query = $this->conn->query(" UPDATE product_variant_details 
-										SET Stock = Stock - '" . $quantity . "' Where SkuID = '" . $skus . "' ");
-										
-					 
-																 
-			if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
-			
-			
-			
-		 public function cekStock($skus)
-		{
-		
+        }
 
-          $query = $this->conn->query("Select * from product_variant_details
-										where SkuID = '" . $skus . "'");
-										
-					 
-																 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-					 public function getSkus($user_id)
-		{
-		
+    }
 
-          $query = $this->conn->query("Select SkuID from product_variant_details
-										where UserID = '" . $user_id . "'");
-										
-					 
-																 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			
-			
-			
-			 public function getDataVariantProduct($user_id, $product_id)
+    public function updateProducts($user_id, $skus, $quantity)
     {
-		
-		   
-		   
-			   
-			   $query = $this->conn->query("SELECT tp.ProductID,
+
+        $query = $this
+            ->conn
+            ->query(" UPDATE product_variant_details 
+										SET Stock = Stock - '" . $quantity . "' Where SkuID = '" . $skus . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function cekStock($skus)
+    {
+
+        $query = $this
+            ->conn
+            ->query("Select * from product_variant_details
+										where SkuID = '" . $skus . "'");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getSkus($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("Select SkuID from product_variant_details
+										where UserID = '" . $user_id . "'");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataVariantProduct($user_id, $product_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT tp.ProductID,
 										pv.ProductVariantID,
 										pvd.SkuID,
 										pvd.Barcode,
@@ -7581,54 +8890,43 @@ if ($search != null) {
 										ON pv.ProductVariantID = ipv.ProductVariantID
 										where tp.UserID =  '" . $user_id . "' and tp.ProductId = '" . $product_id . "' and  pv.Status= 1 AND  pvd.Status= 1
                                         Order by tp.ProductID and pvd.ProductVariantDetailName DESC");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			 public function getProductIDByUserID($user_id)
-    {
-		
-		   
-		  
 
-			   
-			   $query = $this->conn->query("SELECT * from products	where UserID = '" . $user_id . "'	and Status = 1
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getProductIDByUserID($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT * from products	where UserID = '" . $user_id . "'	and Status = 1
                                         Order by ProductName ");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-				 public function getProductDataIDByUserID($user_id)
-    {
-		
-		   
-		  
 
-			   
-			   $query = $this->conn->query("SELECT * FROM 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getProductDataIDByUserID($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 										products AS tp
 										LEFT JOIN product_variants AS pv 
 										ON tp.ProductID = pv.ProductID 
@@ -7638,90 +8936,71 @@ if ($search != null) {
 										ON pv.ProductVariantID = ipv.ProductVariantID
 										where tp.UserID =" . $user_id . "	and tp.Status =1
 										");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			public function getDataProducts($user_id)
-    {
-		
-		   
-		  
 
-			   
-			   $query = $this->conn->query("SELECT * FROM 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataProducts($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 										products AS p
 										LEFT JOIN 
 										master_brand AS mb
 										ON p.BrandID = mb.BrandID
 										where p.UserID =" . $user_id . " and p.Status =1
 										");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			public function getDataProductVariants($ProductID)
-    {
-		
-		   
-		  
 
-			   
-			   $query = $this->conn->query("SELECT * FROM
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataProductVariants($ProductID)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM
 											product_variants AS pv
 											LEFT JOIN product_variant_details AS pvd
 											ON pvd.ProductVariantID = pv.ProductVariantID
 										where pv.ProductID =" . $ProductID . "
 										");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-			
-					public function getDataProductsdanVariant($user_id)
-    {
-		
-		   
-		  
 
-			   
-			   $query = $this->conn->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataProductsdanVariant($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
 											   pvd.SkuID ,pvd.ProductVariantDetailName , pvd.Stock , 
 											   pvd.PriceRetail , pvd.PriceReseller ,mb.BrandName AS brand 
 											   FROM
@@ -7735,29 +9014,24 @@ if ($search != null) {
 
 										where p.UserID =" . $user_id . " and p.Status =1
 										");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
+        }
+
+    }
 
     public function getDataProductVariants2($user_id, $item)
     {
 
-
-
-
-
-        $query = $this->conn->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
+        $query = $this
+            ->conn
+            ->query("SELECT p.ProductID , p.CategoryID , p.ProductName , p.Description , pv.ProductVariantName , 
 											   pvd.SkuID ,pvd.ProductVariantDetailName , pvd.Stock , 
 											   pvd.PriceRetail , pvd.PriceReseller ,mb.BrandName AS brand 
 											   FROM
@@ -7773,112 +9047,102 @@ if ($search != null) {
 									order by pvd.SkuID
 										");
 
-
-
-
-
-
-
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
 
     }
 
-				 public function getDataLazada($user_id)
+    public function getDataLazada($user_id)
     {
-		
-		   
-          $query = $this->conn->query(" SELECT * from lazada
+
+        $query = $this
+            ->conn
+            ->query(" SELECT * from lazada
 										where UserID = '" . $user_id . "' and active=1
                                        ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
-			
-			
-							 public function getDataLazadaByMerchant($user_id , $merchant_name)
+        }
+
+    }
+
+    public function getDataLazadaByMerchant($user_id, $merchant_name)
     {
-		
-		   
-          $query = $this->conn->query(" SELECT * from lazada
+
+        $query = $this
+            ->conn
+            ->query(" SELECT * from lazada
 										where UserID = '" . $user_id . "' and merchant_name = '" . $merchant_name . "' 
                                        ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
-			
-			
-			
-			public function checkSkus($user_id)
+        }
+
+    }
+
+    public function checkSkus($user_id)
     {
-		
-		   
-          $query = $this->conn->query(" SELECT SkuID from product_variant_details
+
+        $query = $this
+            ->conn
+            ->query(" SELECT SkuID from product_variant_details
 										where UserID = '" . $user_id . "'
                                        ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
-			
-			
-				 public function updateStockProduct($user_id, $sku_id ,$stock_fisik)
+        }
+
+    }
+
+    public function updateStockProduct($user_id, $sku_id, $stock_fisik)
     {
-		
-		  
-		   
-		   
-		  
-        
-			  $query = $this->conn->query("UPDATE product_variant_details SET Stock =  '" . $stock_fisik . "' Where SkuID = '" . $sku_id . "'");
-			
-			if ($query ) {
+
+        $query = $this
+            ->conn
+            ->query("UPDATE product_variant_details SET Stock =  '" . $stock_fisik . "' Where SkuID = '" . $sku_id . "'");
+
+        if ($query)
+        {
             return true;
 
-        } else {
+        }
+        else
+        {
             return false;
         }
 
-        
+    }
 
-          
-			}
-			
-			
-				
-			
-																		 
-			
-			
-			
-						 public function generateBarcode()
+    public function generateBarcode()
     {
-		
-		   
-          $query = $this->conn->query(" SELECT 
+
+        $query = $this
+            ->conn
+            ->query(" SELECT 
                              pvd.ProductVariantDetailID,
                             pvd.ProductVariantID,
                             pvd.SkuID,
@@ -7904,23 +9168,24 @@ LEFT JOIN products AS tp
 ON pv.ProductID = tp.ProductID
 
 WHERE pv.ProductID = 1 ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-			} else {
+        }
+        else
+        {
             return null;
-			}
-			
-			}
-			
-			
-				 public function getDataBarcode($user_id, $barcode)
+        }
+
+    }
+
+    public function getDataBarcode($user_id, $barcode)
     {
-		
-		   
-          $query = $this->conn->query("SELECT 
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
                             pvd.ProductVariantDetailID,
                             pvd.ProductVariantID,
                             pvd.SkuID,
@@ -7948,74 +9213,77 @@ ON pv.ProductID = tp.ProductID
 
 										
 										WHERE pvd.Barcode = '" . $barcode . "' ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-						 public function getDataStok($sku)
-    {
-		
-		   
-          $query = $this->conn->query("SELECT 
-                           Stock FROM product_variant_details WHERE SkuID = '" . $sku . "' ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-				 public function getDataHistory($order_id)
-    {
-		
-		   
-          $query = $this->conn->query("SELECT 
-                           * FROM history_orders WHERE order_id = '" . $order_id . "' ");
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
-			
-			
-	
-			
-                                                                         
-                           
 
-						   public function getDataCart($user_id , $page, $limit)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                         
-                                                                         $query = $this->conn->query("SELECT a.CustomerID , b.SKU as SkuID, b.Quantity , c.ProductName , d.ProductVariantName , e.ProductVariantDetailName, b.Price FROM cart AS a
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataStok($sku)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
+                           Stock FROM product_variant_details WHERE SkuID = '" . $sku . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataHistory($order_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
+                           * FROM history_orders WHERE order_id = '" . $order_id . "' ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataCart($user_id, $page, $limit)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT a.CustomerID , b.SKU as SkuID, b.Quantity , c.ProductName , d.ProductVariantName , e.ProductVariantDetailName, b.Price FROM cart AS a
                                                                                                      
                                                                                                      LEFT JOIN cart_details AS b ON b.CartID = a.CartID
                                                                                                      LEFT JOIN products AS c ON b.ProductID = c.ProductID
@@ -8023,69 +9291,80 @@ ON pv.ProductID = tp.ProductID
                                                                                                      LEFT JOIN product_variant_details AS e ON b.ProductVariantDetailID = e.ProductVariantDetailID
                                                                                                      WHERE  a.UserID = '5'
                                                                                                      Order by b.CreatedDate DESC " . $condition);
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																									 
-																									 
-																			public function getDataCartDetail($user_id , $page, $limit)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
 
-	$query = $this->conn->query("SELECT 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getDataCartDetail($user_id, $page, $limit)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
 a.CartDetailID,
 a.SKU,
 	a.Price,
 	a.Quantity,
-	b.ProductName
+	b.ProductName,
+	a.SubTotal
  FROM cart_details AS a
  LEFT JOIN products AS b
   ON a.ProductID = b.ProductID
  WHERE  a.UserID = '" . $user_id . "'
 Order by a.CreatedDate DESC " . $condition);
-   if (mysqli_num_rows($query) > 0) {
-    return $query;
-     } else {
-     return null;
-   }
-   }
-                                                                        
-																		
-																		public function getDataOrders($user_id, $page, $limit , $status_id)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
-			   
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-																		$query = $this->conn->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
+    public function getDataOrders($user_id, $page, $limit, $status_id)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
 																		customer_first_name , customer_last_name ,  price , 
 																									items_count , payment_method ,voucher ,  voucher_code , voucher_platform , voucher_seller , 
 																									 gift_option ,gift_message , shipping_fee, 
@@ -8095,33 +9374,39 @@ Order by a.CreatedDate DESC " . $condition);
 																									 FROM 
 																									history_orders
                                                                                                     where user_id = '" . $user_id . "' and statuses = '" . $status_id . "'
-                                                                                                     Order by created_at DESC " . $condition);	
-																									 
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																			public function getDataRts($user_id, $page, $limit , $status_id)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
-			   
+                                                                                                     Order by created_at DESC " . $condition);
 
-																		$query = $this->conn->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getDataRts($user_id, $page, $limit, $status_id)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
 																		customer_first_name , customer_last_name ,  price , 
 																									items_count , payment_method ,voucher ,  voucher_code , voucher_platform , voucher_seller , 
 																									 gift_option ,gift_message , shipping_fee, 
@@ -8131,33 +9416,39 @@ Order by a.CreatedDate DESC " . $condition);
 																									 FROM 
 																									history_orders
                                                                                                     where user_id = '" . $user_id . "' and statuses = '" . $status_id . "'
-                                                                                                     Order by created_at DESC " . $condition);	
-																									 
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }						 
-																								
-																	public function getDataOrder($user_id, $page, $limit , $order_id)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
-			   
+                                                                                                     Order by created_at DESC " . $condition);
 
-																		$query = $this->conn->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getDataOrder($user_id, $page, $limit, $order_id)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
 																		customer_first_name , customer_last_name ,  price , 
 																									items_count , payment_method ,voucher ,  voucher_code , voucher_platform , voucher_seller , 
 																									 gift_option ,gift_message , shipping_fee, 
@@ -8167,82 +9458,92 @@ Order by a.CreatedDate DESC " . $condition);
 																									 FROM 
 																									history_orders
                                                                                                     where user_id = '" . $user_id . "' and order_id = '" . $order_id . "'
-                                                                                                     Order by created_at DESC " . $condition);	
-																									 
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																				
+                                                                                                     Order by created_at DESC " . $condition);
 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-																public function getDataOrderItems($user_id, $page, $limit , $order_id)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
+    public function getDataOrderItems($user_id, $page, $limit, $order_id)
+    {
 
-																		$query = $this->conn->query("SELECT * FROM 
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 																									history_order_details
                                                                                                     where order_id = '" . $order_id . "'
-                                                                                                     Order by created_at DESC " . $condition);																									
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																									 
-													
-																		public function getDataRtsItems($user_id, $page, $limit , $order_id)
-                                                                         {
-                                                                         
-                                                                         $condition = '';
-                                                                         if ($page != '' && $limit != '') {
-                                                                         if ($page == 1) {
-                                                                         $p = 0;
-                                                                         } else {
-                                                                         $p = ($page - 1) * $limit;
-                                                                         }
-                                                                         
-                                                                         $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
-                                                                         }
-                                                                         
-                                                                      
+                                                                                                     Order by created_at DESC " . $condition);
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-																		$query = $this->conn->query("SELECT * FROM 
+    public function getDataRtsItems($user_id, $page, $limit, $order_id)
+    {
+
+        $condition = '';
+        if ($page != '' && $limit != '')
+        {
+            if ($page == 1)
+            {
+                $p = 0;
+            }
+            else
+            {
+                $p = ($page - 1) * $limit;
+            }
+
+            $condition .= "LIMIT " . $limit . " OFFSET " . $p . " ";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 																									history_order_details
                                                                                                     where order_id = '" . $order_id . "'
-                                                                                                     Order by created_at DESC " . $condition);																									
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																														 	
-																									 						
-                                                                         public function getProductItem($product_id)
-                                                                         {
-                                                                         
-                                                                         
-                                                                         
-                                                                         
-                                                                         $query = $this->conn->query("SELECT * FROM 
+                                                                                                     Order by created_at DESC " . $condition);
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductItem($product_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 products AS tp
 LEFT JOIN product_variants AS pv 
 ON tp.ProductID = pv.ProductID 
@@ -8258,21 +9559,23 @@ ON pv.ProductVariantID = ipv.ProductVariantID
 									
 										
                                          ");
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     public function getProductItems()
     {
 
-
-
-
-        $query = $this->conn->query("SELECT * FROM 
+        $query = $this
+            ->conn
+            ->query("SELECT * FROM 
 products AS tp
 LEFT JOIN product_variants AS pv 
 ON tp.ProductID = pv.ProductID 
@@ -8288,20 +9591,22 @@ ON pv.ProductVariantID = ipv.ProductVariantID
 										
                                          ");
 
-        if (mysqli_num_rows($query) > 0) {
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-																									 
-																									    public function getImageVariant($product_id)
-                                                                         {
-                                                                         
-                                                                         
-                                                                         
-                                                                         
-                                                                         $query = $this->conn->query("SELECT 
+
+    public function getImageVariant($product_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
 ipv.ProductVariantID ,
 ipv.ImageProductVariantID,
 ipv.ImageProductVariantName,
@@ -8328,19 +9633,23 @@ order by ipv.isDefault = 1 DESC
 									
 										
                                          ");
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																									 
-																				    public function getImagesProducts($ProductID)
-                                                                         {
 
-																			$query = $this->conn->query("
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getImagesProducts($ProductID)
+    {
+
+        $query = $this
+            ->conn
+            ->query("
 																			
 																			SELECT 
 																			ip.ImageProductName
@@ -8353,22 +9662,23 @@ order by ipv.isDefault = 1 DESC
 									
 										
 																				");
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																													 
-																									 
-																									   public function getProductVariant($product_id)
-                                                                         {
-                                                                         
-                                                                         
-                                                                         
-                                                                         
-                                                                         $query = $this->conn->query("SELECT 
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductVariant($product_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
 *
 
 FROM 
@@ -8388,22 +9698,23 @@ order by pv.isDefault = 1 DESC
 									
 										
                                          ");
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-																									 
-																									 
-																									 			   public function getProductVariantDetail($product_id)
-                                                                         {
-                                                                         
-                                                                         
-                                                                         
-                          
-                                                                         $query = $this->conn->query("SELECT 
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getProductVariantDetail($product_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                   pvd.ProductVariantDetailID,
                             pvd.ProductVariantID,
                             pvd.SkuID,
@@ -8435,40 +9746,46 @@ ON pv.ProductID = tp.ProductID
 							order by pvd.ProductVariantDetailName
 										
                                          ");
-                                                                                                     
-                                                                                                     if (mysqli_num_rows($query) > 0) {
-                                                                                                     return $query;
-                                                                                                     } else {
-                                                                                                     return null;
-                                                                                                     }
-                                                                                                     }
-                                                                                                     
-                                                                                                     
-                                                                                                     
- public function getDataCategory($user_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getDataCategory($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                    *
 						
                                     FROM
                                         master_category  as a
 							
 								        ");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-	public function getDataBrand($user_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT
+    public function getDataBrand($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                    *
 						
                                     FROM
@@ -8476,173 +9793,211 @@ ON pv.ProductID = tp.ProductID
                                         
 							
 								        ");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-	public function getDataColor($user_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT 
+    public function getDataColor($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                      *
 									
                                     FROM
                                         master_color 
 				                        
 										ORDER BY ColorID DESC");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-                                    public function getOrderNoCurrent($user_id)
-                                    {
-                                    
-                                    
-                                    $query = $this->conn->query("SELECT
+
+    public function getOrderNoCurrent($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                                                 OrderNO
                                                                 
                                                                 FROM
                                                                 history_orders
                                                                 
                                                                 ORDER BY OrderNO DESC LIMIT 1");
-                                                                
-                                                                if (mysqli_num_rows($query) > 0) {
-                                                                return $query;
-                                                                } else {
-                                                                return null;
-                                                                }
-                                                                
-                                                                }
-                                                                
-                 
-                                    public function getProductsID($user_id)
-                                    {
-                                    
-                                    
-                                    $query = $this->conn->query("SELECT
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getProductsID($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                                                 ProductID
                                                                 
                                                                 FROM
                                                                 products
                                                                 
                                                                 ORDER BY ProductID DESC LIMIT 1");
-                                                                
-                                                                if (mysqli_num_rows($query) > 0) {
-                                                                return $query;
-                                                                } else {
-                                                                return null;
-                                                                }
-                                                                
-                                                                }
-                                                                
-	public function getDataVariants($user_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public function getDataVariants($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                      *
 									
                                     FROM
                                         variants
 				                        
 										ORDER BY VariantID DESC");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-                                    
-                                    public function getDataVariantValues($user_id , $variant_id)
-                                    {
-                                    if ($variant_id != null){
-                                    $conditions = " where VariantID =   '" . $variant_id  . "' ORDER BY VariantID DESC";
-                                    }else {
-                                    $conditions = " ORDER BY VariantID DESC";
-                                    }
-                                    
-                                    $query = $this->conn->query("SELECT
+
+    public function getDataVariantValues($user_id, $variant_id)
+    {
+        if ($variant_id != null)
+        {
+            $conditions = " where VariantID =   '" . $variant_id . "' ORDER BY VariantID DESC";
+        }
+        else
+        {
+            $conditions = " ORDER BY VariantID DESC";
+        }
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                                                 *
                                                                 
                                                                 FROM
                                                                 variant_values                                                        
                                                                 " . $conditions);
-                                                              
-                                                                if (mysqli_num_rows($query) > 0) {
-                                                                return $query;
-                                                                } else {
-                                                                return null;
-                                                                }
-                                                                }
-                                                                
-                                                                                                            
-                                                                
-	public function getDataSize($user_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT 
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getDataSize($user_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT 
                                      *
 									
                                     FROM
                                         master_size 
 				                        
 										ORDER BY SizeID DESC");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	 public function getDataSubCategory1($category_id)
+    public function getDataSubCategory1($category_id)
     {
-	
 
-        $query = $this->conn->query("SELECT
+        $query = $this
+            ->conn
+            ->query("SELECT
                                       *
                                     FROM
                                         sub_category1
 									WHERE CategoryID = '" . $category_id . "' 
 										ORDER BY SubCategoryID1 DESC");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
-	
-	 public function getDataSubCategory2($sub_category_id)
-    {
-	
 
-        $query = $this->conn->query("SELECT
+    public function getDataSubCategory2($sub_category_id)
+    {
+
+        $query = $this
+            ->conn
+            ->query("SELECT
                                       *
                                     FROM
                                         sub_category2
 									WHERE SubCategoryID1 = '" . $sub_category_id . "' 
 										ORDER BY SubCategoryID2 DESC");
-										
-         if (mysqli_num_rows($query) > 0) {
+
+        if (mysqli_num_rows($query) > 0)
+        {
             return $query;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
     public function insertDataAsuransi($user_id, $id_master_asuransi, $NoPolis, $StartDate, $EndDate, $PackageName, $Benefit, $JenisAsuransi)
     {
-        $insert = $this->conn->query("INSERT INTO master_users_data_asuransi 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO master_users_data_asuransi 
 									(UserID, 
 									id_master_asuransi, 
 									NoPolis,
@@ -8667,9 +10022,12 @@ ON pv.ProductID = tp.ProductID
 									'1'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -8678,45 +10036,37 @@ ON pv.ProductID = tp.ProductID
     {
         $bulan = substr($bulan, 3, 3);
 
-        if ($bulan == "Jan")
-            $bul = "01";
-        elseif ($bulan == "Feb")
-            $bul = "02";
-        elseif ($bulan == "Mar")
-            $bul = "03";
-        elseif ($bulan == "Apr")
-            $bul = "04";
-        elseif ($bulan == "Mei")
-            $bul = "05";
-        elseif ($bulan == "Jun")
-            $bul = "06";
-        elseif ($bulan == "Jul")
-            $bul = "07";
-        elseif ($bulan == "Agt")
-            $bul = "08";
-        elseif ($bulan == "Sep")
-            $bul = "09";
-        elseif ($bulan == "Okt")
-            $bul = "10";
-        elseif ($bulan == "Nov")
-            $bul = "11";
-        elseif ($bulan == "Des")
-            $bul = "12";
+        if ($bulan == "Jan") $bul = "01";
+        elseif ($bulan == "Feb") $bul = "02";
+        elseif ($bulan == "Mar") $bul = "03";
+        elseif ($bulan == "Apr") $bul = "04";
+        elseif ($bulan == "Mei") $bul = "05";
+        elseif ($bulan == "Jun") $bul = "06";
+        elseif ($bulan == "Jul") $bul = "07";
+        elseif ($bulan == "Agt") $bul = "08";
+        elseif ($bulan == "Sep") $bul = "09";
+        elseif ($bulan == "Okt") $bul = "10";
+        elseif ($bulan == "Nov") $bul = "11";
+        elseif ($bulan == "Des") $bul = "12";
 
         return $bul;
     }
 
     public function updateDataAsuransi($id, $id_master_asuransi, $NoPolis, $StartDate, $EndDate, $PackageName, $Benefit, $JenisAsuransi)
     {
-        if ($StartDate != "") {
+        if ($StartDate != "")
+        {
             $StartDate = substr($StartDate, 7, 4) . '-' . $this->gantiBulan($StartDate) . '-' . substr($StartDate, 0, 2);
         }
 
-        if ($EndDate != "") {
+        if ($EndDate != "")
+        {
             $EndDate = substr($EndDate, 7, 4) . '-' . $this->gantiBulan($EndDate) . '-' . substr($EndDate, 0, 2);
         }
 
-        $update = $this->conn->query("UPDATE master_users_data_asuransi SET 
+        $update = $this
+            ->conn
+            ->query("UPDATE master_users_data_asuransi SET 
 									id_master_asuransi 		= '" . $id_master_asuransi . "',
 									NoPolis 		= '" . $NoPolis . "',
 									StartDate 		= '" . $StartDate . "',
@@ -8727,10 +10077,13 @@ ON pv.ProductID = tp.ProductID
 									ModifiedDate 		= '" . $this->get_current_time() . "'
 								WHERE 
 									id = '" . $id . "' ");
-        if ($update) {
+        if ($update)
+        {
             return true;
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -8738,7 +10091,9 @@ ON pv.ProductID = tp.ProductID
     public function getDetailDataAsuransi($id)
     {
 
-        $update = $this->conn->query("SELECT
+        $update = $this
+            ->conn
+            ->query("SELECT
                 master_users_data_asuransi.id,
                 master_users_data_asuransi.UserID,
                 master_users_data_asuransi.id_master_asuransi,
@@ -8789,10 +10144,13 @@ ON pv.ProductID = tp.ProductID
                 LEFT JOIN master_asuransi ON master_asuransi.id = master_users_data_asuransi.id_master_asuransi 
             WHERE
                 master_users_data_asuransi.id = '" . $id . "'");
-        if ($update) {
+        if ($update)
+        {
             return $update;
 
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -8800,21 +10158,28 @@ ON pv.ProductID = tp.ProductID
     public function deleteCartDetailByUserID($user_id, $CartDetailID)
     {
 
-        $update = $this->conn->query("delete from  cart_details
+        $update = $this
+            ->conn
+            ->query("delete from  cart_details
 									WHERE 
 										UserID = '" . $user_id . "' and CartDetailID = '" . $CartDetailID . "'");
 
-        if ($update) {
-     
+        if ($update)
+        {
+
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function selectContactDetailForBloodRequest($UserID)
     {
-        $q = $this->conn->query("SELECT
+        $q = $this
+            ->conn
+            ->query("SELECT
                                     a.PatientName as EmergencyContactName,
                                     a.PatientID,
                                     a.Telp as EmergencyContactTelp,
@@ -8829,9 +10194,12 @@ ON pv.ProductID = tp.ProductID
 								 AND 
 								 a.Active = 1");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -8839,7 +10207,9 @@ ON pv.ProductID = tp.ProductID
     public function sendBloodRequest($UserID, $nama, $JenisKelamin, $Umur, $Tinggi, $Berat, $JenisGolonganDarah, $Rhesus, $Alamat, $Phone, $Keterangan, $Jumlahcc, $latitude, $longitude)
     {
 
-        $insert = $this->conn->query("INSERT INTO blood_request 
+        $insert = $this
+            ->conn
+            ->query("INSERT INTO blood_request 
 									(Nama, 
 									Gender, 
 									Umur,
@@ -8874,15 +10244,21 @@ ON pv.ProductID = tp.ProductID
 									'1'
 									) ");
 
-        if ($insert) {
+        if ($insert)
+        {
 
             //check apakah ada nama user yang sama dengan UserID tersebut
             $firstname = explode(' ', trim($nama));
 
-            $check_master_user = $this->conn->query("SELECT UserID FROM master_users where UserID = '" . $UserID . "' AND FirstName LIKE '%" . $firstname[0] . "%'");
-            if (mysqli_num_rows($check_master_user) > 0) {
+            $check_master_user = $this
+                ->conn
+                ->query("SELECT UserID FROM master_users where UserID = '" . $UserID . "' AND FirstName LIKE '%" . $firstname[0] . "%'");
+            if (mysqli_num_rows($check_master_user) > 0)
+            {
                 //update master_user yang UserID nya sana dengan value $UserID
-                $update_master_user = $this->conn->query("UPDATE master_users SET 
+                $update_master_user = $this
+                    ->conn
+                    ->query("UPDATE master_users SET 
                                     Weight 		        = '" . $Berat . "',
                                     Height 		        = '" . $Tinggi . "',
                                     JenisGolonganDarah 	= '" . $JenisGolonganDarah . "',
@@ -8891,11 +10267,18 @@ ON pv.ProductID = tp.ProductID
 								WHERE 
 									UserID              = '" . $UserID . "' ");
                 return true;
-            } else {
+            }
+            else
+            {
                 //update master_patient atau buat baru pasien
-                $check_master_patient = $this->conn->query("SELECT UserID FROM master_patients where UserID = '" . $UserID . "' AND PatientName LIKE '%" . $nama . "%'");
-                if (mysqli_num_rows($check_master_patient) > 0) {
-                    $update_master_user = $this->conn->query("UPDATE master_patients SET 
+                $check_master_patient = $this
+                    ->conn
+                    ->query("SELECT UserID FROM master_patients where UserID = '" . $UserID . "' AND PatientName LIKE '%" . $nama . "%'");
+                if (mysqli_num_rows($check_master_patient) > 0)
+                {
+                    $update_master_user = $this
+                        ->conn
+                        ->query("UPDATE master_patients SET 
                                     Weight 		        = '" . $Berat . "',
                                     Height 		        = '" . $Tinggi . "',
                                     JenisGolonganDarah 	= '" . $JenisGolonganDarah . "',
@@ -8906,9 +10289,13 @@ ON pv.ProductID = tp.ProductID
 									UserID              = '" . $UserID . "'
 									AND PatientName LIKE '%" . $nama . "%' ");
                     return true;
-                } else {
+                }
+                else
+                {
                     //insert data master_patient baru
-                    $insert_master_patient = $this->conn->query("INSERT INTO master_patients 
+                    $insert_master_patient = $this
+                        ->conn
+                        ->query("INSERT INTO master_patients 
 										(PatientName,
 										Telp,
 										UserID,
@@ -8934,21 +10321,28 @@ ON pv.ProductID = tp.ProductID
 										'" . $Alamat . "',
 										'" . $this->get_current_time() . "'
 										) ");
-                    if($insert_master_patient){
+                    if ($insert_master_patient)
+                    {
                         return true;
-                    } else{
+                    }
+                    else
+                    {
                         return false;
                     }
                 }
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public function getUserFamily($user_id)
     {
-        $q = $this->conn->query("SELECT 
+        $q = $this
+            ->conn
+            ->query("SELECT 
                     IFNULL( PatientName, '' ) AS PatientName,
                 IFNULL( Gender, '' ) AS Gender,
                 IFNULL( Age, '' ) AS Age,
@@ -8968,9 +10362,12 @@ ON pv.ProductID = tp.ProductID
                 WHERE
                     UserID = " . $user_id . " ");
 
-        if (mysqli_num_rows($q) > 0) {
+        if (mysqli_num_rows($q) > 0)
+        {
             return $q;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

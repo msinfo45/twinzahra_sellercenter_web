@@ -38,6 +38,7 @@
 
   //mengubah data json menjadi data array asosiatif
   $result=json_decode($content,true);
+  //echo json_encode($result);
   				if ($result['total_rows'] > 0) {
 					
 					  foreach($result['data'] as $DataProduct)
@@ -74,7 +75,7 @@
                             echo '</td>';
 
                             echo'<td>';
-                            echo $DataProduct['Price'] * $DataProduct['Quantity'] ;
+                            echo $DataProduct['SubTotal'] ;
                             echo '</td>';
 					
 

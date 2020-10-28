@@ -38,6 +38,112 @@ if (isset($content) && $content != "") {
 
 
 	
+	 if ($content == "add_cart") {
+        $modeHeader = 0;   
+        $post = json_decode(file_get_contents("php://input"), true);
+        $user_id = $post['UserID'];	
+		$sku_id = $post['SkuID'];
+		$token_session = $post['TokenSession'];		
+		//$sku_id = "WK-HTM-AB-S-HTM-39";
+	//Get Value For History Order details from post
+
+       if (isset($sku_id)) {
+       	$getData = $db->checkProductBySKU($sku_id);
+
+ if ($getData != null) {
+
+       		while ($row = $getData->fetch_assoc()) {
+       			$rows[] = $row;
+       		}
+
+
+		foreach ($rows as $obj) {
+							
+			$product_id =$obj['ProductID'];
+			$price =$obj['PriceRetail'];
+			$stock =$obj['Stock'];
+			$quantity = "1";
+			$product_variant_id =$obj['ProductVariantID'];
+			$product_variant_detail_id =$obj['ProductVariantDetailID'];
+		
+
+
+		}
+		
+
+if ($stock > 0) {
+	
+$createdCart = $db->createCart($token_session,$customer_id, $user_id ,$firstname , $lastname , $grand_total , $item_count);
+
+ //jika produk berhasil
+	if ($createdCart != null) {
+				
+	////while ($id = $createdCart->fetch_assoc()) {
+       	//		$ids[] = $id;
+
+       //}
+
+
+$cart_id = $createdCart;
+//echo $createdCart;die;
+	$created = $db->createCartDetail($cart_id , $user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id, $product_variant_detail_id);
+
+	if ($created != null) {
+
+	$return = array(
+	"status" => 200,
+	"total_rows" => 1,
+	"message" => "Produk berhasil ditambahkan kekeranjang",
+	"data" => $price
+	);
+
+
+}
+	
+								
+								
+	//jika produk gagal	
+	} else {
+	$return = array(
+	"status" => 404,
+	"message" => "Gagal saat menambahkan ke keranjang"
+	);
+	}
+
+
+		
+						
+}else{
+
+$return = array(
+	"status" => 404,
+	"message" => "Stok Kosong"
+	);
+
+}
+
+							
+
+	
+                    } else {
+                        $return = array(
+                            "status" => 404,
+                            "message" => "Produk tidak ada di database"
+                        );
+                    }
+					
+			
+		//Jika user id tidak ada//	
+       } else {
+           $return = array(
+               "status" => 404,
+               "message" => "Sku tidak boleh kosong"
+            );
+        }
+        echo json_encode($return);
+    }
+
+
 	 if ($content == "add_cart_detail") {
         $modeHeader = 0;   
         $post = json_decode(file_get_contents("php://input"), true);
@@ -62,7 +168,7 @@ if (isset($content) && $content != "") {
 							$quantity = "1";
 							$product_variant_id =$obj['ProductVariantID'];
 							$product_variant_detail_id =$obj['ProductVariantDetailID'];
-							
+				
 							if ($stock > 0) {
 	
 							$created = $db->createCartDetail($user_id, $sku_id ,$product_id , $price , $quantity , $product_variant_id, $product_variant_detail_id);
@@ -140,7 +246,7 @@ if (isset($content) && $content != "") {
                             while ($row = $getData->fetch_assoc()) {										
 						
                                 $rows[] = $row;				
-	
+	 							$sub_total[] = $row['SubTotal'];	
 							
                             }
 							
@@ -148,11 +254,13 @@ if (isset($content) && $content != "") {
 
                             $total = mysqli_num_rows($getData);
 
+    						$sub_total = array_sum($sub_total);
 
                             $return = array(
                                 "status" => 200,
                                 "message" => "ok",
                                 "total_rows" => $total,
+                                "sub_total" => $sub_total,
                                 "data" => $rows
                             );
                         } else {
@@ -903,6 +1011,7 @@ if (isset($content) && $content != "") {
 				
 				
 				
+
 				 if ($content == "created_order") {
         $modeHeader = 0;   
         $post = json_decode(file_get_contents("php://input"), true);
@@ -913,11 +1022,13 @@ if (isset($content) && $content != "") {
 		
 					$marketplace = $post['marketplace']  ;
 					$order_id = $post['order_id']  ;
+					$order_number = $post['order_id']  ;
 					$merchant_name = $post['merchant_name']  ;
 					$customer_first_name = $post['name']  ;
 					$shipping_provider = $post['shipping_provider']  ;
 					$tracking_code = $post['tracking_code']  ;
 					$shipping_amount = $post['shipping_amount']  ;
+					$payment_method = $post['payment_method']  ;
 					$tracking_code_pre = $post['tracking_code_pre']  ;
 					$remarks = $post['remark']  ;
 					$action = $post['action']  ;
@@ -934,7 +1045,7 @@ if (isset($content) && $content != "") {
 				
 					if (isset($user_id) && isset($order_id) && isset($marketplace) ) {
 						
-					$getDataCartDetail = $db->checkCartDetailByUserID($user_id);
+					$getDataCartDetail = $db->checkCart($user_id , $token_session);
 						
 					if ($getDataCartDetail != null) {
 
@@ -946,10 +1057,11 @@ if (isset($content) && $content != "") {
 					"order_id" =>$order_id ,
 					"name" =>$rows['ProductName'],
 					"sku" =>$rows['SKU'] ,
-					"paid_price" =>$rows['PriceSale'] ,
-					"item_price" =>$rows['PriceSale'] ,
-					"Quantity" =>$rows['Quantity'] ,
+					"paid_price" =>$rows['Price'] ,
+					"item_price" =>$rows['Price'] ,
+					"qty" =>$rows['Quantity'] ,
 					"variation" =>$rows['ProductVariantName'] . $rows['ProductVariantDetailName'] ,
+
 					"shipment_provider" =>$shipping_provider, 
 					"tracking_code_pre" =>$tracking_code_pre, 
 					"tracking_code" =>$tracking_code, 
@@ -965,7 +1077,7 @@ if (isset($content) && $content != "") {
 
 	
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/lazada.php?request=get_order');
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/lazada.php?request=get_order'));
 					$payloadItem = json_encode( array( "order_id"=> $order_id,
 					"merchant_name"=> $merchant_name) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -1005,7 +1117,8 @@ if (isset($content) && $content != "") {
 					
 					//echo json_encode($order_number);die;
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, 'http://localhost/api/orders.php?request=get_order_items');
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
+
 					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1199,6 +1312,175 @@ if (isset($content) && $content != "") {
                "message" => "Order Number belum terisi"
             );
         }
+        echo json_encode($return);
+    }
+
+
+
+
+     if ($content == "created_kasir") {
+        $modeHeader = 0;   
+        $post = json_decode(file_get_contents("php://input"), true);
+		
+		//Get Value For History Order from post
+       
+	
+					$token_session = $post['TokenSession']  ;
+					$marketplace = $post['marketplace']  ;
+					$order_id = $post['order_id']  ;
+					$order_number = $post['order_id']  ;
+					$merchant_name = $post['merchant_name']  ;
+					$customer_first_name = $post['name']  ;
+					$shipping_provider = $post['shipping_provider']  ;
+					$tracking_code = $post['tracking_code']  ;
+					$shipping_amount = $post['shipping_amount']  ;
+					$payment_method = $post['payment_method']  ;
+					$tracking_code_pre = $post['tracking_code_pre']  ;
+					$remarks = $post['remark']  ;
+					$action = $post['action']  ;
+					
+
+					$user_id = 5;
+			
+				
+					if (isset($user_id) && isset($order_id) && isset($marketplace) ) {
+						
+					$getDataCartDetail = $db->checkCart($user_id , $token_session);
+						
+					if ($getDataCartDetail != null) {
+
+                    while ($row = $getDataCartDetail->fetch_assoc()) {					
+						
+                    $rows = $row;				
+					$cart_id = $row['CartID'];
+					$variant_details[] = array(
+					"order_id" =>$order_id ,
+					"name" =>$rows['ProductName'],
+					"sku" =>$rows['SKU'] ,
+					"paid_price" =>$rows['Price'] ,
+					"item_price" =>$rows['Price'] ,
+					"qty" =>$rows['Quantity'] ,
+					"variation" =>$rows['ProductVariantName'] . " " . $rows['ProductVariantDetailName'] ,
+					"shipment_provider" =>$shipping_provider, 
+					"tracking_code_pre" =>$tracking_code_pre, 
+					"tracking_code" =>$tracking_code, 
+					"shipping_amount" =>$shipping_amount, 
+					"product_main_image" =>$rows['ImageProductVariantName'] ,
+					"status" =>2
+					);
+					
+                   }
+               }
+					
+		
+            $getData = $db->checkHistoryOrderByOrder($order_id , $user_id);
+			
+			if ($getData == null) {
+					
+				//Isi History Orders
+			
+				$createHistoryOrders = $db->createHistoryOrders(
+					$order_id,
+					$order_number,
+					$user_id,
+					$marketplace,
+					$branch_number,
+					$warehouse_code,
+					$customer_first_name,
+					$customer_last_name,
+					$price,
+					$items_count,
+					$payment_method,
+					$voucher,
+					$voucher_code,
+					$voucher_platform,
+					$voucher_seller,
+					$gift_option,
+					$gift_message,
+					$shipping_fee,
+					$shipping_fee_discount_seller,
+					$shipping_fee_discount_platform,
+					$promised_shipping_times,
+					$national_registration_number,
+					$tax_code,
+					$extra_attributes,
+					$remarks,
+					$delivery_info,
+					$statuses,
+					$created_at,
+					$updated_at);
+			 
+
+                  
+			
+               //jika produk berhasil
+			  if ($createHistoryOrders == true) {
+				  
+			
+				$variant_details = json_encode($variant_details, true);
+				 
+				$createHistoryOrderDetails = $db->createHistoryOrderDetails(
+				$order_id , $variant_details);
+				 
+		
+               				 
+				if ($createHistoryOrderDetails == true) {
+		
+				$updateStokBySKU = $db->updateStokBySKU($variant_details);
+				
+				$deleteCartDetailByUser = $db->deleteCartDetailByUser($user_id , $cart_id);
+				   
+				
+				 $return = array(
+                             "status" => 200,
+                            "message" => "Data berhasil disimpan",
+							"data" => $createHistoryOrderDetails
+                         );
+						   
+						   
+                }else{
+					
+							$return = array(
+                             "status" => 404,
+                             "message" => "Gagal menyimpan data produk",
+							"data" => []
+                           );
+					
+				}
+				
+				//jika produk gagal	
+                } else {
+                  $return = array(
+                       "status" => 404,
+                     "message" => "Gagal meyimpan data produk"
+                    );
+                }
+				
+				 
+				
+				
+                    } else {
+                        $return = array(
+                            "status" => 404,
+                            "message" => "Order Double"
+                        );
+                    }
+					
+					
+					
+					}else{
+
+
+					$return = array(
+                     "status" => 404,
+                     "message" => "Anda belum memilih Marketplace"
+                    );
+
+
+					}						
+			
+			
+	
         echo json_encode($return);
     }
 	

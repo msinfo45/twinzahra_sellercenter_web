@@ -1610,3 +1610,36 @@ CRITICAL - 2020-10-27 10:18:46 --> syntax error, unexpected '<'
 #4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
 #6 {main}
+CRITICAL - 2020-10-27 20:01:36 --> Undefined index: total_rows
+#0 C:\xampp\htdocs\twinzahra\app\Views\kasir\modal\modal_search_product.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 42, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(525): CodeIgniter\View\View->render('kasir/modal/mod...', NULL, true)
+#3 C:\xampp\htdocs\twinzahra\app\Views\kasir\index.php(534): CodeIgniter\View\View->include('kasir/modal/mod...')
+#4 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('kasir/index', Array, true)
+#6 C:\xampp\htdocs\twinzahra\app\Controllers\Kasir.php(7): view('kasir/index')
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Kasir->index()
+#8 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir))
+#9 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-10-27 21:19:11 --> Trying to get property 'total_rows' of non-object
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products.php(126): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 126, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(15): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-27 22:57:07 --> Array to string conversion
+#0 C:\xampp\htdocs\twinzahra\app\Views\kasir\view\load_item_products.php(41): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('kasir/view/load...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Kasir.php(15): view('kasir/view/load...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Kasir->load_item_products()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

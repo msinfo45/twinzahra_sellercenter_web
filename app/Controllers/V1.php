@@ -48,6 +48,16 @@ class v1 extends BaseController
 		
 	}
 
+		public function orders()
+
+	{
+		
+		
+	return view('v1/orders');
+
+		
+	}
+
 
 	//--------------------------------------------------------------------
 

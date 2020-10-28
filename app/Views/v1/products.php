@@ -26,9 +26,12 @@ $url='https://api.lazada.co.id/rest';
 	
 
 //-------------------------------------- API Function Start Here ----------------------------------------//
+$content = "";
 
-//Check request content
-$content = $_GET['request'];
+if (isset($_GET['request'])) {
+    $content = $_GET['request'];
+}
+
 
 if (isset($content) && $content != "") {
 
@@ -285,7 +288,7 @@ include "public/models/Products_Model.php";
 //                    $user_id = $userid_header;
                     $user_id = null;
 					$product_id = $post['ProductID'];
-				//$product_id= 1;
+				$product_id= 1;
 						
 						$rowProductVariant =  array();
 						$rowImageProductVariant =  array();

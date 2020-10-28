@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="modal-body">
+              
 
 
                     <span id="success_message"></span>
@@ -36,8 +36,7 @@ curl_close($ch);
 $result=json_decode($content,true);
 
 
-echo'
-                        <table id="example2" class="table table-bordered table-hover ">
+echo' <table id="example2" class="table table-bordered table-hover ">
                             <tbody>';
                             if ($result['total_rows'] > 0) {
 
@@ -48,7 +47,7 @@ echo'
 
                                         <div class="filtr-item col-sm-1" data-category="1" data-sort="'.$DataProduct['ProductName'].'">
                                             <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
-                                                <img src="'.$DataProduct['ImageProductName'].'" class="img-fluid mb-2" alt="image"/>
+                                                <img src="'.$DataProduct['ImageProductName'].'" class="img-thumbnail mb-2" alt="image"/>
                                             </a>
                                         </div>';
 
@@ -102,7 +101,7 @@ echo'
                                     <th style="width:20%">Variant</th>
                                     <th style="width:25%">Sku</th>
                                     <th style="width:20%">Harga Satuan</th>
-                                    <th style="width:20%">Harga Reseller</th>
+                                
                                     <th style="width:5%">Stok</th>
                                     <th style="width:10%">Barcode</th>
                                 </tr>';
@@ -136,11 +135,7 @@ echo'
                                             echo '</div>';
                                         echo '</td>';
 
-                                    echo '<td> ';
-                                        echo '<div class="css-11v3zrg">';
-                                            echo $ProductVariantDetails->PriceReseller;
-                                            echo '</div>';
-                                        echo '</td>';
+
 
 
                                     echo '<td> ';
@@ -194,7 +189,7 @@ echo'</tbody>
                     <div class="modal-footer">
 
                         <button align="absolute" type="button"  class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    </div>
+                 
                 </div>
             </div>
         </div>

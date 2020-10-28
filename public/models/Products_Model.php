@@ -149,46 +149,106 @@ if ($search != null) {
 
 
 
-			 public function getProductItem($user_id, $product_id)
-    {
-		
-		   
-		   
-			   
-			   $query = $this->conn->query("SELECT tp.ProductID,
-										pv.ProductVariantID,
-										pvd.SkuID,
-										pvd.Barcode,
-										tp.ProductName,									
-										pv.ProductVariantName,
-										pvd.ProductVariantDetailName,
-										pvd.PriceRetail,
-										pvd.PriceReseller,
-										pvd.Stock AS Stock,
-										ipv.ImageProductVariantName AS ImageVariantProduct
-										FROM products AS tp
-										LEFT JOIN product_variant_details AS pvd
-										ON tp.ProductID = pvd.ProductID
-										LEFT JOIN product_variants AS pv
-										ON pvd.ProductVariantID = pv.ProductVariantID
-										LEFT JOIN image_product_variants AS ipv
-										ON pv.ProductVariantID = ipv.ProductVariantID
-										where tp.UserID =  '" . $user_id . "' and tp.ProductId = '" . $product_id . "' and  pv.Status= 1 AND  pvd.Status= 1
-                                        Order by tp.ProductID and pvd.ProductVariantDetailName DESC");
-			   
-			   
-		   
-          
-																		 
-												 
-																		 
-			if (mysqli_num_rows($query) > 0) {
-            return $query;
-			} else {
-            return null;
-			}
-			
-			}
+   public function getProductItem($product_id)
+{
+                                                                         
+$query = $this->conn->query("SELECT * FROM 
+products AS tp
+LEFT JOIN product_variants AS pv 
+ON tp.ProductID = pv.ProductID 
+LEFT JOIN product_variant_details AS pvd
+ON pv.ProductVariantID = pvd.ProductVariantID
+LEFT JOIN image_product_variants AS ipv
+ON pv.ProductVariantID = ipv.ProductVariantID
+WHERE (pv.ProductID = '" . $product_id . "' and ipv.isDefault = 1)
+order by pvd.SkuID ASC
+");
+
+if (mysqli_num_rows($query) > 0) {
+   return $query;
+    } else {
+     return null;
+    }
+    }
+
+
+				 
+ public function getProductVariant($product_id)
+{
+		$query = $this->conn->query("SELECT 
+										*
+									FROM 
+									product_variants AS pv
+									LEFT JOIN products AS tp
+									ON pv.ProductID = tp.ProductID
+									WHERE pv.ProductID = '" . $product_id . "'
+									order by pv.isDefault = 1 DESC
+									");
+                                                                                                     
+if (mysqli_num_rows($query) > 0) {
+return $query;
+} else {
+return null;
+}
+}
+
+
+public function getImageVariant($product_id)
+{
+   $query = $this->conn->query("SELECT 
+								ipv.ProductVariantID ,
+								ipv.ImageProductVariantID,
+								ipv.ImageProductVariantName,
+								ipv.isDefault
+								FROM 
+								image_product_variants AS ipv
+								LEFT JOIN product_variants AS pv
+								ON ipv.ProductVariantID = pv.ProductVariantID
+								LEFT JOIN products AS tp
+								ON pv.ProductID = tp.ProductID
+								WHERE pv.ProductID = '" . $product_id . "'
+								order by ipv.isDefault = 1 DESC
+								 ");
+                                                                                                     
+if (mysqli_num_rows($query) > 0) {
+return $query;
+} else {
+return null;
+}
+}
+
+public function getProductVariantDetail($product_id)
+{
+
+$query = $this->conn->query("SELECT 
+                             pvd.ProductVariantDetailID,
+                            pvd.ProductVariantID,
+                            pvd.SkuID,
+                            pvd.ProductVariantDetailName,
+                            pvd.PriceRetail,
+                            pvd.PriceReseller,
+                            pvd.Stock,
+                            pvd.Barcode,
+                            pvd.isDefault          
+							FROM 
+							product_variant_details AS pvd
+							LEFT JOIN product_variants AS pv
+							ON pvd.ProductVariantID = pv.ProductVariantID
+							LEFT JOIN products AS tp
+							ON pv.ProductID = tp.ProductID
+							WHERE pv.ProductID = '" . $product_id . "'
+							order by pvd.ProductVariantDetailName
+							");
+
+if (mysqli_num_rows($query) > 0) {
+return $query;
+} else {
+return null;
+}
+}
+
+
+
 
 			 public function getDataSync($user_id, $product_id)
     {
@@ -262,7 +322,23 @@ if ($search != null) {
 
     }
 
+	
+		 public function getSkus($user_id)
+		{
+		
+
+          $query = $this->conn->query("Select SkuID from product_variant_details
+										where UserID = '" . $user_id . "'");
+										
+					 
+																 
+			if (mysqli_num_rows($query) > 0) {
+            return $query;
+			} else {
+            return null;
+			}
 			
+			}
 			
 			
 		
