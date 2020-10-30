@@ -1,12 +1,20 @@
 <?php namespace App\Controllers;
+use CodeIgniter\RESTful\ResourceController;
 
-class Orders extends BaseController
+class Orders extends ResourceController
 {
-	public function index()
+
+protected $modelName = 'App\Models\Orders_Model';
+
+public function index()
 	{
 		return view('orders/index');
+		//return $this->respond($this->model->findAll());
 
 	}
+
+
+
 
 public function load_pending()
 	{
@@ -23,6 +31,8 @@ public function load_rts()
 		return view('orders/view/load_rts');
 		
 	}
+
+	
 
 
 	//--------------------------------------------------------------------

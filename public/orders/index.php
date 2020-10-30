@@ -1,7 +1,6 @@
 <?php
 
-require '../include/head.php';
-require '../include/slidebar.php';
+
 require_once "../config/config_type.php";
 //Check request content
 $content = $_GET['request'];

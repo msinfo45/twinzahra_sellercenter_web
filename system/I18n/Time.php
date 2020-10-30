@@ -105,8 +105,10 @@ class Time extends DateTime
 	public function __construct(string $time = null, $timezone = null, string $locale = null)
 	{
 		// If no locale was provided, grab it from Locale (set by IncomingRequest for web requests)
-		$this->locale = ! empty($locale) ? $locale : Locale::getDefault();
-
+		//$this->locale = ! empty($locale) ? $locale : Locale::getDefault();
+if( function_exists('locale_set_default' ) ) :
+    locale_set_default($this->config->defaultLocale ?? 'en');
+  endif; 
 		// If a test instance has been provided, use it instead.
 		if (is_null($time) && static::$testNow instanceof Time)
 		{

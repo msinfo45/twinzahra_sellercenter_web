@@ -29,19 +29,20 @@
               <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-orders-tab" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-orders-pending-tab" data-toggle="pill" href="#custom-tabs-orders-pending" role="tab" aria-controls="custom-tabs-orders-pending" aria-selected="true" >Pesanan Baru</a>
+                    <a class="nav-link active" id="custom-tabs-orders-pending-tab" data-toggle="pill" href="#custom-tabs-orders-pending-content" role="tab" aria-controls="custom-tabs-orders-pending-content" aria-selected="true" >Pesanan Baru</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-orders-readytoship-tab" data-toggle="pill" href="#custom-tabs-orders-readytoship" role="tab" aria-controls="custom-tabs-orders-readytoship" aria-selected="false" >Siap Kirim</a>
+
+                    <a class="nav-link" id="custom-tabs-orders-readytoship-tab" data-toggle="pill" href="#custom-tabs-orders-readytoship-content" role="tab" aria-controls="custom-tabs-orders-readytoship-content" aria-selected="false" >Siap Kirim</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-orders-ship-tab" data-toggle="pill" href="#custom-tabs-orders-ship" role="tab" aria-controls="custom-tabs-orders-ship" aria-selected="false" >Dalam Pengiriman</a>
+                    <a class="nav-link" id="custom-tabs-orders-ship-tab" data-toggle="pill" href="#custom-tabs-orders-ship-content" role="tab" aria-controls="custom-tabs-orders-ship-content" aria-selected="false" >Dalam Pengiriman</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-orders-done-tab" data-toggle="pill" href="#custom-tabs-orders-done" role="tab" aria-controls="custom-tabs-orders-done" aria-selected="false" >Selesai</a>
+                    <a class="nav-link" id="custom-tabs-orders-done-tab" data-toggle="pill" href="#custom-tabs-orders-done-content" role="tab" aria-controls="custom-tabs-orders-done-content" aria-selected="false" >Selesai</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-orders-filed-tab" data-toggle="pill" href="#custom-tabs-orders-filed" role="tab" aria-controls="custom-tabs-orders-filed" aria-selected="false" >Gagal</a>
+                    <a class="nav-link" id="custom-tabs-orders-filed-tab" data-toggle="pill" href="#custom-tabs-orders-filed-content" role="tab" aria-controls="custom-tabs-orders-filed-content" aria-selected="false" >Gagal</a>
                   </li>
                 </ul>
               </div>
@@ -50,32 +51,33 @@
             
                 <div class="tab-content" id="custom-tabs-orders-tabContent">
 
-                  <div class="tab-pane fade show active" id="custom-tabs-orders-pending" role="tabpanel" aria-labelledby="custom-tabs-orders-pending-tab">
+                  <div class="tab-pane fade show active" id="custom-tabs-orders-pending-content" role="tabpanel" aria-labelledby="custom-tabs-orders-pending-tab">
 
  
-              <div id="ResultPending"></div> 
+                <div id="ResultPending"></div> 
 
                   </div>
 
-                  <div class="tab-pane fade" id="custom-tabs-orders-readytoship" role="tabpanel" aria-labelledby="custom-tabs-orders-readytoship-tab">
+                  <div class="tab-pane fade" id="custom-tabs-orders-readytoship-content" role="tabpanel" aria-labelledby="custom-tabs-orders-readytoship-tab">
+
 
                   <div id="ResultReadToShip"></div> 
 
                   </div>
 
-                  <div class="tab-pane fade" id="custom-tabs-orders-ship" role="tabpanel" aria-labelledby="custom-tabs-orders-ship-tab">
+                  <div class="tab-pane fade" id="custom-tabs-orders-ship-content" role="tabpanel" aria-labelledby="custom-tabs-orders-ship-tab">
 
-                   <div id="ResultShip"></div> 
+             ship
 
                   </div>
 
-                  <div class="tab-pane fade" id="custom-tabs-orders-done" role="tabpanel" aria-labelledby="custom-tabs-orders-done-tab">
-                    
+                  <div class="tab-pane fade" id="custom-tabs-orders-done-content" role="tabpanel" aria-labelledby="custom-tabs-orders-done-tab">
+                 
                     <div id="ResultDone"></div> 
 
                   </div>
 
-                     <div class="tab-pane fade" id="custom-tabs-orders-filed" role="tabpanel" aria-labelledby="custom-tabs-orders-filed-tab">
+                     <div class="tab-pane fade" id="custom-tabs-orders-filed-content" role="tabpanel" aria-labelledby="custom-tabs-orders-filed-tab">
                     
                     <div id="ResultFiled"></div> 
 
@@ -152,7 +154,7 @@ var displayProduct = 5;
   $('#ResultReadToShip').html(createSkeleton(displayProduct));
   
     setTimeout(function(){
-      loadPending(displayProduct);
+      loadRTS(displayProduct);
     }, 0);
 
     function createSkeleton(limit){
@@ -190,49 +192,33 @@ var displayProduct = 5;
 ///
 
 //Default load
- loadPending();
+loadPending();
  //
 
- //Load Pending Order//
 $(document).on("click", "#custom-tabs-orders-pending-tab", function () {
   
  loadPending();
-
 });
-///
 
-//Load Siap Kirim//
 $(document).on("click", "#custom-tabs-orders-readytoship-tab", function () {
-  
+
  loadRTS();
-
 });
-///
 
-//Load Ship//
 $(document).on("click", "#custom-tabs-orders-ship-tab", function () {
-  
- loadPending();
 
+ //loadRTS();
 });
-///
 
-
-//Load Selesai//
 $(document).on("click", "#custom-tabs-orders-done-tab", function () {
-  
- loadPending();
-
+ 
+ //loadRTS();
 });
-///
 
-//Load Gagal//
 $(document).on("click", "#custom-tabs-orders-filed-tab", function () {
   
- loadPending();
-
+ //loadRTS();
 });
-///
 
 
 

@@ -4,8 +4,8 @@
  	function getOrders(){
 		
 
-	$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, base_url('v1/orders?request=get_orders'));
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_orders'));
 					$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "1"	
 										) );
@@ -27,9 +27,10 @@
  
  
  	function getOrderItems($DataProduct){
-		
+
+
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, base_url('v1/orders?request=get_order_items'));
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
 					$payloadItem = json_encode( array( "order_id"=> $DataProduct ) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
@@ -48,6 +49,7 @@
 	
 	 	function cekStok($sku){
 		
+
 					$chItems = curl_init();
 					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/products.php?request=cek_stok'));
 					$payloadItem = json_encode( array( "sku"=> $sku ) );
@@ -70,6 +72,7 @@
 	
 
 function getHistory($order_id){
+
 		
 					$chItems = curl_init();
 					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=cek_history'));
@@ -93,14 +96,10 @@ function getHistory($order_id){
 	
 	
 
-  $result = getOrders();
+ $result = getOrders();
 
- //echo json_encode($result);die;
+//echo json_encode($result);die;
 
- echo'<table id="TableOrders" class="table table-striped table-hover">
-	
-
-		<tbody>';
 					
 		if (count($result['data']) > 0) {
 
@@ -138,33 +137,17 @@ function getHistory($order_id){
 				$created_at = $DataProduct['created_at'] ;
 				$updated_at = $DataProduct['updated_at'] ;
 				
-				echo '<tr >';
+				echo '<div class="card" >';
 
-				
-
-    
-
-				echo'<div class="card-header mt-4">
-
-					<h6 class="card-title col-auto" >
-					'.$DataProduct['marketplace'].	'	
-					</h6>
-					<h6 class="card-title col-auto" >
-					'.$merchant_name.	'	
-					</h6> 
-					
-					'.$price.'
-					
-					
-					'.$order_number.'
-					
-					
-					'.$customer_first_name.	'	
-			
-				
-					'.$customer_last_name.	'	
+				echo'<div class="card-header">
+					<div class="row">
+					<div class="col-auto">'.$DataProduct['marketplace'].	' </div>
+					<div class="col-auto">'.$merchant_name.	'	</div>
+					<div class="col-auto">'.$price.	'	</div>
+					<div class="col-auto">'.$order_number.	'	</div>
+					<div class="col-auto">'.$customer_first_name.	'	</div>
 											
-					</div>';
+					</div></div>';
 
 		$resultItem = getOrderItems($order_id);
 		$cekHistoryOrder = getHistory($order_id);
@@ -173,33 +156,41 @@ function getHistory($order_id){
 			{
 				$resultStok = cekStok($DataOrderItems['sku']);
 
-					echo'<div  class="card-body table-bordered input-group">';
-					echo'<img class="img-product" width="80px" height="80px" src='.$DataOrderItems['product_main_image'].'>';
-					echo '<div class="css-gjyepm">';
-					echo '<a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> 
-						<div class="styPLCProductNameInfo">';
+					echo'<div class="card-body">';
+					echo'<div class="row">';
+					echo'<div  class="col-auto">';
+					echo'<img class="img-product" width="100px" height="100px" src='.$DataOrderItems['product_main_image'].'>';
+					echo ' </div>';
+
+					echo '<div class="col">';
+
+					echo '<div class="card-title"><a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> 
+						';
 					echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");	
-					echo '</div></a>';
-							
-					echo '<div class="css-11v3zrg">';
+					echo '</a></div>';
+					
+					echo ' <div class="card-text">';
+					echo '<div class="mt-1">';
 					echo $DataOrderItems['order_item_id'];
 					echo'</div>';
 							
-					echo '<div class="css-11v3zrg">';
+					echo '<div class="mt-1">';
 					echo $DataOrderItems['sku'] ;
 					echo'</div>';
 
-					echo '<div class="css-11v3zrg">';
+					echo '<div class="mt-1">';
 					echo $DataOrderItems['paid_price'];
 					echo'</div>';
 
-					echo '</div></div>';
+					echo '</div></div></div></div>';
 							
 			}
 
-					echo'<div class="card-header">
-					<h6 class="card-title">';
-					echo' <div class="d-flex">';
+
+
+					echo'<div class="card-header">';
+					echo'<div class="row">';
+					echo' <div class="col justify-content-center align-self-center">';
 
 				if ($cekHistoryOrder == null ) {
 				if ($resultStok == "") {
@@ -222,9 +213,9 @@ function getHistory($order_id){
 					echo '<span style="color:green;" class="col-auto">Pesanan sedang diproses</span>';
 
 				}	
+echo ' </div>';
 
-
-
+echo ' <div class="col-auto">';
 				if ($cekHistoryOrder == null ) {
 					if ($resultStok == 0) {			
 				
@@ -235,14 +226,18 @@ function getHistory($order_id){
 					echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';			
 					
 				}}
-				echo'</div></div></div>';				
+				echo '</div></div>';
+				
+				
+				
+				echo'</div></div>';				
 												
 						
 
 						
 
 				
-					echo'</tr>';
+					echo'</div>';
 
 				}
 				
@@ -251,8 +246,7 @@ function getHistory($order_id){
 					echo json_encode($result['message']);
 	
 		}
-					echo'</tbody>
-					</table>';
+				
 				
 
 ?>
@@ -315,7 +309,8 @@ function SendAcceptOrders(){
 		contentType: 'application/json',
 		processData: false,
 		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
-        url:'/api/orders.php?request=accept_order',
+
+    	 url:'<?= base_url('public/api/orders.php?request=accept_order') ?>',
            
             beforeSend: function () {
                 $('.btn').attr("disabled","disabled");
@@ -333,12 +328,12 @@ function SendAcceptOrders(){
 					
                     $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
 					alert(data.message);
-					 window.location.href = '/orders'; 
+					 window.location.href = '<?= base_url('orders') ?>'; 
                 }else{
 					
 					$('.statusMsg').html('<span style="color:red;"></p>'+data.message);
 					alert(data.message);
-					 window.location.href = '/orders'; 
+					 window.location.href = '<?= base_url('orders') ?>'; 
                 }
                 $('.btn').removeAttr("disabled");
                 $('#AcceptOrder .modal-body').css('opacity', '');

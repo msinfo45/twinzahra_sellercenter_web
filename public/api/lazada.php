@@ -10,7 +10,14 @@ $url='https://api.lazada.co.id/rest';
 		
 $rowsLazada = array();
 $rows = [];
+
+//Check request content
+$content = "";
+
+if (isset($_GET['request'])) {
     $content = $_GET['request'];
+}
+
     if (isset($content) && $content != "") {
         
           //Load Models
@@ -1113,7 +1120,7 @@ $rows = [];
 				
 				$return = array(
                             "status" => 200,
-							"message" => "Pesanan berhasil dikonfirmasi",
+							"message" => "Pesanan berhasil di pickup",
                             "data" => $datas
                         );	
 			}else{
@@ -1164,11 +1171,7 @@ $rows = [];
 				$delivery_type = $post['delivery_type'];
 				$tracking_number = $post['tracking_number'];
 				$merchant_name = $post['merchant_name'];
-				
-				//$order_item_ids = "[441008605132192]";
-				//$shipping_provider = "LEX ID" ;
-				//$delivery_type = "dropship" ;
-				//$merchant_name = "Twinzahra Shop";
+
 				
 				
 				
@@ -1198,7 +1201,7 @@ $rows = [];
 
 
 
-						$request = new LazopRequest('/order/pack');
+						$request = new LazopRequest('/order/rts');
 						$request->addApiParam('delivery_type', $delivery_type);
 						$request->addApiParam('order_item_ids', $order_item_ids);
 						$request->addApiParam("shipment_provider", $delivery_type);
@@ -1216,15 +1219,15 @@ $rows = [];
 				
 				$return = array(
                             "status" => 200,
-							"message" => $data->message,
-                            "data" => $response
+							//"message" => $data->message,
+                            "data" => $data
                         );	
 			}else{
 				
 				$return = array(
                             "status" => 404,
-							"message" => $data->message,
-                            "data" =>$response
+							//"message" => $data->message,
+                            "data" =>$data
                         );	
 				
 			}
@@ -1266,11 +1269,6 @@ $rows = [];
 				$merchant_name = $post['merchant_name'];
 				
 				
-				//$order_item_id = "439088831036995";
-				//$shipping_provider = "LEX ID" ;
-				//$delivery_type = "dropship" ;
-				//$tracking_number = "LXAD-2026285224";
-				
 			
 				
 				if (isset($user_id) && isset($order_item_id) ) {
@@ -1311,15 +1309,15 @@ $rows = [];
 				
 				$return = array(
                             "status" => 200,
-							"message" => $data->message,
-                            "data" => $response
+						//	"message" => $data->message,
+                            "data" => $data
                         );	
 			}else{
 				
 				$return = array(
                             "status" => 404,
-							"message" => $data->message,
-                            "data" =>$response
+							//"message" => $data->message,
+                            "data" =>$data
                         );	
 				
 			}

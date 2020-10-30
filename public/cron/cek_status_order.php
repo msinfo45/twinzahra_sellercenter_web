@@ -55,7 +55,7 @@ $url='https://api.lazada.co.id/rest';
 			$request->addApiParam('order_ids', json_encode($rowsHistory));
 			$jdecode=json_decode($c->execute($request, $accessToken));
 			$data=$jdecode->data;
-			$order_items=$jdecode->data->order_items;
+			//$order_items=$jdecode->data->order_items;
 			
 			//echo json_encode($jdecode);die;
 
@@ -75,10 +75,13 @@ $url='https://api.lazada.co.id/rest';
 			$shipment_provider =  $order_items->shipment_provider;
 			$shipping_amount =  $order_items->shipping_amount;
 			
+
+			///update status data 
+
 				if ($status == "shipped") {
 					
 				$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'http://sellercenter.twinzahra.com/api/orders.php?request=set_ship');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=set_ship');
 					$payload = json_encode( array( "order_id"=> $order_id ,
 					"created_at"=> $created_at,
 					"name"=> $name,
@@ -95,10 +98,11 @@ $url='https://api.lazada.co.id/rest';
 					$resultLazada=json_decode($lazadacontent,true);
 		
 					$status = "shipped";
+
 				}else if ($status == "delivered") {
 					
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'http://sellercenter.twinzahra.com/api/orders.php?request=set_delivery');
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=set_delivery');
 					$payload = json_encode( array( "order_id"=> $order_id ,
 					"created_at"=> $created_at,
 					"name"=> $name,
@@ -116,6 +120,10 @@ $url='https://api.lazada.co.id/rest';
 				
 					$status = "delivered";
 			
+				}else{
+
+
+
 				}
 				
 	
@@ -124,7 +132,7 @@ $url='https://api.lazada.co.id/rest';
 				
 					"order_id" => $order_id,
 					"order_number" => $order_number,
-					"msg" => $resultLazada,
+					//"msg" => $resultLazada,
 					"status" => $status
 					
 

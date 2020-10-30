@@ -1,35 +1,36 @@
  
  <?php
- 
- 	function getRts(){
+
+ 	function getOrders(){
 		
 
-	$halaman = 1;
-	$page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
-	$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-	
-	$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_rts'));
-		//$payload = json_encode( array( "Page"=> "1" ) );
-		$payload = json_encode( array( "UserID"=> "5",
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_rts'));
+					$payload = json_encode( array( "UserID"=> "5",
 										"status_id"=> "2"	
 										) );
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$content = curl_exec($ch);
-		curl_close($ch);
-		$result=json_decode($content,true);
-		return $result;
+					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$content = curl_exec($ch);
+					curl_close($ch);
+
+					//mengubah data json menjadi data array asosiatif
+					$result=json_decode($content,true);
+					
+					return $result;
+ 
+
+	
 		
 			}			
  
  
- 	function getItemsRts($DataProduct){
-		
+ 	function getOrderItems($DataProduct){
+
+
 					$chItems = curl_init();
-						curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_rts_items'));
-	
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_rts_items'));
 					$payloadItem = json_encode( array( "order_id"=> $DataProduct ) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
@@ -46,48 +47,65 @@
  
 	}
 	
-
-	
-		
-		
-		
+	 	function cekStok($sku){
 		
 
-		//mengubah data json menjadi data array asosiatif
-		
-  
+					$chItems = curl_init();
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/products.php?request=cek_stok'));
+					$payloadItem = json_encode( array( "sku"=> $sku ) );
+
+					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
+					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
+					$contentItem = curl_exec($chItems);
+					//$resultItem=json_encode($contentItem,true);
+					curl_close($chItems);
+
+					//mengubah data json menjadi data array asosiatif
+					$resultItem=json_decode($contentItem,true);
+										
+					$stock =$resultItem['data'];
+										
+					return $stock;
  
+	}
+	
 
-  $result = getRts();
+function getHistory($order_id){
 
- echo' 
-
-
-
-				<table id="TableOrders" class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="selectAll">
-									<label for="selectAll"></label>
-								</span>
-							</th>
-							<th>Produk</th>
-							<th>No Resi</th>						
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>';
-					
-					if (count($result['data']) > 0) {
-					
-					  foreach($result['data'] as $DataProduct)
-
-				{
 		
+					$chItems = curl_init();
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=cek_history'));
+					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
+
+					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
+					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
+					$contentItem = curl_exec($chItems);
+					//$resultItem=json_encode($contentItem,true);
+					curl_close($chItems);
+
+					//mengubah data json menjadi data array asosiatif
+					$resultItem=json_decode($contentItem,true);
+										
+					$data =$resultItem['data'];
+									
+					return $data;
+ 
+	}
+	
+	
+
+ $result = getOrders();
+
+//echo json_encode($result);die;
 
 					
+		if (count($result['data']) > 0) {
+
+			foreach($result['data'] as $DataProduct)
+			{
+				//Set Variable History Orders
 				//Set Variable History Orders
 				$order_id = $DataProduct['order_id'] ;
 				$order_number = $DataProduct['order_number'] ;
@@ -119,153 +137,213 @@
 				$created_at = $DataProduct['created_at'] ;
 				$updated_at = $DataProduct['updated_at'] ;
 				
-				
+				echo '<div class="card" >';
 
+				echo'<div class="card-header">
+					<div class="row">
+					<div class="col-auto">'.$DataProduct['marketplace'].	' </div>
 				
-	
-								
-				
-		
-			echo '<tr>';
-										 
-
+					<div class="col-auto">'.$price.	'	</div>
+					<div class="col-auto">'.$order_number.	'	</div>
+					<div class="col-auto">'.$customer_first_name.	'	</div>
 											
-									
+					</div></div>';
+
+		$resultItem = getOrderItems($order_id);
+		$cekHistoryOrder = getHistory($order_id);
+
+			foreach($resultItem['data'] as $DataOrderItems)
+			{
+				$resultStok = cekStok($DataOrderItems['sku']);
+
+					echo'<div class="card-body">';
+					echo'<div class="row">';
+					echo'<div  class="col-auto">';
+					echo'<img class="img-product" width="100px" height="100px" src='.$DataOrderItems['product_main_image'].'>';
+					echo ' </div>';
+
+					echo '<div class="col">';
+
+					echo '<div class="card-title"><a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> 
+						';
+					echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");	
+					echo '</a></div>';
+					
+					echo ' <div class="card-text">';
+					echo '<div class="mt-1">';
+					echo $DataOrderItems['order_item_id'];
+					echo'</div>';
+							
+					echo '<div class="mt-1">';
+					echo $DataOrderItems['sku'] ;
+					echo'</div>';
+
+					echo '<div class="mt-1">';
+					echo $DataOrderItems['paid_price'];
+					echo'</div>';
+
+					echo '</div></div></div></div>';
+							
+			}
+
+
+
+					echo'<div class="card-header">';
+					echo'<div class="row">';
+					echo' <div class="col justify-content-center align-self-center">';
+
+				if ($cekHistoryOrder == null ) {
+				if ($resultStok == "") {
+								
+					echo '<span style="color:blue;" class="col-auto">Produk belum ada di sistem</span>';
+										
+				}else if ($resultStok == 0){
+								
+					echo '<span style="color:red;" class="col-auto">Stok Kosong</span>';
+							
+								
+				}else if ($resultStok > 0){
+								
+					echo '<span style="color:green;" class="col-auto">Stok Tersedia</span>';
+								
+				}
+							
+				}else{
+
+					echo '<span style="color:green;" class="col-auto">Pesanan sedang diproses</span>';
+
+				}	
+echo ' </div>';
+
+echo ' <div class="col-auto">';
+				if ($cekHistoryOrder != null ) {
+					
+					echo'<a data-toggle="modal" data-id="'.$order_id.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Kirim</a>';			
+					
+				}
+				echo '</div></div>';
 				
-			
-							echo'<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox1" name="options[]" value="1">
-									<label for="checkbox1"></label>
-								</span>
-							</td>';
+				
+				
+				echo'</div></div>';				
+												
+						
+
+						
+
+				
+					echo'</div>';
+
+				}
+				
+		}else{
 		
-		
-			
-										  
-							echo '<td> ';
-							
-						
-										  
-							echo'<div class="col-xs-6">
-							
-							<h6 class="css-11v3zrg">
-						'.$DataProduct['marketplace'].	'	
-						</h6>
-						
-						'.$order_id.	'
-						'.$customer_first_name.	'	
-						'.$customer_last_name.	'								
-						</div>';
-					
-					
-							$resultItem = getItemsRts($order_id);
-						
-					  	
-									  foreach($resultItem['data'] as $DataOrderItems)
-
-									  {
-										  
-										  
-					
-									
-									  
-									  
-							
-							echo'<div  class="css-1cagh9d">';
-							
-							echo'
-							<img class="img-product" width="80px" height="80px" src='.$DataOrderItems['product_main_image'].'>';
-							
-							echo '<div class="css-gjyepm">';
-							
-							echo '<a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> 
-									<div class="styPLCProductNameInfo">';
-
-							echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");	
-							echo '</div></a>';
-							
-							echo '<div class="css-11v3zrg">';
-							echo $DataOrderItems['order_item_id'];
-							echo'</div>';
-							
-							echo '<div class="css-11v3zrg">';
-							echo $DataOrderItems['sku'];
-							echo'</div>';				
-						
-							echo '<div class="css-11v3zrg">';
-							echo $DataOrderItems['paid_price'];
-							echo'</div>';
-							
-							echo '</div></div>';
-							
-}
-							echo'</td>';
-							
-							
-						
-							echo'<td>';
-							
-							if ($DataOrderItems['tracking_code'] != null ) {
-								
-							echo $DataOrderItems['tracking_code'];
-								
-							}
-							
-							echo '</td>';
-							
-							
-							
-									  
-
+					echo json_encode($result['message']);
 	
+		}
+				
+				
 
-							echo '<td >';
-
-							if ($DataOrderItems['tracking_code'] != null ) {
-								
-							echo'<a  target="_blank" title="Add this item"  class="btn btn-primary" href="https://cekresi.com/?v=573182064&noresi='.$DataOrderItems['tracking_code'].'">Kirim</a>';
-							 
-								
-							}
-					
-							
-							 
-							 
 ?>
 
+
 	 
+<script>
 
-					
-					
-					
-					<?php
-					echo '</td>';
-					
-					
+$(document).on("click", ".EditOrder", function () {
+     var order_id = $(this).data('id');
+	  var name = $(this).data('name');
+	  var marketplace = $(this).data('marketplace');
 
-						
- 
-						
-						echo'</tr>';
-						}
+	  
+    $(".modal-body #order_id").val(order_id );
+	$(".modal-body #name").val(name);
+	$(".modal-body #marketplace").val(marketplace);
 
+     // As pointed out in comments, 
+     // it is unnecessary to have to manually call the modal.
+	   $('.modal-body #marketplace').attr("disabled","disabled");
+	   $('.modal-body #order_id').attr("disabled","disabled");
+		$('.modal-body #name' ).attr("disabled","disabled");
+      $('#EditOrder').modal('show');
+	  
+});
+
+
+
+$(document).on("click", ".AcceptOrder", function () {
+     var order_id = $(this).data('id');
+	 var merchant_name = $(this).data('merchant_name');
+     $("#AcceptOrder .modal-body #order_id").val( order_id );
+	$("#AcceptOrder .modal-body #merchant_name").val( merchant_name );
+
+     // As pointed out in comments, 
+     // it is unnecessary to have to manually call the modal.
+      $('#AcceptOrder').modal('show');
+});
+
+
+
+
+function SendAcceptOrders(){
+     var order_id = $('#order_id').val();
+	 var merchant_name = $('#merchant_name').val();
+   // var shipping_provider = $('#shipping_provider').val();
+    //var delivery_type = $('#delivery_type').val();
 	
-	
-	
-	}else{
+		var e = document.getElementById("shipping_providers");
+		var shipping_provider = e.options[e.selectedIndex].text;
 		
-	echo json_encode($result['message']);
-	
-	}
-	
+		var f = document.getElementById("delivery_type");
+		var delivery_type = f.options[f.selectedIndex].text;
+		
+		//alert(shipping_provider);
+        $.ajax({
+        type: 'POST',
+		dataType: 'json',
+		contentType: 'application/json',
+		processData: false,
+		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
 
-					 
-					echo'</tbody>
-				</table>';
+    	 url:'<?= base_url('public/api/orders.php?request=accept_order') ?>',
+           
+            beforeSend: function () {
+                $('.btn').attr("disabled","disabled");
+                $('#AcceptOrder .modal-body').css('opacity', '.5');
+            },
+            success:function(data){
+				
+				console.log(data.message);
+				console.log(data.status);
+				
+                if(data.status == '200'){
+					 $('#AcceptOrder #order_id').val('');
+                    $('#AcceptOrder #shipping_provider').val('');
+                    $('#AcceptOrder #delivery_type').val('');
+					
+                    $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
+					alert(data.message);
+					 window.location.href = '<?= base_url('orders') ?>'; 
+                }else{
+					
+					$('.statusMsg').html('<span style="color:red;"></p>'+data.message);
+					alert(data.message);
+					 window.location.href = '<?= base_url('orders') ?>'; 
+                }
+                $('.btn').removeAttr("disabled");
+                $('#AcceptOrder .modal-body').css('opacity', '');
 				
 				
-				
-				?>
+                
+            },
+			error: function(){
+			alert("Cannot get data");
+			}
+			
+        });
+    
+}
 
-
+</script>
+<?= $this->include('orders/modal/accept_order') ?>
+<?= $this->include('orders/modal/edit_order') ?>
