@@ -1,0 +1,516 @@
+CRITICAL - 2020-10-30 09:07:20 --> Undefined index: HTTP_TOKEN
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(1793): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 1793, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 09:08:02 --> Undefined index: HTTP_TOKEN
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(1793): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 1793, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 09:12:15 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(1529): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 1529, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 09:12:15 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "{0}". in C:\xampp\htdocs\twinzahra\system\Format\Exceptions\FormatException.php:9
+Stack trace:
+#0 C:\xampp\htdocs\twinzahra\system\Format\JSONFormatter.php(71): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(414): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(134): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\twinzahra\system\Debug\Exceptions.php(168): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-10-30 09:13:49 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(1529): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 1529, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 09:13:50 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "{0}". in C:\xampp\htdocs\twinzahra\system\Format\Exceptions\FormatException.php:9
+Stack trace:
+#0 C:\xampp\htdocs\twinzahra\system\Format\JSONFormatter.php(71): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(414): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(134): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\twinzahra\system\Debug\Exceptions.php(168): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-10-30 00:30:44 --> Undefined variable: db
+#0 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(73): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 73, Array)
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 00:33:08 --> Call to undefined method App\Models\Orders_Model::getDataOrders
+#0 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): CodeIgniter\Model->__call('getDataOrders', Array)
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 00:33:52 --> Call to a member function query() on null
+#0 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 00:36:37 --> Undefined variable: db
+#0 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 45, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 00:41:48 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 57, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(57): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 00:42:21 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::fetch_assoc()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 00:44:15 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 57, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(57): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 00:44:32 --> Call to undefined method CodeIgniter\Database\MySQLi\Connection::get()
+#0 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 00:46:31 --> syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+#0 C:\xampp\htdocs\twinzahra\system\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->requireFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\twinzahra\system\Autoloader\Autoloader.php(258): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Orde...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Orde...')
+#3 [internal function]: spl_autoload_call('App\\Models\\Orde...')
+#4 C:\xampp\htdocs\twinzahra\system\RESTful\ResourceController.php(177): class_exists('App\\Models\\Orde...')
+#5 C:\xampp\htdocs\twinzahra\system\RESTful\ResourceController.php(76): CodeIgniter\RESTful\ResourceController->setModel('App\\Models\\Orde...')
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(895): CodeIgniter\RESTful\ResourceController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(403): CodeIgniter\CodeIgniter->createController()
+#8 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2020-10-30 00:47:05 --> Undefined variable: db
+#0 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 45, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 00:50:01 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 57, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(57): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 00:50:43 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 57, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(57): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 00:53:17 --> include(App\Models\Orders_Model): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Mod...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-30 00:53:34 --> syntax error, unexpected 'protected' (T_PROTECTED)
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 01:17:35 --> syntax error, unexpected 'protected' (T_PROTECTED)
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 01:17:44 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 57, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(57): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:19:14 --> Constant expression contains invalid operations
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-10-30 01:19:16 --> Constant expression contains invalid operations
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-10-30 01:20:09 --> Undefined variable: db
+#0 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 53, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 01:20:21 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 66, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(66): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:20:46 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 66, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(66): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:22:13 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::fetch_assoc()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 01:25:09 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 68, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(68): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:26:57 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(71): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:27:22 --> mysqli_num_rows() expects parameter 1 to be mysqli_result, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mysqli_num_rows...', 'C:\\xampp\\htdocs...', 69, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(69): mysqli_num_rows(Object(CodeIgniter\Database\MySQLi\Result))
+#2 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2020-10-30 01:28:53 --> Undefined variable: query
+#0 C:\xampp\htdocs\twinzahra\app\Models\Orders_Model.php(68): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 68, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(75): App\Models\Orders_Model->getDataOrders(5, NULL, 0, 1)
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 01:29:08 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::fetch_assoc()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 01:30:00 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::result_array()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 01:30:24 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::fetch_assoc()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 01:30:42 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::result_array()
+#0 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->get_orders()
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2020-10-30 01:31:02 --> syntax error, unexpected 'as' (T_AS)
+#0 C:\xampp\htdocs\twinzahra\system\Router\Router.php(195): CodeIgniter\Router\Router->autoRoute('orders/get_orde...')
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(797): CodeIgniter\Router\Router->handle('orders/get_orde...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 01:31:39 --> syntax error, unexpected 'as' (T_AS)
+#0 C:\xampp\htdocs\twinzahra\system\Router\Router.php(195): CodeIgniter\Router\Router->autoRoute('orders/get_orde...')
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(797): CodeIgniter\Router\Router->handle('orders/get_orde...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 01:32:03 --> syntax error, unexpected 'protected' (T_PROTECTED)
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-10-30 01:32:46 --> include(App\Models\Orders_Model): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Mod...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-30 01:33:27 --> include(App\Models\Orders_Model): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Mod...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-30 01:33:53 --> syntax error, unexpected 'as' (T_AS)
+#0 C:\xampp\htdocs\twinzahra\system\Router\Router.php(195): CodeIgniter\Router\Router->autoRoute('orders')
+#1 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(797): CodeIgniter\Router\Router->handle('orders')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-10-30 01:34:35 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:34:40 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:35:53 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:37:34 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:38:30 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:38:57 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(145): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 145, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:39:35 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(226): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 226, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:40:14 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(226): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 226, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 01:43:35 --> include(App\Models\Orders_Model): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Mod...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-30 01:51:23 --> include(App\Models\Orders_Model): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(App\\Mod...', 'C:\\xampp\\htdocs...', 41, Array)
+#1 C:\xampp\htdocs\twinzahra\app\Views\v1\orders.php(41): include()
+#2 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('v1/orders', Array, true)
+#4 C:\xampp\htdocs\twinzahra\app\Controllers\V1.php(56): view('v1/orders')
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\v1->orders()
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\v1))
+#7 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-10-30 04:57:30 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 04:57:47 --> Undefined index: shop_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(113): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 113, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 04:58:40 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(145): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 145, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 05:04:13 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(222): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 222, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 05:04:45 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(226): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 226, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 05:04:54 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(226): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 226, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-30 05:05:08 --> Undefined variable: merchant_name
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_rts.php(226): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 226, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

@@ -1,3 +1,4 @@
+
 <?php
 
 class Model_user
@@ -10,10 +11,18 @@ class Model_user
     {
         include "db_connection.php";
         include "config_type.php";
+        // Load Composer's autoloader
+ require '../include/PHPMailer/PHPMailerAutoload.php';
         $this->conn = $conn;
         $this->uploaddir = $UPLOAD_DIR_2;
         $this->smsuserkey = $SMS_USERKEY;
         $this->smspasskey = $SMS_PASSKEY;
+
+        // Import PHPMailer classes into the global namespace
+
+
+
+
     }
 
     // destructor
@@ -6938,23 +6947,39 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
      * @param : Phone, Code, Name
      * returns boolean
      */
-    function send_email($email, $code, $name)
+
+    function send_email($order_id , $sku , $status , $message)
     {
-        $userkey = $this->smsuserkey; //userkey lihat di zenziva
-        $passkey = $this->smspasskey; // set passkey di zenziva
-        $message = "VTAL: Hi " . $name . ", Terima Kasih telah melakukan registrasi di VTAL. Mohon masukan kode aktivasi berikut ini: " . $code;
-        $url = "https://reguler.zenziva.net/apps/smsapi.php";
-        $curlHandle = curl_init();
-        curl_setopt($curlHandle, CURLOPT_URL, $url);
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey=' . $userkey . '&passkey=' . $passkey . '&nohp=' . $phone . '&pesan=' . urlencode($message));
-        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
-        curl_setopt($curlHandle, CURLOPT_POST, 1);
-        $results = curl_exec($curlHandle);
-        curl_close($curlHandle);
+
+       
+
+
+        $email_pengirim = "msinfo45@gmail.com";
+        $isi=$order_id . " " . $sku . " " .$message;
+        $subjek=$status;
+        $email_tujuan="twinzahrashop@gmail.com";
+
+        $mail = new PHPMailer();
+
+        $mail->IsHTML(true);    // set email format to HTML
+        $mail->IsSMTP();   // we are going to use SMTP
+        $mail->SMTPAuth   = true; // enabled SMTP authentication
+        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
+        $mail->Port       = 465;                   // SMTP port to connect to GMail
+        $mail->Username   = $email_pengirim;  // alamat email kamu
+        $mail->Password   = "Hacker45";            // password GMail
+        $mail->SetFrom($email_pengirim, 'noreply');  //Siapa yg mengirim email
+        $mail->Subject    = $subjek;
+        $mail->Body       = $isi;
+        $mail->AddAddress($email_tujuan);
+
+       if(!$mail->Send()) {
+          echo "Eror: ".$mail->ErrorInfo;
+           exit;
+        }else {
+           echo "<div class='alert alert-success'><strong>Berhasil!</strong> Email telah berhasil dikirim.</div>";
+        }
     }
 
     /**
