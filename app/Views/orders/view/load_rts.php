@@ -218,7 +218,7 @@ echo ' </div>';
 echo ' <div class="col-auto">';
 				if ($cekHistoryOrder != null ) {
 					
-					echo'<a data-toggle="modal" data-id="'.$order_id.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Kirim</a>';			
+					echo'<a data-id="'.$order_id.'" title="Kirim"  class="SetToRTS btn btn-primary" href="#SetToRTS">Kirim</a>';			
 					
 				}
 				echo '</div></div>';
@@ -282,6 +282,60 @@ $(document).on("click", ".AcceptOrder", function () {
       $('#AcceptOrder').modal('show');
 });
 
+
+
+
+
+$(document).on("click", ".SetToRTS", function () {
+  var OrderID = $(this).data('id');
+  var text;
+    var r = confirm("Anda yakin ?");
+    if (r == true) {
+
+        $.ajax({
+        type: 'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    processData: false,
+    data: '{"order_item_ids": "'+ OrderID +'"}',
+      url:'<?= base_url('public/api/lazada.php?request=set_rts') ?>',
+      
+           
+            beforeSend: function () {
+                $('.deleteItemCartDetail').attr("disabled","disabled");
+                $('.table-wrapper').css('opacity', '.5');
+            },
+            success:function(data){
+        
+        console.log(data.message);
+        console.log(data.status);
+        
+                if(data.status == '200'){
+          
+
+          //alert(data.message);
+          loadDataItem();
+                }else{
+          sound_error();
+          alert(data.message);
+        
+                }
+                $('.deleteItemCartDetail').removeAttr("disabled");
+                $('.table-wrapper').css('opacity', '');
+        
+        
+                
+            },
+      error: function(){
+      alert("Cannot get data");
+      }
+      
+        });
+     
+    } else {
+     
+    }
+});
 
 
 

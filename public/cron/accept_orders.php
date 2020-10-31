@@ -109,7 +109,7 @@ foreach($resultItem['data'] as $DataOrderItems)
 		$status = "sukses";
 		$message = "Pesanan Berhasil di Konfirmasi";
 
-		$sendEmail = $db->send_email($order_id , $sku , $status , $message);
+		//$sendEmail = $db->send_email($order_id , $sku , $status , $message);
 
 		}else{
 
@@ -126,7 +126,7 @@ foreach($resultItem['data'] as $DataOrderItems)
 		$status = "gagal";
 		$message = "Produk di database kosong";
 
-		$sendEmail = $db->send_email($order_id , $sku , $status , $message);
+		//$sendEmail = $db->send_email($order_id , $sku , $status , $message);
 		
 
 		}
