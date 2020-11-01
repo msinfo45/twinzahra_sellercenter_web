@@ -1,0 +1,20 @@
+CRITICAL - 2020-10-31 19:45:48 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(104): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 104, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-10-31 19:47:49 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra\app\Views\orders\view\load_pending.php(104): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 104, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

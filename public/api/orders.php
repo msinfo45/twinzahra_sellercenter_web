@@ -1543,15 +1543,15 @@ foreach($resultItem['data'] as $DataOrderItems)
 					//print_r ($resultInvoice);die;
 
 					
-					
-					
+	
+				
 					//jika set invoice berhasil
 					if ($resultInvoice['status'] == 200) {
 							
 
 					//Set Ready to Ship						
 					$chrts = curl_init();
-					curl_setopt($chrts, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=set_rts');
+					curl_setopt($chrts, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=set_rts');
 					$payloadRts = json_encode( array( "order_item_ids"=> $order_item_ids,
 					"shipping_provider"=> $shipping_provider,
 					"delivery_type"=> $delivery_type,

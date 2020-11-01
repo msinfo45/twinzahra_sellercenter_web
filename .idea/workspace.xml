@@ -81,6 +81,7 @@
       <workItem from="1604060305698" duration="795000" />
       <workItem from="1604071776873" duration="241000" />
       <workItem from="1604106587653" duration="111000" />
+      <workItem from="1604191189242" duration="235000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -159,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604106651719</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Penambahan History Orders ready to ship , dalam pengiriman dll">
+      <created>1604191377643</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1604191377643</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,20 +183,21 @@
     <MESSAGE value="Perbaikan halaman order pending" />
     <MESSAGE value="Commit directory" />
     <MESSAGE value="Perbaikan Accept Order otomatis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan Accept Order otomatis" />
+    <MESSAGE value="Penambahan History Orders ready to ship , dalam pengiriman dll" />
+    <option name="LAST_COMMIT_MESSAGE" value="Penambahan History Orders ready to ship , dalam pengiriman dll" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1604106642703">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1604191356332">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604106642703" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604191356332" />
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog" timestamp="1603361256408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604106656424">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604191387991">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604106656424" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604191387991" />
   </component>
 </project>
