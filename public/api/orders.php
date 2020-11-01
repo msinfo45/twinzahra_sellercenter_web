@@ -325,7 +325,7 @@ $return = array(
                     $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;
                     $user_id = 5;
-					$status_id = 1;
+					//$status_id = 1;
 					
 					$page = null;
 					
@@ -1549,7 +1549,29 @@ foreach($resultItem['data'] as $DataOrderItems)
 					if ($resultInvoice['status'] == 200) {
 							
 
-						
+					//Set Ready to Ship						
+					$chrts = curl_init();
+					curl_setopt($chrts, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=set_rts');
+					$payloadRts = json_encode( array( "order_item_ids"=> $order_item_ids,
+					"shipping_provider"=> $shipping_provider,
+					"delivery_type"=> $delivery_type,
+					"tracking_number"=> $tracking_number,
+					"user_id"=> $user_id,
+					"merchant_name"=> $merchant_name	) );
+					curl_setopt( $chrts, CURLOPT_POSTFIELDS, $payloadRts );
+					curl_setopt( $chrts, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($chrts, CURLOPT_RETURNTRANSFER, 1);
+					$contentRts = curl_exec($chrts);
+					curl_close($chrts);
+
+					//mengubah data json menjadi data array asosiatif
+					$resultRts=json_decode($contentRts,true);
+					
+					//print_r ($resultRts);die;
+					//jika set RTS sukse
+					
+					if ($resultRts['status'] == 200) {
+
 							// Simpan data ke database
 							$data1 = array(
 							'order_id'=> $order_id,
@@ -1593,7 +1615,19 @@ foreach($resultItem['data'] as $DataOrderItems)
 						
 										
 						
-					
+					}else{
+				//Jika Set RTS Gagal
+				
+								$return = array(
+								"status" => 404,
+								"total_rows" => 0,
+								"message" => $resultRts['message'],
+								"data" => $resultRts
+								
+								   );
+
+					}						
+						
 							
 
 						 //jika respond invoice error  

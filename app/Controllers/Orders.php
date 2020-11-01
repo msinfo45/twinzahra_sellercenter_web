@@ -33,6 +33,36 @@ public function load_rts()
 	}
 
 	
+public function load_ship()
+{
+	
+	
+	return view('orders/view/load_ship');
+	
+}
+
+
+
+public function load_done()
+	{
+		
+		
+		return view('orders/view/load_done');
+		
+	}
+
+
+	
+public function load_filed()
+{
+	
+	
+	return view('orders/view/load_filed');
+	
+}
+
+
+	
 
 
 	//--------------------------------------------------------------------

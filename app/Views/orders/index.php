@@ -67,7 +67,7 @@
 
                   <div class="tab-pane fade" id="custom-tabs-orders-ship-content" role="tabpanel" aria-labelledby="custom-tabs-orders-ship-tab">
 
-             ship
+                  <div id="ResultShip"></div> 
 
                   </div>
 
@@ -191,6 +191,133 @@ var displayProduct = 5;
 }
 ///
 
+function LoadShip(){
+
+var displayProduct = 5;
+  $('#ResultShip').html(createSkeleton(displayProduct));
+  
+    setTimeout(function(){
+      LoadShip(displayProduct);
+    }, 0);
+
+    function createSkeleton(limit){
+      var skeletonHTML = '';
+      for(var i = 0; i < limit; i++){
+        skeletonHTML += '<div class="ph-item">';
+        skeletonHTML += '<div class="ph-col-4">';
+        skeletonHTML += '<div class="ph-picture"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '<div>';
+        skeletonHTML += '<div class="ph-row">';
+        skeletonHTML += '<div class="ph-col-12 big"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+      }
+      return skeletonHTML;
+    }
+  
+    function LoadShip(limit){
+      $.ajax({
+          url:'<?= base_url('orders/load_ship') ?>',
+        method:"POST",
+        data:{action: 'load_ship', limit:limit},
+        success:function(data) {
+          $('#ResultShip').html(data);
+        }
+      });
+    }
+}
+
+function LoadDone(){
+
+var displayProduct = 5;
+  $('#ResultDone').html(createSkeleton(displayProduct));
+  
+    setTimeout(function(){
+      LoadDone(displayProduct);
+    }, 0);
+
+    function createSkeleton(limit){
+      var skeletonHTML = '';
+      for(var i = 0; i < limit; i++){
+        skeletonHTML += '<div class="ph-item">';
+        skeletonHTML += '<div class="ph-col-4">';
+        skeletonHTML += '<div class="ph-picture"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '<div>';
+        skeletonHTML += '<div class="ph-row">';
+        skeletonHTML += '<div class="ph-col-12 big"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+      }
+      return skeletonHTML;
+    }
+  
+    function LoadDone(limit){
+      $.ajax({
+          url:'<?= base_url('orders/load_done') ?>',
+        method:"POST",
+        data:{action: 'load_done', limit:limit},
+        success:function(data) {
+          $('#ResultDone').html(data);
+        }
+      });
+    }
+}
+
+function LoadFiled(){
+
+var displayProduct = 5;
+  $('#ResultFiled').html(createSkeleton(displayProduct));
+  
+    setTimeout(function(){
+      LoadFiled(displayProduct);
+    }, 0);
+
+    function createSkeleton(limit){
+      var skeletonHTML = '';
+      for(var i = 0; i < limit; i++){
+        skeletonHTML += '<div class="ph-item">';
+        skeletonHTML += '<div class="ph-col-4">';
+        skeletonHTML += '<div class="ph-picture"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '<div>';
+        skeletonHTML += '<div class="ph-row">';
+        skeletonHTML += '<div class="ph-col-12 big"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+      }
+      return skeletonHTML;
+    }
+  
+    function LoadFiled(limit){
+      $.ajax({
+          url:'<?= base_url('orders/load_filed') ?>',
+        method:"POST",
+        data:{action: 'load_filed', limit:limit},
+        success:function(data) {
+          $('#ResultFiled').html(data);
+        }
+      });
+    }
+}
+
+
 //Default load
 loadPending();
  //
@@ -207,17 +334,16 @@ $(document).on("click", "#custom-tabs-orders-readytoship-tab", function () {
 
 $(document).on("click", "#custom-tabs-orders-ship-tab", function () {
 
- //loadRTS();
+LoadShip();
 });
 
 $(document).on("click", "#custom-tabs-orders-done-tab", function () {
  
- //loadRTS();
+LoadDone();
 });
 
 $(document).on("click", "#custom-tabs-orders-filed-tab", function () {
-  
- //loadRTS();
+LoadFiled();
 });
 
 

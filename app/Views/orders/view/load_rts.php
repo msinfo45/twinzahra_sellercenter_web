@@ -238,7 +238,8 @@ echo ' <div class="col-auto">';
 				
 		}else{
 		
-					echo json_encode($result['message']);
+			echo '<div class="card-body text-center" >'.$result['message'] .'</div>';
+
 	
 		}
 				

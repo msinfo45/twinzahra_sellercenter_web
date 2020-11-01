@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="" />
+    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +80,7 @@
       <workItem from="1603910024311" duration="165000" />
       <workItem from="1604060305698" duration="795000" />
       <workItem from="1604071776873" duration="241000" />
+      <workItem from="1604106587653" duration="111000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -149,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604072012151</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Perbaikan Accept Order otomatis">
+      <created>1604106651719</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1604106651719</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,20 +174,21 @@
     <MESSAGE value="perbaikan halaman kasir" />
     <MESSAGE value="Perbaikan halaman order pending" />
     <MESSAGE value="Commit directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit directory" />
+    <MESSAGE value="Perbaikan Accept Order otomatis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan Accept Order otomatis" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1604071998972">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1604106642703">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604071998972" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604106642703" />
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog" timestamp="1603361256408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604072017505">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604106656424">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604072017505" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604106656424" />
   </component>
 </project>
