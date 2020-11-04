@@ -15,8 +15,13 @@ $url='https://api.lazada.co.id/rest';
 	$order_id_lazada = array();
 	
                  $user_id = 5;
-					
-					$getDataLazada = $db->getDataLazada($user_id);
+				 $merchant_name = null;	
+	
+				 if (isset($post['merchant_name'])) {
+					 $merchant_name = $post['merchant_name'];
+				 }
+
+					$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 					
 			
 

@@ -10,14 +10,7 @@ $url='https://api.lazada.co.id/rest';
 		
 $rowsLazada = array();
 $rows = [];
-
-//Check request content
-$content = "";
-
-if (isset($_GET['request'])) {
     $content = $_GET['request'];
-}
-
     if (isset($content) && $content != "") {
         
           //Load Models
@@ -31,10 +24,15 @@ if (isset($_GET['request'])) {
                     //$user_id = $post['UserID'];
 					$user_id = 5;
 				
-					
-					if (isset($user_id)) {
+					$merchant_name = null;	
+	
+if (isset($post['merchant_name'])) {
+	$merchant_name = $post['merchant_name'];
+}
 
-				$getDataLazada = $db->getDataLazada($user_id);
+				if (isset($user_id)) {
+
+				$getDataLazada = $db->getDataLazada($user_id , $merchant_name);
 
 				if ($getDataLazada != null) {
 							
@@ -98,11 +96,15 @@ if (isset($_GET['request'])) {
                     //$user_id = $post['UserID'];
 					$user_id = 5;
 				
-							
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}		
 					
 					if (isset($user_id)) {
 
-				$getDataLazada = $db->getDataLazada($user_id);
+				$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 
 				if ($getDataLazada != null) {
 							
@@ -200,7 +202,7 @@ if (isset($_GET['request'])) {
 		$statuses= $datas->statuses;
 		$created_at= $datas->created_at;
 		$updated_at= $datas->updated_at;
-	//	$address_shipping=$datas>address_shipping;
+		//$address_shipping=$datas>address_shipping;
 		$address_billing=$datas->address_billing;
 		
 					
@@ -237,21 +239,21 @@ if (isset($_GET['request'])) {
 					"created_at"=>$created_at,
 					"updated_at"=>$updated_at,
 					
-					"address_shipping"=>array(
-									"order_id"=> $order_id,
+				///	"address_shipping"=>array(
+						//			"order_id"=> $order_id,
 						//			"first_name"=> $address_shipping->first_name,
-							//		"last_name"=> $address_shipping->last_name,
-								//	"country"=> $address_shipping->country,
-								//	"phone"=> $address_shipping->phone,
-								//	"phone2"=> $address_shipping->phone2,
-								//	"address1"=> $address_shipping->address1,
-									//"address2"=> $address_shipping->address2,
-								//	"address3"=> $address_shipping->address3,
+						//			"last_name"=> $address_shipping->last_name,
+							//		"country"=> $address_shipping->country,
+							//		"phone"=> $address_shipping->phone,
+							//		"phone2"=> $address_shipping->phone2,
+							//		"address1"=> $address_shipping->address1,
+							//		"address2"=> $address_shipping->address2,
+							//		"address3"=> $address_shipping->address3,
 								//	"address4"=> $address_shipping->address4,
-									//"address5"=> $address_shipping->address5,
+								//	"address5"=> $address_shipping->address5,
 								//	"city"=> $address_shipping->city,
 								//	"post_code"=> $address_shipping->post_code
-					),
+					//),
 					
 					"address_billing"=>array(
 									"order_id"=> $order_id,
@@ -556,11 +558,21 @@ if (isset($_GET['request'])) {
                     //$user_id = $post['UserID'];
 					$user_id = 5;
 					$order_id = $post['order_id'];;
-					//$order_id = 481862189929735;;		
+						
+
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
 					
+					
+				//	$order_id = 483725973795096;
+					//$merchant_name="Twinzahra Shop";
+
 					if (isset($user_id)) {
 
-				$getDataLazada = $db->getDataLazada($user_id);
+				$getDataLazada = $db->getDataLazada($user_id , $merchant_name);
 
 
 					if ($getDataLazada != null) {
@@ -634,8 +646,8 @@ if (isset($_GET['request'])) {
 		$voucher_seller= $datas->voucher_seller;
 		$voucher_code_seller= $datas->voucher_code_seller;
 		$voucher_code= $datas->voucher_code;
-	//	$voucher_code_platform->voucher_code_platform;
-	//	$voucher_platform= $voucher_platform;
+		//$voucher_code_platform->voucher_code_platform;
+		//$voucher_platform= $voucher_platform;
 		$order_flag= $datas->order_flag;
 		$promised_shipping_time= $datas->promised_shipping_time;
 		$digital_delivery_info= $datas->digital_delivery_info;
@@ -679,7 +691,7 @@ if (isset($_GET['request'])) {
 			"shipping_provider_type" =>$shipping_provider_type,
             "shipping_fee_original" =>$shipping_fee_original,
 			"shipping_service_cost " =>$shipping_service_cost,
-           // "shipping_fee_discount_seller" =>$shipping_fee_discount_seller,
+            //"shipping_fee_discount_seller" =>$shipping_fee_discount_seller,
             "shipping_amount" =>$shipping_amount,
 			"is_digital" =>$is_digital,
 			"voucher_amount" =>$voucher_amount,
@@ -711,7 +723,7 @@ if (isset($_GET['request'])) {
 						
 						 $return = array(
                           "status" => 404,
-                          "message" => $jdecode->message
+                           "message" => $jdecode->message
                         );
 						
 					}
@@ -720,23 +732,23 @@ if (isset($_GET['request'])) {
          
 					
 			   } else {
-                      $return = array(
-                          "status" => 404,
-                           "message" => "Token Belum di setting"
-                      );
+                        $return = array(
+                            "status" => 404,
+                            "message" => "Token Belum di setting"
+                        );
                     }
 					   
 					   
                     
                     } else {
-                       $return = array(
-                         "status" => 404,
-                           "message" => "Oops sepertinya ada yang salah!"
-                      );
+                        $return = array(
+                            "status" => 404,
+                            "message" => "Oops sepertinya ada yang salah!"
+                        );
                     }
 					
 
-	                 echo json_encode($return);
+	                   echo json_encode($return);
 	
 
 
@@ -747,11 +759,15 @@ if (isset($_GET['request'])) {
                     $post = json_decode(file_get_contents("php://input"), true);
                     //$user_id = $post['UserID'];
 					$user_id = 5;
-				
+					$merchant_name = null;	
+	
+if (isset($post['merchant_name'])) {
+	$merchant_name = $post['merchant_name'];
+}
 					
 					if (isset($user_id)) {
 
-				$getDataLazada = $db->getDataLazada($user_id);
+				$getDataLazada = $db->getDataLazada($user_id , $merchant_name);
 
 				if ($getDataLazada != null) {
 							
@@ -806,11 +822,15 @@ if (isset($_GET['request'])) {
 					
 			
 				
-					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
 					
 					if (isset($user_id)) {
 
-					$getDataLazada = $db->getDataLazada($user_id);
+					$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 
 				if ($getDataLazada != null) {
 							
@@ -1017,10 +1037,15 @@ if (isset($_GET['request'])) {
                     //$user_id = $post['UserID'];
 					$user_id = 5;
 				
-					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
+
 					if (isset($user_id)) {
 
-				$getDataLazada = $db->getDataLazada($user_id);
+				$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 
 				if ($getDataLazada != null) {
 							
@@ -1120,7 +1145,7 @@ if (isset($_GET['request'])) {
 				
 				$return = array(
                             "status" => 200,
-							"message" => "Pesanan berhasil di pickup",
+							"message" => "Pesanan berhasil dikonfirmasi",
                             "data" => $datas
                         );	
 			}else{
@@ -1171,7 +1196,11 @@ if (isset($_GET['request'])) {
 				$delivery_type = $post['delivery_type'];
 				$tracking_number = $post['tracking_number'];
 				$merchant_name = $post['merchant_name'];
-
+				
+				//$order_item_ids = "[441008605132192]";
+				//$shipping_provider = "LEX ID" ;
+				//$delivery_type = "dropship" ;
+				//$merchant_name = "Twinzahra Shop";
 				
 				
 				
@@ -1201,7 +1230,7 @@ if (isset($_GET['request'])) {
 
 
 
-						$request = new LazopRequest('/order/rts');
+						$request = new LazopRequest('/order/pack');
 						$request->addApiParam('delivery_type', $delivery_type);
 						$request->addApiParam('order_item_ids', $order_item_ids);
 						$request->addApiParam("shipment_provider", $delivery_type);
@@ -1219,15 +1248,15 @@ if (isset($_GET['request'])) {
 				
 				$return = array(
                             "status" => 200,
-							//"message" => $data->message,
-                            "data" => $data
+							"message" => $data->message,
+                            "data" => $response
                         );	
 			}else{
 				
 				$return = array(
                             "status" => 404,
-							//"message" => $data->message,
-                            "data" =>$data
+							"message" => $data->message,
+                            "data" =>$response
                         );	
 				
 			}
@@ -1269,6 +1298,11 @@ if (isset($_GET['request'])) {
 				$merchant_name = $post['merchant_name'];
 				
 				
+				//$order_item_id = "439088831036995";
+				//$shipping_provider = "LEX ID" ;
+				//$delivery_type = "dropship" ;
+				//$tracking_number = "LXAD-2026285224";
+				
 			
 				
 				if (isset($user_id) && isset($order_item_id) ) {
@@ -1309,15 +1343,15 @@ if (isset($_GET['request'])) {
 				
 				$return = array(
                             "status" => 200,
-						//	"message" => $data->message,
-                            "data" => $data
+							"message" => $data->message,
+                            "data" => $response
                         );	
 			}else{
 				
 				$return = array(
                             "status" => 404,
-							//"message" => $data->message,
-                            "data" =>$data
+							"message" => $data->message,
+                            "data" =>$response
                         );	
 				
 			}
@@ -1359,11 +1393,142 @@ if (isset($_GET['request'])) {
                     $post = json_decode(file_get_contents("php://input"), true);
 					
 					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
+					//$user_id = $post['UserID'];
+					$user_id = 5;
+					
+			$productArr = [];
+            $skusArr = [];
+			
+				$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
+
+		if ($getDataLazada != null) {
+							
+                    while ($rowLazada = $getDataLazada->fetch_assoc()) {										
+					$rows[] = $rowLazada;
+			
+					}
+					
+foreach ($rows as $obj) {
+							
+					$appkey =  $obj['AppKey'];
+					$appSecret =  $obj['AppSecret'];
+					$accessToken =  $obj['AccessToken'];	
+					$merchant_name =  $obj['merchant_name'];
+					
+						
+			$c = new LazopClient($url,$appkey,$appSecret);
+			$request = new LazopRequest('/products/get','GET');
+			$request->addApiParam('filter','all');
+			$jdecode=json_decode($c->execute($request, $accessToken));
+			$data=$jdecode->data;
+			$product=$jdecode->data->products;
+								
+	//echo json_encode($jdecode);die;
+	
+
+	 
+ foreach($product as $products)
+		{
+		
+					
+
+	foreach($products -> skus as $skus)
+		{
+		//$rowSkus [] = $skus	;	
+		//$skusArr[$products->item_id]['SkuId'] = $skus['SkuId'];
+        //$skusArr[$products->item_id]['Status'] =$skus['Status'];
+		//$skusArr[$products->item_id]['SellerSku'] = $skus['SellerSku'];
+		//$skusArr[$products->item_id]['ShopSku'] = $skus['ShopSku'];
+		//$skusArr[$products->item_id]['color_family'] = $skus['color_family'];
+		//$skusArr[$products->item_id]['quantity'] = $skus['quantity'];
+		//$skusArr[$products->item_id]['price'] = $skus['price'];
+		//$skusArr[$products->item_id]['special_price'] = $skus['special_price'];
+		//$skusArr[$products->item_id]['size'] = $skus['size'];	
+		//$skusArr[$products->item_id]['Url'] = $skus['Url'];	
+
+		//}	
+		
+//$resultSkus = array_values($skusArr);
+			
+		$productArr[$products->item_id]['item_id'] = $products->item_id;
+        $productArr[$products->item_id]['merchant_name'] = $merchant_name;
+		$productArr[$products->item_id]['name'] = $products->attributes->name;
+		$productArr[$products->item_id]['skus'][]= $skus;
+		}		
+		}
+		
+		
+$result = array_values($productArr);
+		
+		}	
+		//echo json_encode($dataProducts);die;
+				
+		  		$return= array(
+					"status" => 200,
+                    "message" => "",
+					"total_rows" => count($result),
+					"data" => $result
+					
+
+                   );
+
+
+
+}else{
+		$return= array(
+					"status" => 404,
+                    "message" => "Toko lazada tidak ada yang aktif",
+					"total_rows" => 0,
+					"data" => []
+					
+
+                   );	
+			
+			
+		}
+ 
+
+	
+            
+            //
+            echo json_encode($return);
+			
+                }
+				
+		  if ($content == "get_product_items") {
+	
+					$modeHeader = 0;
+                    $post = json_decode(file_get_contents("php://input"), true);
+					
+					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
+				
+	
+				
+						$item_id = $post['item_id'];
+					
+					
+					$seller_sku = null;	
+	
+					if (isset($post['seller_sku'])) {
+						$seller_sku = $post['seller_sku'];
+					}
 					
 					//$user_id = $post['UserID'];
 					$user_id = 5;
 					
-				$getDataLazada = $db->getDataLazada($user_id);
+				if ($item_id != null) {
+					
+				$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 
 		if ($getDataLazada != null) {
 							
@@ -1381,140 +1546,132 @@ if (isset($_GET['request'])) {
 					
 						
 			$c = new LazopClient($url,$appkey,$appSecret);
-			$request = new LazopRequest('/products/get','GET');
-			$request->addApiParam('filter','all');
-			//$request->addApiParam('update_before','2018-01-01T00:00:00+0800');
-			//$request->addApiParam('search','product_name');
-			//$request->addApiParam('create_before','2018-01-01T00:00:00+0800');
-			//$request->addApiParam('offset','0');
-			//$request->addApiParam('create_after','2010-01-01T00:00:00+0800');
-			//$request->addApiParam('update_after','2010-01-01T00:00:00+0800');
-			//$request->addApiParam('limit','10');
-			//$request->addApiParam('options','1');
-			//$request->addApiParam('sku_seller_list',' [\"39817:01:01\", \"Apple 6S Black\"]');
-			//var_dump($c->execute($request, $accessToken));
+			$request = new LazopRequest('/product/item/get','GET');
+			$request->addApiParam('item_id', $item_id);
 			$jdecode=json_decode($c->execute($request, $accessToken));
-								$data=$jdecode->data;
-								$product=$jdecode->data->products;
-								$sku=$jdecode->data->products->skus;
-	
-	
-
-
-
-			
-			
- foreach($product as $products)
-
-		{
-		$attributes = $products->attributes;	
-		$rows[] = $products;
-		$total_products = $data->total_products;
-		$item_id = $products->item_id;	  
-		$primary_category = $products->primary_category;
-		$name = $attributes->name;
-		$warranty_type = $attributes->warranty_type;
-		$brand = $attributes->brand;
-		$short_description = $attributes->short_description;
-		$description = $attributes->description;
 		
-				   
-		 foreach($products->skus as $skus)
+			
+	//echo json_encode($jdecode);die;
+	
 
+if ($jdecode->code == "0") {
+	
+		$data=$jdecode->data;
+		$primary_category=$data->primary_category;	
+		$attributes=$data->attributes;	
+			
+		foreach($jdecode->data->skus as $skus)
 		{
 			
-		$Status = $skus->Status;
-		$SellerSku = $skus->SellerSku;	
-		$ShopSku = $skus->ShopSku;	
-		$SkuId = $skus->SkuId;	
-		$Url = $skus->Url;	
-		$price = $skus->price;	
-		$special_price = $skus->special_price;	
-		$special_to_time = $skus->special_to_time;	
-		$special_to_date = $skus->special_to_date;	
-		$quantity = $skus->quantity;	
-		$Available = $skus->Available;	
-		$product_weight = $skus->product_weight;	
-		$package_width = $skus->package_width;	
-		$package_height = $skus->package_height;	
-		$package_length = $skus->package_length;	
-		$package_weight = $skus->package_weight;	
-		
 		foreach($skus->Images as $Images)		
 		{
-			$dataImage[]= $Images;	
+		 	$dataImage = $Images;	
 		}
-
-		$dataProducts[]= array(
+		
+		$dataSkus[] = array("Status" => $skus->Status,
+		"SellerSku" =>$skus->SellerSku,
+		"ShopSku" => $skus->ShopSku,	
+		"SkuId" => $skus->SkuId,
+		"color_family" =>$skus->color_family,
+		"Url" => $skus->Url,
+		"price" => $skus->price,	
+		"special_price" => $skus->special_price,			
+		"quantity" => $skus->quantity,
+		"package_width" => $skus->package_width,
+		"package_height" => $skus->package_height,	
+		"package_length" => $skus->package_length,
+		"package_weight" => $skus->package_weight,
+		"image_skus" => array($dataImage)		
+		);			
+		
+		
+		$dataItems = array(
 		
 					"merchant_name" => $merchant_name,
-					"primary_category" => $primary_category,
 					"item_id" => $item_id,
-					"name" => $name,
-					"warranty_type" => $warranty_type,
-					"brand" => $brand,
-					"short_description" => $short_description,
-					"description" => $description,
-					"Status" => $Status,
-					"SellerSku" => $SellerSku,
-					"ShopSku" => $ShopSku,
-					"SkuId" => $SkuId,
-					"Url" => $Url,
-					"price" => $price,
-					"special_price" => $special_price,
-					"special_to_time" => $special_to_time,
-					"special_to_date" => $special_to_date,
-					"quantity" => $quantity,
-					"Available" => $Available,
-					"product_weight" => $product_weight,
-					"package_width" => $package_width,
-					"package_height" => $package_height,
-					"package_length" => $package_length,
-					"package_weight" => $package_weight,
-					"images" => $dataImage
-
-					
-                   );		
-
-		}
-		
-		
-								
+					"name" => $attributes->name,
+					"brand" => $attributes->brand,
+					//"short_description" => $attributes->short_description,
+					//"description" => $attributes->description,
+					"primary_category" => $primary_category,
+					"skus" => $dataSkus
 				
-		}			   
+                   );		
+			   
 		}
 		
+}else{
+	
+		
+		  		$return= array(
+					"status" => 404,
+                    "message" => $jdecode->message,
+					"total_rows" => 0,
+					"data" => []
+					
+
+                   );
+	
+}
+		}	
 		//echo json_encode($dataProducts);die;
 				
 		  		$return= array(
 					"status" => 200,
-                    "message" => "",
-					"total_rows" => count($dataProducts),
-					"data" => $dataProducts
+                    "message" => "Sukses",
+					"total_rows" => count($dataSkus),
+					"data" => $dataItems
 					
 
                    );
 
-}
+
+
+}else{
+		$return= array(
+					"status" => 404,
+                    "message" => "Toko lazada tidak ada yang aktif",
+					"total_rows" => 0,
+					"data" => []
+					
+
+                   );	
+			
+			
+		}
  
 
-	
+	}else{
+		$return= array(
+					"status" => 404,
+                    "message" => "Item ID tidak boleh kosong",
+					"total_rows" =>0,
+					"data" => []
+					
+
+                   );	
+			
+			
+		}
             
             //
             echo json_encode($return);
 			
                 }
-				
-				
+								
 				  if ($content == "get_skus") {
 	
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
-					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
 			
 					$user_id = 5;
 					
-					$getDataLazada = $db->getDataLazada($user_id);
+					$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 					
 					$addProduct = 0;
 
@@ -1608,8 +1765,13 @@ if (isset($_GET['request'])) {
 					
 			
 					$user_id = 5;
-					
-					$getDataLazada = $db->getDataLazada($user_id);
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
+
+					$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 					
 			
 
@@ -1921,11 +2083,15 @@ if (isset($_GET['request'])) {
                         $product_id = $post['ProductID'];
                     }
 
-
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
 
                 
 							//Mencari konfigurasi lazada by user id
-						$getDataLazada = $db->getDataLazada($user_id);
+						$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 					
 						if ($getDataLazada != null) {
 							
@@ -2114,9 +2280,13 @@ if (isset($_GET['request'])) {
 	
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
-					
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}
 					$user_id = 5;
-				$getDataLazada = $db->getDataLazada($user_id);
+				$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 				
 				if ($getDataLazada !=null ) {
 					
@@ -2337,18 +2507,6 @@ var_dump($c->execute($request, $access_token));
 			
                 }
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
-
 
 } else {
     //Aha, what you're looking for !!!

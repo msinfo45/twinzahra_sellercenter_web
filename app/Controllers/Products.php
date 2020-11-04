@@ -16,7 +16,16 @@ class Products extends BaseController
 		
 	}
 
+	public function load_products_lazada()
+	{
+		
+		
+		return view('products/view/load_products_lazada');
+		
+	}
 
+
+	
 	//--------------------------------------------------------------------
 
 }

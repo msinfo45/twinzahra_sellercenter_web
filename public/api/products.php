@@ -443,9 +443,13 @@ if (isset($content) && $content != "") {
         $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;
         $user_id = null;
-        $product_id = $post['ProductID'];
-        $product_id= 1;
-
+    
+        //$product_id= 1;
+        $product_id = null;	
+	
+        if (isset($post['ProductID'])) {
+            $product_id = $post['ProductID'];
+        }
         $rowProductVariant =  array();
         $rowImageProductVariant =  array();
         $rowProductVariantDetail =  array();

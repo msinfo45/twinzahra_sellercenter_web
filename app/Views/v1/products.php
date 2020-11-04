@@ -438,19 +438,32 @@ include "public/models/Products_Model.php";
                         $product_id = $post['ProductID'];
                     }
 
+					$merchant_name = null;	
+	
+					if (isset($_GET['merchant_name'])) {
+						$merchant_name = $_GET['merchant_name'];
+					}
 
 
+					$item_id = null;	
+	
+					if (isset($_GET['item_id'])) {
+						$item_id = $_GET['item_id'];
+					}
+					
                 
 							//Mencari konfigurasi lazada by user id
-						$getConfigLazada = $db->getConfigLazada($user_id);
+					$getDataLazada = $db->getDataLazada($user_id, $merchant_name);
 					
-                        while ($rowLazada = $getConfigLazada->fetch_assoc()) {										
-				
-						$app_key =  $rowLazada['AppKey'];
-						$appSecret =  $rowLazada['AppSecret'];
-						$access_token =  $rowLazada['AccessToken'];	
-			
-						}
+                      if ($getDataLazada != null) {
+					
+					foreach ($rows as $obj) {
+							
+					$appkey =  $obj['AppKey'];
+					$appSecret =  $obj['AppSecret'];
+					$accessToken =  $obj['AccessToken'];	
+					$merchant_name =  $obj['merchant_name'];
+					
 					
 						//Mencari ProductID by user id
 						$getDataProduct = $db->getProducts($user_id);
@@ -512,12 +525,12 @@ include "public/models/Products_Model.php";
 
 			$xml_output .= "</Request>";
 
-			$c = new LazopClient($url,$app_key,$appSecret);
+			$c = new LazopClient($url,$appkey,$appSecret);
 			$request = new LazopRequest('/product/update');
 			$request->addApiParam('payload', $xml_output);
 			
 			
-			$jdecode=json_decode($c->execute($request, $access_token));
+			$jdecode=json_decode($c->execute($request, $accessToken));
 			$code = $jdecode->code;
 
 			$resultData = json_encode($jdecode , true);
@@ -535,7 +548,10 @@ include "public/models/Products_Model.php";
 						
 			}	
 			
+			
+			
 			$dataResult[]= array (
+						"MerchantName"=>$MerchantName,
 						"ProductName"=>$ProductName,
 						"Status"=>$status,
 						"Msg"=>$message,
@@ -545,7 +561,7 @@ include "public/models/Products_Model.php";
 
 		}
 				//	}
-
+					  }
 
 //}
 						
@@ -565,7 +581,18 @@ include "public/models/Products_Model.php";
                );
 
 			//sendEmail (json_encode($return));
+		}else{
+		$return= array(
+					"status" => 404,
+                    "message" => "Toko lazada tidak ada yang aktif",
+					"total_rows" => 0,
+					"data" => []
+					
+
+                   );	
 			
+			
+		}
           echo json_encode($return);
 
                 }

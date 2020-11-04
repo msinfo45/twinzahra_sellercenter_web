@@ -25,28 +25,28 @@
                      <div class="container-fluid">
  
 
-            <div class="card card-primary card-outline card-outline-tabs">
-              <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-products-tab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-products-database-tab" data-toggle="pill" href="#custom-tabs-products-database" role="tab" aria-controls="custom-tabs-products-database" aria-selected="true">Database</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-products-lazada-tab" data-toggle="pill" href="#custom-tabs-products-lazada" role="tab" aria-controls="custom-tabs-products-lazada" aria-selected="false">Lazada</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-products-shopee-tab" data-toggle="pill" href="#custom-tabs-products-shopee" role="tab" aria-controls="custom-tabs-products-shopee" aria-selected="false">Shopee</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-products-tokopedia-tab" data-toggle="pill" href="#custom-tabs-products-tokopedia" role="tab" aria-controls="custom-tabs-proucts-tokopedia" aria-selected="false">Tokopedia</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content" id="custom-tabs-products-tabContent">
-                  <div class="tab-pane fade show active" id="custom-tabs-products-database" role="tabpanel" aria-labelledby="custom-tabs-products-database-tab">
+<div class="card card-primary card-outline card-outline-tabs">
+   <div class="card-header p-0 border-bottom-0">
+      <ul class="nav nav-tabs" id="custom-tabs-products-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="custom-tabs-products-database-tab" data-toggle="pill" href="#custom-tabs-products-database-content" role="tab" aria-controls="custom-tabs-products-database" aria-selected="true">Database</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="custom-tabs-products-lazada-tab" data-toggle="pill" href="#custom-tabs-products-lazada-content" role="tab" aria-controls="custom-tabs-products-lazada" aria-selected="false">Lazada</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="custom-tabs-products-shopee-tab" data-toggle="pill" href="#custom-tabs-products-shopee-content" role="tab" aria-controls="custom-tabs-products-shopee" aria-selected="false">Shopee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="custom-tabs-products-tokopedia-tab" data-toggle="pill" href="#custom-tabs-products-tokopedia-content" role="tab" aria-controls="custom-tabs-proucts-tokopedia" aria-selected="false">Tokopedia</a>
+        </li>
+      </ul>
+</div>
 
- 
+<div class="card-body">
+  <div class="tab-content" id="custom-tabs-products-tabContent">
+  <div class="tab-pane fade show active" id="custom-tabs-products-database-content" role="tabpanel" aria-labelledby="custom-tabs-products-database-tab">
+
 
 <div class="d-flex">
       <div>
@@ -93,7 +93,7 @@
 
 </div>
 
-<a data-toggle="modal"  target="_blank" title="Sync Marketplace"  class="btn btn-primary" href="<?= base_url('v1/products?request=sync_marketplace') ?>">Sync Marketplace</a>    
+<a   target="_blank" title="Sync Marketplace"  class="btn btn-primary" href="<?= base_url('v1/products?request=sync_marketplace') ?>">Sync Marketplace</a>    
 
 
 </div>
@@ -105,13 +105,14 @@
                     <div id="ResultProductDatabase"></div>
 
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-products-lazada" role="tabpanel" aria-labelledby="custom-tabs-products-lazada-tab">
-                     Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam. 
+                  <div class="tab-pane fade" id="custom-tabs-products-lazada-content" role="tabpanel" aria-labelledby="custom-tabs-products-lazada-tab">
+                  <div id="ResultLazada"></div>
+
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-products-shopee" role="tabpanel" aria-labelledby="custom-tabs-products-shopee-tab">
+                  <div class="tab-pane fade" id="custom-tabs-products-shopee-content" role="tabpanel" aria-labelledby="custom-tabs-products-shopee-tab">
                      Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna. 
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-products-tokopedia" role="tabpanel" aria-labelledby="custom-tabs-products-tokopedia-tab">
+                  <div class="tab-pane fade" id="custom-tabs-products-tokopedia-content" role="tabpanel" aria-labelledby="custom-tabs-products-tokopedia-tab">
                      Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis. 
                   </div>
                 </div>
@@ -132,17 +133,17 @@
 
   <script>
 
-  LoadViewProducts();
+LoadProducts();
 
-  $(document).on("click", "#tab-database", function () {
-  
-  LoadViewProducts();
-});
-
-$(document).on("click", "#tab-lazada", function () {
-  
-  loadClassProductLazada();
-});
+$(document).on("click", "#custom-tabs-products-database-tab", function () {
+  //alert("database");
+  LoadProducts();
+ });
+ 
+ $(document).on("click", "#custom-tabs-products-lazada-tab", function () {
+ //alert("lazada");
+  LoadProductLazada();
+ });
 
 
     
@@ -154,20 +155,20 @@ $(document).on("click", "#tab-lazada", function () {
  
  var SearchProductDatabase = $('.SearchProductDatabase').val();
  
-LoadViewProducts(SearchProductDatabase, "");
+LoadProducts(SearchProductDatabase, "");
 
    }
 
-    });
+});
   
- function LoadViewProducts(SearchProductDatabase , SearchSize){
+ function LoadProducts(SearchProductDatabase , SearchSize){
   
     var displayProduct = 10;
     var Page = 1;
   $('#ResultProductDatabase').html(createSkeleton(displayProduct));
   
     setTimeout(function(){
-      loadProducts(displayProduct);
+      LoadProducts(displayProduct);
     }, 100);
 
     function createSkeleton(limit){
@@ -191,7 +192,7 @@ LoadViewProducts(SearchProductDatabase, "");
       return skeletonHTML;
     }
   
-    function loadProducts(limit){
+    function LoadProducts(limit){
     
        $.ajax({
      url:'<?= base_url('products/load_products') ?>',
@@ -208,28 +209,18 @@ LoadViewProducts(SearchProductDatabase, "");
     
 }
 
-$(document).on("keypress", ".SearchProductLazada", function(e){
 
-        if(e.which == 13){
   
- 
- var SearchProductLazada = $('.SearchProductLazada').val();
- 
-loadClassProductLazada(SearchProductLazada);
 
-   }
+//Funcion Pending Order
+function LoadProductLazada(){
 
-    });
-  
- function loadClassProductLazada(SearchProductLazada){
-  
-    var displayProduct = 5;
-    var Page = 1;
-  $('#ResultProductLazada').html(createSkeleton(displayProduct));
+var displayProduct = 5;
+  $('#ResultLazada').html(createSkeleton(displayProduct));
   
     setTimeout(function(){
-      loadProductsLazada(displayProduct);
-    }, 100);
+      LoadProductLazada(displayProduct);
+    }, 0);
 
     function createSkeleton(limit){
       var skeletonHTML = '';
@@ -252,23 +243,17 @@ loadClassProductLazada(SearchProductLazada);
       return skeletonHTML;
     }
   
-    function loadProductsLazada(limit){
-    
-       $.ajax({
-      url:'http://localhost/twinzahra/public/include/views/load_products.php',
+    function LoadProductLazada(limit){
+      $.ajax({
+          url:'<?= base_url('products/load_products_lazada') ?>',
         method:"POST",
-    //data: '{"Search":"'+ Search +'","Page": Page}',
-        data:{action: 'load_products', limit:limit , "Search":SearchProductLazada,"Page": Page},
+        data:{action: 'load_products_lazada', limit:limit},
         success:function(data) {
-      $('#ResultProductLazada').html(data); 
+          $('#ResultLazada').html(data);
         }
       });
-  
-
     }
-    
 }
-
 
 
 
@@ -362,7 +347,7 @@ $(document).on("click", ".SyncMarketplace", function () {
             $('#search_size').change(function(){ 
                 var id=$(this).val();
       
-        LoadViewProducts("", id);
+        LoadProducts("", id);
             }); 
              
         });

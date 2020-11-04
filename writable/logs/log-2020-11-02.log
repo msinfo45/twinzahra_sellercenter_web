@@ -1,0 +1,140 @@
+CRITICAL - 2020-11-02 09:53:17 --> Undefined index: ImageProductName
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 09:53:17 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "{0}". in C:\xampp\htdocs\twinzahra\system\Format\Exceptions\FormatException.php:9
+Stack trace:
+#0 C:\xampp\htdocs\twinzahra\system\Format\JSONFormatter.php(71): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(414): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(134): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\twinzahra\system\Debug\Exceptions.php(168): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-11-02 09:53:38 --> Undefined index: ImageProductName
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 09:54:55 --> Undefined index: ImageProductName
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 10:45:26 --> Undefined index: ImageProductName
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 10:46:09 --> Undefined index: ProductID
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(78): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 78, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 10:46:44 --> Undefined index: ProductID
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(78): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 78, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 10:46:58 --> Trying to get property 'total_rows' of non-object
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(111): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 111, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 10:48:40 --> syntax error, unexpected 'else' (T_ELSE)
+#0 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#1 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#2 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#3 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-11-02 11:18:22 --> Undefined variable: ProductVariants
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(134): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 134, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 11:18:23 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "{0}". in C:\xampp\htdocs\twinzahra\system\Format\Exceptions\FormatException.php:9
+Stack trace:
+#0 C:\xampp\htdocs\twinzahra\system\Format\JSONFormatter.php(71): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(414): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\twinzahra\system\API\ResponseTrait.php(134): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\twinzahra\system\Debug\Exceptions.php(168): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-11-02 11:18:26 --> Undefined variable: ProductVariants
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(134): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 134, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 22:37:28 --> Array to string conversion
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-02 22:59:18 --> Undefined variable: ProductVariants
+#0 C:\xampp\htdocs\twinzahra\app\Views\products\view\load_products_lazada.php(134): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 134, Array)
+#1 C:\xampp\htdocs\twinzahra\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra\system\Common.php(1119): CodeIgniter\View\View->render('products/view/l...', Array, true)
+#3 C:\xampp\htdocs\twinzahra\app\Controllers\Products.php(23): view('products/view/l...')
+#4 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(922): App\Controllers\Products->load_products_lazada()
+#5 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Products))
+#6 C:\xampp\htdocs\twinzahra\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

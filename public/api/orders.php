@@ -326,6 +326,11 @@ $return = array(
 //                    $user_id = $userid_header;
                     $user_id = 5;
 					//$status_id = 1;
+					$merchant_name = null;	
+	
+					if (isset($post['merchant_name'])) {
+						$merchant_name = $post['merchant_name'];
+					}		
 					
 					$page = null;
 					
@@ -347,7 +352,7 @@ $return = array(
 				
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_orders');
-					//$payload = json_encode( array( "order_number"=> $DataProduct['order_number'] ) );
+					$payload = json_encode( array( "merchant_name"=> $merchant_name) );
 					//$payload = json_encode( array( "UserID"=> "5" ) );
 					//curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -770,6 +775,12 @@ $return = array(
 					
                     $limit = 0;
 					
+					$merchant_name = null;	
+
+					if (isset($post['merchant_name'])) {
+                        $merchant_name = $post['merchant_name'];
+					}
+
 					 if (isset($post['UserID'])) {
                         $user_id = $post['UserID'];
                     }
@@ -787,7 +798,8 @@ $return = array(
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_order_items');
 					$payload = json_encode( array( "order_id"=> $order_id,
-													"UserID"=> "5") );
+													"UserID"=> "5",
+													"merchant_name"=> $merchant_name) );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

@@ -52,42 +52,27 @@ $result=json_decode($content,true);
 
 
 
-echo' 
-<table id="example2" class="table table-bordered table-hover ">
-<tbody>';
+
+
 if ($result['total_rows'] > 0) {
 
     foreach($result['data'] as $DataProduct)
     {
-        echo '<tr>';
-        echo '<td ><div class="input-group">   
+        echo' <div class="container table-bordered p-1">';
+        echo '<div class="row">';
+        echo '<div class="col-auto">'; 
+		echo ' <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
+                <img class="img-product" width="100px" height="100px" src='.$DataProduct['ImageProductName'].'>      
+                </a>';
+        echo' </div>';
 
-<div class="filtr-item col-sm-1" data-category="1" data-sort="'.$DataProduct['ProductName'].'">
-                      <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
-                        <img src="'.$DataProduct['ImageProductName'].'" class="img-fluid mb-2" alt="image"/>
-                      </a>
-                    </div>';
-
-        echo '<div class="css-gjyepm">';
-        echo '<div class="styPLCProductNameInfo"><h6>';
+        echo '<div class="col">';
+        echo '<h6>';
         echo $DataProduct['ProductName'];
-        echo '</h6></div>
-        </div>';
-
-        // echo '<div class="css-11v3zrg">';
-        // echo $DataProduct['SkuID'];
-        //  echo '</div>';
-
-        // echo '<div class="css-11v3zrg">';
-        // echo $DataProduct['ProductVariantName'] . " " . $DataProduct['ProductVariantDetailName'];
-        //echo '</div>';
-
-        //echo '<div class="css-11v3zrg">';
-        //echo $DataProduct['PriceRetail'];
-        //  echo '</div>';
+        echo '</h6></div>';
 
 
-        echo '</div></div>';
+        echo '</div>';
 
 
         echo ' <button class="btn btn-primary col-auto" data-toggle="collapse" data-target="#variant'.$DataProduct['ProductID'].'" >Lihat Variant</button>';
@@ -188,8 +173,7 @@ if ($result['total_rows'] > 0) {
 
         echo' </div> ';
 
-        echo'</td>';
-        echo'</tr>';
+        echo'</div>';
     }
 
 }else{
@@ -198,10 +182,7 @@ if ($result['total_rows'] > 0) {
 
 }
 
-echo'</tbody>
-                 </table>
-                 
-                 </div> ';
+echo'</div></div> ';
 
 
 

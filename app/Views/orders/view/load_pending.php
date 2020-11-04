@@ -26,12 +26,13 @@
 			}			
  
  
- 	function getOrderItems($DataProduct){
+ 	function getOrderItems($order_id , $merchant_name){
 
 
 					$chItems = curl_init();
 					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
-					$payloadItem = json_encode( array( "order_id"=> $DataProduct ) );
+					$payloadItem = json_encode( array( "order_id"=> $order_id,
+					"merchant_name"=> $merchant_name) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -149,7 +150,7 @@ function getHistory($order_id){
 											
 					</div></div>';
 
-		$resultItem = getOrderItems($order_id);
+		$resultItem = getOrderItems($order_id, $merchant_name);
 		$cekHistoryOrder = getHistory($order_id);
 
 			foreach($resultItem['data'] as $DataOrderItems)
