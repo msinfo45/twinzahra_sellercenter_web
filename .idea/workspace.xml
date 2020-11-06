@@ -41,6 +41,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -83,6 +84,7 @@
       <workItem from="1604106587653" duration="111000" />
       <workItem from="1604191189242" duration="235000" />
       <workItem from="1604215547432" duration="192000" />
+      <workItem from="1604452064548" duration="2933000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -175,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604215714261</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo">
+      <created>1604455011324</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604455011339</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,20 +202,30 @@
     <MESSAGE value="Perbaikan Accept Order otomatis" />
     <MESSAGE value="Penambahan History Orders ready to ship , dalam pengiriman dll" />
     <MESSAGE value="Perbaikan Accept Orders" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan Accept Orders" />
+    <MESSAGE value="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1604215704437">
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604650222669">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604454993830" />
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604650222669" />
+    <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604215704437" />
+    <state x="116" y="61" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1604452130978" />
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog" timestamp="1603361256408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604215717197">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604455016733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604215717197" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604650166007" />
   </component>
 </project>

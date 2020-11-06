@@ -36,6 +36,160 @@ if (isset($content) && $content != "") {
     $db = new Model_user();
 
 
+
+if ($content == "sync_marketplace") {
+	
+	$modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+    $user_id = 5;
+	$rowProducts = array();
+	$ProductID = array();
+					
+
+$item_id = null;	
+	
+if (isset($post['item_id'])) {
+	$item_id = $post['item_id'];
+}
+
+	$merchant_name = null;	
+	
+if (isset($post['merchant_name'])) {
+	$merchant_name = $post['merchant_name'];
+}
+					
+//Mencari konfigurasi lazada by user id
+$getDataLazada = $db->getDataLazada($user_id , $merchant_name);
+				
+if ($getDataLazada != null) {
+							
+while ($rowLazada = $getDataLazada->fetch_assoc()) {										
+$rows[] = $rowLazada;
+			
+}
+							
+foreach ($rows as $obj) {
+						
+
+					$appkey =  $obj['AppKey'];
+					$appSecret =  $obj['AppSecret'];
+					$accessToken =  $obj['AccessToken'];	
+					$merchant_name =  $obj['merchant_name'];										
+	
+							
+//Mencari ProductID by user id
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/products.php?request=get_products');
+					$payload = json_encode( array( "UserID"=> $user_id,
+													"Status" => 1) );
+					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$productContent = curl_exec($ch);
+					curl_close($ch);
+					
+					$resultProducts=json_decode($productContent,true);
+					
+					//echo json_encode($resultProducts);die;
+							
+	
+	
+	foreach($resultProducts['data'] as $data) {
+
+		$ProductID = $data['ProductID'];
+		$ProductName = $data['ProductName'];
+		$Description = $data['Description'];
+
+
+
+			$xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+			$xml_output .= "<Request>\n";
+			$xml_output .= "\t<Product>\n";
+			$xml_output .= "\t<Attributes>\n";
+			$xml_output .= "\t\t<name>" . $ProductName . "</name>\n";
+			//$xml_output .= "\t\t<short_description>" . $Description . "</short_description>\n";
+			$xml_output .= "\t</Attributes>\n";
+			$xml_output .= "\t<Skus>\n";
+
+
+	foreach($data['skus'] as $skus) {
+
+		$SkuID = $skus['SkuID'];
+		$Stock = $skus['Stock'];
+		$PriceRetail = $skus['PriceRetail'];
+		$PriceReseller = $skus['PriceReseller'];
+			$xml_output .= "\t<Sku>\n";
+			$xml_output .= "\t\t<SellerSku>" . $skus['SkuID'] . "</SellerSku>\n";
+			$xml_output .= "\t\t<quantity>" . $skus['Stock'] . "</quantity>\n";
+			$xml_output .= "\t\t<price>" . $skus['PriceRetail'] . "</price>\n";
+			$xml_output .= "\t</Sku>\n";
+
+	}
+			$xml_output .= "\t</Skus>\n";
+			$xml_output .= "\t</Product>\n";
+			$xml_output .= "</Request>";
+
+			$c = new LazopClient($url,$appkey,$appSecret);
+			$request = new LazopRequest('/product/update');
+			$request->addApiParam('payload', $xml_output);			
+			$jdecode=json_decode($c->execute($request, $accessToken));
+			$code = $jdecode->code;
+
+			$resultData = json_encode($jdecode , true);
+			
+			//echo json_encode($resultData);die;
+			
+		if ($code == 0) {
+				
+			$status = "Sukses";
+			$message = 'null';
+				
+			}else{
+
+			$status = "Gagal";
+			$message = $jdecode->message;
+			
+						
+						
+			}	
+			
+		$dataResult[]= array (
+						"MerchantName" => $merchant_name,
+						"ProductName"=>$ProductName,
+						"Status"=>$status,
+						"Msg"=>$message,
+						"Code"=>$code,
+						);
+
+
+			}
+
+
+	
+		}			   
+
+
+		$return = array(
+		"status" => 200,
+		"message" => "Sync ke marketplace berhasil",
+		"total_rows" => COUNT($dataResult),
+		"data" => $dataResult
+					  
+               );
+			  
+ } else {
+                        $return = array(
+                            "status" => 404,
+                            "message" => "Akun lazada belum diatur"
+                        );
+}
+			//sendEmail (json_encode($return));
+			
+          echo json_encode($return);
+					
+				
+
+}
 			if ($content == "get_skus") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
@@ -105,18 +259,20 @@ if (isset($content) && $content != "") {
 					
 					$search = null;
 					
-                    $limit = 10;
+                    $limit = null;
 					
 					$status =1;
 
 					$search_size = null;
                     $search_color = null;
 					
+					$productArr = [];
+					$skusArr = [];
+					$imageskusArr = [];
 					
-					
-                    //if (isset($post['Page'])) {
-                       // $page = $post['Page'];
-                   // }
+                    if (isset($post['Limit'])) {
+                        $limit = $post['Limit'];
+                   }
 					
 					 if (isset($post['Search'])) {
                         $search = $post['Search'];
@@ -148,16 +304,75 @@ if (isset($content) && $content != "") {
 							
                             }
 							
+							
+foreach($rows as $products)
+{
+		$product_id = $products['ProductID'];
+			
+		$getDataProductItems = $db->getProductItems($user_id, $product_id);
+		
+		while ($rowProductItem = $getDataProductItems->fetch_assoc()) {										
+						
+        $rowProductItems= $rowProductItem;	
+
+		$getDataImageProductVariants = $db->getImageProductVariants($rowProductItems['ProductVariantID']);
+	
+		while ($rowImageProductVariants = $getDataImageProductVariants->fetch_assoc()) {		
+	
+	$rowImageProductVariant = $rowImageProductVariants['ImageProductVariantName'];
+	
+	$skusArr = array ("ProductVariantID" => $rowProductItem['ProductVariantID'],
+							"ProductVariantName" => $rowProductItem['ProductVariantName'],
+							"ProductVariantDetailName" => $rowProductItem['ProductVariantDetailName'],
+							"Price" => $rowProductItem['Price'],
+							"PriceRetail" => $rowProductItem['PriceRetail'],
+							"PriceReseller" => $rowProductItem['PriceReseller'],
+							"Stock" => $rowProductItem['Stock'],
+							"SkuID" => $rowProductItem['SkuID'],
+							"Barcode" => $rowProductItem['Barcode'],
+							"ProductVariantID" => $rowProductItem['ProductVariantID'],
+							"Images" => array($rowImageProductVariant)
+			
+			);
+		}
+		
+		
+	
+	
+	 	
+		
+		//$resultSkus = array_values($skusArr);	
+		
+	//echo json_encode($rowProductItems);die;
+		$productArr[$products['ProductID']]['ProductID'] = $products['ProductID'];
+        $productArr[$products['ProductID']]['UserID'] = $products['UserID'];
+		$productArr[$products['ProductID']]['SupplierID'] = $products['SupplierID'];
+		$productArr[$products['ProductID']]['ProductName'] = $products['ProductName'];
+		$productArr[$products['ProductID']]['CategoryID'] = $products['CategoryID'];
+		$productArr[$products['ProductID']]['BrandID'] = $products['BrandID'];
+		$productArr[$products['ProductID']]['Description'] = $products['Description'];
+		$productArr[$products['ProductID']]['skus'][]= $skusArr;				
+       
+			}  
+	
+			
+			
+		}				
+							
+							
+		$result = array_values($productArr);					
+							
+							
 	
 
-                            $total = mysqli_num_rows($getData);
+                           
 
 
                             $return = array(
                                 "status" => 200,
                                 "message" => "ok",
-                                "total_rows" => $total,
-                                "data" => $rows
+                                "total_rows" => COUNT($result),
+                                "data" => $result
                             );
                         } else {
                             $return = array(
@@ -579,142 +794,70 @@ if (isset($content) && $content != "") {
         echo json_encode($return);
     }
 				
-				if ($content == "get_product_item") {
-					$modeHeader = 0;
-                    $post = json_decode(file_get_contents("php://input"), true);
-//                    $user_id = $userid_header;
-                    $user_id = null;
-					$product_id = $post['ProductID'];
-				//$product_id= 1;
-						
-						$rowProductVariant =  array();
-						$rowImageProductVariant =  array();
-						$rowProductVariantDetail =  array();
-						
-                        $getData = $db->getProductItem($product_id);
-						
-						 
-						 
-						 $getProductVariant = $db->getProductVariant($product_id);
-						 $getImageProductVariant = $db->getImageVariant($product_id);
-						 $getProductVariantDetail = $db->getProductVariantDetail($product_id);
-						
-						 
-                        if ($getData != null  ) {
-
-
-							$productArr = [];
-							$productVariantArr = [];
-							$imageVariantArr = [];
-							$productVariantDetailArr = [];
-					  
-					  
-					  while ($rowImageProductVariant = $getImageProductVariant->fetch_assoc()) {										
-						
-                      $rowImageProductVariants[] = $rowImageProductVariant;	
-							
-			
-					$imageVariantArr[$rowImageProductVariant['ImageProductVariantID']]['ProductVariantID'] = $rowImageProductVariant['ProductVariantID'];
-					$imageVariantArr[$rowImageProductVariant['ImageProductVariantID']]['ImageProductVariantID'] = $rowImageProductVariant['ImageProductVariantID'];
-					$imageVariantArr[$rowImageProductVariant['ImageProductVariantID']]['ImageProductVariantName'] = $rowImageProductVariant['ImageProductVariantName'];
-					$imageVariantArr[$rowImageProductVariant['ImageProductVariantID']]['isDefault'] = $rowImageProductVariant['isDefault'];
-					$resultImageVariant = array_values($imageVariantArr);	
-
-			
-					  }
-					  
-					  
-					  	  while ($rowProductVariantDetail = $getProductVariantDetail->fetch_assoc()) {										
-						
-                      $rowProductVariantDetails[] = $rowProductVariantDetail;	
-							
-			
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['ProductVariantDetailID'] = $rowProductVariantDetail['ProductVariantDetailID'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['ProductVariantID'] = $rowProductVariantDetail['ProductVariantID'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['SkuID'] = $rowProductVariantDetail['SkuID'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['ProductVariantDetailName'] = $rowProductVariantDetail['ProductVariantDetailName'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['PriceRetail'] = $rowProductVariantDetail['PriceRetail'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['PriceReseller'] = $rowProductVariantDetail['PriceReseller'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['Stock'] = $rowProductVariantDetail['Stock'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['Barcode'] = $rowProductVariantDetail['Barcode'];
-					$productVariantDetailArr[$rowProductVariantDetail['ProductVariantDetailID']]['isDefault'] = $rowProductVariantDetail['isDefault'];
-					$resultProductDetails = array_values($productVariantDetailArr);	
-
-			
-					  }
-
-					  
-					  
-					  
-					  
-					   while ($rowProductVariant = $getProductVariant->fetch_assoc()) {										
-						
-                                $rowProductVariants[] = $rowProductVariant;	
-							
 				
+if ($content == "get_product_items") {
+	$modeHeader = 0;
+	$post = json_decode(file_get_contents("php://input"), true);
 
+    $user_id = 5;
+	$product_id = $post['ProductID'];
+	$product_id= 1;
 					
-					  
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['ProductVariantID'] = $rowProductVariant['ProductVariantID'];
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['ProductID'] = $rowProductVariant['ProductID'];
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['ProductVariantName'] = $rowProductVariant['ProductVariantName'];
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['isDefault'] = $rowProductVariant['isDefault'];
-					
-					
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['image_product_variant'] = $resultImageVariant;
-					$productVariantArr[$rowProductVariant['ProductVariantID']]['product_variant_details'] = $resultProductDetails;
-			
-					  }
-					  
-					
-					  
-					 $result1 = array_values($productVariantArr);	
-					  
-					 
-                            while ($row = $getData->fetch_assoc()) {										
+	$rowVariants =  [];
+	$rowImageProductVariants =  [];
+
 						
-                                $rows[] = $row;				
+	$getDataProductItems = $db->getProductItems($user_id, $product_id);
+					 
+while ($rowProductItem = $getDataProductItems->fetch_assoc()) {										
+						
+	$ProductVariantID = $rowProductItem['ProductVariantID'];
+	$rows[] = $rowProductItem;
+		
+	}
+			//$getDataImageProductVariants = $db->getImageProductVariants($ProductVariantID);
+	
+	//	while ($rowImageProductVariants = $getDataImageProductVariants->fetch_assoc()) {		
+	
+	//$rowImageProductVariant = $rowImageProductVariants['ImageProductVariantName'];
+	
+			//$rowImageProductVariants = array ($rowImageProductVariant	
+			//);
 	
 	
-    $productArr[$row['ProductID']]['ProductID'] = $row['ProductID'];
-    $productArr[$row['ProductID']]['ProductName'] = $row['ProductName'];
-	$productArr[$row['ProductID']]['Description'] = $row['Description'];
-	$productArr[$row['ProductID']]['Weight'] = $row['Weight'];
-   
-	$productArr[$row['ProductID']]['product_variants'] = $result1;
+		//}
 
-					
-                            }
-							
-							
 
+foreach ($rows as $ProductItems) {
 	
-				$result = array_values($productArr);			
+		$rowVariants[$ProductItems['ProductVariantID']]['ProductVariantID'] = $ProductItems['ProductVariantID'];	
+        $rowVariants[$ProductItems['ProductVariantID']]['ProductVariantName'] = $ProductItems['ProductVariantName'];
+		$rowVariants[$ProductItems['ProductVariantID']]['ProductVariantDetailName'] = $ProductItems['ProductVariantDetailName'];
+		$rowVariants[$ProductItems['ProductVariantID']]['Price'] = $ProductItems['Price'];
+		$rowVariants[$ProductItems['ProductVariantID']]['PriceRetail'] = $ProductItems['PriceRetail'];
+		$rowVariants[$ProductItems['ProductVariantID']]['PriceReseller'] = $ProductItems['PriceReseller'];
+		$rowVariants[$ProductItems['ProductVariantID']]['Stock'] = $ProductItems['Stock'];
+		$rowVariants[$ProductItems['ProductVariantID']]['SkuID'] = $ProductItems['SkuID'];
+		$rowVariants[$ProductItems['ProductVariantID']]['Barcode'] = $ProductItems['Barcode'];
+		$rowVariants[$ProductItems['ProductVariantID']]['ProductVariantID'] = $ProductItems['ProductVariantID'];
+		
+	
+		
+}
+
+	$resultVariants = array_values($rowVariants);
 
 
-
-
-                            $total = mysqli_num_rows($getData);
-
-
-                            $return = array(
-                                "status" => 200,
-                                "message" => "ok",
-                                "total_rows" => $total,
-                                "data" => $result
-                            );
-                        } else {
-                            $return = array(
-                                "status" => 200,
-								"total_rows" => 0,
-                                "message" => "Belum ada Produk",
-								"data" => []
-                            );
-                        }
-                  
-
-                    echo json_encode($return);
-                }
+	$return = array(
+	"status" => 200,
+	"total_rows" => COUNT($resultVariants),
+	"message" => "ok",
+	"data" => $resultVariants
+	);
+										
+  echo json_encode($return);
+  
+}         
 				
     // ---------------------------------------- API that need token below ------------------------------------------- //
     if ($modeHeader == 1) {

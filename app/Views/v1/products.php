@@ -112,7 +112,7 @@ include "public/models/Products_Model.php";
 					
 					$search = null;
 					
-                    $limit = 10;
+                 $limit = null;
 					
 					$status =1;
 
@@ -121,9 +121,9 @@ include "public/models/Products_Model.php";
 					
 					
 					
-                    //if (isset($post['Page'])) {
-                       // $page = $post['Page'];
-                   // }
+                    if (isset($post['Limit'])) {
+                        $limit = $post['Limit'];
+                    }
 					
 					 if (isset($post['Search'])) {
                         $search = $post['Search'];
@@ -567,7 +567,7 @@ include "public/models/Products_Model.php";
 						
 
 
-		$total = mysqli_num_rows($getDataProduct);
+		$total = mysqli_num_rows($getDataLazada);
 
 						
 		//$dataResult = json_encode($dataResult , true);

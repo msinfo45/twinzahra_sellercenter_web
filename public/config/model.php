@@ -3472,6 +3472,30 @@ class Model_user
         }
     }
 
+
+    public function getImageProductVariants($product_variant_id)
+    {
+
+        $query_get = $this->conn->query("SELECT
+                                           *
+                                        from
+                                        image_product_variants
+					
+											WHERE 
+                                            ProductVariantID =  '" . $product_variant_id . "'
+                                        
+                                         
+											");
+
+        if (mysqli_num_rows($query_get) > 0)
+        {
+            return $query_get;
+        }
+        else
+        {
+            return null;
+        }
+    }
     /**
      * Get Promo Order Detail
      */
@@ -8770,7 +8794,13 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
                 $p = ($page - 1) * $limit;
             }
 
-            $condition .= "Order by pvd.Stock and pvd.Stock DESC LIMIT " . $limit . " OFFSET " . $p . " ";
+            if ($limit == null) {
+                $condition .= "Order by pvd.Stock and pvd.Stock DESC OFFSET " . $p . " ";
+            }else{
+
+                $condition .= "Order by pvd.Stock and pvd.Stock DESC LIMIT " . $limit . " OFFSET " . $p . " ";
+            }
+     
 
         }
 
@@ -8818,7 +8848,7 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
 	                                LEFT JOIN image_products AS ip
 	                                ON tp.ProductID = ip.ProductID
                                     where (tp.UserID =" . $user_id . "	and tp.Status =" . $status . ") and (ip.isDefault = 1)
-                                    Order by tp.ProductID ASC LIMIT " . $limit . " OFFSET " . $p . " ");
+                                    Order by tp.ProductID ASC  ");
 
         }
 
@@ -9620,26 +9650,22 @@ ON pv.ProductVariantID = ipv.ProductVariantID
         }
     }
 
-    public function getProductItems()
+    public function getProductItems($UserID , $ProductID)
     {
 
-        $query = $this
-            ->conn
-            ->query("SELECT * FROM 
-products AS tp
-LEFT JOIN product_variants AS pv 
-ON tp.ProductID = pv.ProductID 
-LEFT JOIN product_variant_details AS pvd
-ON pv.ProductVariantID = pvd.ProductVariantID
-LEFT JOIN image_product_variants AS ipv
-ON pv.ProductVariantID = ipv.ProductVariantID
-	WHERE ipv.isDefault = 1
-										
-									order by pvd.SkuID ASC
-
-									
-										
-                                         ");
+        $query = $this->conn->query("SELECT pv.ProductVariantID , 
+        pv.ProductVariantName ,
+        pvd.ProductVariantDetailName,
+        pvd.Price,
+        pvd.PriceRetail,
+        pvd.PriceReseller,
+        pvd.Stock,
+        pvd.SkuID,
+        pvd.Barcode
+        FROM product_variants AS pv 
+        LEFT JOIN product_variant_details AS pvd
+        ON pvd.ProductVariantID = pv.ProductVariantID
+        where pv.ProductID = '" . $ProductID . "' and pv.UserID =  '" . $UserID . "' ");
 
         if (mysqli_num_rows($query) > 0)
         {

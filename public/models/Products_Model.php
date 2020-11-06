@@ -147,7 +147,50 @@ if ($search != null) {
 			
 			}
 
-
+			public function getDataLazada($user_id , $merchant_name)
+			{
+			
+				if ($merchant_name != null) {
+		
+					$query = $this
+					->conn
+					->query(" SELECT * from lazada
+												where (UserID = '" . $user_id . "' and merchant_name = '" . $merchant_name . "') and active=1
+											   ");
+		
+				if (mysqli_num_rows($query) > 0)
+				{
+					return $query;
+				}
+				else
+				{
+					return null;
+				}
+		
+		
+				}else{
+		
+					$query = $this
+					->conn
+					->query(" SELECT * from lazada
+												where UserID = '" . $user_id . "' and active=1
+											   ");
+		
+				if (mysqli_num_rows($query) > 0)
+				{
+					return $query;
+				}
+				else
+				{
+					return null;
+				}
+		
+		
+				}
+		
+				
+		
+			}
 
    public function getProductItem($product_id)
 {

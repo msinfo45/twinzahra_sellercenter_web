@@ -176,7 +176,7 @@ echo' </div></div> ';
 
 echo'<div class="ml-auto">
 <a  target="_blank" title="Sync Marketplace"  class="btn btn-primary" 
-href="http://localhost/twinzahra/v1/products?request=sync_marketplace?item_id='.$DataProduct['item_id'].'&merchant_name='.$DataProduct['merchant_name'] .'">
+href="http://localhost/twinzahra/public/api/products.php?request=sync_marketplace">
 <img class="img-product" width="15px" height="15px" src="public/images/update.png"> 
 </a>   
  </div>';
