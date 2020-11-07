@@ -60,11 +60,11 @@ if ($result['total_rows'] > 0) {
     {
         echo' <div class="container table-bordered p-1">';
         echo '<div class="row">';
-        echo '<div class="col-auto">'; 
-		echo ' <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
-                <img class="img-product" width="100px" height="100px" src='.$DataProduct['ImageProductName'].'>      
-                </a>';
-        echo' </div>';
+       // echo '<div class="col-auto">';
+	//	echo ' <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
+          //      <img class="img-product" width="100px" height="100px" src='.$DataProduct['ImageProductName'].'>
+          //      </a>';
+      //  echo' </div>';
 
         echo '<div class="col">';
         echo '<h6>';
@@ -81,7 +81,7 @@ if ($result['total_rows'] > 0) {
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, base_url('public/api/products.php?request=get_product_item'));
+        curl_setopt($ch, CURLOPT_URL, base_url('public/api/products.php?request=get_product_items'));
         $payload = json_encode( array(
             "UserID"=> 5 ,
             "ProductID"=> $DataProduct['ProductID'] ) );
@@ -112,54 +112,54 @@ if ($result['total_rows'] > 0) {
 
           foreach ($resultItem -> data as $ProductItem) {
 
-            foreach ($ProductItem-> product_variants as $ProductVariants) {
+            foreach ($ProductItem-> skus as $skus) {
 
-                    foreach ($ProductVariants-> product_variant_details as $ProductVariantDetails) {
+                   // foreach ($ProductVariants-> product_variant_details as $ProductVariantDetails) {
 
 
 
                         echo '<td> ';
                         echo '<div class="css-11v3zrg">';
-                       echo $ProductVariants->ProductVariantName . " " . $ProductVariantDetails->ProductVariantDetailName;
+                       echo $skus->ProductVariantName . " " . $skus->ProductVariantDetailName;
                         echo '</div>';
                         echo '</td>';
 
                         echo '<td> ';
                         echo '<div class="css-11v3zrg">';
-                        echo $ProductVariantDetails->SkuID;
-                        echo '</div>';
-                        echo '</td>';
-
-
-                        echo '<td> ';
-                        echo '<div class="css-11v3zrg">';
-                       echo $ProductVariantDetails->PriceRetail;
-                        echo '</div>';
-                        echo '</td>';
-
-                        echo '<td> ';
-                        echo '<div class="css-11v3zrg">';
-                        echo $ProductVariantDetails->PriceReseller;
+                        echo $skus->SkuID;
                         echo '</div>';
                         echo '</td>';
 
 
                         echo '<td> ';
                         echo '<div class="css-11v3zrg">';
-                        echo $ProductVariantDetails->Stock;
+                       echo $skus->PriceRetail;
                         echo '</div>';
                         echo '</td>';
 
                         echo '<td> ';
                         echo '<div class="css-11v3zrg">';
-                        echo $ProductVariantDetails->Barcode;
+                        echo $skus->PriceReseller;
+                        echo '</div>';
+                        echo '</td>';
+
+
+                        echo '<td> ';
+                        echo '<div class="css-11v3zrg">';
+                        echo $skus->Stock;
+                        echo '</div>';
+                        echo '</td>';
+
+                        echo '<td> ';
+                        echo '<div class="css-11v3zrg">';
+                        echo $skus->Barcode;
                         echo '</div>';
                         echo '</td>';
 
 
                         echo '</tr>';
 
-                    }
+                  //}
                 }
             }
        }else{

@@ -8777,7 +8777,7 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
         return $query_get;
     }
 
-    public function getDataProduct($user_id, $status, $page, $limit, $search, $search_size, $search_color)
+    public function getDataProduct($product_id, $user_id, $status, $page, $limit, $search, $search_size, $search_color)
     {
 
         $condition = '';
@@ -8834,6 +8834,25 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
 					LEFT JOIN product_variant_details AS pvd
 					ON pv.ProductVariantID = pvd.ProductVariantID			
 					WHERE (tp.UserID =" . $user_id . " AND  pvd.Stock > 0 ) AND (ip.isDefault = 1 AND tp.Status =" . $status . ") AND (pvd.ProductVariantDetailName LIKE CONCAT('%','" . $search_size . "','%'))
+										
+										Order by tp.ProductID ASC");
+
+        }
+        else if ($product_id != null)
+        {
+
+          $query = $this
+            ->conn
+            ->query("
+  	SELECT * FROM 
+	                                products AS tp
+	                                LEFT JOIN image_products AS ip
+	                                ON tp.ProductID = ip.ProductID
+					LEFT JOIN product_variants AS pv
+					ON tp.ProductID = pv.ProductID	
+					LEFT JOIN product_variant_details AS pvd
+					ON pv.ProductVariantID = pvd.ProductVariantID			
+					WHERE (tp.UserID =" . $user_id . ") AND (ip.isDefault = 1 AND tp.Status =" . $status . ") AND (tp.ProductID =" . $product_id . " )
 										
 										Order by tp.ProductID ASC");
 
@@ -9665,7 +9684,8 @@ ON pv.ProductVariantID = ipv.ProductVariantID
         FROM product_variants AS pv 
         LEFT JOIN product_variant_details AS pvd
         ON pvd.ProductVariantID = pv.ProductVariantID
-        where pv.ProductID = '" . $ProductID . "' and pv.UserID =  '" . $UserID . "' ");
+        where pv.ProductID = '" . $ProductID . "' and pv.UserID =  '" . $UserID . "' 
+        order by pvd.ProductVariantDetailName");
 
         if (mysqli_num_rows($query) > 0)
         {

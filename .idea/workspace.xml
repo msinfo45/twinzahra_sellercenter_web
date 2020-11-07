@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/products/view/load_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/products/view/load_products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +88,8 @@
       <workItem from="1604191189242" duration="235000" />
       <workItem from="1604215547432" duration="192000" />
       <workItem from="1604452064548" duration="2933000" />
+      <workItem from="1604650164461" duration="6674000" />
+      <workItem from="1604714793636" duration="798000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -184,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604455011339</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="11062020">
+      <created>1604650233984</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604650233984</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +215,8 @@
     <MESSAGE value="Penambahan History Orders ready to ship , dalam pengiriman dll" />
     <MESSAGE value="Perbaikan Accept Orders" />
     <MESSAGE value="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo" />
+    <MESSAGE value="11062020" />
+    <option name="LAST_COMMIT_MESSAGE" value="11062020" />
   </component>
   <component name="WindowStateProjectService">
     <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604650222669">
@@ -219,10 +232,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1604455016733">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1604650245023">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604650245023" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
