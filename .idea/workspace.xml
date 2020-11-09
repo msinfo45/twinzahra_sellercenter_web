@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/products/view/load_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/products/view/load_products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/orders/view/load_rts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/orders/view/load_rts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/shopee.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,9 @@
       <workItem from="1604215547432" duration="192000" />
       <workItem from="1604452064548" duration="2933000" />
       <workItem from="1604650164461" duration="6674000" />
-      <workItem from="1604714793636" duration="798000" />
+      <workItem from="1604714793636" duration="2580000" />
+      <workItem from="1604892987020" duration="3263000" />
+      <workItem from="1604913499335" duration="225000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -196,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604650233984</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="perbaikan load_products.php">
+      <created>1604723628692</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1604723628692</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,27 +225,32 @@
     <MESSAGE value="Perbaikan Accept Orders" />
     <MESSAGE value="Perbaikan sync marketplace , accept orders &amp; penambahan fitur promo" />
     <MESSAGE value="11062020" />
-    <option name="LAST_COMMIT_MESSAGE" value="11062020" />
+    <MESSAGE value="perbaikan load_products.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="perbaikan load_products.php" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604650222669">
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604723627041">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604454993830" />
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604650222669" />
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604723627041" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="116" y="61" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1604452130978" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1604897120673">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604897120673" />
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog" timestamp="1603361256408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1604650245023">
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1604723686514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604650245023" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604723686514" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

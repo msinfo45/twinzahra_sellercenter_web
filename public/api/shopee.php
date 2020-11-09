@@ -28,17 +28,17 @@ $rowsLazada = array();
 					$ditambah_5_menit = date("$tgl $waktu", strtotime('+5 minutes'));
 					
 					
-					$partner_id = "844193";
-					$redirect = "http://sellercenter.twinzahra.com";
+					$partner_id = "841409";
+					$redirect = "google.com";
 					$timestamp=strtotime($ditambah_5_menit); 
-					$sign ="ca1e9d30c90d5982f2e9a0d1e2a42e8f18650b008c02d289592a153a53a32fc2";
+					$sign ="31219c72afbe5794a50d30d86389942b0fa95355efc401739708667cfd07df9d";
 					
 				echo  "https://partner.uat.shopeemobile.com/api/v2/shop/auth_partner?partner_id=".$partner_id."&redirect=".$redirect."&imestamp=".$timestamp."&sign=".$sign."";die;
 					   // persiapkan curl
     $ch = curl_init(); 
 
     // set url 
-    curl_setopt($ch, CURLOPT_URL, "https://partner.uat.shopeemobile.com/api/v2/shop/auth_partner?partner_id='".$partner_id."'&redirect='".$redirect."'&timestamp='".$timestamp."'&sign='".$sign."'");
+    curl_setopt($ch, CURLOPT_URL, "https://partner.uat.shopeemobile.com/api/v2/shop/auth_partner?partner_id='".$partner_id."'&timestamp='".$timestamp."'&sign='".$sign."'&redirect='".$redirect."'");
 
     // return the transfer as a string 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 

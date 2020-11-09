@@ -1050,7 +1050,7 @@ if (isset($post['merchant_name'])) {
 				if ($getDataLazada != null) {
 							
 							
-                    while ($rowLazada = $getDataLazada->fetch_assoc()) {										
+         while ($rowLazada = $getDataLazada->fetch_assoc()) {
 					$appkey =  $rowLazada['AppKey'];
 					$appSecret =  $rowLazada['AppSecret'];
 					$accessToken =  $rowLazada['AccessToken'];	
@@ -1230,7 +1230,7 @@ if (isset($post['merchant_name'])) {
 
 
 
-						$request = new LazopRequest('/order/pack');
+						$request = new LazopRequest('/order/rts');
 						$request->addApiParam('delivery_type', $delivery_type);
 						$request->addApiParam('order_item_ids', $order_item_ids);
 						$request->addApiParam("shipment_provider", $delivery_type);
@@ -1428,7 +1428,7 @@ foreach ($rows as $obj) {
 			$data=$jdecode->data;
 			$product=$jdecode->data->products;
 								
-	//echo json_encode($jdecode);die;
+	echo json_encode($jdecode);die;
 	
 
 	 

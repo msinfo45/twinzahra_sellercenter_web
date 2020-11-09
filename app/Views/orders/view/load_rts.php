@@ -217,7 +217,7 @@ echo ' </div>';
 
 echo ' <div class="col-auto">';
 				if ($cekHistoryOrder != null ) {
-					
+                    echo'<a data-id="'.$order_id.'" title="Kirim"  class="SetToRTS btn btn-primary" href="#SetToRTS">Cetak Label</a>';
 					echo'<a data-id="'.$order_id.'" title="Kirim"  class="SetToRTS btn btn-primary" href="#SetToRTS">Kirim</a>';			
 					
 				}
