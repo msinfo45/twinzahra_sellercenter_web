@@ -1428,7 +1428,7 @@ foreach ($rows as $obj) {
 			$data=$jdecode->data;
 			$product=$jdecode->data->products;
 								
-	echo json_encode($jdecode);die;
+	//echo json_encode($jdecode);die;
 	
 
 	 
