@@ -546,7 +546,7 @@ $(document).on("click", ".deleteItemCartDetail", function () {
 
                    
 </div>
-<?= $this->include('kasir/modal/modal_search_product') ?>
+
 <?= $this->endSection() ?>
 
 

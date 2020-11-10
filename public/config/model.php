@@ -12,7 +12,7 @@ class Model_user
         include "db_connection.php";
         include "config_type.php";
         // Load Composer's autoloader
- require '../include/PHPMailer/PHPMailerAutoload.php';
+        require '../include/PHPMailer/PHPMailerAutoload.php';
         $this->conn = $conn;
         $this->uploaddir = $UPLOAD_DIR_2;
         $this->smsuserkey = $SMS_USERKEY;
@@ -6972,41 +6972,42 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
      * returns boolean
      */
 
-    function send_email($order_id , $sku , $status , $message)
-    {
-
-       
+  function send_email($subjek , $message)
+  {
 
 
-        $email_pengirim = "msinfo45@gmail.com";
-        $isi=$order_id . " " . $sku . " " .$message;
-        $subjek=$status;
-        $email_tujuan="twinzahrashop@gmail.com";
 
-        $mail = new PHPMailer();
+    date_default_timezone_set('Etc/UTC');
+    $email_pengirim = "no_replay@twinzahra.masuk.id";
+    $isi=$message;
+  //  $subjek=$status;
+    $email_tujuan="twinzahrashop@gmail.com";
 
-        $mail->IsHTML(true);    // set email format to HTML
-        $mail->IsSMTP();   // we are going to use SMTP
-        $mail->SMTPAuth   = true; // enabled SMTP authentication
-        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
-        $mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
-        $mail->Port       = 465;                   // SMTP port to connect to GMail
-        $mail->Username   = $email_pengirim;  // alamat email kamu
-        $mail->Password   = "Hacker45";            // password GMail
-        $mail->SetFrom($email_pengirim, 'noreply');  //Siapa yg mengirim email
-        $mail->Subject    = $subjek;
-        $mail->Body       = $isi;
-        $mail->AddAddress($email_tujuan);
+    $mail = new PHPMailer();
 
-       if(!$mail->Send()) {
-          echo "Eror: ".$mail->ErrorInfo;
-           exit;
-        }else {
-           echo "<div class='alert alert-success'><strong>Berhasil!</strong> Email telah berhasil dikirim.</div>";
-        }
+    $mail->IsHTML(true);    // set email format to HTML
+    $mail->IsSMTP();   // we are going to use SMTP
+    $mail->SMTPAuth   = true; // enabled SMTP authentication
+    $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+    $mail->Host       = "mail.twinzahra.masuk.id";      // setting GMail as our SMTP server
+    $mail->Port       = 465;                   // SMTP port to connect to GMail
+    $mail->Username   = $email_pengirim;  // alamat email kamu
+    $mail->Password   = "Klapaucius92!";            // password GMail
+    $mail->SetFrom($email_pengirim, 'Twinzahra Shop');  //Siapa yg mengirim email
+    $mail->Subject    = $subjek;
+    $mail->Body       = $isi;
+    $mail->AddAddress($email_tujuan);
+
+    if(!$mail->Send()) {
+      echo "Eror: ".$mail->ErrorInfo;
+      exit;
+    }else {
+     // echo "<div class='alert alert-success'><strong>Berhasil!</strong> Email telah berhasil dikirim.</div>";
     }
+  }
 
-    /**
+
+  /**
      * Function Send SMS new password
      * @param : Phone, New Password
      * returns boolean

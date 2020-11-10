@@ -16,15 +16,11 @@ include "../config/model.php";
 	$merchant_name = $post['merchant_name'];
 	}
 	
-	
-	
 
-		
-						
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=get_orders');
 	$payload = json_encode( array( 
-	"status"=> "pending",
+	//"status"=> "pending",
 	"merchant_name"=> $merchant_name) );
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 	curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -38,11 +34,11 @@ Foreach($resultOrders['data'] as $dataOrders)
 	{
 	
 	$order_id = $dataOrders['order_id'] ;
-	$shop_name = $dataOrders['shop_name'] ;
+   $merchant_name = $dataOrders['merchant_name'] ;
 	$chItems = curl_init();
 	curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra/public/api/orders.php?request=get_order_items');
 	$payloadItem = json_encode( array( "order_id"=> $order_id,
-										"merchant_name"=> $shop_name ) );
+										"merchant_name"=> $merchant_name  ) );
 	curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
 	curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 	curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
@@ -51,7 +47,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 	
 	$resultItem=json_decode($contentItem,true);
 	
-	//echo json_encode($resultItem);die;
+	//echo json_encode($resultOrders);die;
 
 	foreach($resultItem['data'] as $DataOrderItems)
 	{
@@ -79,7 +75,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 		curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra/public/api/orders.php?request=accept_order');
 		$payloadItem = json_encode( array( 
 		"order_id"=> $order_id ,
-		"merchant_name"=> $shop_name ,
+		"merchant_name"=> $merchant_name ,
 		"shipping_provider"=> "dropship" ,
 		"delivery_type"=> "dropship" 
 		));
@@ -95,15 +91,17 @@ Foreach($resultOrders['data'] as $dataOrders)
 	if ($resultItem['status'] == "200"){
 
 		$status = "sukses";
-		$message = "Pesanan Berhasil di Konfirmasi";
-		//$sendEmail = $db->send_email($order_id , $sku , $status , $message);
+    $subject  = "Pesanan " . $order_id . " telah berhasil dikonfirmasi" ;
+    $message = "Pesanan Gagal di Konfirmasi";
+		$sendEmail = $db->send_email($subject , $message);
 	
 	}else{
 	
 		$status = "gagal";
+    $subject  = "Pesanan " . $order_id . " gagal dikonfirmasi" ;
 		$message = "Pesanan Gagal di Konfirmasi";
-	
-		//$sendEmail = $db->send_email($order_id , $sku , $status , $message);
+
+    $sendEmail = $db->send_email($subject , $message);
 	
 	}
 	
@@ -111,9 +109,9 @@ Foreach($resultOrders['data'] as $dataOrders)
 	}else{
 	
 	$status = "gagal";
-	$message = "Produk di database kosong";
-	
-	//$sendEmail = $db->send_email($order_id , $sku , $status , $message);
+	$subject  = "Pesanan " . $order_id . " stok kosong" ;
+    $message = "Pesanan Gagal di Konfirmasi";
+	$sendEmail = $db->send_email($subject , $message);
 			
 	//
 	}
@@ -123,7 +121,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 
 	
 	$dataOrder[] = array(
-	"merchant_name" => $shop_name,
+	"merchant_name" => $merchant_name,
 	"order_id" => $order_id,
 	"sku" => $sku,
 	"status" => $status,

@@ -26,13 +26,14 @@
 			}			
  
  
- 	function getOrderItems($order_id , $merchant_name){
+ 	function getOrderItems($order_id , $merchant_name , $marketplace){
 
 
 					$chItems = curl_init();
 					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
 					$payloadItem = json_encode( array( "order_id"=> $order_id,
-					"merchant_name"=> $merchant_name) );
+					"merchant_name"=> $merchant_name,
+                    "marketplace"=> $marketplace) );
 					//$payloadItem = json_encode( array( "order_id" => 45 ) );
 					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -111,7 +112,7 @@ function getHistory($order_id){
 				$order_number = $DataProduct['order_number'] ;
 				$user_id = 5 ;
 				$marketplace = $DataProduct['marketplace'] ;
-				$merchant_name = $DataProduct['shop_name'] ;
+				$merchant_name = $DataProduct['merchant_name'] ;
 				$branch_number = $DataProduct['branch_number'] ;
 				$warehouse_code = $DataProduct['warehouse_code'] ;
 				$customer_first_name = $DataProduct['customer_first_name'] ;
@@ -150,7 +151,7 @@ function getHistory($order_id){
 											
 					</div></div>';
 
-		$resultItem = getOrderItems($order_id, $merchant_name);
+		$resultItem = getOrderItems($order_id, $merchant_name,$marketplace);
 		$cekHistoryOrder = getHistory($order_id);
 
 			foreach($resultItem['data'] as $DataOrderItems)
@@ -220,7 +221,7 @@ echo ' <div class="col-auto">';
 				if ($cekHistoryOrder == null ) {
 					if ($resultStok == 0) {			
 				
-					echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';			
+					echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';
                                         
 					}else{
 						

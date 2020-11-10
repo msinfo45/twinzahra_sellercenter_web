@@ -146,7 +146,7 @@ if (isset($post['merchant_name'])) {
 					
 					//$dataReturn[] = $data;
 			
-					
+				//	echo json_encode($jdecode);die;
 						
 					
 						
@@ -212,7 +212,7 @@ if (isset($post['merchant_name'])) {
 					"order_id" => $order_id,
 					"order_number" => $order_number,
 					"marketplace" => "LAZADA",
-					"shop_name" => $merchant_name,
+					"merchant_name" => $merchant_name,
 					"branch_number"=>$branch_number,
 					"warehouse_code"=>$warehouse_code,
 					"customer_first_name" => $customer_first_name,
@@ -1408,7 +1408,7 @@ if (isset($post['merchant_name'])) {
 
 		if ($getDataLazada != null) {
 							
-                    while ($rowLazada = $getDataLazada->fetch_assoc()) {										
+          while ($rowLazada = $getDataLazada->fetch_assoc()) {
 					$rows[] = $rowLazada;
 			
 					}

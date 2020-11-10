@@ -2,8 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/models/Model_Shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/kasir/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/kasir/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/orders/view/load_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/orders/view/load_pending.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/forex.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/getToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/help2pay.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/api/lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/midtrans.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/perfectmoney.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/callback_fasapay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/db_connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/db_connection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/accept_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/accept_orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/cek_status_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/cek_status_order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/include/PHPMailer/PHPMailerAutoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/include/PHPMailer/PHPMailerAutoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Client.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/ApiException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/AuthException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/BadRequestException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/ClientException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/Factory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Exception/Api/ServerException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Discount/Discount.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Item/Item.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Logistics/Logistics.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/NodeAbstract.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Order/Order.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Returns/Returns.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/Shop/Shop.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/Nodes/ShopCategory/ShopCategory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/RequestParameterCollection.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/RequestParameters.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/RequestParametersInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/shopee/src/ResponseData.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +131,8 @@
       <workItem from="1604714793636" duration="2580000" />
       <workItem from="1604892987020" duration="3263000" />
       <workItem from="1604913499335" duration="906000" />
-      <workItem from="1604915258763" duration="18000" />
+      <workItem from="1604915258763" duration="1515000" />
+      <workItem from="1604978544343" duration="20886000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -211,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604913747931</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="perbaikan set product lazada">
+      <created>1604915409315</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1604915409315</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,14 +282,15 @@
     <MESSAGE value="11062020" />
     <MESSAGE value="perbaikan load_products.php" />
     <MESSAGE value="perbaikan set rts lazada" />
-    <option name="LAST_COMMIT_MESSAGE" value="perbaikan set rts lazada" />
+    <MESSAGE value="perbaikan set product lazada" />
+    <option name="LAST_COMMIT_MESSAGE" value="perbaikan set product lazada" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604913746903">
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1604915408391">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604454993830" />
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604913746903" />
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604915408391" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -253,14 +303,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="563" y="263" width="261" height="201" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1603361256408" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1604913749851">
+    <state x="794" y="452" key="NewPhpFileDialog" timestamp="1604980001010">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="452" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604980001010" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1605002903999">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604913749851" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605002903999" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604650166007" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1604980881356">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604980881356" />
   </component>
 </project>

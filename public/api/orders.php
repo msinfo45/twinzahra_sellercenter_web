@@ -333,26 +333,25 @@ $return = array(
 					}		
 					
 					$page = null;
-					
-                    $limit = 0;
+          $limit = 0;
 					
 					 if (isset($post['UserID'])) {
-                        $user_id = $post['UserID'];
-                    }
+          $user_id = $post['UserID'];
+          }
 					
-					
-                    if (isset($post['Page'])) {
-                        $page = $post['Page'];
-                    }
+          if (isset($post['Page'])) {
+           $page = $post['Page'];
+           }
 					
 					if (isset($post['status_id'])) {
-                        $status_id = $post['status_id'];
-                    }
+          $status_id = $post['status_id'];
+           }
+       //   $status_id = 4;
 					
 				
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_orders');
-					$payload = json_encode( array( "merchant_name"=> $merchant_name) );
+				//	$payload = json_encode( array( "merchant_name"=> $merchant_name) );
 					//$payload = json_encode( array( "UserID"=> "5" ) );
 					//curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -361,23 +360,35 @@ $return = array(
 					curl_close($ch);
 					
 					$resultLazada=json_decode($lazadacontent,true);
-					
-						
 
-                        $getData = $db->getDataOrders($user_id, $page, $limit , $status_id);
+
+          $chShopee = curl_init();
+          curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra/public/api/shopee.php?request=get_orders');
+         // $payloadShopee = json_encode( array( "merchant_name"=> $merchant_name) );
+          //$payload = json_encode( array( "UserID"=> "5" ) );
+          //curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+          curl_setopt( $chShopee, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($chShopee, CURLOPT_RETURNTRANSFER, 1);
+          $shopeeContent = curl_exec($chShopee);
+          curl_close($chShopee);
+
+          $resultShopee =json_decode($shopeeContent,true);
+
+
+           $getData = $db->getDataOrders($user_id, $page, $limit , $status_id);
 						
-						if ($getData != null && $resultLazada != null ) {
+						if ($resultLazada != null && $resultShopee != null ) {
 							
 							
-							   while ($row = $getData->fetch_assoc()) {										
+							  // while ($row = $getData->fetch_assoc()) {
 						
-                                $rows[] = $row;				
+                             //   $rows[] = $row;
 	
 								
-                            }
+                 // }
 							
 									$r = [];
-									$r = array_merge($rows,$resultLazada) ;
+									$r = array_merge($resultLazada,$resultShopee) ;
 					
 
 
@@ -417,9 +428,16 @@ $return = array(
                         "message" => "ok lazada",
                         "data" => $resultLazada
 						);
-									
-								
-								
+
+
+            }else if (($resultShopee!= null )) {
+
+
+              $return = array(
+                "status" => 200,
+                "message" => "ok Shopee",
+                "data" => $resultShopee
+              );
 								
                         } else {
 							
@@ -774,7 +792,12 @@ $return = array(
 					$page = null;
 					
                     $limit = 0;
-					
+          $marketplace = null;
+
+          if (isset($post['marketplace'])) {
+            $marketplace = $post['marketplace'];
+          }
+
 					$merchant_name = null;	
 
 					if (isset($post['merchant_name'])) {
@@ -792,68 +815,93 @@ $return = array(
 					
 
 					//Get data from database
-                    $getData = $db->getDataOrderItems($user_id, $page, $limit , $order_id);
-						
-					//Get data from lazada	
-					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_order_items');
-					$payload = json_encode( array( "order_id"=> $order_id,
-													"UserID"=> "5",
-													"merchant_name"=> $merchant_name) );
-					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					$lazadacontent = curl_exec($ch);
-					curl_close($ch);
-					$rowLazada=json_decode($lazadacontent,true);
-					
-                        if ($getData != null) {
 
-                            while ($row = $getData->fetch_assoc()) {										
-						
-                                $rows[] = $row;				
-	
-								
-                            }
-							
-							$total = mysqli_num_rows($getData);
-											
-											
-							$return = array(
-                                "status" => 200,
-								"total_rows" => $total,
-                                "message" => "Berhasil",
-                                "data" => $rows
-                            );
-							
-							
-						}else if ($rowLazada != null) {
-					
+
+         if ($marketplace == "LAZADA") {
+
+           //Get data from lazada
+           $ch = curl_init();
+           curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_order_items');
+           $payload = json_encode( array( "order_id"=> $order_id,
+             "UserID"=> "5",
+             "merchant_name"=> $merchant_name) );
+           curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+           curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+           $lazadacontent = curl_exec($ch);
+           curl_close($ch);
+           $rowLazada=json_decode($lazadacontent,true);
 
 							$total = count($rowLazada);	
 
-                            $return = array(
-                                "status" => 200,
+               $return = array(
+                "status" => 200,
 								"total_rows" => $total,
-                                "message" => "Berhasil",
-                                "data" => $rowLazada
-                            );
-							
-							
-							
-							
-                        } else {
-                            $return = array(
-                                "status" => 200,
-								"total_rows" => 0,
-                                "message" => "Belum ada Data",
-								"data" => []
-                            );
-                        }
+                 "message" => "Berhasil",
+                 "data" => $rowLazada
+                );
+
+          }else if ($marketplace == "SHOPEE") {
+
+           //Get data from shopee
+
+           $chShopee = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_order_items");
+           $payloadShopee = json_encode( array( "ordersn_list"=> array($order_id),
+             "UserID"=> "5",
+             "merchant_name"=> $merchant_name) );
+           curl_setopt($chShopee, CURLOPT_POSTFIELDS, $payloadShopee);
+           curl_setopt($chShopee, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+           curl_setopt($chShopee, CURLOPT_RETURNTRANSFER, true);
+           $resultShopee= curl_exec($chShopee);
+           curl_close($chShopee);
+           $rowShopee = json_decode($resultShopee , true);
+
+            $total = count($rowShopee);
+
+            $return = array(
+              "status" => 200,
+              "total_rows" => $total,
+              "message" => "Berhasil",
+              "data" => $rowShopee
+            );
+
+
+
+          } else {
+           $getData = $db->getDataOrderItems($user_id, $page, $limit , $order_id);
+
+           if ($getData != null) {
+
+             while ($row = $getData->fetch_assoc()) {
+               $rows[] = $row;
+             }
+
+             $total = mysqli_num_rows($getData);
+
+
+             $return = array(
+               "status" => 200,
+               "total_rows" => $total,
+               "message" => "Berhasil",
+               "data" => $rows
+             );
+
+
+           }else{
+             $return = array(
+               "status" => 200,
+               "total_rows" => 0,
+               "message" => "Belum ada Data",
+               "data" => []
+             );
+           }
+
+
+}
                   
 
                     echo json_encode($return);
-                }		
+				}
 				
 							if ($content == "cek_history") {
 					$modeHeader = 0;
