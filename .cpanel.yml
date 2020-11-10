@@ -3,3 +3,6 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/twinzahr/public_html/
     - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R .cpanel.yml $DEPLOYPATH
+    - /bin/cp -R .env $DEPLOYPATH
+    - /bin/cp -R .htaccess $DEPLOYPATH
