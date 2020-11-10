@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/twinzahr/public_html/github
+    - export DEPLOYPATH=/home/twinzahr/public_html
     - /bin/cp * $DEPLOYPATH
