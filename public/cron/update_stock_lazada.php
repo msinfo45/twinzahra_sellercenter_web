@@ -5,20 +5,20 @@ include "../config/model.php";
 $db = new Model_user();
 
 
-		$chSkus = curl_init("https://twinzahra.masuk.id/public/api/shopee.php?request=update_variant_stock");
-        curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
-        $resultSkus = curl_exec($chSkus);
-        curl_close($chSkus);
-        $jsonDecodeSkus = json_decode($resultSkus);
-		
+$chSkus = curl_init("http://localhost/twinzahra/public/api/lazada.php?request=update_stock");
+curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
+$resultSkus = curl_exec($chSkus);
+curl_close($chSkus);
+$jsonDecodeSkus = json_decode($resultSkus);
 
-		
-	 
-		
-		
-		 $subject  = "Sync otomatis produk shopee berhasil" ;
-          $message  = '
+
+
+
+
+
+$subject  = "Sync otomatis produk lazada berhasil" ;
+$message  = '
 
 <div>
 <table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
@@ -77,7 +77,7 @@ $db = new Model_user();
                                              </tr>
                                              <tr>
                                                 <td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
-										Stok Produk di shopee berhasil di sync otomatis
+										Stok Produk di Lazada berhasil di syncron otomatis
                                                 </td>
                                              </tr>
                                              <tr>
@@ -134,39 +134,44 @@ $db = new Model_user();
                                              <tr>
                                                 <td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td>
                                              </tr> ';
-											 
-									foreach($jsonDecodeSkus->data as $data) {
-			
-		$item_id = $data ->item_id;
-		$variation_id  = $data ->variation_id;
-		$variation_sku = $data ->variation_sku;
-		$status = $data ->Status;
-			
-		$message .= '
+
+foreach($jsonDecodeSkus->data as $data) {
+
+  $item_id = $data ->item_id;
+  $merchant_name = $data ->merchant_name;
+  $name = $data ->name;
+  $SellerSku = $data ->SellerSku;
+  $Status = $data ->Status;
+  $marketplace = "LAZADA";
+
+  $message .= '
 				<tr>
                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Item Id: </td>
                     <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $item_id  .'</td>
                     </tr>
 					<tr>
-                     <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Variation Id: </td>
-                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">'. $variation_id .'</td>
+                     <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Merchant: </td>
+                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">'. $merchant_name .'</td>
                       </tr>
                       <tr>
-                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Variation Sku: </td>
-                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $variation_sku  .'</td>
+                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Nama Produk: </td>
+                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $name  .'</td>
                       </tr>
 											 
-			
+					<tr>
+                  <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Sku: </td>
+                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $SellerSku  .'</td>
+                    </tr>
 											 
 					<tr>
                   <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Status: </td>
-                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $status  .'</td>
+                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $Status  .'</td>
                     </tr><br>
 					';
-											 
-	}
-											 
-                  $message .=  '<tr>
+
+}
+
+$message .=  '<tr>
                                                 <td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td>
                                              </tr>
                                           </tbody>
@@ -312,7 +317,7 @@ $db = new Model_user();
 </div>';
 
 
-              $sendEmail = $db->send_email($subject , $message);
+$sendEmail = $db->send_email($subject , $message);
 
 echo json_encode($jsonDecodeSkus);
 ?>

@@ -234,7 +234,7 @@ if (isset($content) && $content != "") {
           $tax_code= "";
           $delivery_info= "";
 
-          $chItems = curl_init("https://twinzahra.masuk.id/public/api/shopee.php?request=get_order_items");
+          $chItems = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_order_items");
           $payloadItems = json_encode( array( "ordersn_list"=> array($order_id),
             "UserID"=> "5",
             "merchant_name"=> $merchant_name) );
@@ -243,29 +243,29 @@ if (isset($content) && $content != "") {
           curl_setopt($chItems, CURLOPT_RETURNTRANSFER, true);
           $resultItems = curl_exec($chItems);
           curl_close($chItems);
-        $jsonDecodeItems = json_decode($resultItems);
+          $jsonDecodeItems = json_decode($resultItems);
 
-         // echo $resultItems;die;
+          // echo $resultItems;die;
 
           foreach($jsonDecodeItems as $items)
 
           {
 
-          $warehouse_code= $items->warehouse_code;
-          $customer_first_name= $items->customer_first_name;
-          $customer_last_name= $items->customer_last_name;
-          $price= $items->price;
-          $items_count= COUNT($jsonDecodeItems);
-          $payment_method= $items->payment_method;
-          $voucher_code= $items->voucher_code;
-          $voucher_seller= $items->voucher_seller;
-          $shipping_fee_original= $items->shipping_fee_original;
-          $promised_shipping_times= $items->promised_shipping_time;
-          $extra_attributes= $items->extra_attributes;
-          $remarks= $items->remark;
-          $statuses= $items->status;
-          $created_at= $items->created_at;
-          $updated_at= $items->updated_at;
+            $warehouse_code= $items->warehouse_code;
+            $customer_first_name= $items->customer_first_name;
+            $customer_last_name= $items->customer_last_name;
+            $price= $items->price;
+            $items_count= COUNT($jsonDecodeItems);
+            $payment_method= $items->payment_method;
+            $voucher_code= $items->voucher_code;
+            $voucher_seller= $items->voucher_seller;
+            $shipping_fee_original= $items->shipping_fee_original;
+            $promised_shipping_times= $items->promised_shipping_time;
+            $extra_attributes= $items->extra_attributes;
+            $remarks= $items->remark;
+            $statuses= $items->status;
+            $created_at= $items->created_at;
+            $updated_at= $items->updated_at;
 
 
             $return[] = array(
@@ -304,236 +304,7 @@ if (isset($content) && $content != "") {
 
 
 
-				   }
-
         }
-
-
-
-
-    //$return = array(
-     // "status" => 200,
-      //"message" => "ok",
-    // "total_rows"=>COUNT($orders),
-      //"data" => $orders
-
-    //);
-
-
-
-
-    }else{
-      $return= array(
-        "status" => 404,
-        "message" => "Toko Shopee tidak ada yang aktif",
-        "total_rows" => 0,
-        "data" => []
-
-
-      );
-
-
-    }
-
-    //
-    echo json_encode($return);
-
-  }
-
-  if ($content == "get_order_items") {
-
-    $modeHeader = 0;
-    $post = json_decode(file_get_contents("php://input"), true);
-
-    $user_id = 5;
-    $merchant_name = null;
-  $ordersn_list = $post['ordersn_list'];
-   // $ordersn_list = ["201109J08RDDET"];
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
-    }
-
-
-if ($ordersn_list) {
-
-
-    $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
-
-    if ($getDataShopee != null) {
-
-      while ($rowShopee = $getDataShopee->fetch_assoc()) {
-        $rows[] = $rowShopee;
-
-      }
-
-      foreach ($rows as $obj) {
-
-        $partner_id = $obj['partner_id'];
-        $partner_key = $obj['partner_key'];
-        $shop_id = $obj['shop_id'];
-        $code = $obj['code'];
-        $merchant_name = $obj['merchant_name'];
-
-        $url = "https://partner.shopeemobile.com/api/v1/orders/detail";
-
-
-
-        $convertJson = array(
-          "ordersn_list" =>$ordersn_list,
-          "partner_id" => (int)$partner_id,
-          "shopid" => (int)$shop_id,
-          "timestamp" => $timestamp);
-
-        $base_string = $url . "|" . json_encode($convertJson);
-
-        $hmac = hash_hmac('sha256', $base_string, $partner_key);
-
-        $ch = curl_init($url);
-        $payload = json_encode($convertJson);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
-          'Authorization: ' . $hmac . ''));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $jdecode = json_decode($result);
-
-//echo json_encode($jdecode);die;
-
-        if ($jdecode->errors == []) {
-
-
-        $orders = $jdecode->orders;
-//echo json_encode($orders);die;
-        foreach($orders as $order)
-
-        {
-
-
-          $order_id = $order->ordersn;
-          $purchase_order_id= "";
-          $purchase_order_number= "";
-         $invoice_number= "";
-          $sla_time_stamp= date('yy-m-d H:i:s', $order->ship_by_date);
-          $package_id= "";
-          $shop_id= "";
-          $order_type= "";
-          $customer_first_name= $order->recipient_address->name;
-          $customer_last_name="";
-          $currency= $order->currency;
-          $tax_amount= $order->escrow_tax;
-          $price= $order->total_amount;
-          $product_main_image= "";
-          $product_detail_url= "";
-          $shipment_provider= $order->shipping_carrier;
-          $tracking_code_pre= "";
-          $tracking_code= $order->tracking_no;
-          $shipping_type= "";
-          $shipping_provider_type= "";
-          $shipping_fee_original= $order->estimated_shipping_fee;
-          $shipping_service_cost= 0;
-          $shipping_amount= $order->estimated_shipping_fee;
-          $is_digital= 0;
-          $voucher_amount= "";
-          $voucher_seller= "";
-          $voucher_code_seller= "";
-          $voucher_code= "";
-          $order_flag= $order->order_flag;
-          $promised_shipping_time= "";
-          $digital_delivery_info= "";
-          $extra_attributes="";
-          $cancel_return_initiator= $order->buyer_cancel_reason;
-          $remark= $order->message_to_seller;
-          $reason= "";
-          $reason_detail= "";
-          $stage_pay_status="";
-          $warehouse_code= "";
-          $return_status= "";
-          $status= $order->order_status;
-          $payment_method= $order->payment_method;
-          $created_at= date('yy-m-d H:i:s', $order->create_time);
-          $updated_at= date('yy-m-d H:i:s', $order->update_time);
-
-
-          foreach($order->items as $item)
-        {
-
-//array items
-          $order_item_id = $item->item_id;
-          $shop_sku= $item->item_sku;
-          $sku= $item->variation_sku;
-          $name= $item->item_name;
-          $variation= $item->variation_name;
-          $item_price= $item->variation_original_price;
-          $paid_price= $item->variation_discounted_price;
-
-          }
-
-
-          $return[] = array(
-            "order_item_id" => $order_id,
-            "order_id" => $order_id,
-            "purchase_order_id" =>$purchase_order_id ,
-            "purchase_order_number" =>$purchase_order_number,
-            "invoice_number" => $invoice_number,
-            "sla_time_stamp" => $sla_time_stamp,
-            "package_id" =>$package_id,
-            "shop_id" =>$shop_id,
-            "order_type" => $order_type,
-            "shop_sku" =>$shop_sku ,
-            "sku" =>$sku,
-            "customer_first_name" =>$customer_first_name,
-            "customer_last_name" =>$customer_last_name,
-            "price" =>$price,
-            "name" =>$name,
-            "variation" =>$variation,
-            "item_price" =>$item_price,
-            "paid_price" =>$paid_price,
-            "currency" =>$currency,
-            "tax_amount" => $tax_amount,
-            "product_main_image" =>$product_main_image,
-            "product_detail_url" =>$product_detail_url,
-            "shipment_provider" =>$shipment_provider,
-            "tracking_code_pre" =>$tracking_code_pre,
-            "tracking_code" =>$tracking_code,
-            "shipping_type" =>$shipping_type,
-            "shipping_provider_type" =>$shipping_provider_type,
-            "shipping_fee_original" =>$shipping_fee_original,
-            "shipping_service_cost " =>$shipping_service_cost,
-            "shipping_amount" =>$shipping_amount,
-            "is_digital" =>$is_digital,
-            "voucher_amount" =>$voucher_amount,
-            "voucher_seller" =>$voucher_seller,
-            "voucher_code_seller" =>$voucher_code_seller,
-            "voucher_code" =>$voucher_code,
-            "order_flag" =>$order_flag,
-            "promised_shipping_time" =>$promised_shipping_time,
-            "digital_delivery_info" =>$digital_delivery_info,
-            "extra_attributes" =>$extra_attributes,
-            "cancel_return_initiator" =>$cancel_return_initiator,
-            "remark" =>$remark,
-            "reason" =>$reason,
-            "reason_detail" =>$reason_detail,
-            "stage_pay_status" =>$stage_pay_status,
-            "warehouse_code" =>$warehouse_code,
-            "return_status" =>$return_status,
-            "payment_method" =>$payment_method,
-            "status" =>$status,
-            "created_at" =>$created_at,
-            "updated_at" =>$updated_at
-          );
-
-        }
-        	}else{
-
-						 $return = array(
-                          "status" => 404,
-                          "message" => "Error",
-                           "data" => $jdecode->errors
-                        );
-
-					}
-
 
       }
 
@@ -563,32 +334,261 @@ if ($ordersn_list) {
 
 
     }
-	
-	
+
+    //
+    echo json_encode($return);
+
+  }
+
+  if ($content == "get_order_items") {
+
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $user_id = 5;
+    $merchant_name = null;
+    $ordersn_list = $post['ordersn_list'];
+    // $ordersn_list = ["201109J08RDDET"];
+    if (isset($post['merchant_name'])) {
+      $merchant_name = $post['merchant_name'];
+    }
+
+
+    if ($ordersn_list) {
+
+
+      $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
+
+      if ($getDataShopee != null) {
+
+        while ($rowShopee = $getDataShopee->fetch_assoc()) {
+          $rows[] = $rowShopee;
+
+        }
+
+        foreach ($rows as $obj) {
+
+          $partner_id = $obj['partner_id'];
+          $partner_key = $obj['partner_key'];
+          $shop_id = $obj['shop_id'];
+          $code = $obj['code'];
+          $merchant_name = $obj['merchant_name'];
+
+          $url = "https://partner.shopeemobile.com/api/v1/orders/detail";
+
+
+
+          $convertJson = array(
+            "ordersn_list" =>$ordersn_list,
+            "partner_id" => (int)$partner_id,
+            "shopid" => (int)$shop_id,
+            "timestamp" => $timestamp);
+
+          $base_string = $url . "|" . json_encode($convertJson);
+
+          $hmac = hash_hmac('sha256', $base_string, $partner_key);
+
+          $ch = curl_init($url);
+          $payload = json_encode($convertJson);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmac . ''));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $result = curl_exec($ch);
+          curl_close($ch);
+          $jdecode = json_decode($result);
+
+//echo json_encode($jdecode);die;
+
+          if ($jdecode->errors == []) {
+
+
+            $orders = $jdecode->orders;
+//echo json_encode($orders);die;
+            foreach($orders as $order)
+
+            {
+
+
+              $order_id = $order->ordersn;
+              $purchase_order_id= "";
+              $purchase_order_number= "";
+              $invoice_number= "";
+              $sla_time_stamp= date('yy-m-d H:i:s', $order->ship_by_date);
+              $package_id= "";
+              $shop_id= "";
+              $order_type= "";
+              $customer_first_name= $order->recipient_address->name;
+              $customer_last_name="";
+              $currency= $order->currency;
+              $tax_amount= $order->escrow_tax;
+              $price= $order->total_amount;
+              $product_main_image= "";
+              $product_detail_url= "";
+              $shipment_provider= $order->shipping_carrier;
+              $tracking_code_pre= "";
+              $tracking_code= $order->tracking_no;
+              $shipping_type= "";
+              $shipping_provider_type= "";
+              $shipping_fee_original= $order->estimated_shipping_fee;
+              $shipping_service_cost= 0;
+              $shipping_amount= $order->estimated_shipping_fee;
+              $is_digital= 0;
+              $voucher_amount= "";
+              $voucher_seller= "";
+              $voucher_code_seller= "";
+              $voucher_code= "";
+              $order_flag= $order->order_flag;
+              $promised_shipping_time= "";
+              $digital_delivery_info= "";
+              $extra_attributes="";
+              $cancel_return_initiator= $order->buyer_cancel_reason;
+              $remark= $order->message_to_seller;
+              $reason= "";
+              $reason_detail= "";
+              $stage_pay_status="";
+              $warehouse_code= "";
+              $return_status= "";
+              $status= $order->order_status;
+              $payment_method= $order->payment_method;
+              $created_at= date('yy-m-d H:i:s', $order->create_time);
+              $updated_at= date('yy-m-d H:i:s', $order->update_time);
+
+
+              foreach($order->items as $item)
+              {
+
+//array items
+                $order_item_id = $item->item_id;
+                $shop_sku= $item->item_sku;
+                $sku= $item->variation_sku;
+                $name= $item->item_name;
+                $variation= $item->variation_name;
+                $item_price= $item->variation_original_price;
+                $paid_price= $item->variation_discounted_price;
+
+              }
+
+
+              $return[] = array(
+                "order_item_id" => $order_id,
+                "order_id" => $order_id,
+                "purchase_order_id" =>$purchase_order_id ,
+                "purchase_order_number" =>$purchase_order_number,
+                "invoice_number" => $invoice_number,
+                "sla_time_stamp" => $sla_time_stamp,
+                "package_id" =>$package_id,
+                "shop_id" =>$shop_id,
+                "order_type" => $order_type,
+                "shop_sku" =>$shop_sku ,
+                "sku" =>$sku,
+                "customer_first_name" =>$customer_first_name,
+                "customer_last_name" =>$customer_last_name,
+                "price" =>$price,
+                "name" =>$name,
+                "variation" =>$variation,
+                "item_price" =>$item_price,
+                "paid_price" =>$paid_price,
+                "currency" =>$currency,
+                "tax_amount" => $tax_amount,
+                "product_main_image" =>$product_main_image,
+                "product_detail_url" =>$product_detail_url,
+                "shipment_provider" =>$shipment_provider,
+                "tracking_code_pre" =>$tracking_code_pre,
+                "tracking_code" =>$tracking_code,
+                "shipping_type" =>$shipping_type,
+                "shipping_provider_type" =>$shipping_provider_type,
+                "shipping_fee_original" =>$shipping_fee_original,
+                "shipping_service_cost " =>$shipping_service_cost,
+                "shipping_amount" =>$shipping_amount,
+                "is_digital" =>$is_digital,
+                "voucher_amount" =>$voucher_amount,
+                "voucher_seller" =>$voucher_seller,
+                "voucher_code_seller" =>$voucher_code_seller,
+                "voucher_code" =>$voucher_code,
+                "order_flag" =>$order_flag,
+                "promised_shipping_time" =>$promised_shipping_time,
+                "digital_delivery_info" =>$digital_delivery_info,
+                "extra_attributes" =>$extra_attributes,
+                "cancel_return_initiator" =>$cancel_return_initiator,
+                "remark" =>$remark,
+                "reason" =>$reason,
+                "reason_detail" =>$reason_detail,
+                "stage_pay_status" =>$stage_pay_status,
+                "warehouse_code" =>$warehouse_code,
+                "return_status" =>$return_status,
+                "payment_method" =>$payment_method,
+                "status" =>$status,
+                "created_at" =>$created_at,
+                "updated_at" =>$updated_at
+              );
+
+            }
+          }else{
+
+            $return = array(
+              "status" => 404,
+              "message" => "Error",
+              "data" => $jdecode->errors
+            );
+
+          }
+
+
+        }
+
+
+
+
+        //$return = array(
+        // "status" => 200,
+        //"message" => "ok",
+        // "total_rows"=>COUNT($orders),
+        //"data" => $orders
+
+        //);
+
+
+
+
+      }else{
+        $return= array(
+          "status" => 404,
+          "message" => "Toko Shopee tidak ada yang aktif",
+          "total_rows" => 0,
+          "data" => []
+
+
+        );
+
+
+      }
 
 
 
 
 
-}else{
-  $return= array(
-    "status" => 404,
-    "message" => "Error",
-    "total_rows" => 0,
-    "data" => []
 
 
-  );
+    }else{
+      $return= array(
+        "status" => 404,
+        "message" => "Error",
+        "total_rows" => 0,
+        "data" => []
 
 
-}
-   //
+      );
+
+
+    }
+    //
     echo json_encode($return);
 
   }
 
 
-	if ($content == "update_variant_stock") {
+  if ($content == "update_variant_stock") {
 
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
@@ -622,7 +622,7 @@ if ($ordersn_list) {
 
 //get product shopee
 
-		$chProduct = curl_init("https://twinzahra.masuk.id/public/api/shopee.php?request=get_products");
+        $chProduct = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_products");
         //$payloadProduct = json_encode($convertJson);
         //curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
         curl_setopt($chProduct, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -630,137 +630,137 @@ if ($ordersn_list) {
         $resultProduct = curl_exec($chProduct);
         curl_close($chProduct);
         $jsonDecodeProduct = json_decode($resultProduct);
-		
-		//echo json_encode($jsonDecodeProduct);die;
-		
-		//looping Array data product
-		//if (isset($resultProduct -> data)) {
-			
-		foreach ($jsonDecodeProduct -> data as $objProduct) 
-		{
-				$rowProduct[] = $objProduct;
-				$item_id = $objProduct -> item_id;
-				$shopid = $objProduct -> shopid;
-				$update_time = $objProduct -> update_time;
-				$status = $objProduct -> status;
-				$item_sku = $objProduct -> item_sku;
+
+        //echo json_encode($jsonDecodeProduct);die;
+
+        //looping Array data product
+        //if (isset($resultProduct -> data)) {
+
+        foreach ($jsonDecodeProduct -> data as $objProduct)
+        {
+          $rowProduct[] = $objProduct;
+          $item_id = $objProduct -> item_id;
+          $shopid = $objProduct -> shopid;
+          $update_time = $objProduct -> update_time;
+          $status = $objProduct -> status;
+          $item_sku = $objProduct -> item_sku;
 
 
-		//looping variants
-		foreach ($objProduct -> variations as $objVariant) 
-		{
-			$rowSkus [] = $objVariant;
-			$variation_sku = $objVariant -> variation_sku;
-			$variation_id = $objVariant -> variation_id;
-			
-			
-		$chSkus = curl_init("https://twinzahra.masuk.id/public/api/products.php?request=get_skus");
-        $payloadSkus = json_encode( array( "skus"=> $variation_sku) );
-        curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
-        curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
-        $resultSkus = curl_exec($chSkus);
-        curl_close($chSkus);
-        $jsonDecodeSkus = json_decode($resultSkus);
-		
-		if ($jsonDecodeSkus-> status == "200") {
-			
-		foreach ($jsonDecodeSkus -> data as $objSkus) 
-		{
-			
-		$stock = $objSkus->Stock;
-		
-		//echo json_encode($stock);die;
-		$url = "https://partner.shopeemobile.com/api/v1/items/update_variation_stock";
-        $tgl="Y-m-d";
-        $waktu="H:i:s";
-        $waktu_sekarang=date("$tgl $waktu");
-        $ditambah_5_menit = date("$tgl $waktu", strtotime('-14 day'));
-        $create_time_from=strtotime($ditambah_5_menit);
+          //looping variants
+          foreach ($objProduct -> variations as $objVariant)
+          {
+            $rowSkus [] = $objVariant;
+            $variation_sku = $objVariant -> variation_sku;
+            $variation_id = $objVariant -> variation_id;
 
-        $convertJson = array(
-          "item_id" => $item_id,
-          "variation_id" =>$variation_id,
-          "stock" =>(int)$stock,
-          "partner_id" => (int)$partner_id,
-          "shopid" => (int)$shop_id,
-          "timestamp" => $timestamp);
 
-        $base_string = $url . "|" . json_encode($convertJson);
+            $chSkus = curl_init("http://localhost/twinzahra/public/api/products.php?request=get_skus");
+            $payloadSkus = json_encode( array( "skus"=> $variation_sku) );
+            curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
+            curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
+            $resultSkus = curl_exec($chSkus);
+            curl_close($chSkus);
+            $jsonDecodeSkus = json_decode($resultSkus);
 
-        $hmac = hash_hmac('sha256', $base_string, $partner_key);
+            if ($jsonDecodeSkus-> status == "200") {
 
-        $ch = curl_init($url);
-        $payload = json_encode($convertJson);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
-          'Authorization: ' . $hmac . ''));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $jsonDecode = json_decode($result);
+              foreach ($jsonDecodeSkus -> data as $objSkus)
+              {
 
-		$status = "Sukses";
-		$message = 'Skus berhasil sync';
-			
-		}			
-		
-			
-		}else {
-			
-			
-			$status = "Gagal";
-			$message = 'skus tidak ditemukan';
-			
-		}
-		
-		
-		
-			
-			$dataResult[]= array (
-						"item_id" => $item_id,
-						"variation_id" => $variation_id,
-						"variation_sku"=>$variation_sku,
-						"Status"=>$status,
-						"Msg"=>$message
-						//"Code"=>$code,
-						);
-						
-						
-		}
-		//echo json_encode($rowProduct);die;
-		
-			
+                $stock = $objSkus->Stock;
 
-      //  $orders = $jsonDecode->orders;
-	
+                //echo json_encode($stock);die;
+                $url = "https://partner.shopeemobile.com/api/v1/items/update_variation_stock";
+                $tgl="Y-m-d";
+                $waktu="H:i:s";
+                $waktu_sekarang=date("$tgl $waktu");
+                $ditambah_5_menit = date("$tgl $waktu", strtotime('-14 day'));
+                $create_time_from=strtotime($ditambah_5_menit);
+
+                $convertJson = array(
+                  "item_id" => $item_id,
+                  "variation_id" =>$variation_id,
+                  "stock" =>(int)$stock,
+                  "partner_id" => (int)$partner_id,
+                  "shopid" => (int)$shop_id,
+                  "timestamp" => $timestamp);
+
+                $base_string = $url . "|" . json_encode($convertJson);
+
+                $hmac = hash_hmac('sha256', $base_string, $partner_key);
+
+                $ch = curl_init($url);
+                $payload = json_encode($convertJson);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+                  'Authorization: ' . $hmac . ''));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                curl_close($ch);
+                $jsonDecode = json_decode($result);
+
+                $status = "Sukses";
+                $message = 'Skus berhasil sync';
+
+              }
+
+
+            }else {
+
+
+              $status = "Gagal";
+              $message = 'skus tidak ditemukan';
+
+            }
+
+
+
+
+            $dataResult[]= array (
+              "item_id" => $item_id,
+              "variation_id" => $variation_id,
+              "variation_sku"=>$variation_sku,
+              "Status"=>$status,
+              "Msg"=>$message
+              //"Code"=>$code,
+            );
+
+
+          }
+          //echo json_encode($rowProduct);die;
+
+
+
+          //  $orders = $jsonDecode->orders;
+
 
 //echo json_encode($jsonDecode);die;
 
 
-			
-				
-		}
-		
 
-		
-		//}
-
-		
-        
-    
 
         }
 
 
 
+        //}
 
-$return = array(
-		"status" => 200,
-		"message" => "Berhasil",
-		"total_rows" => COUNT($dataResult),
-		"data" => $dataResult
-    );
+
+
+
+
+      }
+
+
+
+
+      $return = array(
+        "status" => 200,
+        "message" => "Berhasil",
+        "total_rows" => COUNT($dataResult),
+        "data" => $dataResult
+      );
 
 
 
@@ -782,9 +782,9 @@ $return = array(
     echo json_encode($return);
 
   }
-  
 
- 
+
+
 
 } else {
   //Aha, what you're looking for !!!

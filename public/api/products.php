@@ -190,65 +190,68 @@ foreach ($rows as $obj) {
 				
 
 }
-			if ($content == "get_skus") {
-					$modeHeader = 0;
-                    $post = json_decode(file_get_contents("php://input"), true);
+  if ($content == "get_skus") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
 //                  
-                   $user_id = 5;
-				
-					
-				
-					
-						if (isset($user_id)) {
+    $user_id = 5;
 
-                        $getData = $db->getSkus($user_id);
-                        if ($getData != null) {
+    $skus = null;
 
-                            while ($row = $getData->fetch_assoc()) {										
-						
-                                $rows[] = $row['SkuID'];				
-								$rows2 = $row['SkuID'];		
-							
-							
-                            }
-							
-						$dataSkus[] = array(
-							$rows2
-							);
-								
-							
+    if (isset($post['skus'])) {
+      $skus = $post['skus'];
+    }
 
-                            $total = mysqli_num_rows($getData);
+    if (isset($user_id) && isset($skus)) {
+
+      $getData = $db->getSkus($user_id , $skus);
+
+      if ($getData != null) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows[] = $row;
 
 
-                            $return = array(
-                                "status" => 200,
-                                "message" => "ok",
-                                "total_rows" => $total,
-                                "data" => $rows
-                            );
-                        } else {
-                            $return = array(
-                                "status" => 404,
-								"total_rows" => 0,
-                                "message" => "Belum ada Produk",
-								"data" => []
-                            );
-                        }
-                  
-					} else {
-                            $return = array(
-                                "status" => 404,
-                                "message" => "ERROR",
-								"data" => []
-                            );
-                        }
-                    echo json_encode($return);
-                }
-				
-    	
-				
-				if ($content == "get_products") {
+
+        }
+
+
+
+
+
+        $total = mysqli_num_rows($getData);
+
+
+        $return = array(
+          "status" => 200,
+          "message" => "ok",
+          "total_rows" => COUNT($rows),
+          "data" => $rows
+        );
+      } else {
+        $return = array(
+          "status" => 404,
+          "total_rows" => 0,
+          "message" => "Belum ada Produk",
+          "data" => []
+        );
+      }
+
+    } else {
+      $return = array(
+        "status" => 404,
+        "message" => "ERROR",
+        "data" => []
+      );
+    }
+    echo json_encode($return);
+  }
+
+
+
+
+  if ($content == "get_products") {
 					$modeHeader = 0;
                     $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;

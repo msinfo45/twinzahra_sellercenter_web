@@ -8921,25 +8921,22 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
 
     }
 
-    public function getSkus($user_id)
+  public function getSkus($user_id , $skus)
+  {
+
+    $query = $this->conn->query("Select * from product_variant_details
+										where UserID = '" . $user_id . "' and SkuID = '" . $skus . "' ");
+
+    if (mysqli_num_rows($query) > 0)
     {
-
-        $query = $this
-            ->conn
-            ->query("Select SkuID from product_variant_details
-										where UserID = '" . $user_id . "'");
-
-        if (mysqli_num_rows($query) > 0)
-        {
-            return $query;
-        }
-        else
-        {
-            return null;
-        }
-
+      return $query;
+    }
+    else
+    {
+      return null;
     }
 
+  }
     public function getDataVariantProduct($user_id, $product_id)
     {
 
