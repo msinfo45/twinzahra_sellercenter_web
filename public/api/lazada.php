@@ -2602,8 +2602,8 @@ if (isset($content) && $content != "") {
                   $xml_output .= "\t\t<SellerSku>" . $SellerSku . "</SellerSku>\n";
                   $xml_output .= "\t\t<Price>" . $PriceRetail . "</Price>\n";
                  $xml_output .= "\t\t<SalePrice>" . $PriceReseller . "</SalePrice>\n";
-               $xml_output .= "\t\t<SaleStartDate>'2020-11-10'</SaleStartDate>\n";
-                $xml_output .= "\t\t<SaleEndDate>'2017-11-13'</SaleEndDate>\n";
+               $xml_output .= "\t\t<SaleStartDate>2020-11-10</SaleStartDate>\n";
+                $xml_output .= "\t\t<SaleEndDate>2020-11-13</SaleEndDate>\n";
                   $xml_output .= "\t\t<Quantity>" . $stock . "</Quantity>\n";
                   $xml_output .= "\t</Sku>\n";
                   $xml_output .= "\t</Skus>\n";
@@ -2617,7 +2617,7 @@ if (isset($content) && $content != "") {
                   $code = $jdecode->code;
                   $resultData = json_encode($jdecode , true);
 
-           //  echo json_encode($resultData);die;
+        //   echo json_encode($resultData);die;
                   if ($code == 0) {
 
                     $status = "Sukses";
