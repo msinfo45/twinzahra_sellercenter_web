@@ -234,7 +234,7 @@ if (isset($content) && $content != "") {
           $tax_code= "";
           $delivery_info= "";
 
-          $chItems = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_order_items");
+          $chItems = curl_init("https://twinzahra.masuk.id/public/api/shopee.php?request=get_order_items");
           $payloadItems = json_encode( array( "ordersn_list"=> array($order_id),
             "UserID"=> "5",
             "merchant_name"=> $merchant_name) );
@@ -563,6 +563,12 @@ if ($ordersn_list) {
 
 
     }
+	
+	
+
+
+
+
 
 }else{
   $return= array(
@@ -576,13 +582,209 @@ if ($ordersn_list) {
 
 
 }
+   //
+    echo json_encode($return);
 
+  }
+
+
+	if ($content == "update_variant_stock") {
+
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $user_id = 5;
+    $merchant_name = null;
+
+    if (isset($post['merchant_name'])) {
+      $merchant_name = $post['merchant_name'];
+    }
+
+
+
+    $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
+
+    if ($getDataShopee != null) {
+
+      while ($rowShopee = $getDataShopee->fetch_assoc()) {
+        $rows[] = $rowShopee;
+
+      }
+
+      foreach ($rows as $obj) {
+
+        $partner_id = $obj['partner_id'];
+        $partner_key = $obj['partner_key'];
+        $shop_id = $obj['shop_id'];
+        $code = $obj['code'];
+        $merchant_name = $obj['merchant_name'];
+
+
+//get product shopee
+
+		$chProduct = curl_init("https://twinzahra.masuk.id/public/api/shopee.php?request=get_products");
+        //$payloadProduct = json_encode($convertJson);
+        //curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
+        curl_setopt($chProduct, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($chProduct, CURLOPT_RETURNTRANSFER, true);
+        $resultProduct = curl_exec($chProduct);
+        curl_close($chProduct);
+        $jsonDecodeProduct = json_decode($resultProduct);
+		
+		//echo json_encode($jsonDecodeProduct);die;
+		
+		//looping Array data product
+		//if (isset($resultProduct -> data)) {
+			
+		foreach ($jsonDecodeProduct -> data as $objProduct) 
+		{
+				$rowProduct[] = $objProduct;
+				$item_id = $objProduct -> item_id;
+				$shopid = $objProduct -> shopid;
+				$update_time = $objProduct -> update_time;
+				$status = $objProduct -> status;
+				$item_sku = $objProduct -> item_sku;
+
+
+		//looping variants
+		foreach ($objProduct -> variations as $objVariant) 
+		{
+			$rowSkus [] = $objVariant;
+			$variation_sku = $objVariant -> variation_sku;
+			$variation_id = $objVariant -> variation_id;
+			
+			
+		$chSkus = curl_init("https://twinzahra.masuk.id/public/api/products.php?request=get_skus");
+        $payloadSkus = json_encode( array( "skus"=> $variation_sku) );
+        curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
+        curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
+        $resultSkus = curl_exec($chSkus);
+        curl_close($chSkus);
+        $jsonDecodeSkus = json_decode($resultSkus);
+		
+		if ($jsonDecodeSkus-> status == "200") {
+			
+		foreach ($jsonDecodeSkus -> data as $objSkus) 
+		{
+			
+		$stock = $objSkus->Stock;
+		
+		//echo json_encode($stock);die;
+		$url = "https://partner.shopeemobile.com/api/v1/items/update_variation_stock";
+        $tgl="Y-m-d";
+        $waktu="H:i:s";
+        $waktu_sekarang=date("$tgl $waktu");
+        $ditambah_5_menit = date("$tgl $waktu", strtotime('-14 day'));
+        $create_time_from=strtotime($ditambah_5_menit);
+
+        $convertJson = array(
+          "item_id" => $item_id,
+          "variation_id" =>$variation_id,
+          "stock" =>(int)$stock,
+          "partner_id" => (int)$partner_id,
+          "shopid" => (int)$shop_id,
+          "timestamp" => $timestamp);
+
+        $base_string = $url . "|" . json_encode($convertJson);
+
+        $hmac = hash_hmac('sha256', $base_string, $partner_key);
+
+        $ch = curl_init($url);
+        $payload = json_encode($convertJson);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+          'Authorization: ' . $hmac . ''));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $jsonDecode = json_decode($result);
+
+		$status = "Sukses";
+		$message = 'Skus berhasil sync';
+			
+		}			
+		
+			
+		}else {
+			
+			
+			$status = "Gagal";
+			$message = 'skus tidak ditemukan';
+			
+		}
+		
+		
+		
+			
+			$dataResult[]= array (
+						"item_id" => $item_id,
+						"variation_id" => $variation_id,
+						"variation_sku"=>$variation_sku,
+						"Status"=>$status,
+						"Msg"=>$message
+						//"Code"=>$code,
+						);
+						
+						
+		}
+		//echo json_encode($rowProduct);die;
+		
+			
+
+      //  $orders = $jsonDecode->orders;
+	
+
+//echo json_encode($jsonDecode);die;
+
+
+			
+				
+		}
+		
+
+		
+		//}
+
+		
+        
+    
+
+        }
+
+
+
+
+$return = array(
+		"status" => 200,
+		"message" => "Berhasil",
+		"total_rows" => COUNT($dataResult),
+		"data" => $dataResult
+    );
+
+
+
+
+    }else{
+      $return= array(
+        "status" => 404,
+        "message" => "Toko Shopee tidak ada yang aktif",
+        "total_rows" => 0,
+        "data" => []
+
+
+      );
+
+
+    }
 
     //
     echo json_encode($return);
 
   }
+  
 
+ 
 
 } else {
   //Aha, what you're looking for !!!
