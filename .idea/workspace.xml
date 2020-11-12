@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/cron/accept_orders_shopee.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/orders/view/load_pending.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/orders/view/load_pending.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/products/view/load_products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/products/view/load_products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/shopee.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/api/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/contactform/Readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/contactform/contactform.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index1.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/indexx.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/accept_orders_shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/accept_orders_shopee.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +94,7 @@
       <workItem from="1604915258763" duration="1515000" />
       <workItem from="1604978544343" duration="21591000" />
       <workItem from="1605066907337" duration="16417000" />
-      <workItem from="1605147812860" duration="22389000" />
+      <workItem from="1605147812860" duration="22574000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -261,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605091221851</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Perbaikan image produk , image pesanan dan ll">
+      <created>1605172848255</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1605172848255</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,18 +282,19 @@
     <MESSAGE value="perbaikan set product lazada" />
     <MESSAGE value="Penambahan api shopee dan lain lain" />
     <MESSAGE value="Perbaikan sync stock lazada" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan sync stock lazada" />
+    <MESSAGE value="Perbaikan image produk , image pesanan dan ll" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan image produk , image pesanan dan ll" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605149454749">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605149454749" />
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605091220695">
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605172847021">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604454993830" />
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605091220695" />
+    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605172847021" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -314,11 +311,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="452" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604980001010" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1605091223391">
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1605172850499">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605091223391" />
+    <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605172850499" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

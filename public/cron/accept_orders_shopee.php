@@ -93,7 +93,7 @@ Foreach($resultOrders as $dataOrders)
         $status = "sukses";
         $subject  = "Pesanan " . $order_id . " telah berhasil dikonfirmasi" ;
         $message = $resultItem['message'];
-       // $sendEmail = $db->send_email($subject , $message);
+       $sendEmail = $db->send_email($subject , $message);
 
       }else{
 
@@ -101,7 +101,7 @@ Foreach($resultOrders as $dataOrders)
         $subject  = "Pesanan " . $order_id . " gagal dikonfirmasi" ;
         $message = $resultItem['message'];
 
-     //   $sendEmail = $db->send_email($subject , $message);
+      // $sendEmail = $db->send_email($subject , $message);
 
       }
 
@@ -111,7 +111,7 @@ Foreach($resultOrders as $dataOrders)
       $status = "gagal";
       $subject  = "Pesanan " . $order_id . " stok kosong" ;
       $message = "Pesanan gagal dikonfirmasi stok kosong atau pesanan sudah pernah di konfirmasi";
-     // $sendEmail = $db->send_email($subject , $message);
+      $sendEmail = $db->send_email($subject , $message);
 
       //
     }
