@@ -60,11 +60,11 @@ if ($result['total_rows'] > 0) {
     {
         echo' <div class="container table-bordered p-1">';
         echo '<div class="row">';
-       // echo '<div class="col-auto">';
-	//	echo ' <a href="'.$DataProduct['ImageProductName'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
-          //      <img class="img-product" width="100px" height="100px" src='.$DataProduct['ImageProductName'].'>
-          //      </a>';
-      //  echo' </div>';
+        echo '<div class="col-auto">';
+		echo ' <a href="'.$DataProduct['Images'].'" data-toggle="lightbox" data-title="'.$DataProduct['ProductName'].'">
+               <img class="img-product" width="100px" height="100px" src='.$DataProduct['Images'].'>
+              </a>';
+      echo' </div>';
 
         echo '<div class="col">';
         echo '<h6>';

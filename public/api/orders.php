@@ -837,7 +837,7 @@ if (isset($content) && $content != "") {
       $return = array(
         "status" => 200,
         "total_rows" => $total,
-        "message" => "Berhasil",
+        "message" => "ok lazada",
         "data" => $rowLazada
       );
 
@@ -861,7 +861,7 @@ if (isset($content) && $content != "") {
       $return = array(
         "status" => 200,
         "total_rows" => $total,
-        "message" => "Berhasil",
+        "message" => "ok shopee",
         "data" => $rowShopee
       );
 
@@ -882,14 +882,14 @@ if (isset($content) && $content != "") {
         $return = array(
           "status" => 200,
           "total_rows" => $total,
-          "message" => "Berhasil",
+          "message" => "ok database",
           "data" => $rows
         );
 
 
       }else{
         $return = array(
-          "status" => 200,
+          "status" => 404,
           "total_rows" => 0,
           "message" => "Belum ada Data",
           "data" => []
@@ -1101,7 +1101,10 @@ if (isset($content) && $content != "") {
 
     //$order_id = 1;
     $user_id = 5;
-    //$marketplace = "Lazada";
+
+  // $marketplace = "SHOPEE";
+   // $order_id = "201111QGYUQA63";
+    //$merchant_name = "Twinzahra Shop";
 
     //$order_id = 441008605032192 ;
     //$shipping_provider = "LEX ID" ;
@@ -1112,7 +1115,7 @@ if (isset($content) && $content != "") {
 
 
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/lazada.php?request=get_order');
+    curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=get_orders');
     $payloadItem = json_encode( array( "order_id"=> $order_id,
       "merchant_name"=> $merchant_name,
       "marketplace"=> $marketplace) );
@@ -1124,7 +1127,6 @@ if (isset($content) && $content != "") {
 
     $resultItem=json_decode($contentItem,true);
     $order_number = $resultItem['order_number'] ;
-    $marketplace = $resultItem['marketplace'] ;
     $branch_number = $resultItem['branch_number'] ;
     $warehouse_code = $resultItem['warehouse_code'] ;
     $customer_first_name = $resultItem['customer_first_name'] ;
@@ -1151,9 +1153,10 @@ if (isset($content) && $content != "") {
     $created_at = $resultItem['created_at'] ;
     $updated_at = $resultItem['updated_at'] ;
 
-    //echo json_encode($order_number);die;
+
+
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/orders.php?request=get_order_items');
+    curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=get_order_items');
 
     $payloadItem = json_encode( array( "order_id"=> $order_id,
       "merchant_name"=> $merchant_name,
@@ -1167,7 +1170,9 @@ if (isset($content) && $content != "") {
 
     //mengubah data json menjadi data array asosiatif
     $resultItem=json_decode($contentItem,true);
+
     //echo json_encode($resultItem);die;
+
     foreach($resultItem['data'] as $DataOrderItems)
 
     {
@@ -1187,6 +1192,7 @@ if (isset($content) && $content != "") {
         "shop_sku" =>$DataOrderItems['shop_sku'] ,
         "sku" =>$DataOrderItems['sku'],
         "name" =>$DataOrderItems['name'],
+        "qty" =>1,
         "variation" =>$DataOrderItems['variation'],
         "item_price" =>$DataOrderItems['item_price'],
         "paid_price" =>$DataOrderItems['paid_price'],
@@ -1289,7 +1295,7 @@ if (isset($content) && $content != "") {
 
           if ($createHistoryOrderDetails == true) {
 
-            $updateStokBySKU = $db->updateStokBySKU($variant_details , $qty);
+            $updateStokBySKU = $db->updateStokBySKU($variant_details);
 
 
 

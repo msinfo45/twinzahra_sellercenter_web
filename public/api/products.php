@@ -360,6 +360,7 @@ foreach($rows as $products)
 		$productArr[$products['ProductID']]['CategoryID'] = $products['CategoryID'];
 		$productArr[$products['ProductID']]['BrandID'] = $products['BrandID'];
 		$productArr[$products['ProductID']]['Description'] = $products['Description'];
+		$productArr[$products['ProductID']]['Images'] = $products['ImageProductName'];
 		$productArr[$products['ProductID']]['skus'][]= $skusArr;				
        
 			}  
@@ -372,9 +373,6 @@ foreach($rows as $products)
 		$result = array_values($productArr);					
 							
 							
-	
-
-                           
 
 
                             $return = array(
@@ -853,6 +851,7 @@ if ($content == "get_product_items") {
 
   }
 
+  $product_id = 1;
   if (isset($user_id) && isset($status)) {
 
     $getData = $db->getDataProduct($product_id, $user_id, $status, $page, $limit , $search ,$search_size , $search_color );

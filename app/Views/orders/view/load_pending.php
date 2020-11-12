@@ -145,9 +145,8 @@ function getHistory($order_id){
 					<div class="row">
 					<div class="col-auto">'.$DataProduct['marketplace'].	' </div>
 					<div class="col-auto">'.$merchant_name.	'	</div>
-					<div class="col-auto">'.$price.	'	</div>
-					<div class="col-auto">'.$order_number.	'	</div>
-					<div class="col-auto">'.$customer_first_name.	'	</div>
+					<div class="col justify-content-center align-self-center">'.$customer_first_name.	'	</div>
+					<div class="col-auto"> No Pesanan '.$order_number.	'	</div>
 											
 					</div></div>';
 
@@ -160,18 +159,21 @@ function getHistory($order_id){
 
 					echo'<div class="card-body">';
 					echo'<div class="row">';
+
+					echo'<div  class="col justify-content-center align-self-center">';
+					echo'<div class="row">';
+
 					echo'<div  class="col-auto">';
 					echo'<img class="img-product" width="100px" height="100px" src='.$DataOrderItems['product_main_image'].'>';
 					echo ' </div>';
 
 					echo '<div class="col">';
-
-					echo '<div class="card-title"><a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> 
-						';
+					echo '<div class="card-title "><a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> ';
 					echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");	
 					echo '</a></div>';
 					
 					echo ' <div class="card-text">';
+
 					echo '<div class="mt-1">';
 					echo $DataOrderItems['order_item_id'];
 					echo'</div>';
@@ -184,56 +186,96 @@ function getHistory($order_id){
 					echo $DataOrderItems['paid_price'];
 					echo'</div>';
 
-					echo '</div></div></div></div>';
+					echo '</div>'; //end div card-text
+
+					echo '</div>';//end div col
+
+
+
+					echo '</div>';//end div row
+
+                if ($DataOrderItems['remark'] != "") {
+
+                    echo ' <div class="card-text mt-3 font-italic">Catatan : '.$DataOrderItems['remark'].'</div>';
+
+
+                }
+
+                echo '</div>';//end div col
+
+
+                echo'<div  class="col-2">';
+                echo '<div class="card-title font-weight-bold">Jasa Pengiriman</div> ';
+                echo ' <div class="card-text">'.$DataOrderItems['shipment_provider'].'</div>';
+                echo '</div>';//end div col-auto
+
+                echo'<div  class="col-1">';
+                echo '<div class="card-title font-weight-bold">Total Harga</div> ';
+                echo ' <div class="card-text">'.$price.'</div>';
+                echo '</div>';//end div col-auto
+
+                    echo '</div>';//end div row
+                    echo '</div>';//end div card-body
 							
 			}
 
 
 
-					echo'<div class="card-header">';
-					echo'<div class="row">';
-					echo' <div class="col justify-content-center align-self-center">';
 
-				if ($cekHistoryOrder == null ) {
-				if ($resultStok == "") {
-								
-					echo '<span style="color:blue;" class="col-auto">Produk belum ada di sistem</span>';
-										
-				}else if ($resultStok == 0){
-								
-					echo '<span style="color:red;" class="col-auto">Stok Kosong</span>';
-							
-								
-				}else if ($resultStok > 0){
-								
-					echo '<span style="color:green;" class="col-auto">Stok Tersedia</span>';
-								
-				}
-							
-				}else{
+                echo'<div class="card-header">
+					<div class="row">';
 
-					echo '<span style="color:green;" class="col-auto">Pesanan sedang diproses</span>';
+                echo'<div  class="col justify-content-center align-self-center">';
 
-				}	
-echo ' </div>';
+                if ($cekHistoryOrder == null ) {
+                    if ($resultStok == "") {
 
-echo ' <div class="col-auto">';
-				if ($cekHistoryOrder == null ) {
-					if ($resultStok == 0) {			
-				
-					echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';
-                                        
-					}else{
-						
-					echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';			
-					
-				}}
-				echo '</div></div>';
-				
-				
-				
-				echo'</div></div>';				
-												
+                        echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di sistem</span></div>';
+
+                    }else if ($resultStok == 0){
+
+                        echo '<div class="card-text font-weight-bold"><span style="color:red;">Stok Kosong</span></div>';
+
+
+                    }else if ($resultStok > 0){
+
+                        echo '<div class="card-text font-weight-bold"><span style="color:green;">Stok Tersedia</span></div>';
+
+                    }
+
+                }else{
+
+                    echo '<div class="card-text font-weight-bold"><span style="color:green;">Pesanan sedang diproses</span></div>';
+
+                }
+
+                echo ' </div>';
+
+
+                echo'<div  class="col text-right" >';
+
+
+                if ($cekHistoryOrder == null ) {
+                    if ($resultStok == 0) {
+
+                        echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';
+
+                    }else{
+
+                        if ($marketplace == "LAZADA") {
+
+                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';
+
+                        }else{
+
+                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Terima"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
+
+                        }
+
+                    }}
+
+                echo '</div>';//end div col-auto
+					echo '</div></div>';
 						
 
 						
