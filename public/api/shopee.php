@@ -339,11 +339,41 @@ if ($getDataShopee != null) {
 
     $user_id = 5;
     $merchant_name = null;
+    $status = $post['status'];
+
+    $orderArr = [];
+    $orderItemsArr = [];
+    $rowsOrdersn = array();
 
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
     }
 
+if ($status == 1) {
+
+  $status = "READY_TO_SHIP";
+
+}else if ($status == 4) {
+
+  $status = "COMPLETED";
+
+}else if ($status == 9) {
+
+  $status = "IN_CANCEL";
+
+}else if ($status == 6) {
+
+  $status = "CANCELLED";
+
+}else if ($status == 5) {
+
+  $status = "TO_RETURN";
+
+}else{
+
+  $status = "ALL";
+
+}
 
 
     $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
@@ -364,7 +394,7 @@ if ($getDataShopee != null) {
         $merchant_name = $obj['merchant_name'];
 
         $url = "https://partner.shopeemobile.com/api/v1/orders/get";
-        $order_status = "READY_TO_SHIP";
+
         $create_time_from = 0;
 
         $tgl="Y-m-d";
@@ -374,7 +404,7 @@ if ($getDataShopee != null) {
         $create_time_from=strtotime($ditambah_5_menit);
 
         $convertJson = array(
-          "order_status" => $order_status,
+          "order_status" => $status,
           "create_time_from" =>$create_time_from,
           "create_time_to" =>$timestamp,
           "partner_id" => (int)$partner_id,
@@ -395,110 +425,250 @@ if ($getDataShopee != null) {
         curl_close($ch);
         $jsonDecode = json_decode($result);
 
+     // echo json_encode($jsonDecode);die;
 
         $orders = $jsonDecode->orders;
-
-        foreach($orders as $order)
-
-        {
+       // echo json_encode($orders);die;
+        foreach($orders as $order) {
           $order_id = $order->ordersn;
-          $order_number = $order->ordersn;
-          $branch_number= "";
-          $voucher= "";
-          $voucher_platform= "";
-          $gift_option= "";
-          $gift_message= "";
-          $shipping_fee= "";
-          $shipping_fee_discount_seller="";
-          $shipping_fee_discount_platform= "";
-          $national_registration_number= "";
-          $tax_code= "";
-          $delivery_info= "";
 
-          $chItems = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_order_items");
-          $payloadItems = json_encode( array( "ordersn_list"=> array($order_id),
-            "UserID"=> "5",
-            "merchant_name"=> $merchant_name) );
+          $rowsOrdersn[] = $order->ordersn;
+
+       }
+
+          $urlItems = "https://partner.shopeemobile.com/api/v1/orders/detail";
+          $convertJsonItems = array(
+            "ordersn_list" =>$rowsOrdersn,
+            "partner_id" => (int)$partner_id,
+            "shopid" => (int)$shop_id,
+            "timestamp" => $timestamp);
+          $base_string_items = $urlItems . "|" . json_encode($convertJsonItems);
+          $hmacItems = hash_hmac('sha256', $base_string_items, $partner_key);
+
+          $chItems = curl_init($urlItems);
+          $payloadItems = json_encode($convertJsonItems);
           curl_setopt($chItems, CURLOPT_POSTFIELDS, $payloadItems);
-          curl_setopt($chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmacItems . ''));
           curl_setopt($chItems, CURLOPT_RETURNTRANSFER, true);
           $resultItems = curl_exec($chItems);
           curl_close($chItems);
-          $jsonDecodeItems = json_decode($resultItems);
-
-          // echo $resultItems;die;
-
-          foreach($jsonDecodeItems as $items)
-
-          {
-
-            $warehouse_code= $items->warehouse_code;
-            $customer_first_name= $items->customer_first_name;
-            $customer_last_name= $items->customer_last_name;
-            $price= $items->price;
-            $items_count= COUNT($jsonDecodeItems);
-            $payment_method= $items->payment_method;
-            $voucher_code= $items->voucher_code;
-            $voucher_seller= $items->voucher_seller;
-            $shipping_fee_original= $items->shipping_fee_original;
-            $promised_shipping_times= $items->promised_shipping_time;
-            $extra_attributes= $items->extra_attributes;
-            $remarks= $items->remark;
-            $statuses= $items->status;
-            $created_at= $items->created_at;
-            $updated_at= $items->updated_at;
+          $jdecodeItems2 = json_decode($resultItems);
 
 
-            $return[] = array(
-              "order_id" => $order_id,
-              "order_number" => $order_number,
-              "marketplace" => "SHOPEE",
-              "merchant_name" => $merchant_name,
-              "branch_number"=>$branch_number,
-              "warehouse_code"=>$warehouse_code,
-              "customer_first_name" => $customer_first_name,
-              "customer_last_name" => $customer_last_name,
-              "price"=>$price,
-              "items_count"=>$items_count,
-              "payment_method"=>$payment_method,
-              "voucher"=>$voucher,
-              "voucher_code"=>$voucher_code,
-              "voucher_platform"=>$voucher_platform,
-              "voucher_seller"=>$voucher_seller,
-              "gift_option"=>$gift_option,
-              "gift_message"=>$gift_message,
-              "shipping_fee"=>$shipping_fee,
-              "shipping_fee_discount_seller"=>$shipping_fee_discount_seller,
-              "shipping_fee_discount_platform"=>$shipping_fee_discount_platform,
-              "promised_shipping_times"=>$promised_shipping_times,
-              "national_registration_number"=>$national_registration_number,
-              "tax_code"=>$tax_code,
-              "extra_attributes"=>$extra_attributes,
-              "remarks"=>$remarks,
-              "delivery_info"=>$delivery_info,
-              "statuses"=>$statuses,
-              "created_at"=>$created_at,
-              "updated_at"=>$updated_at,
-            );
+         if ( isset($jdecodeItems2->orders)){
+           $orderItem2 = $jdecodeItems2->orders;
+         }
 
-          }
+          foreach($orderItem2  as $orderItems2) {
+
+            $order_number = $order->ordersn;
+            $user_id = $user_id;
+            $marketplace = "SHOPEE";
+            $merchant_name = $merchant_name;
+            $branch_number = "";
+            $voucher = "";
+            $voucher_platform = "";
+            $gift_option = "";
+            $gift_message = "";
+            $shipping_fee = "";
+            $shipping_fee_discount_seller = "";
+            $shipping_fee_discount_platform = "";
+            $national_registration_number = "";
+            $tax_code = "";
+            $delivery_info = "";
+
+          //  $customer_first_name = $items->recipient_address->name;
+            $customer_first_name= "";
+            $customer_last_name = "";
+            $price = $orderItems2->total_amount;
+            $payment_method = $orderItems2->payment_method;
+            $shipping_fee_original = $orderItems2->estimated_shipping_fee;
+            $remarks = $orderItems2->message_to_seller;
+            $promised_shipping_times = "";
+
+            if ($orderItems2->order_status == "UNPAID") {
+              $statuses = 8;
+            } else if ($orderItems2->order_status == "READY_TO_SHIP") {
+              $statuses = 1;
+            } else if ($orderItems2->order_status == "COMPLETED") {
+              $statuses = 4;
+            } else if ($orderItems2->order_status == "IN_CANCEL") {
+              $statuses = 9;
+            } else if ($orderItems2->order_status == "CANCELLED") {
+              $statuses = 6;
+            } else if ($orderItems2->order_status == "TO_RETURN") {
+              $statuses = 5;
+            } else {
+              $statuses = 0;
+            }
+
+            $items_count =0;
+
+            $created_at = date('yy-m-d H:i:s', $orderItems2->create_time);
+            $updated_at = date('yy-m-d H:i:s', $orderItems2->update_time);
+
+
+            foreach ($orderItems2->items as $items) {
+
+              $order_item_id = $items->item_id;
+              $purchase_order_id= "";
+              $purchase_order_number= "";
+              $invoice_number= "";
+              $sla_time_stamp= date('yy-m-d H:i:s', $orderItems2->ship_by_date);
+              $package_id= "";
+              $shop_id= "";
+              $order_type= "";
+              $shop_sku= $items->item_sku;
+              $sku= $items->variation_sku;
+              $name= $items->item_name;
+              $variation= $items->variation_name;
+              $item_price= $items->variation_original_price;
+              $paid_price= $items->variation_discounted_price;
+              $qty =  $items->variation_quantity_purchased;
+              $currency= $orderItems2->currency;
+              $tax_amount= $orderItems2->escrow_tax;
+              $product_detail_url= "";
+              $shipment_provider= $orderItems2->shipping_carrier;
+              $tracking_code_pre= "";
+              $tracking_code= $orderItems2->tracking_no;
+              $shipping_type= "";
+              $shipping_provider_type= "";
+              $shipping_fee_original= $orderItems2->estimated_shipping_fee;
+              $shipping_service_cost= 0;
+              $shipping_fee_discount_seller = 0;
+              $is_digital= 0;
+              $voucher_code_seller= "";
+              $voucher_code= "";
+              $voucher_code_platform= "";
+              $order_flag= $orderItems2->order_flag;
+              $promised_shipping_time= "";
+              $digital_delivery_info= "";
+              $extra_attributes="";
+              $cancel_return_initiator= $orderItems2->buyer_cancel_reason;
+              $reason= "";
+              $reason_detail= "";
+              $stage_pay_status="";
+              $warehouse_code= "";
+              $return_status= "";
+              $voucher_seller = "";
+
+
+              $orderItemsArr[$order_item_id]['order_item_id'] = $order_item_id;
+              $orderItemsArr[$order_item_id]['order_id'] = $order_id;
+              $orderItemsArr[$order_item_id]['purchase_order_id'] = $purchase_order_id;
+              $orderItemsArr[$order_item_id]['purchase_order_number'] =$purchase_order_number;
+              $orderItemsArr[$order_item_id]['invoice_number'] = $invoice_number;
+              $orderItemsArr[$order_item_id]['sla_time_stamp'] = $sla_time_stamp;
+              $orderItemsArr[$order_item_id]['package_id'] = $package_id;
+              $orderItemsArr[$order_item_id]['shop_id'] = $shop_id;
+              $orderItemsArr[$order_item_id]['order_type'] = $order_type;
+              $orderItemsArr[$order_item_id]['shop_sku'] = $shop_sku;
+              $orderItemsArr[$order_item_id]['sku'] = $sku;
+              $orderItemsArr[$order_item_id]['name'] = $name;
+              $orderItemsArr[$order_item_id]['variation'] = $variation;
+              $orderItemsArr[$order_item_id]['item_price'] = $item_price;
+              $orderItemsArr[$order_item_id]['paid_price'] = $paid_price;
+              $orderItemsArr[$order_item_id]['qty'] = $qty;
+              $orderItemsArr[$order_item_id]['currency'] = $currency;
+              $orderItemsArr[$order_item_id]['tax_amount'] = $tax_amount;
+              // $orderItemsArr[$order_item_id]['image_variants'] = $image_variants;
+              $orderItemsArr[$order_item_id]['product_detail_url'] = $product_detail_url;
+              $orderItemsArr[$order_item_id]['shipment_provider'] = $shipment_provider;
+              $orderItemsArr[$order_item_id]['tracking_code_pre'] = $tracking_code_pre;
+              $orderItemsArr[$order_item_id]['tracking_code'] = $tracking_code;
+              $orderItemsArr[$order_item_id]['shipping_type'] = $shipping_type;
+              $orderItemsArr[$order_item_id]['shipping_provider_type'] = $shipping_provider_type;
+              $orderItemsArr[$order_item_id]['shipping_fee_original'] = $shipping_fee_original;
+              $orderItemsArr[$order_item_id]['shipping_service_cost'] = $shipping_service_cost;
+              $orderItemsArr[$order_item_id]['shipping_fee_discount_seller'] = $shipping_fee_discount_seller;
+              $orderItemsArr[$order_item_id]['is_digital'] = $is_digital;
+              $orderItemsArr[$order_item_id]['voucher_seller'] = $voucher_seller;
+              $orderItemsArr[$order_item_id]['voucher_code_seller'] = $voucher_code_seller;
+              $orderItemsArr[$order_item_id]['voucher_code'] = $voucher_code;
+              $orderItemsArr[$order_item_id]['voucher_code_platform'] = $voucher_code_platform;
+              $orderItemsArr[$order_item_id]['voucher_platform'] = $voucher_platform;
+              $orderItemsArr[$order_item_id]['order_flag'] = $order_flag;
+              $orderItemsArr[$order_item_id]['promised_shipping_time'] = $promised_shipping_time;
+              $orderItemsArr[$order_item_id]['digital_delivery_info'] = $digital_delivery_info;
+              $orderItemsArr[$order_item_id]['extra_attributes'] = $extra_attributes;
+              $orderItemsArr[$order_item_id]['cancel_return_initiator'] = $cancel_return_initiator;
+              $orderItemsArr[$order_item_id]['reason'] = $reason;
+              $orderItemsArr[$order_item_id]['reason_detail'] = $reason_detail;
+              $orderItemsArr[$order_item_id]['stage_pay_status'] = $stage_pay_status;
+              $orderItemsArr[$order_item_id]['warehouse_code'] = $warehouse_code;
+              $orderItemsArr[$order_item_id]['return_status'] = $return_status;
+              $orderItemsArr[$order_item_id]['status'] = $status;
+              $orderItemsArr[$order_item_id]['created_at'] = $created_at;
+              $orderItemsArr[$order_item_id]['updated_at'] = $updated_at;
 
 
 
-        }
+            }
+
+            $resultOrderItems = array_values($orderItemsArr);
+
+
+
+
+
+
+
+            }
+
+
+
+          $orderArr[$order_id]['order_id'] = $order_id;
+          $orderArr[$order_id]['order_number'] = $order_number;
+          $orderArr[$order_id]['user_id'] = $user_id;
+          $orderArr[$order_id]['marketplace'] =$marketplace;
+          $orderArr[$order_id]['merchant_name'] = $merchant_name;
+          $orderArr[$order_id]['branch_number'] = $branch_number;
+          $orderArr[$order_id]['warehouse_code'] = $warehouse_code;
+          $orderArr[$order_id]['customer_first_name'] = $customer_first_name;
+          $orderArr[$order_id]['customer_last_name'] = $customer_last_name;
+          $orderArr[$order_id]['price'] = $price;
+          $orderArr[$order_id]['items_count'] = $items_count;
+          $orderArr[$order_id]['payment_method'] = $payment_method;
+          $orderArr[$order_id]['voucher'] = $voucher;
+          $orderArr[$order_id]['voucher_code'] = $voucher_code;
+          $orderArr[$order_id]['voucher_platform'] = $voucher_platform;
+          $orderArr[$order_id]['voucher_seller'] = $voucher_seller;
+          $orderArr[$order_id]['gift_option'] = $gift_option;
+          $orderArr[$order_id]['gift_message'] = $gift_message;
+          $orderArr[$order_id]['shipping_fee'] = $shipping_fee;
+          $orderArr[$order_id]['shipping_fee_discount_seller'] = $shipping_fee_discount_seller;
+          $orderArr[$order_id]['shipping_fee_discount_platform'] = $shipping_fee_discount_platform;
+          $orderArr[$order_id]['promised_shipping_times'] = $promised_shipping_times;
+          $orderArr[$order_id]['national_registration_number'] = $national_registration_number;
+          $orderArr[$order_id]['tax_code'] = $tax_code;
+          $orderArr[$order_id]['remarks'] = $remarks;
+          $orderArr[$order_id]['delivery_info'] = $delivery_info;
+          $orderArr[$order_id]['statuses'] = $statuses;
+          $orderArr[$order_id]['created_at'] = $created_at;
+          $orderArr[$order_id]['updated_at'] = $updated_at;
+          // $orderArr[$order_id]['order_items'][]= $resultOrderItems;
+
+
+
+          //}
+
+
+        $result = array_values($orderArr);
+
 
       }
 
 
 
 
-      //$return = array(
-      // "status" => 200,
-      //"message" => "ok",
-      // "total_rows"=>COUNT($orders),
-      //"data" => $orders
+      $return = array(
+       "status" => 200,
+      "message" => "ok shopee",
+       "total_rows"=>COUNT($result),
+      "data" => $result
 
-      //);
+      );
 
 
 
@@ -529,13 +699,13 @@ if ($getDataShopee != null) {
     $user_id = 5;
     $merchant_name = null;
     $ordersn_list = $post['ordersn_list'];
-   // $ordersn_list = ["201111QGYUQA63"];
+  // $ordersn_list = ["201112QJCT9KYK"];
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
     }
 
 
-    if ($ordersn_list) {
+    if (isset($user_id) && isset($ordersn_list) && isset($merchant_name) ) {
 
 
       $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
@@ -621,13 +791,14 @@ if ($getDataShopee != null) {
 
                 $resultSkus = json_decode($skuscontent);
                 $datas = $resultSkus->data;
-
+//echo json_encode($resultSkus);die;
 
                 foreach ($datas as $data) {
 
                   foreach ($data->Images as $image) {
 
-                    $product_main_image= $image;
+                    $image_variants []= $image;
+
                   }
 
 
@@ -648,12 +819,15 @@ if ($getDataShopee != null) {
               $shipping_provider_type= "";
               $shipping_fee_original= $order->estimated_shipping_fee;
               $shipping_service_cost= 0;
+              $shipping_fee_discount_seller = 0;
               $shipping_amount= $order->estimated_shipping_fee;
               $is_digital= 0;
               $voucher_amount= "";
               $voucher_seller= "";
               $voucher_code_seller= "";
               $voucher_code= "";
+              $voucher_platform = "";
+              $voucher_code_platform= "";
               $order_flag= $order->order_flag;
               $promised_shipping_time= "";
               $digital_delivery_info= "";
@@ -665,7 +839,24 @@ if ($getDataShopee != null) {
               $stage_pay_status="";
               $warehouse_code= "";
               $return_status= "";
-              $status= $order->order_status;
+
+              if ($order->order_status == "UNPAID") {
+                $status= 8;
+              }else  if ($order->order_status == "READY_TO_SHIP") {
+                $status= 1;
+              }else  if ($order->order_status == "COMPLETED") {
+                $status= 4;
+              }else  if ($order->order_status == "IN_CANCEL") {
+                $status= 6;
+              }else  if ($order->order_status == "CANCELLED") {
+                $status= 6;
+              }else  if ($order->order_status == "TO_RETURN") {
+                $status= 5;
+              }else{
+                $status= 0;
+              }
+
+
               $payment_method= $order->payment_method;
               $created_at= date('yy-m-d H:i:s', $order->create_time);
               $updated_at= date('yy-m-d H:i:s', $order->update_time);
@@ -674,7 +865,6 @@ if ($getDataShopee != null) {
               foreach($order->items as $item)
               {
 
-//array items
                 $order_item_id = $item->item_id;
                 $shop_sku= $item->item_sku;
                 $sku= $item->variation_sku;
@@ -682,11 +872,12 @@ if ($getDataShopee != null) {
                 $variation= $item->variation_name;
                 $item_price= $item->variation_original_price;
                 $paid_price= $item->variation_discounted_price;
+                $qty =  $item->variation_quantity_purchased;
 
               }
 
 
-              $return[] = array(
+              $arrVariants[] = array(
                 "order_item_id" => $order_id,
                 "order_id" => $order_id,
                 "purchase_order_id" =>$purchase_order_id ,
@@ -698,16 +889,14 @@ if ($getDataShopee != null) {
                 "order_type" => $order_type,
                 "shop_sku" =>$shop_sku ,
                 "sku" =>$sku,
-                "customer_first_name" =>$customer_first_name,
-                "customer_last_name" =>$customer_last_name,
-                "price" =>$price,
                 "name" =>$name,
                 "variation" =>$variation,
                 "item_price" =>$item_price,
                 "paid_price" =>$paid_price,
+                "qty" =>$qty,
                 "currency" =>$currency,
                 "tax_amount" => $tax_amount,
-                "product_main_image" =>$product_main_image,
+                "image_variants" => $image_variants,
                 "product_detail_url" =>$product_detail_url,
                 "shipment_provider" =>$shipment_provider,
                 "tracking_code_pre" =>$tracking_code_pre,
@@ -716,30 +905,39 @@ if ($getDataShopee != null) {
                 "shipping_provider_type" =>$shipping_provider_type,
                 "shipping_fee_original" =>$shipping_fee_original,
                 "shipping_service_cost " =>$shipping_service_cost,
+                "shipping_fee_discount_seller " =>$shipping_fee_discount_seller,
                 "shipping_amount" =>$shipping_amount,
                 "is_digital" =>$is_digital,
                 "voucher_amount" =>$voucher_amount,
                 "voucher_seller" =>$voucher_seller,
                 "voucher_code_seller" =>$voucher_code_seller,
                 "voucher_code" =>$voucher_code,
+                "voucher_code_platform" =>$voucher_code_platform,
+                "voucher_platform" =>$voucher_platform,
                 "order_flag" =>$order_flag,
                 "promised_shipping_time" =>$promised_shipping_time,
                 "digital_delivery_info" =>$digital_delivery_info,
                 "extra_attributes" =>$extra_attributes,
                 "cancel_return_initiator" =>$cancel_return_initiator,
-                "remark" =>$remark,
                 "reason" =>$reason,
                 "reason_detail" =>$reason_detail,
                 "stage_pay_status" =>$stage_pay_status,
                 "warehouse_code" =>$warehouse_code,
                 "return_status" =>$return_status,
-                "payment_method" =>$payment_method,
                 "status" =>$status,
                 "created_at" =>$created_at,
                 "updated_at" =>$updated_at
               );
 
             }
+
+            $return = array(
+              "status" => 200,
+              "message" => "ok",
+              "total_rows" => COUNT($arrVariants),
+              "data" => $arrVariants
+            );
+
           }else{
 
             $return = array(
@@ -753,16 +951,6 @@ if ($getDataShopee != null) {
 
         }
 
-
-
-
-        //$return = array(
-        // "status" => 200,
-        //"message" => "ok",
-        // "total_rows"=>COUNT($orders),
-        //"data" => $orders
-
-        //);
 
 
 
@@ -789,7 +977,7 @@ if ($getDataShopee != null) {
     }else{
       $return= array(
         "status" => 404,
-        "message" => "Error",
+        "message" => "error",
         "total_rows" => 0,
         "data" => []
 

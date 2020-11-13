@@ -354,7 +354,7 @@ foreach($rows as $products)
 		
 	//echo json_encode($rowProductItems);die;
 		$productArr[$products['ProductID']]['ProductID'] = $products['ProductID'];
-        $productArr[$products['ProductID']]['UserID'] = $products['UserID'];
+    $productArr[$products['ProductID']]['UserID'] = $products['UserID'];
 		$productArr[$products['ProductID']]['SupplierID'] = $products['SupplierID'];
 		$productArr[$products['ProductID']]['ProductName'] = $products['ProductName'];
 		$productArr[$products['ProductID']]['CategoryID'] = $products['CategoryID'];
@@ -851,7 +851,7 @@ if ($content == "get_product_items") {
 
   }
 
-  $product_id = 1;
+ // $product_id = 1;
   if (isset($user_id) && isset($status)) {
 
     $getData = $db->getDataProduct($product_id, $user_id, $status, $page, $limit , $search ,$search_size , $search_color );

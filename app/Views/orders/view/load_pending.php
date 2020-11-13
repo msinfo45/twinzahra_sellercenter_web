@@ -230,7 +230,7 @@ function getHistory($order_id){
                 if ($cekHistoryOrder == null ) {
                     if ($resultStok == "") {
 
-                        echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di sistem</span></div>';
+                        echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di database</span></div>';
 
                     }else if ($resultStok == 0){
 
