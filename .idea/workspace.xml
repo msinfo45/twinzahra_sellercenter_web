@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,6 +100,7 @@
       <workItem from="1605147812860" duration="23801000" />
       <workItem from="1605232574883" duration="21979000" />
       <workItem from="1605279304259" duration="124000" />
+      <workItem from="1605312941323" duration="293000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -271,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605172920938</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="perbaikan get orders di shopee">
+      <created>1605313040807</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1605313040807</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,17 +303,18 @@
     <MESSAGE value="Penambahan api shopee dan lain lain" />
     <MESSAGE value="Perbaikan sync stock lazada" />
     <MESSAGE value="Perbaikan image produk , image pesanan dan ll" />
-    <option name="LAST_COMMIT_MESSAGE" value="Perbaikan image produk , image pesanan dan ll" />
+    <MESSAGE value="perbaikan get orders di shopee" />
+    <option name="LAST_COMMIT_MESSAGE" value="perbaikan get orders di shopee" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605232990803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605232990803" />
-    <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605172919936">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="308" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605313244759">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1604454993830" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1605313244759" />
     <state x="70" y="0" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605172919936" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
@@ -325,10 +332,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="452" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604980001010" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1605172923104">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1605313120195">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604455016733" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605313120195" />
     <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605172923104" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
