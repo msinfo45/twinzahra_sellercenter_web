@@ -1,0 +1,166 @@
+CRITICAL - 2020-11-13 19:43:06 --> Undefined index: extra_attributes
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(115): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 115, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:44:08 --> Undefined index: extra_attributes
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(115): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 115, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:44:27 --> Undefined index: remark
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:45:53 --> Undefined index: remarks
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(176): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 176, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:51:11 --> Illegal string offset 'data'
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 86, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:52:03 --> Illegal string offset 'data'
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 86, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:52:23 --> Illegal string offset 'data'
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 86, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 19:52:26 --> Illegal string offset 'data'
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(86): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'C:\\xampp\\htdocs...', 86, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 21:41:38 --> Undefined index: first_name
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(193): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 193, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 21:42:46 --> Undefined index: first_name
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(193): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 193, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 21:55:22 --> syntax error, unexpected 'else' (T_ELSE)
+#0 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-11-13 21:55:47 --> syntax error, unexpected 'else' (T_ELSE)
+#0 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#3 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-11-13 21:57:19 --> Undefined index: statuses
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(224): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 224, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 23:22:28 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_pending.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 85, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(23): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 23:58:47 --> Undefined index: user_id
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_rts.php(92): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 92, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 23:58:51 --> Undefined index: user_id
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_rts.php(92): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 92, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-13 23:58:57 --> Undefined index: user_id
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_rts.php(92): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 92, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

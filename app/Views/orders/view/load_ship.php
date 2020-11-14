@@ -255,7 +255,7 @@ if (count($result['data']) > 0) {
 
         }else {
 
-            echo '<div class="card-text font-weight-bold"><span style="color:green;">Pesanan sedang diproses</span></div>';
+            echo '<div class="card-text font-weight-bold"><span style="color:green;">Dalam perjalanan</span></div>';
 
         }
 
