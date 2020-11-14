@@ -22,7 +22,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $baseURL = 'http://localhost/twinzahra/';
-	#public $baseURL = 'https://sellercenter.twinzahra.com/';
+	#public $baseURL = 'https://twinzahra.masuk.id/';
 	/*
 	|--------------------------------------------------------------------------
 	| Index File

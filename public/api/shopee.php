@@ -341,10 +341,11 @@ if ($getDataShopee != null) {
     $merchant_name = null;
     $status = $post['status'];
 
-    $orderArr = [];
-    $orderItemsArr = [];
+    $orderArr = array();
+    $orderItemsArr = array();
     $rowsOrdersn = array();
-
+	$result = array();
+	$resultOrdersItems = array();
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
     }
@@ -375,7 +376,7 @@ if ($status == 1) {
 
 }
 
-
+ $status = "READY_TO_SHIP";
     $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
 
     if ($getDataShopee != null) {
@@ -430,10 +431,11 @@ if ($status == 1) {
         $orders = $jsonDecode->orders;
        // echo json_encode($orders);die;
         foreach($orders as $order) {
-          $order_id = $order->ordersn;
-
+			
+        
           $rowsOrdersn[] = $order->ordersn;
 
+//echo json_encode($rowsOrdersn);die;
        }
 
           $urlItems = "https://partner.shopeemobile.com/api/v1/orders/detail";
@@ -456,13 +458,16 @@ if ($status == 1) {
           $jdecodeItems2 = json_decode($resultItems);
 
 
+
          if ( isset($jdecodeItems2->orders)){
            $orderItem2 = $jdecodeItems2->orders;
          }
 
+//echo json_encode($jdecodeItems2);die;
           foreach($orderItem2  as $orderItems2) {
-
-            $order_number = $order->ordersn;
+		
+			$order_id = $orderItems2->ordersn;
+            $order_number = $orderItems2->ordersn;
             $user_id = $user_id;
             $marketplace = "SHOPEE";
             $merchant_name = $merchant_name;
@@ -503,15 +508,30 @@ if ($status == 1) {
               $statuses = 0;
             }
 
-            $items_count =0;
 
             $created_at = date('yy-m-d H:i:s', $orderItems2->create_time);
             $updated_at = date('yy-m-d H:i:s', $orderItems2->update_time);
 
 
+	
+			$first_name = $orderItems2 ->recipient_address->name;
+			$last_name = "";
+			$country = $orderItems2 ->recipient_address->country;
+			$phone = $orderItems2 ->recipient_address->phone;
+			$phone2 = "";
+			$address1 = $orderItems2 ->recipient_address->full_address;
+			$address2 = "";
+			$address3 = "";
+			$address4 = "";
+			$address5 = "";
+			$city = $orderItems2 ->recipient_address->city;
+			$post_code = $orderItems2 ->recipient_address->zipcode;	
+			
+			
+			
             foreach ($orderItems2->items as $items) {
 
-              $order_item_id = $items->item_id;
+			  $order_item_id = $items->item_id;
               $purchase_order_id= "";
               $purchase_order_number= "";
               $invoice_number= "";
@@ -552,73 +572,10 @@ if ($status == 1) {
               $warehouse_code= "";
               $return_status= "";
               $voucher_seller = "";
-
-
-              $orderItemsArr[$order_item_id]['order_item_id'] = $order_item_id;
-              $orderItemsArr[$order_item_id]['order_id'] = $order_id;
-              $orderItemsArr[$order_item_id]['purchase_order_id'] = $purchase_order_id;
-              $orderItemsArr[$order_item_id]['purchase_order_number'] =$purchase_order_number;
-              $orderItemsArr[$order_item_id]['invoice_number'] = $invoice_number;
-              $orderItemsArr[$order_item_id]['sla_time_stamp'] = $sla_time_stamp;
-              $orderItemsArr[$order_item_id]['package_id'] = $package_id;
-              $orderItemsArr[$order_item_id]['shop_id'] = $shop_id;
-              $orderItemsArr[$order_item_id]['order_type'] = $order_type;
-              $orderItemsArr[$order_item_id]['shop_sku'] = $shop_sku;
-              $orderItemsArr[$order_item_id]['sku'] = $sku;
-              $orderItemsArr[$order_item_id]['name'] = $name;
-              $orderItemsArr[$order_item_id]['variation'] = $variation;
-              $orderItemsArr[$order_item_id]['item_price'] = $item_price;
-              $orderItemsArr[$order_item_id]['paid_price'] = $paid_price;
-              $orderItemsArr[$order_item_id]['qty'] = $qty;
-              $orderItemsArr[$order_item_id]['currency'] = $currency;
-              $orderItemsArr[$order_item_id]['tax_amount'] = $tax_amount;
-              // $orderItemsArr[$order_item_id]['image_variants'] = $image_variants;
-              $orderItemsArr[$order_item_id]['product_detail_url'] = $product_detail_url;
-              $orderItemsArr[$order_item_id]['shipment_provider'] = $shipment_provider;
-              $orderItemsArr[$order_item_id]['tracking_code_pre'] = $tracking_code_pre;
-              $orderItemsArr[$order_item_id]['tracking_code'] = $tracking_code;
-              $orderItemsArr[$order_item_id]['shipping_type'] = $shipping_type;
-              $orderItemsArr[$order_item_id]['shipping_provider_type'] = $shipping_provider_type;
-              $orderItemsArr[$order_item_id]['shipping_fee_original'] = $shipping_fee_original;
-              $orderItemsArr[$order_item_id]['shipping_service_cost'] = $shipping_service_cost;
-              $orderItemsArr[$order_item_id]['shipping_fee_discount_seller'] = $shipping_fee_discount_seller;
-              $orderItemsArr[$order_item_id]['is_digital'] = $is_digital;
-              $orderItemsArr[$order_item_id]['voucher_seller'] = $voucher_seller;
-              $orderItemsArr[$order_item_id]['voucher_code_seller'] = $voucher_code_seller;
-              $orderItemsArr[$order_item_id]['voucher_code'] = $voucher_code;
-              $orderItemsArr[$order_item_id]['voucher_code_platform'] = $voucher_code_platform;
-              $orderItemsArr[$order_item_id]['voucher_platform'] = $voucher_platform;
-              $orderItemsArr[$order_item_id]['order_flag'] = $order_flag;
-              $orderItemsArr[$order_item_id]['promised_shipping_time'] = $promised_shipping_time;
-              $orderItemsArr[$order_item_id]['digital_delivery_info'] = $digital_delivery_info;
-              $orderItemsArr[$order_item_id]['extra_attributes'] = $extra_attributes;
-              $orderItemsArr[$order_item_id]['cancel_return_initiator'] = $cancel_return_initiator;
-              $orderItemsArr[$order_item_id]['reason'] = $reason;
-              $orderItemsArr[$order_item_id]['reason_detail'] = $reason_detail;
-              $orderItemsArr[$order_item_id]['stage_pay_status'] = $stage_pay_status;
-              $orderItemsArr[$order_item_id]['warehouse_code'] = $warehouse_code;
-              $orderItemsArr[$order_item_id]['return_status'] = $return_status;
-              $orderItemsArr[$order_item_id]['status'] = $status;
-              $orderItemsArr[$order_item_id]['created_at'] = $created_at;
-              $orderItemsArr[$order_item_id]['updated_at'] = $updated_at;
-
-
-
-            }
-
-            $resultOrderItems = array_values($orderItemsArr);
-
-
-
-
-
-
-
-            }
-
-
-
-          $orderArr[$order_id]['order_id'] = $order_id;
+      
+			}
+			
+		  $orderArr[$order_id]['order_id'] = $order_id;
           $orderArr[$order_id]['order_number'] = $order_number;
           $orderArr[$order_id]['user_id'] = $user_id;
           $orderArr[$order_id]['marketplace'] =$marketplace;
@@ -628,7 +585,7 @@ if ($status == 1) {
           $orderArr[$order_id]['customer_first_name'] = $customer_first_name;
           $orderArr[$order_id]['customer_last_name'] = $customer_last_name;
           $orderArr[$order_id]['price'] = $price;
-          $orderArr[$order_id]['items_count'] = $items_count;
+          $orderArr[$order_id]['items_count'] = COUNT($orderItems2->items);
           $orderArr[$order_id]['payment_method'] = $payment_method;
           $orderArr[$order_id]['voucher'] = $voucher;
           $orderArr[$order_id]['voucher_code'] = $voucher_code;
@@ -647,14 +604,106 @@ if ($status == 1) {
           $orderArr[$order_id]['statuses'] = $statuses;
           $orderArr[$order_id]['created_at'] = $created_at;
           $orderArr[$order_id]['updated_at'] = $updated_at;
-          // $orderArr[$order_id]['order_items'][]= $resultOrderItems;
+		  $orderArr[$order_id]['order_items'][]= array("order_item_id" => $order_item_id,
+                                            "order_id" => $order_id,
+                                            "purchase_order_id" => $purchase_order_id,
+                                            "purchase_order_number" =>$purchase_order_number,
+                                            "invoice_number" => $invoice_number,
+                                            "sla_time_stamp" => $sla_time_stamp,
+                                            "package_id" => $package_id,
+                                            "shop_id" => $shop_id,
+                                            "order_type" => $order_type,
+                                            "shop_sku" => $shop_sku,
+                                            "sku" => $sku,
+                                            "name" => $name,
+                                            "variation" => $variation,
+                                            "item_price" => $item_price,
+                                            "paid_price" => $paid_price,
+                                            "qty" => $qty,
+                                            "currency" => $currency,
+                                            "tax_amount" => $tax_amount,                                            
+                                            "product_detail_url" => $product_detail_url,
+                                            "shipment_provider" => $shipment_provider,
+                                            "tracking_code_pre" => $tracking_code_pre,
+                                            "tracking_code" => $tracking_code,
+                                            "shipping_type" => $shipping_type,
+                                            "shipping_provider_type" => $shipping_provider_type,
+                                            "shipping_fee_original" => $shipping_fee_original,
+                                            "shipping_service_cost" => $shipping_service_cost,
+                                            "shipping_fee_discount_seller" => $shipping_fee_discount_seller,
+                                            "is_digital" => $is_digital,
+                                            "voucher_seller" => $voucher_seller,
+                                            "voucher_code_seller" => $voucher_code_seller,
+                                            "voucher_code" => $voucher_code,
+                                            "voucher_code_platform" => $voucher_code_platform,
+                                            "voucher_platform" => $voucher_platform,
+                                            "order_flag" => $order_flag,
+                                            "promised_shipping_time" => $promised_shipping_time,
+                                            "digital_delivery_info" => $digital_delivery_info,
+                                            "extra_attributes" => $extra_attributes,
+                                            "cancel_return_initiator" => $cancel_return_initiator,
+                                            "reason" => $reason,
+                                            "reason_detail" => $reason_detail,
+                                            "stage_pay_status" => $stage_pay_status,
+                                            "warehouse_code" => $warehouse_code,
+                                            "return_status" => $return_status,
+                                            "status" => $statuses,
+                                            "created_at" => $created_at,
+                                            "updated_at" => $updated_at
+											// "image_variants" => $image_variants,
+                                          
+														);
+														
+														
+		 $orderArr[$order_id]['address_billing']= array("order_id" => $order_id,
+		 "first_name" => $first_name,
+		 "last_name" => $last_name,
+		 "country" => $country,
+		 "phone" => $phone,
+		 "phone2" => $phone2,
+		 "address1" => $address1,
+		 "address2" => $address2,
+		 "address3" => $address3,
+		 "address4" => $address4,
+		 "address5" => $address5,
+		 "city" => $city,
+		 "post_code" => $post_code,
+		 
+			);	
+			
+		$orderArr[$order_id]['address_shipping']= array("order_id" => $order_id,
+		"first_name" => $first_name,
+		 "last_name" => $last_name,
+		 "country" => $country,
+		 "phone" => $phone,
+		 "phone2" => $phone2,
+		 "address1" => $address1,
+		 "address2" => $address2,
+		 "address3" => $address3,
+		 "address4" => $address4,
+		 "address5" => $address5,
+		 "city" => $city,
+		 "post_code" => $post_code,
+		 
+			);								
+			
+
+			  
+            
+
+            }
+			
+		
+			
+			$result = array_values($orderArr);
+			
+   //echo json_encode($result);die;
 
 
 
-          //}
 
-
-        $result = array_values($orderArr);
+	
+   
 
 
       }

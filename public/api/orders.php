@@ -372,12 +372,12 @@ if (isset($content) && $content != "") {
     $shopeeContent = curl_exec($chShopee);
     curl_close($chShopee);
 
-    $resultShopee =json_decode($shopeeContent,true);
-
+    $resultShopee =json_decode($shopeeContent);
+    $dataShopee = $resultShopee->data;
 
     $getData = $db->getDataOrders($user_id, $page, $limit , $status_id);
 
-    if ($resultLazada != null && $resultShopee != null ) {
+    if ($resultLazada != null && $resultShopee->status == 200 ) {
 
 
       // while ($row = $getData->fetch_assoc()) {
@@ -388,7 +388,7 @@ if (isset($content) && $content != "") {
       // }
 
       $r = [];
-      $r = array_merge($resultLazada,$resultShopee) ;
+      $r = array_merge($resultLazada,$dataShopee) ;
 
 
 
@@ -436,7 +436,7 @@ if (isset($content) && $content != "") {
       $return = array(
         "status" => 200,
         "message" => "ok Shopee",
-        "data" => $resultShopee
+        "data" => $dataShopee
       );
 
     } else {
