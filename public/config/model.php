@@ -414,7 +414,7 @@ class Model_user
         }
     }
 
-    public function createHistoryOrders($order_id, $order_number, $user_id, $marketplace, $branch_number, $warehouse_code, $customer_first_name, $customer_last_name, $price, $items_count, $payment_method, $voucher, $voucher_code, $voucher_platform, $voucher_seller, $gift_option, $gift_message, $shipping_fee, $shipping_fee_discount_seller, $shipping_fee_discount_platform, $promised_shipping_times, $national_registration_number, $tax_code, $extra_attributes, $remarks, $delivery_info, $statuses, $created_at, $updated_at)
+    public function createHistoryOrders($order_id, $order_number, $user_id, $marketplace, $merchant_name ,$branch_number, $warehouse_code, $customer_first_name, $customer_last_name, $price, $items_count, $payment_method, $voucher, $voucher_code, $voucher_platform, $voucher_seller, $gift_option, $gift_message, $shipping_fee, $shipping_fee_discount_seller, $shipping_fee_discount_platform, $promised_shipping_times, $national_registration_number, $tax_code, $extra_attributes, $remarks, $delivery_info, $statuses, $created_at, $updated_at)
     {
 
         if ($created_at == "")
@@ -432,6 +432,7 @@ class Model_user
 					order_number,
 					user_id,
 					marketplace,
+                    merchant_name,
 					branch_number,
 					warehouse_code,
 					customer_first_name,
@@ -464,6 +465,7 @@ class Model_user
 									'" . $order_number . "' ,
 									'" . $user_id . "' ,
 									'" . $marketplace . "' ,
+                                    '" . $merchant_name . "' ,
 									'" . $branch_number . "' ,
 									'" . $warehouse_code . "' ,
 									'" . $customer_first_name . "' ,
@@ -9603,9 +9605,9 @@ Order by a.CreatedDate DESC " . $condition);
         $query = $this
             ->conn
             ->query("SELECT * FROM 
-																									history_order_details
-                                                                                                    where order_id = '" . $order_id . "'
-                                                                                                     Order by created_at DESC " . $condition);
+				history_order_details
+                 where order_id = '" . $order_id . "'
+                   Order by created_at DESC ");
         if (mysqli_num_rows($query) > 0)
         {
             return $query;

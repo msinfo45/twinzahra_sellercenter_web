@@ -24,7 +24,8 @@
 					 
 										  
 							echo'<p class="statusMsg"></p><input type="hidden"  name="order_id" id="order_id">
-							<input type="hidden"  name="merchant_name" id="merchant_name">';
+							<input type="hidden"  name="merchant_name" id="merchant_name">
+							<input type="hidden"  name="marketplace" id="marketplace">';
 							
 							echo' <div class="col-md-9 mb-3">';
 						

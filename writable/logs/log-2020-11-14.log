@@ -58,3 +58,33 @@ CRITICAL - 2020-11-14 00:53:27 --> count(): Parameter must be an array or an obj
 #6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
 #8 {main}
+CRITICAL - 2020-11-14 04:47:15 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_done.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 85, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(50): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_done()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-14 07:59:05 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_rts.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 85, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-14 07:59:44 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\orders\view\load_rts.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 85, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Orders.php(31): view('orders/view/loa...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Orders->load_rts()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

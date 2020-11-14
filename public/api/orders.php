@@ -333,6 +333,7 @@ if (isset($content) && $content != "") {
       $merchant_name = $post['merchant_name'];
     }
 
+    $orderArr = array();
     $page = null;
     $limit = 0;
 
@@ -349,6 +350,7 @@ if (isset($content) && $content != "") {
     }
     //   $status_id = 4;
 
+    
     if ($status == 1) {
 
       $ch = curl_init();
@@ -457,14 +459,14 @@ if (isset($content) && $content != "") {
 
         while ($row = $getData->fetch_assoc()) {
 
-          //$rows[] = $row;
+          $rows[] = $row;
 
           $order_id = $row['order_id'];
           $order_number = $row['order_number'];
           $branch_number = $row['branch_number'];
           $warehouse_code = $row['warehouse_code'];
           $marketplace = $row['marketplace'];
-          $merchant_names = $row['merchant_name'];
+          $merchant_name = $row['merchant_name'];
           $customer_first_name = $row['customer_first_name'];
           $customer_last_name = $row['customer_last_name'];
           $price = $row['price'];
@@ -491,7 +493,7 @@ if (isset($content) && $content != "") {
           $updated_at = $row['updated_at'];
           $address_billing = $row['address_billing'];
 
-          //echo json_encode($merchant_names);die;
+
           $getDataAddressShipping = $db->getDataAddressShipping($order_id);
 
           if ($getDataAddressShipping != null) {
@@ -530,13 +532,16 @@ if (isset($content) && $content != "") {
             $post_code = "";
           }
 
+        
+
           $getDataOrderItems = $db->getDataOrderItems($user_id, $page, $limit, $order_id);
 
-
+         
           if ($getDataOrderItems != null) {
 
 
             while ($rowOrderItems = $getDataOrderItems->fetch_assoc()) {
+             // echo json_encode($rowOrderItems);die;
 
               $order_item_id = $rowOrderItems['order_item_id'];
               $order_id = $rowOrderItems['order_id'];
@@ -584,15 +589,17 @@ if (isset($content) && $content != "") {
               $warehouse_code = $rowOrderItems['warehouse_code'];
               $return_status = $rowOrderItems['return_status'];
               $imageImageVariant = $rowOrderItems['product_main_image'];
+             
 
             }
 
+            
 
             $orderArr[$order_id]['order_id'] = $order_id;
             $orderArr[$order_id]['order_number'] = $order_number;
             $orderArr[$order_id]['user_id'] = $user_id;
             $orderArr[$order_id]['marketplace'] = $marketplace;
-            $orderArr[$order_id]['merchant_name'] = $merchant_names;
+            $orderArr[$order_id]['merchant_name'] = $merchant_name;
             $orderArr[$order_id]['branch_number'] = $branch_number;
             $orderArr[$order_id]['warehouse_code'] = $warehouse_code;
             $orderArr[$order_id]['customer_first_name'] = $customer_first_name;
@@ -704,8 +711,8 @@ if (isset($content) && $content != "") {
 
           }
 
-          $result = array_values($orderArr);
-          // echo json_encode($rows);die;
+        $result = array_values($orderArr);
+          
 
           $return = array(
             "status" => 200,
@@ -781,7 +788,7 @@ if (isset($content) && $content != "") {
       $resultLazada = json_decode($lazadacontent);
       $dataLazada = $resultLazada->data;
 
-     // echo json_encode($resultLazada);die;
+ //echo json_encode($resultLazada);die;
 
       $chShopee = curl_init();
       curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_order');
@@ -1707,7 +1714,6 @@ if (isset($content) && $content != "") {
     $tracking_code_pre = $post['tracking_code_pre']  ;
     $remarks = $post['remark']  ;
     $action = $post['action']  ;
-
     $user_id = 5;
 
 
@@ -1730,119 +1736,101 @@ if (isset($content) && $content != "") {
 
     $resultItem=json_decode($contentItem,true);
 
-    //echo json_encode($resultItem);die;
-
-    $order_number = $resultItem['order_number'] ;
-    $branch_number = $resultItem['branch_number'] ;
-    $warehouse_code = $resultItem['warehouse_code'] ;
-    $customer_first_name = $resultItem['customer_first_name'] ;
-    $customer_last_name = $resultItem['customer_last_name'] ;
-    $price = $resultItem['price'] ;
-    $items_count = $resultItem['items_count'] ;
-    $payment_method = $resultItem['payment_method'] ;
-    $voucher = $resultItem['voucher'] ;
-    $voucher_code = $resultItem['voucher_code'] ;
-    $voucher_platform = $resultItem['voucher_platform'] ;
-    $voucher_seller = $resultItem['voucher_seller'] ;
-    $gift_option = $resultItem['gift_option'] ;
-    $gift_message = $resultItem['gift_message'] ;
-    $shipping_fee = $resultItem['shipping_fee'] ;
-    $shipping_fee_discount_seller = $resultItem['shipping_fee_discount_seller'] ;
-    $shipping_fee_discount_platform = $resultItem['shipping_fee_discount_platform'] ;
-    $promised_shipping_times = $resultItem['promised_shipping_times'] ;
-    $national_registration_number = $resultItem['national_registration_number'] ;
-    $tax_code = $resultItem['tax_code'] ;
-    $extra_attributes = $resultItem['extra_attributes'] ;
-    $remarks = $resultItem['remarks'] ;
-    $delivery_info = $resultItem['delivery_info'] ;
-    $statuses = $resultItem['statuses'] ;
-    $created_at = $resultItem['created_at'] ;
-    $updated_at = $resultItem['updated_at'] ;
+ //echo json_encode($resultItem);die;
+ foreach ($resultItem ['data'] as $datas) {
 
 
+    $order_number = $datas['order_number'] ;
+    $branch_number = $datas['branch_number'] ;
+    $warehouse_code = $datas['warehouse_code'] ;
+    $customer_first_name = $datas['customer_first_name'] ;
+    $customer_last_name = $datas['customer_last_name'] ;
+    $price = $datas['price'] ;
+    $items_count = $datas['items_count'] ;
+    $payment_method = $datas['payment_method'] ;
+    $voucher = $datas['voucher'] ;
+    $voucher_code = $datas['voucher_code'] ;
+    $voucher_platform = $datas['voucher_platform'] ;
+    $voucher_seller = $datas['voucher_seller'] ;
+    $gift_option = $datas['gift_option'] ;
+    $gift_message = $datas['gift_message'] ;
+    $shipping_fee = $datas['shipping_fee'] ;
+    $shipping_fee_discount_seller = $datas['shipping_fee_discount_seller'] ;
+    $shipping_fee_discount_platform = $datas['shipping_fee_discount_platform'] ;
+    $promised_shipping_times = $datas['promised_shipping_times'] ;
+    $national_registration_number = $datas['national_registration_number'] ;
+    $tax_code = $datas['tax_code'] ;
+    $extra_attributes = $datas['extra_attributes'] ;
+    $remarks = $datas['remarks'] ;
+    $delivery_info = $datas['delivery_info'] ;
+    $statuses = $datas['statuses'] ;
+    $created_at = $datas['created_at'] ;
+    $updated_at = $datas['updated_at'] ;
 
-    $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=get_order_items');
 
-    $payloadItem = json_encode( array( "order_id"=> $order_id,
-      "merchant_name"=> $merchant_name,
-      "marketplace"=> $marketplace
-    ) );
-    curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-    curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-    $contentItem = curl_exec($chItems);
-    curl_close($chItems);
-
-    //mengubah data json menjadi data array asosiatif
-    $resultItem=json_decode($contentItem,true);
-
-    //echo json_encode($resultItem);die;
-
-    foreach($resultItem['data'] as $DataOrderItems)
+    foreach($datas['order_items'] as $DataOrderItems)
 
     {
-      $order_item_ids[] = $DataOrderItems['order_item_id'];
-      //Set array untuk variable history orders
-      $variant_details[] = array(
+         
+          //Set array untuk variable history orders
+          $variant_details[] = array(
+    
+            "order_item_id" =>$DataOrderItems['order_item_id'] ,
+            "order_id" =>$DataOrderItems['order_id'] ,
+            "purchase_order_id" =>$DataOrderItems['purchase_order_id'] ,
+            "purchase_order_number" =>$DataOrderItems['purchase_order_number'],
+            "invoice_number" => $DataOrderItems['invoice_number'],
+            "sla_time_stamp" => $DataOrderItems['sla_time_stamp'],
+            "package_id" =>$DataOrderItems['package_id'],
+            "shop_id" =>$DataOrderItems['shop_id'],
+            "order_type" => $DataOrderItems['order_type'],
+            "shop_sku" =>$DataOrderItems['shop_sku'] ,
+            "sku" =>$DataOrderItems['sku'],
+            "name" =>$DataOrderItems['name'],
+            "qty" =>1,
+            "variation" =>$DataOrderItems['variation'],
+            "item_price" =>$DataOrderItems['item_price'],
+            "paid_price" =>$DataOrderItems['paid_price'],
+            "currency" =>$DataOrderItems['currency'],
+            "tax_amount" => $DataOrderItems['tax_amount'],
+            "product_main_image" =>$DataOrderItems['image_variant'],
+            "product_detail_url" =>$DataOrderItems['product_detail_url'],
+            "shipment_provider" =>$DataOrderItems['shipment_provider'],
+            "tracking_code_pre" =>$DataOrderItems['tracking_code_pre'],
+            "tracking_code" =>$DataOrderItems['tracking_code'],
+            "shipping_type" =>$DataOrderItems['shipping_type'],
+            "shipping_provider_type" =>$DataOrderItems['shipping_provider_type'],
+            "shipping_fee_original" =>$DataOrderItems['shipping_fee_original'],
+            "shipping_service_cost " =>$DataOrderItems['shipping_service_cost'],
+            "shipping_fee_discount_seller" =>$DataOrderItems['shipping_fee_discount_seller'],
+            "shipping_amount" =>$DataOrderItems['shipping_amount'],
+            "is_digital" =>$DataOrderItems['is_digital'],
+            "voucher_amount" =>$DataOrderItems['voucher_amount'],
+            "voucher_seller" =>$DataOrderItems['voucher_seller'],
+            "voucher_code_seller" =>$DataOrderItems['voucher_code_seller'],
+            "voucher_code" =>$DataOrderItems['voucher_code'],
+            "voucher_code_platform" =>$DataOrderItems['voucher_code_platform'],
+            "voucher_platform" =>$DataOrderItems['voucher_platform'],
+            "order_flag" =>$DataOrderItems['order_flag'],
+            "promised_shipping_time" =>$DataOrderItems['promised_shipping_time'],
+            "digital_delivery_info" =>$DataOrderItems['digital_delivery_info'],
+            "extra_attributes" =>$DataOrderItems['extra_attributes'],
+            "cancel_return_initiator" =>$DataOrderItems['cancel_return_initiator'],
+            "reason" =>$DataOrderItems['reason'],
+            "reason_detail" =>$DataOrderItems['reason_detail'],
+            "stage_pay_status" =>$DataOrderItems['stage_pay_status'],
+            "warehouse_code" =>$DataOrderItems['warehouse_code'],
+            "return_status" =>$DataOrderItems['return_status'],
+            "status" =>$DataOrderItems['status'],
+            "created_at" =>$DataOrderItems['created_at'],
+            "updated_at" =>$DataOrderItems['updated_at']
+    
+          );
+        }
 
-        "order_item_id" =>$DataOrderItems['order_item_id'] ,
-        "order_id" =>$DataOrderItems['order_id'] ,
-        "purchase_order_id" =>$DataOrderItems['purchase_order_id'] ,
-        "purchase_order_number" =>$DataOrderItems['purchase_order_number'],
-        "invoice_number" => $DataOrderItems['invoice_number'],
-        "sla_time_stamp" => $DataOrderItems['sla_time_stamp'],
-        "package_id" =>$DataOrderItems['package_id'],
-        "shop_id" =>$DataOrderItems['shop_id'],
-        "order_type" => $DataOrderItems['order_type'],
-        "shop_sku" =>$DataOrderItems['shop_sku'] ,
-        "sku" =>$DataOrderItems['sku'],
-        "name" =>$DataOrderItems['name'],
-        "qty" =>1,
-        "variation" =>$DataOrderItems['variation'],
-        "item_price" =>$DataOrderItems['item_price'],
-        "paid_price" =>$DataOrderItems['paid_price'],
-        "currency" =>$DataOrderItems['currency'],
-        "tax_amount" => $DataOrderItems['tax_amount'],
-        "product_main_image" =>$DataOrderItems['product_main_image'],
-        "product_detail_url" =>$DataOrderItems['product_detail_url'],
-        "shipment_provider" =>$DataOrderItems['shipment_provider'],
-        "tracking_code_pre" =>$DataOrderItems['tracking_code_pre'],
-        "tracking_code" =>$DataOrderItems['tracking_code'],
-        "shipping_type" =>$DataOrderItems['shipping_type'],
-        "shipping_provider_type" =>$DataOrderItems['shipping_provider_type'],
-        "shipping_fee_original" =>$DataOrderItems['shipping_fee_original'],
-        "shipping_service_cost " =>$DataOrderItems['shipping_service_cost'],
-        "shipping_fee_discount_seller" =>$DataOrderItems['shipping_fee_discount_seller'],
-        "shipping_amount" =>$DataOrderItems['shipping_amount'],
-        "is_digital" =>$DataOrderItems['is_digital'],
-        "voucher_amount" =>$DataOrderItems['voucher_amount'],
-        "voucher_seller" =>$DataOrderItems['voucher_seller'],
-        "voucher_code_seller" =>$DataOrderItems['voucher_code_seller'],
-        "voucher_code" =>$DataOrderItems['voucher_code'],
-        "voucher_code_platform" =>$DataOrderItems['voucher_code_platform'],
-        "voucher_platform" =>$DataOrderItems['voucher_platform'],
-        "order_flag" =>$DataOrderItems['order_flag'],
-        "promised_shipping_time" =>$DataOrderItems['promised_shipping_time'],
-        "digital_delivery_info" =>$DataOrderItems['digital_delivery_info'],
-        "extra_attributes" =>$DataOrderItems['extra_attributes'],
-        "cancel_return_initiator" =>$DataOrderItems['cancel_return_initiator'],
-        "reason" =>$DataOrderItems['reason'],
-        "reason_detail" =>$DataOrderItems['reason_detail'],
-        "stage_pay_status" =>$DataOrderItems['stage_pay_status'],
-        "warehouse_code" =>$DataOrderItems['warehouse_code'],
-        "return_status" =>$DataOrderItems['return_status'],
-        "status" =>$DataOrderItems['status'],
-        "created_at" =>$DataOrderItems['created_at'],
-        "updated_at" =>$DataOrderItems['updated_at']
+ }
 
-      );
-
-    }
-
-
-
-
+ 
 
 
       //cek user id
@@ -1859,6 +1847,7 @@ if (isset($content) && $content != "") {
           $order_number,
           $user_id,
           $marketplace,
+          $merchant_name,
           $branch_number,
           $warehouse_code,
           $customer_first_name,
@@ -2143,7 +2132,7 @@ if (isset($content) && $content != "") {
       $variant_details = array();
 
       $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra/public/api/orders.php?request=get_order_items');
+      curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=get_order_items');
       $payloadItem = json_encode( array( "order_id"=> $order_id ,
         "marketplace"=> $marketplace,
         "merchant_name"=> $merchant_name) );
@@ -2153,6 +2142,7 @@ if (isset($content) && $content != "") {
       $contentItem = curl_exec($chItems);
       curl_close($chItems);
 
+     // echo json_encode($contentItem);die;
       //mengubah data json menjadi data array asosiatif
       $resultItem=json_decode($contentItem,true);
 
@@ -2167,12 +2157,13 @@ if (isset($content) && $content != "") {
 
       $order_item_ids = json_encode($order_item_ids, true);
 
+     // echo json_encode($order_item_ids);die;
       if($shipping_provider != null && $delivery_type != null ) {
 
 
         //Set Pick
         $chpick = curl_init();
-        curl_setopt($chpick, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=set_pick');
+        curl_setopt($chpick, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_pick');
         $payloadItem = json_encode( array( "order_item_ids"=> $order_item_ids,
           "shipping_provider"=> $shipping_provider,
           "delivery_type"=> $delivery_type,
@@ -2185,12 +2176,10 @@ if (isset($content) && $content != "") {
         curl_close($chpick);
 
         $resultpick=json_decode($contentpick,true);
-        //print_r ($resultpick);die;
+     // echo json_encode ($contentpick);die;
         //Mencari tracking number
-        foreach ($resultpick['data'] as $items) {
-
-          $tracking_number = $items['tracking_number'];
-        }
+       
+        
 
 
 
@@ -2199,9 +2188,13 @@ if (isset($content) && $content != "") {
         //jika set pick berhasil
         if ($resultpick['status'] == 200) {
 
+          foreach ($resultpick['data'] as $items) {
+
+            $tracking_number = $items['tracking_number'];
+          }
           //Set Invoice
           $chInvoice = curl_init();
-          curl_setopt($chInvoice, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=set_invoice');
+          curl_setopt($chInvoice, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_invoice');
           $payloadInvoice = json_encode( array( "order_item_id"=> $order_item_id,
             "user_id"=> $user_id,
             "merchant_name"=> $merchant_name
@@ -2214,7 +2207,7 @@ if (isset($content) && $content != "") {
 
           $resultInvoice=json_decode($contentInvoice,true);
 
-
+          //echo json_encode ($resultInvoice);die;
           //print_r ($resultInvoice);die;
 
 
@@ -2226,7 +2219,7 @@ if (isset($content) && $content != "") {
 
             //Set Ready to Ship
             $chrts = curl_init();
-            curl_setopt($chrts, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=set_rts');
+            curl_setopt($chrts, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_rts');
             $payloadRts = json_encode( array( "order_item_ids"=> $order_item_ids,
               "shipping_provider"=> $shipping_provider,
               "delivery_type"=> $delivery_type,
@@ -2241,11 +2234,11 @@ if (isset($content) && $content != "") {
 
             //mengubah data json menjadi data array asosiatif
             $resultRts=json_decode($contentRts,true);
-
+           // echo json_encode ($resultRts);die;
             //print_r ($resultRts);die;
             //jika set RTS sukse
 
-            if ($resultRts['status'] == 200) {
+            if ($resultRts['status'] != 200) {
 
               // Simpan data ke database
               $data1 = array(
@@ -2255,7 +2248,7 @@ if (isset($content) && $content != "") {
                 'marketplace'=> $marketplace
               );
 
-              echo json_encode($data1);die;
+             // echo json_encode($data1);die;
 
               $options = array(
                 'http' => array(
@@ -2329,7 +2322,7 @@ if (isset($content) && $content != "") {
             "status" => 404,
             "total_rows" => 100,
             "message" => $resultpick['message'],
-            "data" => $resultpick
+            "data" => $resultpick['data']
           );
 
         }

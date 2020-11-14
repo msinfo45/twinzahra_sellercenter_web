@@ -1416,14 +1416,17 @@ if (isset($content) && $content != "") {
           $data=json_decode($c->execute($request, $accessToken));
 
 
-         // echo json_encode($data);die;
-          $datas=$data->data->order_items;
+        // echo json_encode($data);die;
+         //if (isset($datas=$data->data->order_items)) {
+         // $datas=$data->data->order_items;
+         //}
+          
 
 
 
 
           if ( $data->code  == "0") {
-
+            $datas=$data->data->order_items;
             $return = array(
               "status" => 200,
               "message" => "Pesanan berhasil dikonfirmasi",
@@ -1511,7 +1514,8 @@ if (isset($content) && $content != "") {
 
 
 
-          $request = new LazopRequest('/order/rts');
+         $request = new LazopRequest('/order/rts');
+        // $request = new LazopRequest('/order/pack');
           $request->addApiParam('delivery_type', $delivery_type);
           $request->addApiParam('order_item_ids', $order_item_ids);
           $request->addApiParam("shipment_provider", $delivery_type);

@@ -282,7 +282,7 @@ function getHistory($order_id){
 
                         if ($marketplace == "LAZADA") {
 
-                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';
+                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'"  title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';
 
                         }else{
 
@@ -344,8 +344,10 @@ $(document).on("click", ".EditOrder", function () {
 $(document).on("click", ".AcceptOrder", function () {
      var order_id = $(this).data('id');
 	 var merchant_name = $(this).data('merchant_name');
+	 var marketplace = $(this).data('marketplace');
      $("#AcceptOrder .modal-body #order_id").val( order_id );
 	$("#AcceptOrder .modal-body #merchant_name").val( merchant_name );
+	$("#AcceptOrder .modal-body #marketplace").val( marketplace );
 
      // As pointed out in comments, 
      // it is unnecessary to have to manually call the modal.
@@ -358,6 +360,7 @@ $(document).on("click", ".AcceptOrder", function () {
 function SendAcceptOrders(){
      var order_id = $('#order_id').val();
 	 var merchant_name = $('#merchant_name').val();
+	 var marketplace = $('#marketplace').val();
    // var shipping_provider = $('#shipping_provider').val();
     //var delivery_type = $('#delivery_type').val();
 	
@@ -373,9 +376,9 @@ function SendAcceptOrders(){
 		dataType: 'json',
 		contentType: 'application/json',
 		processData: false,
-		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
+		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'", "marketplace": "'+ marketplace +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
 
-    	 url:'<?= base_url('public/api/orders.php?request=accept_order') ?>',
+    	 url:'<?= base_url('public/api/orders/accept_order') ?>',
            
             beforeSend: function () {
                 $('.btn').attr("disabled","disabled");
