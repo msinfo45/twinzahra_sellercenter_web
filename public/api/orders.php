@@ -323,9 +323,10 @@ if (isset($content) && $content != "") {
   if ($content == "get_orders") {
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
-//                    $user_id = $userid_header;
+
     $user_id = 5;
-    //$status_id = 1;
+    $status = $post['status'];
+    $marketplace = $post['marketplace'];
     $merchant_name = null;
 
     if (isset($post['merchant_name'])) {
@@ -348,106 +349,385 @@ if (isset($content) && $content != "") {
     }
     //   $status_id = 4;
 
+    if ($status == 1) {
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/lazada.php?request=get_orders');
-    //	$payload = json_encode( array( "merchant_name"=> $merchant_name) );
-    //$payload = json_encode( array( "UserID"=> "5" ) );
-    //curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $lazadacontent = curl_exec($ch);
-    curl_close($ch);
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_orders');
+      $payloadLazada = json_encode(array("user_id" => $user_id,
+        "merchant_name" => $merchant_name,
+        "status" => $status));
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadLazada);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      $lazadacontent = curl_exec($ch);
+      curl_close($ch);
+      $resultLazada = json_decode($lazadacontent);
+      $dataLazada = $resultLazada->data;
 
-    $resultLazada=json_decode($lazadacontent,true);
+      //  echo json_encode($dataLazada);die;
 
+      $chShopee = curl_init();
+      curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_orders');
+      $payloadShopee = json_encode(array("user_id" => $user_id,
+        "merchant_name" => $merchant_name,
+        "status" => $status));
+      curl_setopt($chShopee, CURLOPT_POSTFIELDS, $payloadShopee);
+      curl_setopt($chShopee, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      curl_setopt($chShopee, CURLOPT_RETURNTRANSFER, 1);
+      $shopeeContent = curl_exec($chShopee);
+      curl_close($chShopee);
 
-    $chShopee = curl_init();
-    curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra/public/api/shopee.php?request=get_orders');
-    // $payloadShopee = json_encode( array( "merchant_name"=> $merchant_name) );
-    //$payload = json_encode( array( "UserID"=> "5" ) );
-    //curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-    curl_setopt( $chShopee, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($chShopee, CURLOPT_RETURNTRANSFER, 1);
-    $shopeeContent = curl_exec($chShopee);
-    curl_close($chShopee);
+      $resultShopee = json_decode($shopeeContent);
+      $dataShopee = $resultShopee->data;
 
-    $resultShopee =json_decode($shopeeContent);
-    $dataShopee = $resultShopee->data;
-
-    $getData = $db->getDataOrders($user_id, $page, $limit , $status_id);
-
-    if ($resultLazada != null && $resultShopee->status == 200 ) {
-
-
-      // while ($row = $getData->fetch_assoc()) {
-
-      //   $rows[] = $row;
-
-
-      // }
-
-      $r = [];
-      $r = array_merge($resultLazada,$dataShopee) ;
+      //  echo json_encode($dataShopee);die;
 
 
 
-      $return = array(
-        "status" => 200,
-        "message" => "ok",
-        "data" => $r
-      );
-
-    }else if ($getData != null) {
+      if ($resultLazada->status == 200 && $resultShopee->status == 200) {
 
 
-      while ($row = $getData->fetch_assoc()) {
 
-        $rows[] = $row;
 
+        $r = [];
+        $r = array_merge($dataLazada, $dataShopee);
+
+
+        $return = array(
+          "status" => 200,
+          "message" => "ok bos",
+          "data" => $r
+        );
+
+      } else if ($getData != null) {
+
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows[] = $row;
+
+
+        }
+
+
+        $result = json_decode($content, true);
+        //get new orders lazada
+
+
+        $return = array(
+          "status" => 200,
+          "message" => "ok",
+          "data" => $rows
+        );
+
+
+      } else if (($resultLazada != null)) {
+
+
+        $return = array(
+          "status" => 200,
+          "message" => "ok lazada",
+          "data" => $dataLazada
+        );
+
+
+      } else if (($resultShopee != null)) {
+
+
+        $return = array(
+          "status" => 200,
+          "message" => "ok Shopee",
+          "data" => $dataShopee
+        );
+
+      } else {
+
+        $return = array(
+          "status" => 404,
+          "message" => "Belum ada Data",
+          "data" => []
+        );
+      }
+
+    }else{
+      //call database
+      $getData = $db->getDataOrders($user_id, $page, $limit, $status);
+
+      if ($getData != null) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          //$rows[] = $row;
+
+          $order_id = $row['order_id'];
+          $order_number = $row['order_number'];
+          $branch_number = $row['branch_number'];
+          $warehouse_code = $row['warehouse_code'];
+          $marketplace = $row['marketplace'];
+          $merchant_names = $row['merchant_name'];
+          $customer_first_name = $row['customer_first_name'];
+          $customer_last_name = $row['customer_last_name'];
+          $price = $row['price'];
+          $items_count = $row['items_count'];
+          $payment_method = $row['payment_method'];
+          $voucher = $row['voucher'];
+          $voucher_code = $row['voucher_code'];
+          $voucher_platform = $row['voucher_platform'];
+          $voucher_seller = $row['voucher_seller'];
+          $gift_option = $row['gift_option'];
+          $gift_message = $row['gift_message'];
+          $shipping_fee = $row['shipping_fee'];
+          $shipping_fee_original = $row['shipping_fee_original'];
+          $shipping_fee_discount_seller = $row['shipping_fee_discount_seller'];
+          $shipping_fee_discount_platform = $row['shipping_fee_discount_platform'];
+          $promised_shipping_times = $row['promised_shipping_times'];
+          $national_registration_number = $row['national_registration_number'];
+          $tax_code = $row['tax_code'];
+          $extra_attributes = $row['extra_attributes'];
+          $remarks = $row['remarks'];
+          $delivery_info = $row['delivery_info'];
+          $statuses = $row['statuses'];
+          $created_at = $row['created_at'];
+          $updated_at = $row['updated_at'];
+          $address_billing = $row['address_billing'];
+
+          //echo json_encode($merchant_names);die;
+          $getDataAddressShipping = $db->getDataAddressShipping($order_id);
+
+          if ($getDataAddressShipping != null) {
+
+
+            while ($rowAddressShipping = $getDataAddressShipping->fetch_assoc()) {
+
+              $first_name = $rowAddressShipping['first_name'];
+              $last_name = $rowAddressShipping['last_name'];
+              $country = $rowAddressShipping['country'];
+              $phone = $rowAddressShipping['phone'];
+              $phone2 = $rowAddressShipping['phone2'];
+              $address1 = $rowAddressShipping['address1'];
+              $address2 = $rowAddressShipping['address2'];
+              $address3 = $rowAddressShipping['address3'];
+              $address4 = $rowAddressShipping['address4'];
+              $address5 = $rowAddressShipping['address5'];
+              $city = $rowAddressShipping['city'];
+              $post_code = $rowAddressShipping['post_code'];
+
+            }
+
+          } else {
+
+            $first_name = "";
+            $last_name = "";
+            $country = "";
+            $phone = "";
+            $phone2 = "";
+            $address1 = "";
+            $address2 = "";
+            $address3 = "";
+            $address4 = "";
+            $address5 = "";
+            $city = "";
+            $post_code = "";
+          }
+
+          $getDataOrderItems = $db->getDataOrderItems($user_id, $page, $limit, $order_id);
+
+
+          if ($getDataOrderItems != null) {
+
+
+            while ($rowOrderItems = $getDataOrderItems->fetch_assoc()) {
+
+              $order_item_id = $rowOrderItems['order_item_id'];
+              $order_id = $rowOrderItems['order_id'];
+              $purchase_order_id = $rowOrderItems['purchase_order_id'];
+              $purchase_order_number = $rowOrderItems['purchase_order_number'];
+              $invoice_number = $rowOrderItems['purchase_order_number'];
+              $sla_time_stamp = $rowOrderItems['sla_time_stamp'];
+              $package_id = $rowOrderItems['package_id'];
+              $shop_id = $rowOrderItems['shop_id'];
+              $order_type = $rowOrderItems['order_type'];
+              $shop_sku = $rowOrderItems['shop_sku'];
+              $sku = $rowOrderItems['sku'];
+              $name = $rowOrderItems['name'];
+              $variation = $rowOrderItems['variation'];
+              $item_price = $rowOrderItems['item_price'];
+              $paid_price = $rowOrderItems['paid_price'];
+              $qty = 1;
+              $currency = $rowOrderItems['currency'];
+              $tax_amount = $rowOrderItems['tax_amount'];
+              $product_detail_url = $rowOrderItems['product_detail_url'];
+              $shipment_provider = $rowOrderItems['shipment_provider'];
+              $tracking_code_pre = $rowOrderItems['tracking_code_pre'];
+              $tracking_code = $rowOrderItems['tracking_code'];
+              $shipping_type = $rowOrderItems['shipping_type'];
+              $shipping_provider_type = $rowOrderItems['shipping_provider_type'];
+              $shipping_fee_original = $rowOrderItems['shipping_fee_original'];
+              $shipping_service_cost = $rowOrderItems['shipping_service_cost'];
+              // $shipping_fee_discount_seller= $rowOrderItems['shipping_fee_discount_seller'];
+              $shipping_amount = $rowOrderItems['shipping_amount'];
+              $is_digital = $rowOrderItems['is_digital'];
+              $voucher_amount = $rowOrderItems['voucher_amount'];
+              $voucher_seller = $rowOrderItems['voucher_seller'];
+              $voucher_code_seller = $rowOrderItems['voucher_code_seller'];
+              $voucher_code = $rowOrderItems['voucher_code'];
+              $voucher_code_platform = $rowOrderItems['voucher_code_platform'];
+              $voucher_platform = $rowOrderItems['voucher_platform'];
+              $order_flag = $rowOrderItems['order_flag'];
+              $promised_shipping_time = $rowOrderItems['promised_shipping_time'];
+              $digital_delivery_info = $rowOrderItems['digital_delivery_info'];
+              $extra_attributes = $rowOrderItems['extra_attributes'];
+              $cancel_return_initiator = $rowOrderItems['cancel_return_initiator'];
+              $reason = $rowOrderItems['reason'];
+              $reason_detail = $rowOrderItems['reason_detail'];
+              $stage_pay_status = $rowOrderItems['stage_pay_status'];
+              $warehouse_code = $rowOrderItems['warehouse_code'];
+              $return_status = $rowOrderItems['return_status'];
+              $imageImageVariant = $rowOrderItems['product_main_image'];
+
+            }
+
+
+            $orderArr[$order_id]['order_id'] = $order_id;
+            $orderArr[$order_id]['order_number'] = $order_number;
+            $orderArr[$order_id]['user_id'] = $user_id;
+            $orderArr[$order_id]['marketplace'] = $marketplace;
+            $orderArr[$order_id]['merchant_name'] = $merchant_names;
+            $orderArr[$order_id]['branch_number'] = $branch_number;
+            $orderArr[$order_id]['warehouse_code'] = $warehouse_code;
+            $orderArr[$order_id]['customer_first_name'] = $customer_first_name;
+            $orderArr[$order_id]['customer_last_name'] = $customer_last_name;
+            $orderArr[$order_id]['price'] = $price;
+            $orderArr[$order_id]['items_count'] = $items_count;
+            $orderArr[$order_id]['payment_method'] = $payment_method;
+            $orderArr[$order_id]['voucher'] = $voucher;
+            $orderArr[$order_id]['voucher_code'] = $voucher_code;
+            $orderArr[$order_id]['voucher_platform'] = $voucher_platform;
+            $orderArr[$order_id]['voucher_seller'] = $voucher_seller;
+            $orderArr[$order_id]['gift_option'] = $gift_option;
+            $orderArr[$order_id]['gift_message'] = $gift_message;
+            $orderArr[$order_id]['shipping_fee'] = $shipping_fee;
+            $orderArr[$order_id]['shipping_fee_discount_seller'] = $shipping_fee_discount_seller;
+            $orderArr[$order_id]['shipping_fee_discount_platform'] = $shipping_fee_discount_platform;
+            $orderArr[$order_id]['promised_shipping_times'] = $promised_shipping_times;
+            $orderArr[$order_id]['national_registration_number'] = $national_registration_number;
+            $orderArr[$order_id]['tax_code'] = $tax_code;
+            $orderArr[$order_id]['remarks'] = $remarks;
+            $orderArr[$order_id]['delivery_info'] = $delivery_info;
+            $orderArr[$order_id]['statuses'] = $statuses;
+            $orderArr[$order_id]['created_at'] = $created_at;
+            $orderArr[$order_id]['updated_at'] = $updated_at;
+            $orderArr[$order_id]['image'] = $imageImageVariant;
+            $orderArr[$order_id]['order_items'][] = array("order_item_id" => $order_item_id,
+              "order_id" => $order_id,
+              "purchase_order_id" => $purchase_order_id,
+              "purchase_order_number" => $purchase_order_number,
+              "invoice_number" => $invoice_number,
+              "sla_time_stamp" => $sla_time_stamp,
+              "package_id" => $package_id,
+              "shop_id" => $shop_id,
+              "order_type" => $order_type,
+              "shop_sku" => $shop_sku,
+              "sku" => $sku,
+              "name" => $name,
+              "variation" => $variation,
+              "item_price" => $item_price,
+              "paid_price" => $paid_price,
+              "qty" => $qty,
+              "currency" => $currency,
+              "tax_amount" => $tax_amount,
+              "product_detail_url" => $product_detail_url,
+              "shipment_provider" => $shipment_provider,
+              "tracking_code_pre" => $tracking_code_pre,
+              "tracking_code" => $tracking_code,
+              "shipping_type" => $shipping_type,
+              "shipping_provider_type" => $shipping_provider_type,
+              "shipping_fee_original" => $shipping_fee_original,
+              "shipping_service_cost" => $shipping_service_cost,
+              "shipping_fee_discount_seller" => $shipping_fee_discount_seller,
+              "shipping_amount" => $shipping_amount,
+              "is_digital" => $is_digital,
+              "voucher_amount" => $voucher_amount,
+              "voucher_seller" => $voucher_seller,
+              "voucher_code_seller" => $voucher_code_seller,
+              "voucher_code" => $voucher_code,
+              "voucher_code_platform" => $voucher_code_platform,
+              "voucher_platform" => $voucher_platform,
+              "order_flag" => $order_flag,
+              "promised_shipping_time" => $promised_shipping_time,
+              "digital_delivery_info" => $digital_delivery_info,
+              "extra_attributes" => $extra_attributes,
+              "cancel_return_initiator" => $cancel_return_initiator,
+              "reason" => $reason,
+              "reason_detail" => $reason_detail,
+              "stage_pay_status" => $stage_pay_status,
+              "warehouse_code" => $warehouse_code,
+              "return_status" => $return_status,
+              "status" => $statuses,
+              "created_at" => $created_at,
+              "updated_at" => $updated_at,
+              "image_variant" => $imageImageVariant
+            );
+
+
+            $orderArr[$order_id]['address_shipping'] = array("order_id" => $order_id,
+              "first_name" => $first_name,
+              "last_name" => $last_name,
+              "country" => $country,
+              "phone" => $phone,
+              "phone2" => $phone2,
+              "address1" => $address1,
+              "address2" => $address2,
+              "address3" => $address3,
+              "address4" => $address4,
+              "address5" => $address5,
+              "city" => $city,
+              "post_code" => $post_code,
+
+            );
+
+            $orderArr[$order_id]['address_billing'] = array("order_id" => $order_id,
+              "first_name" => $first_name,
+              "last_name" => $last_name,
+              "country" => $country,
+              "phone" => $phone,
+              "phone2" => $phone2,
+              "address1" => $address1,
+              "address2" => $address2,
+              "address3" => $address3,
+              "address4" => $address4,
+              "address5" => $address5,
+              "city" => $city,
+              "post_code" => $post_code,
+
+            );
+
+          }
+
+          $result = array_values($orderArr);
+          // echo json_encode($rows);die;
+
+          $return = array(
+            "status" => 200,
+            "message" => "ok database",
+            "total_rows" => COUNT($result),
+            "data" => $result
+
+          );
+
+        }
+
+      }else{
+
+        $return = array(
+          "status" => 404,
+          "message" => "Belum ada Data",
+          "data" => []
+        );
 
       }
 
-
-      $result=json_decode($content,true);
-      //get new orders lazada
-
-
-      $return = array(
-        "status" => 200,
-        "message" => "ok",
-        "data" => $rows
-      );
-
-
-    }else if (($resultLazada!= null )) {
-
-
-      $return = array(
-        "status" => 200,
-        "message" => "ok lazada",
-        "data" => $resultLazada
-      );
-
-
-    }else if (($resultShopee!= null )) {
-
-
-      $return = array(
-        "status" => 200,
-        "message" => "ok Shopee",
-        "data" => $dataShopee
-      );
-
-    } else {
-
-      $return = array(
-        "status" => 404,
-        "message" => "Belum ada Data",
-        "data" => []
-      );
     }
-
 
     echo json_encode($return);
   }

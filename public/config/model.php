@@ -9461,7 +9461,7 @@ Order by a.CreatedDate DESC " . $condition);
 
         $query = $this
             ->conn
-            ->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,
+            ->query("SELECT order_id , order_number ,marketplace,branch_number ,warehouse_code,  merchant_name,
 																		customer_first_name , customer_last_name ,  price , 
 																									items_count , payment_method ,voucher ,  voucher_code , voucher_platform , voucher_seller , 
 																									 gift_option ,gift_message , shipping_fee, 
@@ -9482,7 +9482,22 @@ Order by a.CreatedDate DESC " . $condition);
             return null;
         }
     }
+  public function getDataAddressShipping($order_id)
+  {
 
+
+    $query = $this->conn->query("SELECT * from history_order_address_shipping
+                                where order_id = '" . $order_id . "'");
+
+    if (mysqli_num_rows($query) > 0)
+    {
+      return $query;
+    }
+    else
+    {
+      return null;
+    }
+  }
     public function getDataRts($user_id, $page, $limit, $status_id)
     {
 

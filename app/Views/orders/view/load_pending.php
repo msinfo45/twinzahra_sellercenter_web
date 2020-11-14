@@ -6,8 +6,8 @@
 
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_orders'));
-					$payload = json_encode( array( "UserID"=> "5",
-										"status_id"=> "1"	
+					$payload = json_encode( array( "user_id"=> "5",
+										"status"=> 1
 										) );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 					curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -26,28 +26,7 @@
 			}			
  
  
- 	function getOrderItems($order_id , $merchant_name , $marketplace){
 
-
-					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=get_order_items'));
-					$payloadItem = json_encode( array( "order_id"=> $order_id,
-					"merchant_name"=> $merchant_name,
-                    "marketplace"=> $marketplace) );
-					//$payloadItem = json_encode( array( "order_id" => 45 ) );
-					//$payloadItem = json_encode( array( "UserID"=> "5" ) );
-					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-					curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-					curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-					$contentItem = curl_exec($chItems);
-					curl_close($chItems);
-
-					//mengubah data json menjadi data array asosiatif
-					$resultItem=json_decode($contentItem,true);
-					
-					return $resultItem;
- 
-	}
 	
 	 	function cekStok($sku){
 		
@@ -110,7 +89,7 @@ function getHistory($order_id){
 				//Set Variable History Orders
 				$order_id = $DataProduct['order_id'] ;
 				$order_number = $DataProduct['order_number'] ;
-				$user_id = 5 ;
+				$user_id = $DataProduct['user_id'] ;
 				$marketplace = $DataProduct['marketplace'] ;
 				$merchant_name = $DataProduct['merchant_name'] ;
 				$branch_number = $DataProduct['branch_number'] ;
@@ -132,7 +111,7 @@ function getHistory($order_id){
 				$promised_shipping_times = $DataProduct['promised_shipping_times'] ;
 				$national_registration_number = $DataProduct['national_registration_number'] ;
 				$tax_code = $DataProduct['tax_code'] ;
-				$extra_attributes = $DataProduct['extra_attributes'] ;
+				//$extra_attributes = $DataProduct['extra_attributes'] ;
 				$remarks = $DataProduct['remarks'] ;
 				$delivery_info = $DataProduct['delivery_info'] ;
 				$statuses = $DataProduct['statuses'] ;
@@ -142,62 +121,67 @@ function getHistory($order_id){
 				echo '<div class="card" >';
 
 				echo'<div class="card-header">
-					<div class="row">
-					<div class="col-auto">'.$DataProduct['marketplace'].	' </div>
-					<div class="col-auto">'.$merchant_name.	'	</div>
-					<div class="col justify-content-center align-self-center">'.$customer_first_name.	'	</div>
-					<div class="col-auto"> No Pesanan '.$order_number.	'	</div>
+					<div class="row">';
+                if ($marketplace == "SHOPEE"){
+                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/shopee.png"></div>';
+                }else if ($marketplace == "LAZADA"){
+                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/lazada.png"></div>';
+                }
+                echo'<div class="col font-weight-bold justify-content-center align-self-center"> '.$merchant_name.	'	</div>';
+
+					echo'<div class="col-auto justify-content-center align-self-center"> No Pesanan '.$order_number.	'	</div>
 											
 					</div></div>';
 
-		$resultItem = getOrderItems($order_id, $merchant_name,$marketplace);
 		$cekHistoryOrder = getHistory($order_id);
 
-			foreach($resultItem['data'] as $DataOrderItems)
-			{
-				$resultStok = cekStok($DataOrderItems['sku']);
-
-					echo'<div class="card-body">';
-					echo'<div class="row">';
-
-					echo'<div  class="col justify-content-center align-self-center">';
-					echo'<div class="row">';
-
-					echo'<div  class="col-auto">';
-					echo'<img class="img-product" width="100px" height="100px" src='.$DataOrderItems['product_main_image'].'>';
-					echo ' </div>';
-
-					echo '<div class="col">';
-					echo '<div class="card-title "><a href='.$DataOrderItems['product_detail_url'].'  target="_blank"> ';
-					echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");	
-					echo '</a></div>';
-					
-					echo ' <div class="card-text">';
-
-					echo '<div class="mt-1">';
-					echo $DataOrderItems['order_item_id'];
-					echo'</div>';
-							
-					echo '<div class="mt-1">';
-					echo $DataOrderItems['sku'] ;
-					echo'</div>';
-
-					echo '<div class="mt-1">';
-					echo $DataOrderItems['paid_price'];
-					echo'</div>';
-
-					echo '</div>'; //end div card-text
-
-					echo '</div>';//end div col
 
 
+                echo '<div class="card-body">';
+                echo '<div class="row">';
+                echo '<div  class="col ">';
 
-					echo '</div>';//end div row
+                foreach($DataProduct['order_items'] as $DataOrderItems) {
+                    $resultStok = cekStok($DataOrderItems['sku']);
 
-                if ($DataOrderItems['remark'] != "") {
+                echo '<div class="row">';
 
-                    echo ' <div class="card-text mt-3 font-italic">Catatan : '.$DataOrderItems['remark'].'</div>';
+                echo '<div  class="col-auto ">';
+                echo '<img class="img-product" width="100px" height="100px" src=' . $DataOrderItems['image_variant'] . '>';
+                echo ' </div>';
 
+                echo '<div class="col">';
+                echo '<div class="card-title "><a href=' . $DataOrderItems['product_detail_url'] . '  target="_blank"> ';
+                echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");
+                echo '</a></div>';
+
+                echo ' <div class="card-text">';
+
+                echo '<div class="mt-1">';
+                echo $DataOrderItems['order_item_id'];
+                echo '</div>';
+
+                echo '<div class="mt-1">';
+                echo $DataOrderItems['sku'];
+                echo '</div>';
+
+                echo '<div class="mt-1">';
+                echo $DataOrderItems['paid_price'];
+                echo '</div>';
+
+                echo '</div>'; //end div card-text
+
+                echo '</div>';//end div col
+
+
+                echo '</div>';//end div row
+
+                if ($remarks != "") {
+
+                    echo ' <div class="card-text mt-3 font-italic">Catatan : ' . $remarks . '</div>';
+
+
+                }
 
                 }
 
@@ -205,9 +189,24 @@ function getHistory($order_id){
 
 
                 echo'<div  class="col-2">';
+                echo '<div class="card-title font-weight-bold">Alamat Pengiriman</div> ';
+                echo ' <div class="card-text">'.$DataProduct['address_shipping']['first_name'].'</div>';
+                echo ' <div class="card-text">'.$DataProduct['address_shipping']['address1'].'</div>';
+                echo ' <div class="card-text">'.$DataProduct['address_shipping']['phone'].'</div>';
+                echo '</div>';//end div col-auto
+
+                echo'<div  class="col-2">';
                 echo '<div class="card-title font-weight-bold">Jasa Pengiriman</div> ';
                 echo ' <div class="card-text">'.$DataOrderItems['shipment_provider'].'</div>';
+
+                if ($DataOrderItems['tracking_code'] != "") {
+                    echo '<div class="card-title font-weight-bold">No Resi</div> ';
+                    echo ' <div class="card-text">' . $DataOrderItems['tracking_code'] . '</div>';
+                }
+
                 echo '</div>';//end div col-auto
+
+
 
                 echo'<div  class="col-1">';
                 echo '<div class="card-title font-weight-bold">Total Harga</div> ';
@@ -217,7 +216,7 @@ function getHistory($order_id){
                     echo '</div>';//end div row
                     echo '</div>';//end div card-body
 							
-			}
+			//}
 
 
 
@@ -228,22 +227,33 @@ function getHistory($order_id){
                 echo'<div  class="col justify-content-center align-self-center">';
 
                 if ($cekHistoryOrder == null ) {
-                    if ($resultStok == "") {
+                    if ($DataProduct['statuses'] == 9) {
 
-                        echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di database</span></div>';
+                     echo '<div class="card-text font-weight-bold"><span style="color:red;" >Pembeli mengajukan pembatalan</span></div>';
 
-                    }else if ($resultStok == 0){
+                    }else{
 
-                        echo '<div class="card-text font-weight-bold"><span style="color:red;">Stok Kosong</span></div>';
+                        if ($resultStok == "") {
+
+                            echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di database</span></div>';
+
+                        }else if ($resultStok == 0){
+
+                            echo '<div class="card-text font-weight-bold"><span style="color:red;">Stok Kosong</span></div>';
 
 
-                    }else if ($resultStok > 0){
+                        }else if ($resultStok > 0){
 
-                        echo '<div class="card-text font-weight-bold"><span style="color:green;">Stok Tersedia</span></div>';
+                            echo '<div class="card-text font-weight-bold"><span style="color:green;">Stok Tersedia</span></div>';
+
+                        }
+
+
 
                     }
 
-                }else{
+
+                }else {
 
                     echo '<div class="card-text font-weight-bold"><span style="color:green;">Pesanan sedang diproses</span></div>';
 
@@ -256,6 +266,14 @@ function getHistory($order_id){
 
 
                 if ($cekHistoryOrder == null ) {
+                    if ($DataProduct['statuses'] == 9) {
+
+                        echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Konfirmasi"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
+
+
+                    }else{
+
+
                     if ($resultStok == 0) {
 
                         echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';
@@ -272,7 +290,9 @@ function getHistory($order_id){
 
                         }
 
-                    }}
+                    }
+                    }
+                }
 
                 echo '</div>';//end div col-auto
 					echo '</div></div>';

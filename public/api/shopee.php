@@ -457,6 +457,7 @@ if ($status == 1) {
           curl_close($chItems);
           $jdecodeItems2 = json_decode($resultItems);
 
+         // echo json_encode($jdecodeItems2);die;
 
 
          if ( isset($jdecodeItems2->orders)){
@@ -466,7 +467,7 @@ if ($status == 1) {
 //echo json_encode($jdecodeItems2);die;
           foreach($orderItem2  as $orderItems2) {
 		
-			$order_id = $orderItems2->ordersn;
+			      $order_id = $orderItems2->ordersn;
             $order_number = $orderItems2->ordersn;
             $user_id = $user_id;
             $marketplace = "SHOPEE";
@@ -484,7 +485,7 @@ if ($status == 1) {
             $delivery_info = "";
 
           //  $customer_first_name = $items->recipient_address->name;
-            $customer_first_name= "";
+            $customer_first_name= $orderItems2 ->recipient_address->name;
             $customer_last_name = "";
             $price = $orderItems2->total_amount;
             $payment_method = $orderItems2->payment_method;
@@ -531,13 +532,13 @@ if ($status == 1) {
 			
             foreach ($orderItems2->items as $items) {
 
-			  $order_item_id = $items->item_id;
+			        $order_item_id = $items->item_id;
               $purchase_order_id= "";
               $purchase_order_number= "";
               $invoice_number= "";
               $sla_time_stamp= date('yy-m-d H:i:s', $orderItems2->ship_by_date);
               $package_id= "";
-              $shop_id= "";
+           //   $shop_id= "";
               $order_type= "";
               $shop_sku= $items->item_sku;
               $sku= $items->variation_sku;
@@ -557,7 +558,9 @@ if ($status == 1) {
               $shipping_fee_original= $orderItems2->estimated_shipping_fee;
               $shipping_service_cost= 0;
               $shipping_fee_discount_seller = 0;
+              $shipping_amount= $orderItems2->estimated_shipping_fee;
               $is_digital= 0;
+              $voucher_amount= "";
               $voucher_code_seller= "";
               $voucher_code= "";
               $voucher_code_platform= "";
@@ -572,10 +575,59 @@ if ($status == 1) {
               $warehouse_code= "";
               $return_status= "";
               $voucher_seller = "";
+
+            }
+
+              $tglImageVariant = "Y-m-d";
+              $waktuImageVariant = "H:i:s";
+              $waktu_sekarangImageVariant= date("$tglImageVariant $waktuImageVariant");
+              $ditambah_5_menitImageVariant = date("$tgl $waktuImageVariant", strtotime('+5 minutes'));
+
+              $urlImageVariant = "https://partner.shopeemobile.com/api/v1/item/get";
+              $pagination_offset = 0;
+              $pagination_entries_per_page = 100;
+              $timestampImageVariant = strtotime($ditambah_5_menitImageVariant);
+
+
+              $convertJsonImageVariant = array("pagination_offset" => $pagination_offset,
+                "item_id" => (int)$order_item_id,
+                "partner_id" => (int)$partner_id,
+                "shopid" => (int)$shop_id,
+                "timestamp" => $timestampImageVariant);
+
+          //   echo json_encode($convertJsonImageVariant);die;
+              $base_stringImageVariant = $urlImageVariant . "|" . json_encode($convertJsonImageVariant);
+
+
+              $hmacImageVariant = hash_hmac('sha256', $base_stringImageVariant, $partner_key);
+
+
+              $chImageVariant = curl_init($urlImageVariant);
+              $payloadImageVariant = json_encode($convertJsonImageVariant);
+              curl_setopt($chImageVariant, CURLOPT_POSTFIELDS, $payloadImageVariant);
+              curl_setopt($chImageVariant, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+                'Authorization: ' . $hmacImageVariant . ''));
+              curl_setopt($chImageVariant, CURLOPT_RETURNTRANSFER, true);
+              $resultImageVariant = curl_exec($chImageVariant);
+              curl_close($chImageVariant);
+              $jsonDecodeImageVariant = json_decode($resultImageVariant);
+          //  echo json_encode($jsonDecodeImageVariant);die;
+              $itemsImageVariant = $jsonDecodeImageVariant->item;
+              // echo json_encode($items);die;
+
+
+              $product_name = $itemsImageVariant -> name;
+              $description = $itemsImageVariant ->description;
+              // $images = $items ->description;
+              foreach ($itemsImageVariant -> images as $ImagesImageVariant) {
+                $imageImageVariant = $ImagesImageVariant;
+              }
+
+        // echo json_encode($imageImageVariant);die;
       
-			}
+
 			
-		  $orderArr[$order_id]['order_id'] = $order_id;
+		      $orderArr[$order_id]['order_id'] = $order_id;
           $orderArr[$order_id]['order_number'] = $order_number;
           $orderArr[$order_id]['user_id'] = $user_id;
           $orderArr[$order_id]['marketplace'] =$marketplace;
@@ -604,7 +656,8 @@ if ($status == 1) {
           $orderArr[$order_id]['statuses'] = $statuses;
           $orderArr[$order_id]['created_at'] = $created_at;
           $orderArr[$order_id]['updated_at'] = $updated_at;
-		  $orderArr[$order_id]['order_items'][]= array("order_item_id" => $order_item_id,
+          $orderArr[$order_id]['image'] = $imageImageVariant;
+		      $orderArr[$order_id]['order_items'][]= array("order_item_id" => $order_item_id,
                                             "order_id" => $order_id,
                                             "purchase_order_id" => $purchase_order_id,
                                             "purchase_order_number" =>$purchase_order_number,
@@ -631,7 +684,9 @@ if ($status == 1) {
                                             "shipping_fee_original" => $shipping_fee_original,
                                             "shipping_service_cost" => $shipping_service_cost,
                                             "shipping_fee_discount_seller" => $shipping_fee_discount_seller,
+                                            "shipping_amount" => $shipping_amount,
                                             "is_digital" => $is_digital,
+                                            "voucher_amount" => $voucher_amount,
                                             "voucher_seller" => $voucher_seller,
                                             "voucher_code_seller" => $voucher_code_seller,
                                             "voucher_code" => $voucher_code,
@@ -649,13 +704,12 @@ if ($status == 1) {
                                             "return_status" => $return_status,
                                             "status" => $statuses,
                                             "created_at" => $created_at,
-                                            "updated_at" => $updated_at
-											// "image_variants" => $image_variants,
-                                          
+                                            "updated_at" => $updated_at,
+                                            "image_variant" => $imageImageVariant
 														);
 														
 														
-		 $orderArr[$order_id]['address_billing']= array("order_id" => $order_id,
+		 $orderArr[$order_id]['address_shipping']= array("order_id" => $order_id,
 		 "first_name" => $first_name,
 		 "last_name" => $last_name,
 		 "country" => $country,
@@ -671,7 +725,7 @@ if ($status == 1) {
 		 
 			);	
 			
-		$orderArr[$order_id]['address_shipping']= array("order_id" => $order_id,
+		$orderArr[$order_id]['address_billing']= array("order_id" => $order_id,
 		"first_name" => $first_name,
 		 "last_name" => $last_name,
 		 "country" => $country,
