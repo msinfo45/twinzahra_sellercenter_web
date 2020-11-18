@@ -1,0 +1,40 @@
+CRITICAL - 2020-11-10 10:44:02 --> Trying to access array offset on value of type int
+#0 /home/twinzahr/public_html/app/Views/orders/view/load_pending.php(159): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/twinzahr/...', 159, Array)
+#1 /home/twinzahr/public_html/system/View/View.php(246): include('/home/twinzahr/...')
+#2 /home/twinzahr/public_html/system/Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 /home/twinzahr/public_html/app/Controllers/Orders.php(23): view('orders/view/loa...')
+#4 /home/twinzahr/public_html/system/CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 /home/twinzahr/public_html/system/CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 /home/twinzahr/public_html/system/CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/twinzahr/public_html/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-10 10:44:39 --> Trying to access array offset on value of type int
+#0 /home/twinzahr/public_html/app/Views/orders/view/load_pending.php(159): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/twinzahr/...', 159, Array)
+#1 /home/twinzahr/public_html/system/View/View.php(246): include('/home/twinzahr/...')
+#2 /home/twinzahr/public_html/system/Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 /home/twinzahr/public_html/app/Controllers/Orders.php(23): view('orders/view/loa...')
+#4 /home/twinzahr/public_html/system/CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 /home/twinzahr/public_html/system/CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 /home/twinzahr/public_html/system/CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/twinzahr/public_html/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-10 10:44:51 --> Trying to access array offset on value of type int
+#0 /home/twinzahr/public_html/app/Views/orders/view/load_pending.php(159): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/twinzahr/...', 159, Array)
+#1 /home/twinzahr/public_html/system/View/View.php(246): include('/home/twinzahr/...')
+#2 /home/twinzahr/public_html/system/Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 /home/twinzahr/public_html/app/Controllers/Orders.php(23): view('orders/view/loa...')
+#4 /home/twinzahr/public_html/system/CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 /home/twinzahr/public_html/system/CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 /home/twinzahr/public_html/system/CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/twinzahr/public_html/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-10 10:56:17 --> Trying to access array offset on value of type int
+#0 /home/twinzahr/public_html/app/Views/orders/view/load_pending.php(159): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/twinzahr/...', 159, Array)
+#1 /home/twinzahr/public_html/system/View/View.php(246): include('/home/twinzahr/...')
+#2 /home/twinzahr/public_html/system/Common.php(1119): CodeIgniter\View\View->render('orders/view/loa...', Array, true)
+#3 /home/twinzahr/public_html/app/Controllers/Orders.php(23): view('orders/view/loa...')
+#4 /home/twinzahr/public_html/system/CodeIgniter.php(922): App\Controllers\Orders->load_pending()
+#5 /home/twinzahr/public_html/system/CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Orders))
+#6 /home/twinzahr/public_html/system/CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/twinzahr/public_html/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
