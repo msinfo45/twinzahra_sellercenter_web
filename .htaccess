@@ -7,7 +7,7 @@ RewriteRule ^public/api/lazada/([^/\.]+)/?$ public/api/lazada.php?request=$1 [L]
 RewriteRule ^public/api/products/([^/\.]+)/?$ public/api/products.php?request=$1 [L]
 RewriteRule ^public/api/orders/([^/\.]+)/?$ public/api/orders.php?request=$1 [L]
 RewriteRule ^public/api/users/([^/\.]+)/?$ public/api/users.php?request=$1 [L]
-
+RewriteRule ^public/api/marketplace/([^/\.]+)/?$ public/api/marketplace.php?request=$1 [L]
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f

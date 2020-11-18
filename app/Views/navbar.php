@@ -99,6 +99,7 @@
                         </li>                    
                     </ul>
                 </li>
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -124,7 +125,36 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Marketplace
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= site_url('marketplace/add') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah Toko</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('marketplace') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Toko</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('marketplace/settings') ?>" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengaturan</p>
+                            </a>
+                        </li>
 
+                    </ul>
+                </li>
 
             </ul>
         </nav>
