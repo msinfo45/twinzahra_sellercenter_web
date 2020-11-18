@@ -18,7 +18,7 @@ if (isset($post['merchant_name'])) {
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/shopee.php?request=get_orders');
+curl_setopt($ch, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/shopee.php?request=get_orders');
 $payload = json_encode( array(
   //"status"=> "pending",
   "merchant_name"=> $merchant_name) );
@@ -36,7 +36,7 @@ Foreach($resultOrders as $dataOrders)
   $order_id = $dataOrders['order_id'] ;
   $merchant_name = $dataOrders['merchant_name'] ;
   $chItems = curl_init();
-  curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra/public/api/shopee.php?request=get_order_items');
+  curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/shopee.php?request=get_order_items');
   $payloadItem = json_encode( array( "ordersn_list"=> array($order_id),
     "merchant_name"=> $merchant_name  ) );
   curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -54,7 +54,7 @@ Foreach($resultOrders as $dataOrders)
     $sku = $DataOrderItems['sku'];
     //echo json_encode($sku);die;
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra/public/api/products.php?request=cek_stok');
+    curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/products.php?request=cek_stok');
     $payloadItem = json_encode( array( "sku"=> $sku ) );
     curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
     curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -72,7 +72,7 @@ Foreach($resultOrders as $dataOrders)
 
 
       $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra/public/api/orders.php?request=created_order');
+      curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/orders.php?request=created_order');
       $payloadItem = json_encode( array(
         "order_id"=> $order_id ,
         "merchant_name"=> $merchant_name ,

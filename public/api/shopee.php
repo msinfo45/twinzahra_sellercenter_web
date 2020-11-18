@@ -150,7 +150,7 @@ if (isset($content) && $content != "") {
           $product_id = $products->item_id;
 
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/shopee.php?request=get_product_items');
+          curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_product_items');
           $payload = json_encode(array("item_id" => $product_id,
             "merchant_name" => $merchant_name));
           curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -883,7 +883,7 @@ if ($status == 1) {
                $order_item_id = $item->item_id;
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra/public/api/shopee.php?request=get_product_items');
+                curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_product_items');
                 $payload = json_encode(array("item_id" => $order_item_id,
                   "merchant_name" => $merchant_name));
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -1129,7 +1129,7 @@ if ($status == 1) {
 
 //get product shopee
 
-        $chProduct = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_products");
+        $chProduct = curl_init("https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_products");
 
         //$payloadProduct = json_encode($convertJson);
         //curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
@@ -1162,7 +1162,7 @@ if ($status == 1) {
             $variation_id = $objVariant -> variation_id;
 
 
-            $chSkus = curl_init("http://localhost/twinzahra/public/api/products.php?request=get_skus");
+            $chSkus = curl_init("https://localhost/twinzahra_sellercenter/public/api/products.php?request=get_skus");
             $payloadSkus = json_encode( array( "skus"=> $variation_sku) );
             curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
             curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1326,7 +1326,7 @@ if ($status == 1) {
 
 //get product shopee
 
-        $chProduct = curl_init("http://localhost/twinzahra/public/api/shopee.php?request=get_products");
+        $chProduct = curl_init("https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_products");
         //$payloadProduct = json_encode($convertJson);
         //curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
         curl_setopt($chProduct, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1358,7 +1358,7 @@ if ($status == 1) {
             $variation_id = $objVariant -> variation_id;
 
 
-            $chSkus = curl_init("http://localhost/twinzahra/public/api/products.php?request=get_skus");
+            $chSkus = curl_init("https://localhost/twinzahra_sellercenter/public/api/products.php?request=get_skus");
             $payloadSkus = json_encode( array( "skus"=> $variation_sku) );
             curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
             curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

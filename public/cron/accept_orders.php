@@ -18,7 +18,7 @@ if (isset($post['merchant_name'])) {
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_orders');
+curl_setopt($ch, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/lazada.php?request=get_orders');
 $payload = json_encode( array(
   "status"=> 1,
   "merchant_name"=> $merchant_name) );
@@ -42,9 +42,10 @@ Foreach($resultOrders['data'] as $dataOrders)
   foreach($dataOrders['order_items'] as $DataOrderItems)
   {
     $sku = $DataOrderItems['sku'];
+  }
     //echo json_encode($sku);die;
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra_sellercenter/public/api/products.php?request=cek_stok');
+    curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/products.php?request=cek_stok');
     $payloadItem = json_encode( array( "sku"=> $sku ) );
     curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
     curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -62,7 +63,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 
 
       $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL,'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=accept_order');
+      curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/orders.php?request=accept_order');
       $payloadItem = json_encode( array(
         "order_id"=> $order_id ,
         "merchant_name"=> $merchant_name ,
@@ -77,7 +78,7 @@ Foreach($resultOrders['data'] as $dataOrders)
       curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
       curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
       $contentItem = curl_exec($chItems);
-      curl_close($chItems);
+     curl_close($chItems);
       $resultItem=json_decode($contentItem,true);
 
       //echo json_encode($resultItem);die;
@@ -86,7 +87,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 
         $status = "sukses";
         $subject  = "Pesanan " . $order_id . " telah berhasil dikonfirmasi" ;
-        $message = "Pesanan berhasil dikonfirmasi";
+        $message = "Pesanan di lazada berhasil dikonfirmasi";
        $sendEmail = $db->send_email($subject , $message);
 
       }else{
@@ -104,7 +105,8 @@ Foreach($resultOrders['data'] as $dataOrders)
       $status = "gagal";
       $subject  = "Pesanan " . $order_id . " belum terdaftar didatabase" ;
       $message = "Pesanan gagal dikonfirmasi karna produk belum terdaftar didatabase";
-       $sendEmail = $db->send_email($subject , $message);
+      $sendEmail = $db->send_email($subject , $message);
+	   
     }else{
 
       $status = "gagal";
@@ -130,7 +132,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 
 
 
-  }
+  //}
 }
 
 

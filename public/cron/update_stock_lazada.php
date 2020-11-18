@@ -5,7 +5,7 @@ include "../config/model.php";
 $db = new Model_user();
 
 
-$chSkus = curl_init("http://localhost/twinzahra/public/api/lazada.php?request=update_stock");
+$chSkus = curl_init("https://twinzahra.masuk.id/public/api/lazada.php?request=update_stock");
 curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
 $resultSkus = curl_exec($chSkus);

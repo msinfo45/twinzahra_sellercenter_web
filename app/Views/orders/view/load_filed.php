@@ -123,9 +123,11 @@ if (count($result['data']) > 0) {
         echo'<div class="card-header">
 					<div class="row">';
         if ($marketplace == "SHOPEE"){
-            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/shopee.png"></div>';
+            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/shopee.png"></div>';
         }else if ($marketplace == "LAZADA"){
-            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/lazada.png"></div>';
+            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/lazada.png"></div>';
+       }else if ($marketplace == "OFFLINE"){
+            echo '<div class="col-auto justify-content-center align-self-center">OFFLINE</div>';
         }
         echo'<div class="col font-weight-bold justify-content-center align-self-center"> '.$merchant_name.	'	</div>';
 

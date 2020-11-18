@@ -517,9 +517,7 @@ class Model_user
         foreach ($obj as $item)
         {
 
-            $insert = $this
-                ->conn
-                ->query("INSERT INTO history_order_details
+            $insert = $this->conn->query("INSERT INTO history_order_details
 			(	
 			order_item_id,
 			order_id,
@@ -4501,14 +4499,13 @@ class Model_user
     /**
      * Get Nurse Data From Order ID
      */
-    public function getHistoryOrder($user_id)
+    public function getHistoryOrder($user_id , $marketplace)
     {
 
         $query_get = $this
             ->conn
-            ->query("SELECT   
-											order_id from history_orders
-										WHERE user_id='" . $user_id . "' and marketplace='LAZADA' and statuses < 4  LIMIT 20");
+            ->query("SELECT  order_id , statuses from history_orders
+										WHERE marketplace='" . $marketplace . "' and (statuses = 10 or statuses= 3)");
 
         if (mysqli_num_rows($query_get) > 0)
         {
@@ -4838,11 +4835,27 @@ class Model_user
     /**
      * Check if user exist
      */
-    public function checkHistoryOrderByOrder($order_id, $user_id)
+    public function checkHistoryOrderByOrder($order_id)
     {
         $query = $this
             ->conn
-            ->query("SELECT * from history_orders WHERE order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
+            ->query("SELECT * from history_orders WHERE order_id = '" . $order_id . "'");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+	    public function getDetailHistoryOrderByTracking($tracking_number)
+    {
+        $query = $this
+            ->conn
+            ->query("SELECT * from history_order_details WHERE tracking_code = '" . $tracking_number . "'");
 
         if (mysqli_num_rows($query) > 0)
         {
@@ -5602,10 +5615,27 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
         }
     }
 
+ public function setRts($user_id , $order_id)
+    {
+
+        $update = $this->conn->query("UPDATE history_orders SET 
+										statuses 		= 10
+									WHERE 
+										order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     /**
      * Update FirebaseID
      */
-    public function setDelivery($user_id, $order_id)
+    public function setDelivery($order_id)
     {
 
         $update = $this
@@ -5613,7 +5643,7 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
             ->query("UPDATE history_orders SET 
 										statuses 		= 4
 									WHERE 
-										order_id = '" . $order_id . "' and user_id = '" . $user_id . "'");
+										order_id = '" . $order_id . "'");
 
         if ($update)
         {

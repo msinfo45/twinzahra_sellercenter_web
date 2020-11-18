@@ -33,6 +33,16 @@ public function load_rts()
 	}
 
 	
+	public function load_update()
+{
+	
+	
+	return view('orders/view/load_update');
+	
+}
+
+	
+
 public function load_ship()
 {
 	
@@ -62,7 +72,6 @@ public function load_filed()
 }
 
 
-	
 
 
 	//--------------------------------------------------------------------

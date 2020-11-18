@@ -97,7 +97,6 @@ if (isset($content) && $content != "") {
     $merchant_name = null;
 
     $status = $post['status'];
-
     $orderArr = array();
     $orderItemsArr = array();
     $rowsOrdersn = array();
@@ -1316,8 +1315,18 @@ if (isset($content) && $content != "") {
     $post = json_decode(file_get_contents("php://input"), true);
     //$user_id = $post['UserID'];
     $user_id = 5;
+	$order_item_ids = base64_decode($post['order_item_ids']);
+	$doc_type = $post['doc_type'];
+	
 
+	 $tgl = "d mm Yr";
+        $waktu = "H:i:s";
+        $waktu_sekarang = date("d F Y h:i:s");
+        //$ditambah_5_menit = date("$tgl $waktu", strtotime('+5 minutes'));
+
+  $timestamp = strtotime($waktu_sekarang);
     $merchant_name = null;
+//echo $timestamp;die;
 
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
@@ -1336,12 +1345,34 @@ if (isset($content) && $content != "") {
           $accessToken =  $rowLazada['AccessToken'];
         }
 
+	$dataArr = array("doc_type" => $doc_type,
+					"order_item_ids" =>$order_item_ids,
+					"app_key" =>$appkey,
+					"sign_method" =>"sha256",
+					"timestamp" =>$timestamp,
+					"access_token" =>$accessToken);
+		
+asort($dataArr);
+
+foreach($dataArr as $x => $x_value) {
+	
+  $base_string = "/order/document/get" . $x . $x_value;
+
+
+  $sign = hash('sha256', $base_string);
+	
+	
+	}
+	
+	//echo $sign;die;
+	
+echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&order_item_ids='. $order_item_ids.'&app_key='. $appkey.'&sign_method=sha256&timestamp='. $timestamp.'&access_token='. $accessToken.'&sign='. $sign.'';die;
 
         $c = new LazopClient($url,$appkey,$appSecret );
 
         $request = new LazopRequest('/order/document/get','GET');
         $request->addApiParam('doc_type','shippingLabel');
-        $request->addApiParam('order_item_ids','[438179560123582]');
+        $request->addApiParam('order_item_ids',$order_item_ids);
 
         $jdecode=json_decode($c->execute($request, $accessToken));
 
@@ -1385,7 +1416,7 @@ if (isset($content) && $content != "") {
 
 
 
-    //print_r ($order_item_ids);die;
+ // echo json_encode($order_item_ids);die;
 
     if (isset($user_id) && isset($order_item_ids) && isset($shipping_provider) && isset($delivery_type) ) {
 
@@ -1417,16 +1448,16 @@ if (isset($content) && $content != "") {
 
 
         // echo json_encode($data);die;
-         //if (isset($datas=$data->data->order_items)) {
-         // $datas=$data->data->order_items;
-         //}
-          
-
-
+        // if (isset($datas=$data->data->order_items)) {
+        //  $datas=$data->data->order_items;
+        // }
+         
 
 
           if ( $data->code  == "0") {
+			  
             $datas=$data->data->order_items;
+			
             $return = array(
               "status" => 200,
               "message" => "Pesanan berhasil dikonfirmasi",
@@ -1471,7 +1502,7 @@ if (isset($content) && $content != "") {
 
   }
 
-  if ($content == "set_rts") {
+   if ($content == "set_rts") {
     $post = json_decode(file_get_contents("php://input"), true);
     //$user_id = $post['UserID'];
     $user_id = 5;
@@ -1479,16 +1510,10 @@ if (isset($content) && $content != "") {
     $shipping_provider =$post['shipping_provider'];
     $delivery_type = $post['delivery_type'];
     $tracking_number = $post['tracking_number'];
+	
     $merchant_name = $post['merchant_name'];
 
-    //$order_item_ids = "[441008605132192]";
-    //$shipping_provider = "LEX ID" ;
-    //$delivery_type = "dropship" ;
-    //$merchant_name = "Twinzahra Shop";
-
-
-
-    //print_r ($order_item_id);die;
+  //echo "". json_encode($order_item_ids) . "" ;die;
 
     if (isset($user_id) && isset($order_item_ids) && isset($shipping_provider) && isset($delivery_type) && isset($tracking_number) ) {
 
@@ -1512,36 +1537,31 @@ if (isset($content) && $content != "") {
           $c = new LazopClient($url,$appkey,$appSecret );
 
 
-
-
          $request = new LazopRequest('/order/rts');
-        // $request = new LazopRequest('/order/pack');
           $request->addApiParam('delivery_type', $delivery_type);
-          $request->addApiParam('order_item_ids', $order_item_ids);
-          $request->addApiParam("shipment_provider", $delivery_type);
+          $request->addApiParam('order_item_ids', json_encode($order_item_ids) );
+          $request->addApiParam('shipment_provide', $shipping_provider);
           $request->addApiParam('tracking_number', $tracking_number);
-          $request->addApiParam('delivery_type', $delivery_type);
-          $data=json_decode($c->execute($request, $accessToken));
+          $jdecode=json_decode($c->execute($request, $accessToken));
+  
+          //$response = json_encode($data);
+		  $data=$jdecode->data;
 
+         
 
-          //$data=$jdecode->data;
-          $response = json_encode($data, true );
-
-          //print_r ($response);die;
-
-          if ( $data->code  == "0") {
-
+          if ( $jdecode->code  == "0") {
+ //echo  json_encode($data);die;
             $return = array(
               "status" => 200,
-              "message" => $data->message,
-              "data" => $response
+             "message" => "Pesanan berhasil dikirim , tunggu update dari jasa pengiriman",
+              "data" => $data
             );
           }else{
 
             $return = array(
               "status" => 404,
-              "message" => $data->message,
-              "data" =>$response
+            "message" => $jdecode->message,
+              "data" =>$data
             );
 
           }
@@ -1616,27 +1636,25 @@ if (isset($content) && $content != "") {
           $request = new LazopRequest('/order/invoice_number/set');
           $request->addApiParam('order_item_id', $order_item_id);
           $request->addApiParam('invoice_number', $invoice_number);
-          $data=json_decode($c->execute($request, $accessToken));
-
-
-          //$data=$jdecode->data;
-          $response = json_encode($data, true );
+          $jsonEncode=json_decode($c->execute($request, $accessToken));
+		  $data=$jsonEncode->data;
+          $response = json_encode($data);
 
           //print_r ($response);die;
 
-          if ( $data->code  == "0") {
+          if ( $jsonEncode->code  == "0") {
 
             $return = array(
               "status" => 200,
               "message" => "ok",
-              "data" => $response
+              "data" => $jsonEncode
             );
           }else{
 
             $return = array(
               "status" => 404,
-              "message" => $data->message,
-              "data" =>$response
+              "message" => $jsonEncode->message,
+              "data" =>$jsonEncode
             );
 
           }
@@ -2826,7 +2844,7 @@ if (isset($content) && $content != "") {
 
 //get product lazada
 
-        $chProduct = curl_init("http://localhost/twinzahra/public/api/lazada.php?request=get_products");
+        $chProduct = curl_init("https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_products");
        // $payloadProduct = json_encode($convertJson);
        // curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
         curl_setopt($chProduct, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -2855,7 +2873,7 @@ if (isset($content) && $content != "") {
             $quantity = $objskus -> quantity;
 
 
-            $chSkus = curl_init("http://localhost/twinzahra/public/api/products.php?request=get_skus");
+            $chSkus = curl_init("https://localhost/twinzahra_sellercenter/public/api/products.php?request=get_skus");
             $payloadSkus = json_encode( array( "skus"=> $SellerSku) );
             curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
             curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

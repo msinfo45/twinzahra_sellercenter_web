@@ -123,9 +123,11 @@ if (count($result['data']) > 0) {
         echo'<div class="card-header">
 					<div class="row">';
         if ($marketplace == "SHOPEE"){
-            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/shopee.png"></div>';
+            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/shopee.png"></div>';
         }else if ($marketplace == "LAZADA"){
-            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/lazada.png"></div>';
+            echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/lazada.png"></div>';
+        }else if ($marketplace == "OFFLINE"){
+            echo '<div class="col-auto justify-content-center align-self-center">OFFLINE</div>';
         }
         echo'<div class="col font-weight-bold justify-content-center align-self-center"> '.$merchant_name.	'	</div>';
 
@@ -144,6 +146,9 @@ if (count($result['data']) > 0) {
         foreach($DataProduct['order_items'] as $DataOrderItems) {
             $resultStok = cekStok($DataOrderItems['sku']);
 
+			$order_item_ids[] = $DataOrderItems['order_item_id'] ;
+			$tracking_code = $DataOrderItems['tracking_code'] ;
+			
             echo '<div class="row">';
 
             echo '<div  class="col-auto ">';
@@ -184,17 +189,20 @@ if (count($result['data']) > 0) {
             }
 
         }
+	
+	//	$order_item_ids = json_encode($order_item_id);
 
         echo '</div>';//end div col
 
 
+if ($DataProduct['address_shipping']['address1'] != "") {
         echo'<div  class="col-2">';
         echo '<div class="card-title font-weight-bold">Alamat Pengiriman</div> ';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['first_name'].'</div>';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['address1'].'</div>';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['phone'].'</div>';
         echo '</div>';//end div col-auto
-
+}
         echo'<div  class="col-2">';
         echo '<div class="card-title font-weight-bold">Jasa Pengiriman</div> ';
         echo ' <div class="card-text">'.$DataOrderItems['shipment_provider'].'</div>';
@@ -226,74 +234,38 @@ if (count($result['data']) > 0) {
 
         echo'<div  class="col justify-content-center align-self-center">';
 
-        if ($cekHistoryOrder == null ) {
-            if ($DataProduct['statuses'] == 9) {
-
-                echo '<div class="card-text font-weight-bold"><span style="color:red;" >Pembeli mengajukan pembatalan</span></div>';
-
-            }else{
-
-                if ($resultStok == "") {
-
-                    echo '<div class="card-text font-weight-bold"><span style="color:blue;" >Produk belum ada di database</span></div>';
-
-                }else if ($resultStok == 0){
-
-                    echo '<div class="card-text font-weight-bold"><span style="color:red;">Stok Kosong</span></div>';
-
-
-                }else if ($resultStok > 0){
-
-                    echo '<div class="card-text font-weight-bold"><span style="color:green;">Stok Tersedia</span></div>';
-
-                }
-
-
-
-            }
-
-
-        }else {
+      
 
             echo '<div class="card-text font-weight-bold"><span style="color:green;">Pesanan sedang diproses</span></div>';
 
-        }
+        
 
         echo ' </div>';
-
+		
+ 
+		
 
         echo'<div  class="col text-right" >';
+		
+ echo'<div  class="row " >';		
+ echo'<div  class="col" >';
 
 
-        if ($cekHistoryOrder == null ) {
-            if ($DataProduct['statuses'] == 9) {
-
-                echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Konfirmasi"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
-
-
-            }else{
+     echo'<a data-toggle="modal" data-shipping_provider="dropship" data-delivery_type="dropship" 
+	 data-tracking_number="'.$tracking_code.'" data-order_item_id="'.base64_encode(json_encode($order_item_ids)).'"  data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'" 
+	 title="Cetak Label Pesanan"  class="PrintLabel btn btn-primary" href="#PrintLabel">Cetak Label</a>';
 
 
-                if ($resultStok == 0) {
+        echo '</div>';//end div col-auto
 
-                    echo'<a data-toggle="modal" data-id="'.$order_id.'"  data-name="'.$customer_first_name.'" data-marketplace="'.$marketplace.'"  title="Ubah Pesanan"  class="EditOrder btn btn-primary" href="#EditOrder">Ubah Pesanan</a>';
+ echo'<div  class="col-auto text-right" >';
+     echo'<a data-toggle="modal" data-shipping_provider="dropship" data-delivery_type="dropship" 
+	 data-tracking_number="'.$tracking_code.'" data-order_id="'.$order_id.'"  data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'" 
+	 title="Kirim Pesanan"  class="SendOrder btn btn-primary" href="#SendOrder">Kirim</a>';
+  echo '</div>';//end div col-auto
 
-                }else{
-
-                    if ($marketplace == "LAZADA") {
-
-                        echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';
-
-                    }else{
-
-                        echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Terima"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
-
-                    }
-
-                }
-            }
-        }
-
+  echo '</div>';//end div col-auto
+  
         echo '</div>';//end div col-auto
         echo '</div></div>';
 
@@ -320,71 +292,35 @@ if (count($result['data']) > 0) {
 
 <script>
 
-    $(document).on("click", ".EditOrder", function () {
-        var order_id = $(this).data('id');
-        var name = $(this).data('name');
-        var marketplace = $(this).data('marketplace');
 
+     
+		
+ $(document).on("click", ".SendOrder", function () {
 
-        $(".modal-body #order_id").val(order_id );
-        $(".modal-body #name").val(name);
-        $(".modal-body #marketplace").val(marketplace);
-
-        // As pointed out in comments,
-        // it is unnecessary to have to manually call the modal.
-        $('.modal-body #marketplace').attr("disabled","disabled");
-        $('.modal-body #order_id').attr("disabled","disabled");
-        $('.modal-body #name' ).attr("disabled","disabled");
-        $('#EditOrder').modal('show');
-
-    });
-
-
-
-    $(document).on("click", ".AcceptOrder", function () {
-        var order_id = $(this).data('id');
-        var merchant_name = $(this).data('merchant_name');
-        $("#AcceptOrder .modal-body #order_id").val( order_id );
-        $("#AcceptOrder .modal-body #merchant_name").val( merchant_name );
-
-        // As pointed out in comments,
-        // it is unnecessary to have to manually call the modal.
-        $('#AcceptOrder').modal('show');
-    });
-
-
-
-
-    function SendAcceptOrders(){
-        var order_id = $('#order_id').val();
-        var merchant_name = $('#merchant_name').val();
-        // var shipping_provider = $('#shipping_provider').val();
-        //var delivery_type = $('#delivery_type').val();
-
-        var e = document.getElementById("shipping_providers");
-        var shipping_provider = e.options[e.selectedIndex].text;
-
-        var f = document.getElementById("delivery_type");
-        var delivery_type = f.options[f.selectedIndex].text;
-
-        //alert(shipping_provider);
-        $.ajax({
+	var shipping_provider = $(this).data('shipping_provider');
+	var delivery_type = $(this).data('delivery_type');
+	var tracking_number = $(this).data('tracking_number');
+	var merchant_name = $(this).data('merchant_name');
+	var marketplace = $(this).data('marketplace');
+	var order_id = $(this).data('order_id');
+		
+            $.ajax({
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
             processData: false,
-            data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
+            data: '{"order_id": "'+ order_id +'" ,"shipping_provider": "'+ shipping_provider +'","delivery_type": "'+delivery_type+'", "tracking_number": "'+tracking_number+'", "merchant_name": "'+merchant_name+'", "marketpalce": "'+marketplace+'"}',
 
-            url:'<?= base_url('public/api/orders.php?request=accept_order') ?>',
+            url:'<?= base_url('public/api/orders.php?request=set_rts') ?>',
 
             beforeSend: function () {
                 $('.btn').attr("disabled","disabled");
-                $('#AcceptOrder .modal-body').css('opacity', '.5');
+                $('.content').css('opacity', '.5');
             },
             success:function(data){
 
-                console.log(data.message);
-                console.log(data.status);
+                //console.log(data.message);
+                //console.log(data.status);
 
                 if(data.status == '200'){
                     $('#AcceptOrder #order_id').val('');
@@ -392,16 +328,32 @@ if (count($result['data']) > 0) {
                     $('#AcceptOrder #delivery_type').val('');
 
                     $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
+					$('.nav-tabs a[href="#custom-tabs-orders-readytoship-tab"').tab('show');
+					
+					
+                
+	
                     alert(data.message);
+					
                     window.location.href = '<?= base_url('orders') ?>';
+	
+	
+					//$(document).on("click", "#custom-tabs-orders-readytoship-tab");
+					
+                    //window.location.href = '<?= base_url('orders') ?>';
+		
+					
                 }else{
 
                     $('.statusMsg').html('<span style="color:red;"></p>'+data.message);
+					$('.nav-tabs a[href="orders#custom-tabs-orders-readytoship-tab"').tab('click');
+					//loadRTS();
                     alert(data.message);
                     window.location.href = '<?= base_url('orders') ?>';
+				  	
                 }
                 $('.btn').removeAttr("disabled");
-                $('#AcceptOrder .modal-body').css('opacity', '');
+                $('.content').css('opacity', '');
 
 
 
@@ -411,9 +363,78 @@ if (count($result['data']) > 0) {
             }
 
         });
+  });
 
-    }
+   		
+ $(document).on("click", ".PrintLabel", function () {
+
+	var shipping_provider = $(this).data('shipping_provider');
+	var delivery_type = $(this).data('delivery_type');
+	var tracking_number = $(this).data('tracking_number');
+	var merchant_name = $(this).data('merchant_name');
+	var marketplace = $(this).data('marketplace');
+	var order_item_id = $(this).data('order_item_id');
+		
+            $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            processData: false,
+            data: '{"order_item_ids": "'+ order_item_id +'" ,"shipping_provider": "'+ shipping_provider +'","delivery_type": "'+delivery_type+'", "tracking_number": "'+tracking_number+'", "merchant_name": "'+merchant_name+'", "marketpalce": "'+marketplace+'"}',
+
+            url:'<?= base_url('public/api/lazada/get_document') ?>',
+
+            beforeSend: function () {
+                $('.btn').attr("disabled","disabled");
+                $('.content').css('opacity', '.5');
+            },
+            success:function(data){
+
+                //console.log(data.message);
+                //console.log(data.status);
+
+                if(data.status == '200'){
+                    $('#AcceptOrder #order_id').val('');
+                    $('#AcceptOrder #shipping_provider').val('');
+                    $('#AcceptOrder #delivery_type').val('');
+
+                    $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
+					$('.nav-tabs a[href="#custom-tabs-orders-readytoship-tab"').tab('show');
+					
+					
+
+	
+                    alert(data.message);
+					
+
+	
+					//$(document).on("click", "#custom-tabs-orders-readytoship-tab");
+					
+                    //window.location.href = '<?= base_url('orders') ?>';
+				//	window.location.href = '<?= base_url('orders#custom-tabs-orders-readytoship-content') ?>';
+					
+                }else{
+
+                    $('.statusMsg').html('<span style="color:red;"></p>'+data.message);
+					$('.nav-tabs a[href="#custom-tabs-orders-readytoship-tab"').tab('click');
+					//loadRTS();
+                    alert(data.message);
+                  //  wnidow.location.href = '<?= base_url('orders') ?>';
+				  	
+                }
+                $('.btn').removeAttr("disabled");
+                $('.content').css('opacity', '');
+
+
+
+            },
+            error: function(){
+                alert("Cannot get data");
+            }
+
+        });
+  });
+
+   
 
 </script>
-<?= $this->include('orders/modal/accept_order') ?>
-<?= $this->include('orders/modal/edit_order') ?>

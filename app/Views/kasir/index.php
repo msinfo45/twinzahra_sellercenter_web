@@ -243,7 +243,7 @@ function rupiah($angka){
     dataType: 'json',
     contentType: 'application/json',
     processData: false,
-    data: '{"UserID": "5", "marketplace": "'+marketplace+'" , "order_id": "'+order_number+'", "name": "'+name+'", "shipping_provider": "'+shipping_provider+'", "tracking_code": "'+tracking_code+'", "shipping_amount": "'+shipping_amount+'", "tracking_code_pre": "'+tracking_code_pre+'", "remark": "'+remark+'", "payment_method": "'+payment_method+'" , "TokenSession": "<?= session() ->get('HTTP_TOKEN') ?>"}',
+    data: '{"UserID": "5", "marketplace": "'+marketplace+'", "merchant_name": "Twinzahra Shop"  , "order_id": "'+order_number+'", "name": "'+name+'", "shipping_provider": "'+shipping_provider+'", "tracking_code": "'+tracking_code+'", "shipping_amount": "'+shipping_amount+'", "tracking_code_pre": "'+tracking_code_pre+'", "remark": "'+remark+'", "payment_method": "'+payment_method+'" , "TokenSession": "<?= session() ->get('HTTP_TOKEN') ?>"}',
              url:'<?= base_url('public/api/orders.php?request=created_kasir') ?>',
             beforeSend: function () {
               $('.create_orders').attr("disabled","disabled");

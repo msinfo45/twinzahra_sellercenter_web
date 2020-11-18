@@ -118,22 +118,28 @@ function getHistory($order_id){
 				$created_at = $DataProduct['created_at'] ;
 				$updated_at = $DataProduct['updated_at'] ;
 				
+				$cekHistoryOrder = getHistory($order_id);
+				
+				if ($cekHistoryOrder == null ) {
+					 
 				echo '<div class="card" >';
 
 				echo'<div class="card-header">
 					<div class="row">';
                 if ($marketplace == "SHOPEE"){
-                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/shopee.png"></div>';
+                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/shopee.png"></div>';
                 }else if ($marketplace == "LAZADA"){
-                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="http://localhost/twinzahra_sellercenter/public/images/lazada.png"></div>';
-                }
+                echo '<div class="col-auto justify-content-center align-self-center"><img class="img-product" width="40px" height="40px" src="https://twinzahra.masuk.id/public/images/lazada.png"></div>';
+                }else if ($marketplace == "OFFLINE"){
+            echo '<div class="col-auto justify-content-center align-self-center">OFFLINE</div>';
+        }
                 echo'<div class="col font-weight-bold justify-content-center align-self-center"> '.$merchant_name.	'	</div>';
 
 					echo'<div class="col-auto justify-content-center align-self-center"> No Pesanan '.$order_number.	'	</div>
 											
 					</div></div>';
 
-		$cekHistoryOrder = getHistory($order_id);
+	
 
 
 
@@ -226,7 +232,7 @@ function getHistory($order_id){
 
                 echo'<div  class="col justify-content-center align-self-center">';
 
-                if ($cekHistoryOrder == null ) {
+               
                     if ($DataProduct['statuses'] == 9) {
 
                      echo '<div class="card-text font-weight-bold"><span style="color:red;" >Pembeli mengajukan pembatalan</span></div>';
@@ -253,19 +259,13 @@ function getHistory($order_id){
                     }
 
 
-                }else {
-
-                    echo '<div class="card-text font-weight-bold"><span style="color:green;">Pesanan sedang diproses</span></div>';
-
-                }
-
+               
                 echo ' </div>';
 
 
                 echo'<div  class="col text-right" >';
 
 
-                if ($cekHistoryOrder == null ) {
                     if ($DataProduct['statuses'] == 9) {
 
                         echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Konfirmasi"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
@@ -282,7 +282,7 @@ function getHistory($order_id){
 
                         if ($marketplace == "LAZADA") {
 
-                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'"  title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Atur Pengiriman</a>';
+                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'"  title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Proses</a>';
 
                         }else{
 
@@ -292,7 +292,11 @@ function getHistory($order_id){
 
                     }
                     }
-                }
+           
+				
+				
+				
+				
 
                 echo '</div>';//end div col-auto
 					echo '</div></div>';
@@ -303,8 +307,10 @@ function getHistory($order_id){
 				
 					echo'</div>';
 
-				}
-				
+		}
+		
+		}	
+		
 		}else{
 		
 			echo '<div class="card-body text-center" >'.$result['message'] .'</div>';

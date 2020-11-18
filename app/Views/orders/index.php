@@ -33,7 +33,11 @@
                   </li>
                   <li class="nav-item">
 
-                    <a class="nav-link" id="custom-tabs-orders-readytoship-tab" data-toggle="pill" href="#custom-tabs-orders-readytoship-content" role="tab" aria-controls="custom-tabs-orders-readytoship-content" aria-selected="false" >Siap Kirim</a>
+                    <a class="nav-link" id="custom-tabs-orders-readytoship-tab" data-toggle="pill" href="#custom-tabs-orders-readytoship-content" role="tab" aria-controls="custom-tabs-orders-readytoship-content" aria-selected="false" >Sedang Diproses</a>
+                  </li>
+				 <li class="nav-item">
+
+                    <a class="nav-link" id="custom-tabs-orders-waitingupdate-tab" data-toggle="pill" href="#custom-tabs-orders-waitingupdate-content" role="tab" aria-controls="custom-tabs-orders-waitingupdate-content" aria-selected="false" >Menunggu Update</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-orders-ship-tab" data-toggle="pill" href="#custom-tabs-orders-ship-content" role="tab" aria-controls="custom-tabs-orders-ship-content" aria-selected="false" >Dalam Pengiriman</a>
@@ -64,6 +68,14 @@
                   <div id="ResultReadToShip"></div> 
 
                   </div>
+
+                  <div class="tab-pane fade" id="custom-tabs-orders-waitingupdate-content" role="tabpanel" aria-labelledby="custom-tabs-orders-waitingupdate-tab">
+
+
+                  <div id="ResultWaitingUpdate"></div> 
+
+                  </div>
+
 
                   <div class="tab-pane fade" id="custom-tabs-orders-ship-content" role="tabpanel" aria-labelledby="custom-tabs-orders-ship-tab">
 
@@ -185,6 +197,50 @@ var displayProduct = 5;
         data:{action: 'load_rts', limit:limit},
         success:function(data) {
           $('#ResultReadToShip').html(data);
+        }
+      });
+    }
+}
+///
+
+//Funcion Pending Order
+function loadWaitingUpdate(){
+
+var displayProduct = 5;
+  $('#ResultWaitingUpdate').html(createSkeleton(displayProduct));
+  
+    setTimeout(function(){
+      loadWaitingUpdate(displayProduct);
+    }, 0);
+
+    function createSkeleton(limit){
+      var skeletonHTML = '';
+      for(var i = 0; i < limit; i++){
+        skeletonHTML += '<div class="ph-item">';
+        skeletonHTML += '<div class="ph-col-4">';
+        skeletonHTML += '<div class="ph-picture"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '<div>';
+        skeletonHTML += '<div class="ph-row">';
+        skeletonHTML += '<div class="ph-col-12 big"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '<div class="ph-col-12"></div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+        skeletonHTML += '</div>';
+      }
+      return skeletonHTML;
+    }
+  
+    function loadWaitingUpdate(limit){
+      $.ajax({
+          url:'<?= base_url('orders/load_update') ?>',
+        method:"POST",
+        data:{action: 'load_update', limit:limit},
+        success:function(data) {
+          $('#ResultWaitingUpdate').html(data);
         }
       });
     }
@@ -330,6 +386,11 @@ $(document).on("click", "#custom-tabs-orders-pending-tab", function () {
 $(document).on("click", "#custom-tabs-orders-readytoship-tab", function () {
 
  loadRTS();
+});
+
+$(document).on("click", "#custom-tabs-orders-waitingupdate-tab", function () {
+
+loadWaitingUpdate();
 });
 
 $(document).on("click", "#custom-tabs-orders-ship-tab", function () {
