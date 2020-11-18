@@ -5,7 +5,7 @@
 		
 
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders.php?request=get_orders'));
+					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders/get_orders'));
 					$payload = json_encode( array( "user_id"=> "5",
 										"status"=> 1
 										) );
@@ -32,7 +32,7 @@
 		
 
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/products.php?request=cek_stok'));
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/products/cek_stok'));
 					$payloadItem = json_encode( array( "sku"=> $sku ) );
 
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -56,7 +56,7 @@ function getHistory($order_id){
 
 		
 					$chItems = curl_init();
-					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders.php?request=cek_history'));
+					curl_setopt($chItems, CURLOPT_URL, base_url('public/api/orders/cek_history'));
 					$payloadItem = json_encode( array( "order_id"=> $order_id ) );
 
 					curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -117,7 +117,10 @@ function getHistory($order_id){
 				$statuses = $DataProduct['statuses'] ;
 				$created_at = $DataProduct['created_at'] ;
 				$updated_at = $DataProduct['updated_at'] ;
-				
+
+                $data_order = base64_encode(json_encode($DataProduct));
+
+
 				$cekHistoryOrder = getHistory($order_id);
 				
 				if ($cekHistoryOrder == null ) {
@@ -286,7 +289,7 @@ function getHistory($order_id){
 
                         }else{
 
-                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" title="Terima"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Konfirmasi</a>';
+                            echo'<a data-toggle="modal" data-data_order="'.$data_order.'" data-merchant_name="'.$merchant_name.'"  data-marketplace="'.$marketplace.'" title="Terima Pesanan"  class="AcceptOrderShopee btn btn-primary" href="#AcceptOrderShopee">Proses</a>';
 
                         }
 
@@ -351,78 +354,109 @@ $(document).on("click", ".AcceptOrder", function () {
      var order_id = $(this).data('id');
 	 var merchant_name = $(this).data('merchant_name');
 	 var marketplace = $(this).data('marketplace');
-     $("#AcceptOrder .modal-body #order_id").val( order_id );
-	$("#AcceptOrder .modal-body #merchant_name").val( merchant_name );
-	$("#AcceptOrder .modal-body #marketplace").val( marketplace );
 
-     // As pointed out in comments, 
-     // it is unnecessary to have to manually call the modal.
-      $('#AcceptOrder').modal('show');
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        processData: false,
+        data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'", "marketplace": "'+ marketplace +'","shipping_provider": "dropship", "delivery_type": "dropship"}',
+
+        url:'<?= base_url('public/api/orders/accept_order') ?>',
+
+        beforeSend: function () {
+            $('.btn').attr("disabled","disabled");
+            $('#AcceptOrder .modal-body').css('opacity', '.5');
+        },
+        success:function(data){
+
+            console.log(data.message);
+            console.log(data.status);
+
+            if(data.status == '200'){
+                $('#AcceptOrder #order_id').val('');
+                $('#AcceptOrder #shipping_provider').val('');
+                $('#AcceptOrder #delivery_type').val('');
+
+                $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
+                alert(data.message);
+                window.location.href = '<?= base_url('orders') ?>';
+            }else{
+
+                $('.statusMsg').html('<span style="color:red;"></p>'+data.message);
+                alert(data.message);
+                window.location.href = '<?= base_url('orders') ?>';
+            }
+            $('.btn').removeAttr("disabled");
+            $('#AcceptOrder .modal-body').css('opacity', '');
+
+
+
+        },
+        error: function(){
+            alert("Cannot get data");
+        }
+
+    });
+});
+
+$(document).on("click", ".AcceptOrderShopee", function () {
+    var data_order = $(this).data('data_order');
+    var merchant_name = $(this).data('merchant_name');
+    var marketplace = $(this).data('marketplace');
+
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        processData: false,
+        data: '{"data_order": "'+ data_order +'", "merchant_name": "'+ merchant_name +'", "marketplace": "'+ marketplace +'"}',
+
+        url:'<?= base_url('public/api/orders/created_order2') ?>',
+
+        beforeSend: function () {
+            $('.btn').attr("disabled","disabled");
+            $('#AcceptOrder .modal-body').css('opacity', '.5');
+        },
+        success:function(data){
+
+            console.log(data.message);
+            console.log(data.status);
+
+            if(data.status == '200'){
+                $('#AcceptOrder #order_id').val('');
+                $('#AcceptOrder #shipping_provider').val('');
+                $('#AcceptOrder #delivery_type').val('');
+
+                $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
+                alert(data.message);
+                window.location.href = '<?= base_url('orders') ?>';
+            }else{
+
+                $('.statusMsg').html('<span style="color:red;"></p>'+data.message);
+                alert(data.message);
+                window.location.href = '<?= base_url('orders') ?>';
+            }
+            $('.btn').removeAttr("disabled");
+            $('#AcceptOrder .modal-body').css('opacity', '');
+
+
+
+        },
+        error: function(){
+            alert("Cannot get data");
+        }
+
+    });
 });
 
 
 
 
-function SendAcceptOrders(){
-     var order_id = $('#order_id').val();
-	 var merchant_name = $('#merchant_name').val();
-	 var marketplace = $('#marketplace').val();
-   // var shipping_provider = $('#shipping_provider').val();
-    //var delivery_type = $('#delivery_type').val();
-	
-		var e = document.getElementById("shipping_providers");
-		var shipping_provider = e.options[e.selectedIndex].text;
-		
-		var f = document.getElementById("delivery_type");
-		var delivery_type = f.options[f.selectedIndex].text;
-		
-		//alert(shipping_provider);
-        $.ajax({
-        type: 'POST',
-		dataType: 'json',
-		contentType: 'application/json',
-		processData: false,
-		data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'", "marketplace": "'+ marketplace +'","shipping_provider": "'+shipping_provider+'", "delivery_type": "'+delivery_type+'"}',
 
-    	 url:'<?= base_url('public/api/orders/accept_order') ?>',
-           
-            beforeSend: function () {
-                $('.btn').attr("disabled","disabled");
-                $('#AcceptOrder .modal-body').css('opacity', '.5');
-            },
-            success:function(data){
-				
-				console.log(data.message);
-				console.log(data.status);
-				
-                if(data.status == '200'){
-					 $('#AcceptOrder #order_id').val('');
-                    $('#AcceptOrder #shipping_provider').val('');
-                    $('#AcceptOrder #delivery_type').val('');
-					
-                    $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
-					alert(data.message);
-					 window.location.href = '<?= base_url('orders') ?>'; 
-                }else{
-					
-					$('.statusMsg').html('<span style="color:red;"></p>'+data.message);
-					alert(data.message);
-					 window.location.href = '<?= base_url('orders') ?>'; 
-                }
-                $('.btn').removeAttr("disabled");
-                $('#AcceptOrder .modal-body').css('opacity', '');
-				
-				
-                
-            },
-			error: function(){
-			alert("Cannot get data");
-			}
-			
-        });
-    
-}
+
+
 
 </script>
-<?= $this->include('orders/modal/accept_order') ?>
+
 <?= $this->include('orders/modal/edit_order') ?>

@@ -5,6 +5,7 @@ include "../config/db_connection.php";
 include "../config/config_type.php";
 include "../config/model.php";
 
+
 $url='https://api.lazada.co.id/rest';
 $db = new Model_user();
 $order_id = array();
@@ -18,130 +19,115 @@ if (isset($post['merchant_name'])) {
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/shopee.php?request=get_orders');
+curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_orders');
 $payload = json_encode( array(
-  //"status"=> "pending",
+  "status"=> 1,
   "merchant_name"=> $merchant_name) );
 curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
 curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $contentOrders = curl_exec($ch);
 curl_close($ch);
-$resultOrders=json_decode($contentOrders,true);
+$resultOrders=json_decode($contentOrders);
 
-//echo json_encode($resultOrders);die;
-Foreach($resultOrders as $dataOrders)
+
+foreach($resultOrders->data as $dataOrders)
 {
 
-  $order_id = $dataOrders['order_id'] ;
-  $merchant_name = $dataOrders['merchant_name'] ;
+  $order_id = $dataOrders-> order_id;
+  $merchant_name = $dataOrders->merchant_name ;
+  $marketplace = $dataOrders->marketplace ;
+
   $chItems = curl_init();
-  curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/shopee.php?request=get_order_items');
-  $payloadItem = json_encode( array( "ordersn_list"=> array($order_id),
-    "merchant_name"=> $merchant_name  ) );
+  curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=cek_history');
+  $payloadItem = json_encode( array( "order_id"=> $order_id ) );
+
   curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
   curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
   curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
   $contentItem = curl_exec($chItems);
   curl_close($chItems);
 
-  $resultItem=json_decode($contentItem,true);
-
-  //echo json_encode($resultOrders);die;
-
-  foreach($resultItem as $DataOrderItems)
-  {
-    $sku = $DataOrderItems['sku'];
-    //echo json_encode($sku);die;
-    $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/products.php?request=cek_stok');
-    $payloadItem = json_encode( array( "sku"=> $sku ) );
-    curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-    curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-    $contentItem = curl_exec($chItems);
-    curl_close($chItems);
-
-    $resultItem=json_decode($contentItem,true);
-
-    $stock =$resultItem['data'];
-
-    //echo json_encode($stock);die;
-
-    if ($stock > 0) {
+  $resultItem=json_decode($contentItem);
 
 
-      $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/orders.php?request=created_order');
-      $payloadItem = json_encode( array(
-        "order_id"=> $order_id ,
-        "merchant_name"=> $merchant_name ,
-        "marketplace"=> "SHOPEE"
-      ));
 
-      curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-      curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-      curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-      $contentItem = curl_exec($chItems);
-      curl_close($chItems);
-      $resultItem=json_decode($contentItem,true);
+ if ($resultItem->status == "404") {
 
-      //echo json_encode($resultItem);die;
-
-      if ($resultItem['status'] == "200"){
-
-        $status = "sukses";
-        $subject  = "Pesanan " . $order_id . " telah berhasil dikonfirmasi" ;
-        $message = $resultItem['message'];
-       $sendEmail = $db->send_email($subject , $message);
-
-      }else{
-
-        $status = "gagal";
-        $subject  = "Pesanan " . $order_id . " gagal dikonfirmasi" ;
-        $message = $resultItem['message'];
-
-      // $sendEmail = $db->send_email($subject , $message);
-
-      }
+   $chItems = curl_init();
+   curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=created_order2');
+   $payloadItem = json_encode(array(
+     "data_order" => base64_encode(json_encode($dataOrders)),
+     "merchant_name" => $merchant_name,
+     "marketplace" => $marketplace
+   ));
 
 
-    }else{
+   curl_setopt($chItems, CURLOPT_POSTFIELDS, $payloadItem);
+   curl_setopt($chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+   curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
+   $contentItem = curl_exec($chItems);
+   curl_close($chItems);
+   $resultItem = json_decode($contentItem, true);
 
-      $status = "gagal";
-      $subject  = "Pesanan " . $order_id . " stok kosong" ;
-      $message = "Pesanan gagal dikonfirmasi stok kosong atau pesanan sudah pernah di konfirmasi";
-      $sendEmail = $db->send_email($subject , $message);
 
-      //
-    }
+   if ($resultItem['status'] == "200") {
+
+     $status = "sukses";
+     $subject = "Pesanan " . $order_id . " telah berhasil dikonfirmasi";
+     $message = $resultItem['message'];
+     $sendEmail = $db->send_email($subject , $message);
+
+   } else {
+
+     $status = "gagal";
+     $subject = "Pesanan " . $order_id . " gagal dikonfirmasi";
+     $message = $resultItem['message'];
+
+    $sendEmail = $db->send_email($subject , $message);
+
+
+   }
+
+   $dataOrder[] = array(
+     "merchant_name" => $merchant_name,
+     "order_id" => $order_id,
+     "status" => $status,
+     "message" => $message
+   );
+
+
+ }else{
+
+
+  $dataOrder = null;
+
+ }
 
 
 
 
-
-    $dataOrder[] = array(
-      "merchant_name" => $merchant_name,
-      "order_id" => $order_id,
-      "sku" => $sku,
-      "status" => $status,
-      "message" => $message
-    );
-
-
-
-  }
 }
 
+if ($dataOrder != null) {
 
-$return = array(
-  "status" => 200,
-  "data" => $dataOrder
-);
+  $return = array(
+    "status" => 200,
+    "total_rows" => COUNT($dataOrder),
+    "message" => "Berhasil",
+    "data" => $dataOrder
+  );
 
+}else{
 
+  $return = array(
+    "status" => 404,
+    "message" => "Belum ada data",
+    "total_rows" => 0,
+    "data" => []
+  );
 
-
+}
 
 echo json_encode($return);
 

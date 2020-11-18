@@ -102,6 +102,7 @@ if (isset($content) && $content != "") {
     $rowsOrdersn = array();
     $result = array();
     $resultOrdersItems = array();
+
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
     }

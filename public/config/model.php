@@ -432,7 +432,7 @@ class Model_user
 					order_number,
 					user_id,
 					marketplace,
-                    merchant_name,
+          merchant_name,
 					branch_number,
 					warehouse_code,
 					customer_first_name,
@@ -488,7 +488,7 @@ class Model_user
 									'" . $extra_attributes . "',
 									'" . $remarks . "',
 									'" . $delivery_info . "',
-									'2',
+									'" . $statuses . "',
 									'" . $created_at . "',
 									'" . $updated_at . "'
                                    )");
@@ -617,7 +617,7 @@ class Model_user
             '" . $item['stage_pay_status'] . "', 
             '" . $item['warehouse_code'] . "', 
             '" . $item['return_status'] . "', 
-            '2', 
+             '" . $item['status'] . "', 
             '" . $item['created_at'] . "', 
             '" . $item['updated_at'] . "'
 
@@ -637,7 +637,108 @@ class Model_user
 
     }
 
-    public function checkTokenSessionCart($token_session, $user_id)
+  public function createHistoryAddressShipping($order_id, $address_shipping)
+  {
+
+    //$obj = json_decode($address_shipping, true);
+
+
+      $insert = $this->conn->query("INSERT INTO history_order_address_shipping
+			(	
+			order_id,
+			first_name, 
+			last_name, 
+			country,
+			phone, 
+			phone2, 
+			address1,
+			address2,
+			address3, 
+			address4,
+			address5, 
+			city, 
+			post_code
+                                                                          
+        )
+       VALUES (
+			'" . $address_shipping['order_id'] . "', 
+	    '" . $address_shipping['first_name'] . "', 
+			'" . $address_shipping['last_name'] . "', 
+			'" . $address_shipping['country'] . "', 
+			'" . $address_shipping['phone'] . "',
+			'" . $address_shipping['phone2'] . "', 
+			'" . $address_shipping['address1'] . "', 
+			'" . $address_shipping['address2'] . "',
+			'" . $address_shipping['address3'] . "',
+			'" . $address_shipping['address4'] . "', 
+			'" . $address_shipping['address5'] . "', 
+			'" . $address_shipping['city'] . "', 
+			'" . $address_shipping['post_code'] . "'
+	   )");
+
+
+
+    if ($insert)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+
+  public function createHistoryAddressBilling($order_id, $address_billing)
+  {
+
+
+    $insert = $this->conn->query("INSERT INTO history_order_address_billing
+			(	
+			order_id,
+			first_name, 
+			last_name, 
+			country,
+			phone, 
+			phone2, 
+			address1,
+			address2,
+			address3, 
+			address4,
+			address5, 
+			city, 
+			post_code
+                                                                          
+        )
+       VALUES (
+			'" . $address_billing['order_id'] . "', 
+	    '" . $address_billing['first_name'] . "', 
+			'" . $address_billing['last_name'] . "', 
+			'" . $address_billing['country'] . "', 
+			'" . $address_billing['phone'] . "',
+			'" . $address_billing['phone2'] . "', 
+			'" . $address_billing['address1'] . "', 
+			'" . $address_billing['address2'] . "',
+			'" . $address_billing['address3'] . "',
+			'" . $address_billing['address4'] . "', 
+			'" . $address_billing['address5'] . "', 
+			'" . $address_billing['city'] . "', 
+			'" . $address_billing['post_code'] . "'
+	   )");
+
+
+
+    if ($insert)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+  public function checkTokenSessionCart($token_session, $user_id)
     {
         $query = $this
             ->conn

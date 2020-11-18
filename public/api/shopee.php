@@ -344,6 +344,7 @@ if ($getDataShopee != null) {
     $orderArr = array();
     $orderItemsArr = array();
     $rowsOrdersn = array();
+
 	$result = array();
 	$resultOrdersItems = array();
     if (isset($post['merchant_name'])) {
@@ -794,6 +795,468 @@ if ($status == 1) {
 
   }
 
+  if ($content == "get_order") {
+
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $user_id = 5;
+    $merchant_name = null;
+    $status = $post['status'];
+
+    $orderArr = array();
+    $orderItemsArr = array();
+    $rowsOrdersn = array();
+
+    $result = array();
+    $resultOrdersItems = array();
+    if (isset($post['merchant_name'])) {
+      $merchant_name = $post['merchant_name'];
+    }
+
+    if ($status == 1) {
+
+      $status = "READY_TO_SHIP";
+
+    }else if ($status == 4) {
+
+      $status = "COMPLETED";
+
+    }else if ($status == 9) {
+
+      $status = "IN_CANCEL";
+
+    }else if ($status == 6) {
+
+      $status = "CANCELLED";
+
+    }else if ($status == 5) {
+
+      $status = "TO_RETURN";
+
+    }else{
+
+      $status = "ALL";
+
+    }
+
+    $status = "READY_TO_SHIP";
+    $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
+
+    if ($getDataShopee != null) {
+
+      while ($rowShopee = $getDataShopee->fetch_assoc()) {
+        $rows[] = $rowShopee;
+
+      }
+
+      foreach ($rows as $obj) {
+
+        $partner_id = $obj['partner_id'];
+        $partner_key = $obj['partner_key'];
+        $shop_id = $obj['shop_id'];
+        $code = $obj['code'];
+        $merchant_name = $obj['merchant_name'];
+
+        $url = "https://partner.shopeemobile.com/api/v1/orders/get";
+
+        $create_time_from = 0;
+
+        $tgl="Y-m-d";
+        $waktu="H:i:s";
+        $waktu_sekarang=date("$tgl $waktu");
+        $ditambah_5_menit = date("$tgl $waktu", strtotime('-14 day'));
+        $create_time_from=strtotime($ditambah_5_menit);
+
+        $convertJson = array(
+          "order_status" => $status,
+          "create_time_from" =>$create_time_from,
+          "create_time_to" =>$timestamp,
+          "partner_id" => (int)$partner_id,
+          "shopid" => (int)$shop_id,
+          "timestamp" => $timestamp);
+
+        $base_string = $url . "|" . json_encode($convertJson);
+
+        $hmac = hash_hmac('sha256', $base_string, $partner_key);
+
+        $ch = curl_init($url);
+        $payload = json_encode($convertJson);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+          'Authorization: ' . $hmac . ''));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $jsonDecode = json_decode($result);
+
+        // echo json_encode($jsonDecode);die;
+
+        $orders = $jsonDecode->orders;
+        // echo json_encode($orders);die;
+        foreach($orders as $order) {
+
+
+          $rowsOrdersn[] = $order->ordersn;
+
+//echo json_encode($rowsOrdersn);die;
+        }
+
+        $urlItems = "https://partner.shopeemobile.com/api/v1/orders/detail";
+        $convertJsonItems = array(
+          "ordersn_list" =>$rowsOrdersn,
+          "partner_id" => (int)$partner_id,
+          "shopid" => (int)$shop_id,
+          "timestamp" => $timestamp);
+        $base_string_items = $urlItems . "|" . json_encode($convertJsonItems);
+        $hmacItems = hash_hmac('sha256', $base_string_items, $partner_key);
+
+        $chItems = curl_init($urlItems);
+        $payloadItems = json_encode($convertJsonItems);
+        curl_setopt($chItems, CURLOPT_POSTFIELDS, $payloadItems);
+        curl_setopt($chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+          'Authorization: ' . $hmacItems . ''));
+        curl_setopt($chItems, CURLOPT_RETURNTRANSFER, true);
+        $resultItems = curl_exec($chItems);
+        curl_close($chItems);
+        $jdecodeItems2 = json_decode($resultItems);
+
+        // echo json_encode($jdecodeItems2);die;
+
+
+        if ( isset($jdecodeItems2->orders)){
+          $orderItem2 = $jdecodeItems2->orders;
+        }
+
+//echo json_encode($jdecodeItems2);die;
+        foreach($orderItem2  as $orderItems2) {
+
+          $order_id = $orderItems2->ordersn;
+          $order_number = $orderItems2->ordersn;
+          $user_id = $user_id;
+          $marketplace = "SHOPEE";
+          $merchant_name = $merchant_name;
+          $branch_number = "";
+          $voucher = "";
+          $voucher_platform = "";
+          $gift_option = "";
+          $gift_message = "";
+          $shipping_fee = "";
+          $shipping_fee_discount_seller = "";
+          $shipping_fee_discount_platform = "";
+          $national_registration_number = "";
+          $tax_code = "";
+          $delivery_info = "";
+
+          //  $customer_first_name = $items->recipient_address->name;
+          $customer_first_name= $orderItems2 ->recipient_address->name;
+          $customer_last_name = "";
+          $price = $orderItems2->total_amount;
+          $payment_method = $orderItems2->payment_method;
+          $shipping_fee_original = $orderItems2->estimated_shipping_fee;
+          $remarks = $orderItems2->message_to_seller;
+          $promised_shipping_times = "";
+
+          if ($orderItems2->order_status == "UNPAID") {
+            $statuses = 8;
+          } else if ($orderItems2->order_status == "READY_TO_SHIP") {
+            $statuses = 1;
+          } else if ($orderItems2->order_status == "COMPLETED") {
+            $statuses = 4;
+          } else if ($orderItems2->order_status == "IN_CANCEL") {
+            $statuses = 9;
+          } else if ($orderItems2->order_status == "CANCELLED") {
+            $statuses = 6;
+          } else if ($orderItems2->order_status == "TO_RETURN") {
+            $statuses = 5;
+          } else {
+            $statuses = 0;
+          }
+
+
+          $created_at = date('yy-m-d H:i:s', $orderItems2->create_time);
+          $updated_at = date('yy-m-d H:i:s', $orderItems2->update_time);
+
+
+
+          $first_name = $orderItems2 ->recipient_address->name;
+          $last_name = "";
+          $country = $orderItems2 ->recipient_address->country;
+          $phone = $orderItems2 ->recipient_address->phone;
+          $phone2 = "";
+          $address1 = $orderItems2 ->recipient_address->full_address;
+          $address2 = "";
+          $address3 = "";
+          $address4 = "";
+          $address5 = "";
+          $city = $orderItems2 ->recipient_address->city;
+          $post_code = $orderItems2 ->recipient_address->zipcode;
+
+
+
+          foreach ($orderItems2->items as $items) {
+
+            $order_item_id = $items->item_id;
+            $purchase_order_id= "";
+            $purchase_order_number= "";
+            $invoice_number= "";
+            $sla_time_stamp= date('yy-m-d H:i:s', $orderItems2->ship_by_date);
+            $package_id= "";
+            //   $shop_id= "";
+            $order_type= "";
+            $shop_sku= $items->item_sku;
+            $sku= $items->variation_sku;
+            $name= $items->item_name;
+            $variation= $items->variation_name;
+            $item_price= $items->variation_original_price;
+            $paid_price= $items->variation_discounted_price;
+            $qty =  $items->variation_quantity_purchased;
+            $currency= $orderItems2->currency;
+            $tax_amount= $orderItems2->escrow_tax;
+            $product_detail_url= "";
+            $shipment_provider= $orderItems2->shipping_carrier;
+            $tracking_code_pre= "";
+            $tracking_code= $orderItems2->tracking_no;
+            $shipping_type= "";
+            $shipping_provider_type= "";
+            $shipping_fee_original= $orderItems2->estimated_shipping_fee;
+            $shipping_service_cost= 0;
+            $shipping_fee_discount_seller = 0;
+            $shipping_amount= $orderItems2->estimated_shipping_fee;
+            $is_digital= 0;
+            $voucher_amount= "";
+            $voucher_code_seller= "";
+            $voucher_code= "";
+            $voucher_code_platform= "";
+            $order_flag= $orderItems2->order_flag;
+            $promised_shipping_time= "";
+            $digital_delivery_info= "";
+            $extra_attributes="";
+            $cancel_return_initiator= $orderItems2->buyer_cancel_reason;
+            $reason= "";
+            $reason_detail= "";
+            $stage_pay_status="";
+            $warehouse_code= "";
+            $return_status= "";
+            $voucher_seller = "";
+
+          }
+
+          $tglImageVariant = "Y-m-d";
+          $waktuImageVariant = "H:i:s";
+          $waktu_sekarangImageVariant= date("$tglImageVariant $waktuImageVariant");
+          $ditambah_5_menitImageVariant = date("$tgl $waktuImageVariant", strtotime('+5 minutes'));
+
+          $urlImageVariant = "https://partner.shopeemobile.com/api/v1/item/get";
+          $pagination_offset = 0;
+          $pagination_entries_per_page = 100;
+          $timestampImageVariant = strtotime($ditambah_5_menitImageVariant);
+
+
+          $convertJsonImageVariant = array("pagination_offset" => $pagination_offset,
+            "item_id" => (int)$order_item_id,
+            "partner_id" => (int)$partner_id,
+            "shopid" => (int)$shop_id,
+            "timestamp" => $timestampImageVariant);
+
+          //   echo json_encode($convertJsonImageVariant);die;
+          $base_stringImageVariant = $urlImageVariant . "|" . json_encode($convertJsonImageVariant);
+
+
+          $hmacImageVariant = hash_hmac('sha256', $base_stringImageVariant, $partner_key);
+
+
+          $chImageVariant = curl_init($urlImageVariant);
+          $payloadImageVariant = json_encode($convertJsonImageVariant);
+          curl_setopt($chImageVariant, CURLOPT_POSTFIELDS, $payloadImageVariant);
+          curl_setopt($chImageVariant, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmacImageVariant . ''));
+          curl_setopt($chImageVariant, CURLOPT_RETURNTRANSFER, true);
+          $resultImageVariant = curl_exec($chImageVariant);
+          curl_close($chImageVariant);
+          $jsonDecodeImageVariant = json_decode($resultImageVariant);
+          //  echo json_encode($jsonDecodeImageVariant);die;
+          $itemsImageVariant = $jsonDecodeImageVariant->item;
+          // echo json_encode($items);die;
+
+
+          $product_name = $itemsImageVariant -> name;
+          $description = $itemsImageVariant ->description;
+          // $images = $items ->description;
+          foreach ($itemsImageVariant -> images as $ImagesImageVariant) {
+            $imageImageVariant = $ImagesImageVariant;
+          }
+
+          // echo json_encode($imageImageVariant);die;
+
+
+
+          $orderArr[$order_id]['order_id'] = $order_id;
+          $orderArr[$order_id]['order_number'] = $order_number;
+          $orderArr[$order_id]['user_id'] = $user_id;
+          $orderArr[$order_id]['marketplace'] =$marketplace;
+          $orderArr[$order_id]['merchant_name'] = $merchant_name;
+          $orderArr[$order_id]['branch_number'] = $branch_number;
+          $orderArr[$order_id]['warehouse_code'] = $warehouse_code;
+          $orderArr[$order_id]['customer_first_name'] = $customer_first_name;
+          $orderArr[$order_id]['customer_last_name'] = $customer_last_name;
+          $orderArr[$order_id]['price'] = $price;
+          $orderArr[$order_id]['items_count'] = COUNT($orderItems2->items);
+          $orderArr[$order_id]['payment_method'] = $payment_method;
+          $orderArr[$order_id]['voucher'] = $voucher;
+          $orderArr[$order_id]['voucher_code'] = $voucher_code;
+          $orderArr[$order_id]['voucher_platform'] = $voucher_platform;
+          $orderArr[$order_id]['voucher_seller'] = $voucher_seller;
+          $orderArr[$order_id]['gift_option'] = $gift_option;
+          $orderArr[$order_id]['gift_message'] = $gift_message;
+          $orderArr[$order_id]['shipping_fee'] = $shipping_fee;
+          $orderArr[$order_id]['shipping_fee_discount_seller'] = $shipping_fee_discount_seller;
+          $orderArr[$order_id]['shipping_fee_discount_platform'] = $shipping_fee_discount_platform;
+          $orderArr[$order_id]['promised_shipping_times'] = $promised_shipping_times;
+          $orderArr[$order_id]['national_registration_number'] = $national_registration_number;
+          $orderArr[$order_id]['tax_code'] = $tax_code;
+          $orderArr[$order_id]['remarks'] = $remarks;
+          $orderArr[$order_id]['delivery_info'] = $delivery_info;
+          $orderArr[$order_id]['statuses'] = $statuses;
+          $orderArr[$order_id]['created_at'] = $created_at;
+          $orderArr[$order_id]['updated_at'] = $updated_at;
+          $orderArr[$order_id]['image'] = $imageImageVariant;
+          $orderArr[$order_id]['order_items'][]= array("order_item_id" => $order_item_id,
+            "order_id" => $order_id,
+            "purchase_order_id" => $purchase_order_id,
+            "purchase_order_number" =>$purchase_order_number,
+            "invoice_number" => $invoice_number,
+            "sla_time_stamp" => $sla_time_stamp,
+            "package_id" => $package_id,
+            "shop_id" => $shop_id,
+            "order_type" => $order_type,
+            "shop_sku" => $shop_sku,
+            "sku" => $sku,
+            "name" => $name,
+            "variation" => $variation,
+            "item_price" => $item_price,
+            "paid_price" => $paid_price,
+            "qty" => $qty,
+            "currency" => $currency,
+            "tax_amount" => $tax_amount,
+            "product_detail_url" => $product_detail_url,
+            "shipment_provider" => $shipment_provider,
+            "tracking_code_pre" => $tracking_code_pre,
+            "tracking_code" => $tracking_code,
+            "shipping_type" => $shipping_type,
+            "shipping_provider_type" => $shipping_provider_type,
+            "shipping_fee_original" => $shipping_fee_original,
+            "shipping_service_cost" => $shipping_service_cost,
+            "shipping_fee_discount_seller" => $shipping_fee_discount_seller,
+            "shipping_amount" => $shipping_amount,
+            "is_digital" => $is_digital,
+            "voucher_amount" => $voucher_amount,
+            "voucher_seller" => $voucher_seller,
+            "voucher_code_seller" => $voucher_code_seller,
+            "voucher_code" => $voucher_code,
+            "voucher_code_platform" => $voucher_code_platform,
+            "voucher_platform" => $voucher_platform,
+            "order_flag" => $order_flag,
+            "promised_shipping_time" => $promised_shipping_time,
+            "digital_delivery_info" => $digital_delivery_info,
+            "extra_attributes" => $extra_attributes,
+            "cancel_return_initiator" => $cancel_return_initiator,
+            "reason" => $reason,
+            "reason_detail" => $reason_detail,
+            "stage_pay_status" => $stage_pay_status,
+            "warehouse_code" => $warehouse_code,
+            "return_status" => $return_status,
+            "status" => $statuses,
+            "created_at" => $created_at,
+            "updated_at" => $updated_at,
+            "image_variant" => $imageImageVariant
+          );
+
+
+          $orderArr[$order_id]['address_shipping']= array("order_id" => $order_id,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+            "country" => $country,
+            "phone" => $phone,
+            "phone2" => $phone2,
+            "address1" => $address1,
+            "address2" => $address2,
+            "address3" => $address3,
+            "address4" => $address4,
+            "address5" => $address5,
+            "city" => $city,
+            "post_code" => $post_code,
+
+          );
+
+          $orderArr[$order_id]['address_billing']= array("order_id" => $order_id,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+            "country" => $country,
+            "phone" => $phone,
+            "phone2" => $phone2,
+            "address1" => $address1,
+            "address2" => $address2,
+            "address3" => $address3,
+            "address4" => $address4,
+            "address5" => $address5,
+            "city" => $city,
+            "post_code" => $post_code,
+
+          );
+
+
+
+
+
+        }
+
+
+
+        $result = array_values($orderArr);
+
+        //echo json_encode($result);die;
+
+
+
+
+
+
+
+
+      }
+
+
+
+
+      $return = array(
+        "status" => 200,
+        "message" => "ok shopee",
+        "total_rows"=>COUNT($result),
+        "data" => $result
+
+      );
+
+
+
+
+    }else{
+      $return= array(
+        "status" => 404,
+        "message" => "Toko Shopee tidak ada yang aktif",
+        "total_rows" => 0,
+        "data" => []
+
+
+      );
+
+
+    }
+
+    //
+    echo json_encode($return);
+
+  }
   if ($content == "get_order_items") {
 
     $modeHeader = 0;
@@ -883,7 +1346,7 @@ if ($status == 1) {
                $order_item_id = $item->item_id;
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_product_items');
+                curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_product_items');
                 $payload = json_encode(array("item_id" => $order_item_id,
                   "merchant_name" => $merchant_name));
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);

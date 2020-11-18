@@ -354,7 +354,7 @@ if (isset($content) && $content != "") {
     if ($status == 1) {
 
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_orders');
+      curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada/get_orders');
       $payloadLazada = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -366,10 +366,10 @@ if (isset($content) && $content != "") {
       $resultLazada = json_decode($lazadacontent);
       $dataLazada = $resultLazada->data;
 
-      //  echo json_encode($dataLazada);die;
+     //echo json_encode($dataLazada);die;
 
       $chShopee = curl_init();
-      curl_setopt($chShopee, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_orders');
+      curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee/get_orders');
       $payloadShopee = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -382,7 +382,7 @@ if (isset($content) && $content != "") {
       $resultShopee = json_decode($shopeeContent);
       $dataShopee = $resultShopee->data;
 
-      //  echo json_encode($dataShopee);die;
+      // echo json_encode($dataShopee);die;
 
 
 
@@ -777,7 +777,7 @@ if (isset($content) && $content != "") {
     if ($status == 1) {
 
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_order');
+      curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada/get_order');
       $payloadLazada = json_encode(array("user_id" => $user_id,
         "order_id" => $order_id,
         "merchant_name" => $merchant_name,
@@ -793,7 +793,7 @@ if (isset($content) && $content != "") {
 //echo json_encode($resultLazada);die;
 
       $chShopee = curl_init();
-      curl_setopt($chShopee, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_order');
+      curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee/get_order');
       $payloadShopee = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -811,8 +811,6 @@ if (isset($content) && $content != "") {
 
 
       if ($resultLazada->status == 200 && $resultShopee->status == 200) {
-
-
 
 
         $r = [];
@@ -847,7 +845,7 @@ if (isset($content) && $content != "") {
         );
 
 
-      } else if (($resultLazada != null)) {
+      } else if ($resultLazada->status == 200) {
 
 
         $return = array(
@@ -857,7 +855,7 @@ if (isset($content) && $content != "") {
         );
 
 
-      } else if (($resultShopee != null)) {
+      } else if ($resultShopee->status == 200) {
 
 
         $return = array(
@@ -1821,7 +1819,7 @@ if ($marketplace == "LAZADA"){
 
 
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/orders/get_order');
+    curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders/get_order');
     $payloadItem = json_encode( array( "order_id"=> $order_id,
       "merchant_name"=> $merchant_name,
       "marketplace"=> $marketplace,
@@ -1835,7 +1833,8 @@ if ($marketplace == "LAZADA"){
 
     $resultItem=json_decode($contentItem,true);
     $dataItems = $resultItem['data'];
-   
+
+  // echo json_encode($resultItem);die;
    
  foreach ($resultItem ['data'] as $datas) {
 
@@ -1863,7 +1862,7 @@ if ($marketplace == "LAZADA"){
     $extra_attributes = $datas['extra_attributes'] ;
     $remarks = $datas['remarks'] ;
     $delivery_info = $datas['delivery_info'] ;
-    $statuses = $datas['statuses'] ;
+    $statuses = 10;
     $created_at = $datas['created_at'] ;
     $updated_at = $datas['updated_at'] ;
 
@@ -1871,9 +1870,14 @@ if ($marketplace == "LAZADA"){
     foreach($datas['order_items'] as $DataOrderItems)
 
     {
-         
-		 $tracking_number = $DataOrderItems['tracking_code'];
-		 $order_item_id = $DataOrderItems['order_item_id'];
+
+      //cek stok
+      $tracking_number = $DataOrderItems['tracking_code'];
+      $order_item_id = $DataOrderItems['order_item_id'];
+
+
+
+
 		
 	//	echo json_encode($tracking_number);die;
           //Set array untuk variable history orders
@@ -2077,6 +2081,263 @@ if ($marketplace == "LAZADA"){
     echo json_encode($return);
   }
 
+  if ($content == "created_order2") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $marketplace = $post['marketplace']  ;
+    $merchant_name = $post['merchant_name']  ;
+    $data_order = $post['data_order']  ;
+    $user_id = 5;
+
+
+
+    if (isset($data_order) && isset($user_id) && isset($merchant_name)&& isset($marketplace)) {
+
+      if (base64_encode(base64_decode($post['data_order'], true)) === $post['data_order']){
+        $data_order = base64_decode($post['data_order']);
+        $resultOrder = Json_decode($data_order,true);
+      } else {
+        $data_order = $post['data_order'];
+      }
+
+        $order_id = $resultOrder['order_id'] ;
+        $order_number = $resultOrder['order_number'] ;
+        $branch_number = $resultOrder['branch_number'] ;
+        $warehouse_code = $resultOrder['warehouse_code'] ;
+        $customer_first_name = $resultOrder['customer_first_name'] ;
+        $customer_last_name = $resultOrder['customer_last_name'] ;
+        $price = $resultOrder['price'] ;
+        $items_count = $resultOrder['items_count'] ;
+        $payment_method = $resultOrder['payment_method'] ;
+        $voucher = $resultOrder['voucher'] ;
+        $voucher_code = $resultOrder['voucher_code'] ;
+        $voucher_platform = $resultOrder['voucher_platform'] ;
+        $voucher_seller = $resultOrder['voucher_seller'] ;
+        $gift_option = $resultOrder['gift_option'] ;
+        $gift_message = $resultOrder['gift_message'] ;
+        $shipping_fee = $resultOrder['shipping_fee'] ;
+        $shipping_fee_discount_seller = $resultOrder['shipping_fee_discount_seller'] ;
+        $shipping_fee_discount_platform = $resultOrder['shipping_fee_discount_platform'] ;
+        $promised_shipping_times = $resultOrder['promised_shipping_times'] ;
+        $national_registration_number = $resultOrder['national_registration_number'] ;
+        $tax_code = $resultOrder['tax_code'] ;
+        $extra_attributes = $resultOrder['extra_attributes'] ;
+        $remarks = $resultOrder['remarks'] ;
+        $delivery_info = $resultOrder['delivery_info'] ;
+        $statuses = 2;
+        $created_at = $resultOrder['created_at'] ;
+        $updated_at = $resultOrder['updated_at'] ;
+
+      $address_shipping = $resultOrder['address_shipping'];
+      $address_billing = $resultOrder['address_billing'];
+
+
+        foreach($resultOrder['order_items'] as $DataOrderItems)
+
+        {
+
+
+          $tracking_number = $DataOrderItems['tracking_code'];
+          $order_item_id = $DataOrderItems['order_item_id'];
+          $sku = $DataOrderItems['sku'];
+
+          //cek stok
+          $chItems = curl_init();
+          curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products/cek_stok');
+          $payloadItem = json_encode( array( "sku"=> $sku ) );
+          curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
+          curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
+          $contentItem = curl_exec($chItems);
+          curl_close($chItems);
+
+          $resultItem=json_decode($contentItem,true);
+
+          $stock =(int)$resultItem['data'];
+
+
+          if ($stock == 0) {
+
+            $return = array(
+              "status" => 404,
+              "message" => "Stok kosong"
+            );
+
+          echo json_encode($return);die;
+
+         }
+
+          $variant_details[] = array(
+
+            "order_item_id" =>$DataOrderItems['order_item_id'] ,
+            "order_id" =>$DataOrderItems['order_id'] ,
+            "purchase_order_id" =>$DataOrderItems['purchase_order_id'] ,
+            "purchase_order_number" =>$DataOrderItems['purchase_order_number'],
+            "invoice_number" => $DataOrderItems['invoice_number'],
+            "sla_time_stamp" => $DataOrderItems['sla_time_stamp'],
+            "package_id" =>$DataOrderItems['package_id'],
+            "shop_id" =>$DataOrderItems['shop_id'],
+            "order_type" => $DataOrderItems['order_type'],
+            "shop_sku" =>$DataOrderItems['shop_sku'] ,
+            "sku" =>$DataOrderItems['sku'],
+            "name" =>$DataOrderItems['name'],
+            "qty" =>1,
+            "variation" =>$DataOrderItems['variation'],
+            "item_price" =>$DataOrderItems['item_price'],
+            "paid_price" =>$DataOrderItems['paid_price'],
+            "currency" =>$DataOrderItems['currency'],
+            "tax_amount" => $DataOrderItems['tax_amount'],
+            "product_main_image" =>$DataOrderItems['image_variant'],
+            "product_detail_url" =>$DataOrderItems['product_detail_url'],
+            "shipment_provider" =>$DataOrderItems['shipment_provider'],
+            "tracking_code_pre" =>$DataOrderItems['tracking_code_pre'],
+            "tracking_code" =>$DataOrderItems['tracking_code'],
+            "shipping_type" =>$DataOrderItems['shipping_type'],
+            "shipping_provider_type" =>$DataOrderItems['shipping_provider_type'],
+            "shipping_fee_original" =>$DataOrderItems['shipping_fee_original'],
+            "shipping_service_cost " =>$DataOrderItems['shipping_service_cost'],
+            "shipping_fee_discount_seller" =>$DataOrderItems['shipping_fee_discount_seller'],
+            "shipping_amount" =>$DataOrderItems['shipping_amount'],
+            "is_digital" =>$DataOrderItems['is_digital'],
+            "voucher_amount" =>$DataOrderItems['voucher_amount'],
+            "voucher_seller" =>$DataOrderItems['voucher_seller'],
+            "voucher_code_seller" =>$DataOrderItems['voucher_code_seller'],
+            "voucher_code" =>$DataOrderItems['voucher_code'],
+            "voucher_code_platform" =>$DataOrderItems['voucher_code_platform'],
+            "voucher_platform" =>$DataOrderItems['voucher_platform'],
+            "order_flag" =>$DataOrderItems['order_flag'],
+            "promised_shipping_time" =>$DataOrderItems['promised_shipping_time'],
+            "digital_delivery_info" =>$DataOrderItems['digital_delivery_info'],
+            "extra_attributes" =>$DataOrderItems['extra_attributes'],
+            "cancel_return_initiator" =>$DataOrderItems['cancel_return_initiator'],
+            "reason" =>$DataOrderItems['reason'],
+            "reason_detail" =>$DataOrderItems['reason_detail'],
+            "stage_pay_status" =>$DataOrderItems['stage_pay_status'],
+            "warehouse_code" =>$DataOrderItems['warehouse_code'],
+            "return_status" =>$DataOrderItems['return_status'],
+            "status" =>2,
+            "created_at" =>$DataOrderItems['created_at'],
+            "updated_at" =>$DataOrderItems['updated_at']
+
+          );
+
+
+        }
+
+       // echo json_encode($variant_details);die;
+
+
+      //cek user id
+      $getData = $db->checkHistoryOrderByOrder($order_id , $user_id);
+
+    //  echo json_encode($getData);die;
+      if ($getData == false) {
+
+
+        $createHistoryOrders = $db->createHistoryOrders(
+          $order_id,
+          $order_number,
+          $user_id,
+          $marketplace,
+          $merchant_name,
+          $branch_number,
+          $warehouse_code,
+          $customer_first_name,
+          $customer_last_name,
+          $price,
+          $items_count,
+          $payment_method,
+          $voucher,
+          $voucher_code,
+          $voucher_platform,
+          $voucher_seller,
+          $gift_option,
+          $gift_message,
+          $shipping_fee,
+          $shipping_fee_discount_seller,
+          $shipping_fee_discount_platform,
+          $promised_shipping_times,
+          $national_registration_number,
+          $tax_code,
+          $extra_attributes,
+          $remarks,
+          $delivery_info,
+          $statuses,
+          $created_at,
+          $updated_at);
+
+        //jika produk berhasil
+        if ($createHistoryOrders == true) {
+
+
+          $variant_details = json_encode($variant_details, true);
+
+          $createHistoryOrderDetails = $db->createHistoryOrderDetails(
+            $order_id , $variant_details);
+
+
+
+          if ($createHistoryOrderDetails == true) {
+
+            $createHistoryAddressShipping = $db->createHistoryAddressShipping(
+              $order_id , $address_shipping);
+
+            $createHistoryAddressBilling = $db->createHistoryAddressBilling(
+              $order_id , $address_billing);
+
+
+            $updateStokBySKU = $db->updateStokBySKU($variant_details);
+
+            $return = array(
+              "status" => 200,
+              "action" => "createHistoryOrderDetails",
+              "message" => "Pesanan berhasil di konfirmasi",
+              // "data" => $createHistoryOrderDetails
+              "data" => $resultRts
+            );
+
+
+          }else{
+
+            $return = array(
+              "status" => 404,
+              "action" => "createHistoryOrderDetails",
+              "message" => "Gagal Menambahkan Variant Produk",
+              "data" => []
+            );
+
+          }
+
+          //jika produk gagal
+        } else {
+          $return = array(
+            "status" => 404,
+            "action" => " createHistoryOrders",
+            "message" => "Gagal"
+          );
+        }
+
+
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "Pesanan sudah pernah di konfirmasi"
+        );
+      }
+
+
+      //Jika user id tidak ada//
+    } else {
+      $return = array(
+        "status" => 404,
+        "message" => "Data order belum terisi"
+      );
+    }
+    echo json_encode($return);
+  }
 
 
   if ($content == "created_kasir") {
