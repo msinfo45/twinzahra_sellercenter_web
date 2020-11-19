@@ -24,7 +24,7 @@ class Model_Marketplace
 
   public function getDataToko($user_id)
   {
-    $query = $this->conn->query("SELECT * FROM marketplace WHERE user_id = '" . $user_id . "' 
+    $query = $this->conn->query("SELECT * FROM toko WHERE user_id = '" . $user_id . "' 
      order by active desc");
 
     if (mysqli_num_rows($query) > 0) {
@@ -34,6 +34,16 @@ class Model_Marketplace
     }
   }
 
+  public function getDataMarketplace()
+  {
+    $query = $this->conn->query("SELECT * FROM marketplace
+     order by active desc");
 
+    if (mysqli_num_rows($query) > 0) {
+      return $query;
+    } else {
+      return false;
+    }
+  }
 
 }

@@ -68,9 +68,9 @@
 
         function loadData(limit){
             $.ajax({
-                url:'<?= base_url('marketplace/load_data') ?>',
+                url:'<?= base_url('marketplace/load_toko') ?>',
                 method:"POST",
-                data:{action: 'load_data', limit:limit},
+                data:{action: 'load_toko', limit:limit},
                 success:function(data) {
                     $('#ResultData').html(data);
                 }

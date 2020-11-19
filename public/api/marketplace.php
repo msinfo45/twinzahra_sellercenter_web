@@ -80,6 +80,48 @@ if (isset($content) && $content != "") {
     echo json_encode($return);
   }
 
+  if ($content == "get_marketplace") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+  
+  
+    $getData = $db->getDataMarketplace();
+
+
+    if ($getData != null) {
+
+      while ($row = $getData->fetch_assoc()) {
+
+        $rows[] = $row;
+
+
+      }
+
+      $total = mysqli_num_rows($getData);
+
+
+      $return = array(
+        "status" => 200,
+        "total_rows" => $total,
+        "message" => "Berhasil",
+        "data" => $rows
+      );
+
+
+
+    } else {
+      $return = array(
+        "status" => 200,
+        "total_rows" => 0,
+        "message" => "Belum ada Data",
+        "data" => []
+      );
+    }
+
+
+    echo json_encode($return);
+  }
 
 
 }

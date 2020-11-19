@@ -9308,6 +9308,29 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
 
     }
 
+    public function getDataMarketplace($marketplace)
+    {
+    
+        $query = $this->conn->query(" SELECT * from marketplace
+										where  marketplace_name = '" . $marketplace . "'
+                                       ");
+
+        if (mysqli_num_rows($query) > 0)
+        {
+            return $query;
+        }
+        else
+        {
+            return null;
+        }
+
+
+      
+        }
+
+
+
+    
     public function getDataLazadaByMerchant($user_id, $merchant_name)
     {
 

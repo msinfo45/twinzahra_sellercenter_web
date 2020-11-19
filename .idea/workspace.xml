@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Controllers/Marketplace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_data.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/api/marketplace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/models/Model_Marketplace.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/cart-add.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/cart-display.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/cart-remove-all.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/cart-remove.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/menu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/array/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/contactform/Readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/contactform/contactform.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/layout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Views/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692700.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692701.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692721.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692759.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692808.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692809.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

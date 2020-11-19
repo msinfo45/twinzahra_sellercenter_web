@@ -2584,26 +2584,31 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
 
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
-    $merchant_name = null;
 
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
-    }
-    $user_id = 5;
-    $getDataLazada = $db->getDataLazada($user_id, $merchant_name);
+    $code = $_GET['code'];
+    $marketplace = "LAZADA";
+	
+
+	if (isset($code)){
+		
+    $getDataLazada = $db->getDataMarketplace($marketplace);
 
     if ($getDataLazada !=null ) {
 
       while ($rowLazada = $getDataLazada->fetch_assoc()) {
 
-        $app_key =  $rowLazada['AppKey'];
-        $appSecret =  $rowLazada['AppSecret'];
-        $access_token =  $rowLazada['AccessToken'];
-        $code =  $rowLazada['Code'];
-
+        $app_key =  $rowLazada['app_key'];
+        $appSecret =  $rowLazada['app_secret'];
+ 
 
       }
 
+      $c = new LazopClient($url,$app_key,$appSecret);
+      $request = new LazopRequest('/auth/token/create','GET');
+      $request->addApiParam('code', $code);
+      $jdecode=json_decode($c->execute($request));
+     // $data=$jdecode->data;
+     //echo json_encode($jdecode);die;
 
       //var_dump($jdecode);die;
       //print_r($jdecode);die;
@@ -2614,14 +2619,15 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
         "data" => $jdecode
 
       );
-
+	  
+	}
 
     }else{
 
 
       $return = array(
         "status" => 404,
-        "message" => "Anda belum setting lazada",
+        "message" => "ERROR",
         "data" => []
 
       );
