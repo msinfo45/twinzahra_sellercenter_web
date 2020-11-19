@@ -24,13 +24,16 @@ class Marketplace_Model
 
   }
 
-  public function insertDataToko($user_id,$marketplace_name, $account,$seller_id, $access_token, $refresh_token)
+
+  public function insertDataToko($user_id,$marketplace, $name , $location , $account, $seller_id, $access_token, $refresh_token)
   {
       $insert = $this
           ->conn
           ->query("INSERT INTO toko 
                                   (user_id,
-                                  marketplace_name, 
+                                  marketplace_name,
+                                  merchant_name,
+                                  location, 
                                   account, 
                                   seller_id, 
                                   access_token,
@@ -39,7 +42,9 @@ class Marketplace_Model
                                   ) 
                               VALUES 
                                   ('" . $user_id . "', 
-                                      '" . $marketplace_name . "', 
+                                  '" . $marketplace . "', 
+                                  '" . $name . "', 
+                                  '" . $location . "', 
                                   '" . $account . "',
                                   '" . $seller_id . "',
                                   '" . $access_token . "',

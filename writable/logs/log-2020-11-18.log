@@ -477,3 +477,23 @@ CRITICAL - 2020-11-18 10:54:53 --> count(): Parameter must be an array or an obj
 #6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
 #8 {main}
+CRITICAL - 2020-11-18 21:13:14 --> Undefined variable: result
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\marketplace\copy.php(67): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 67, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('marketplace/cop...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Marketplace.php(47): view('marketplace/cop...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Marketplace->copy()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Marketplace))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-11-18 23:52:37 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\twinzahra_sellercenter\app\Views\marketplace\view\load_data_copy.php(24): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 24, Array)
+#1 C:\xampp\htdocs\twinzahra_sellercenter\system\View\View.php(246): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\twinzahra_sellercenter\system\Common.php(1119): CodeIgniter\View\View->render('marketplace/vie...', Array, true)
+#3 C:\xampp\htdocs\twinzahra_sellercenter\app\Controllers\Marketplace.php(55): view('marketplace/vie...')
+#4 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(922): App\Controllers\Marketplace->load_data_copy()
+#5 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(408): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Marketplace))
+#6 C:\xampp\htdocs\twinzahra_sellercenter\system\CodeIgniter.php(316): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\twinzahra_sellercenter\index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

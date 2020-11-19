@@ -256,8 +256,7 @@ foreach ($rows as $obj) {
                     $post = json_decode(file_get_contents("php://input"), true);
 //                    $user_id = $userid_header;
 
-                   $user_id = 5;
-				
+          $user_id = 5;
 					$page = 1;
 					
 					$search = null;
@@ -317,12 +316,14 @@ foreach ($rows as $obj) {
 foreach($rows as $products)
 {
 		$product_id = $products['ProductID'];
-			
+
+
 		$getDataProductItems = $db->getProductItems($user_id, $product_id);
 		
 		while ($rowProductItem = $getDataProductItems->fetch_assoc()) {										
 						
-        $rowProductItems= $rowProductItem;	
+        $rowProductItems= $rowProductItem;
+
 
 		$getDataImageProductVariants = $db->getImageProductVariants($rowProductItems['ProductVariantID']);
 	
@@ -352,7 +353,7 @@ foreach($rows as $products)
 		
 		//$resultSkus = array_values($skusArr);	
 		
-	//echo json_encode($rowProductItems);die;
+
 		$productArr[$products['ProductID']]['ProductID'] = $products['ProductID'];
     $productArr[$products['ProductID']]['UserID'] = $products['UserID'];
 		$productArr[$products['ProductID']]['SupplierID'] = $products['SupplierID'];

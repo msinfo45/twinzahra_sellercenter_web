@@ -1060,10 +1060,7 @@ if (isset($content) && $content != "") {
 
 
         $c = new LazopClient($url,$appkey,$appSecret );
-
         $request = new LazopRequest('/shipment/providers/get','GET');
-        //$request->addApiParam('order_id',$order_id);
-
         $jdecode=json_decode($c->execute($request, $accessToken));
         $shipment_providers=$jdecode->data->shipment_providers;
 
@@ -1095,206 +1092,164 @@ if (isset($content) && $content != "") {
 
   if ($content == "create_product") {
     $post = json_decode(file_get_contents("php://input"), true);
-    //$user_id = $post['UserID'];
+
     $user_id = 5;
+    $marketplace = "lAZADA";
+    $seller_id = $post['seller_id'];
 
-    $Data = $post['Data'];
+    if (isset($seller_id)) {
+    //Mencari data marketplace
+    $getDataMarketplace = $db->getDataMarketplace($marketplace);
 
+    if ($getDataMarketplace != null) {
 
+      while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
 
-    $merchant_name = null;
+        $appkey = $rowMarketplace['app_key'];
+        $appSecret = $rowMarketplace['app_secret'];
 
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
-    }
+      }
 
-    if (isset($user_id)) {
+      //mencari data toko
+      $getDataToko= $db->getDataToko($user_id , $seller_id);
 
-      $getDataLazada = $db->getDataLazada($user_id, $merchant_name);
+      if ($getDataToko != null) {
 
-      if ($getDataLazada != null) {
+        while ($rowToko= $getDataToko->fetch_assoc()) {
 
-        while ($rowLazada = $getDataLazada->fetch_assoc()) {
-          $rows[] = $rowLazada;
+          $accessToken = $rowToko['access_token'];
+          $merchant_name = $rowToko['merchant_name'];
+          $marketplace_name = $rowToko['marketplace_name'];
 
         }
 
 
-        foreach ($rows as $obj) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+        $payload = json_encode( array( "UserID"=> $user_id) );
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $productContent = curl_exec($ch);
+        curl_close($ch);
+        $resultProducts=json_decode($productContent);
+
+        // echo json_encode($resultProducts);die;
+        if ($resultProducts->status == 200) {
+
+          foreach($resultProducts->data as $dataProducts) {
+
+            $xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+            $xml_output .= '<Request>';
+            $xml_output .= '<Product>';
+            $xml_output .= '<PrimaryCategory>' . $dataProducts->CategoryID . '</PrimaryCategory>';
+            $xml_output .= '<Attributes>';
+            $xml_output .= '<name>' . $dataProducts->ProductName . '</name>';
+            $xml_output .= '<short_description>' . $dataProducts->Description . '</short_description>';
+            $xml_output .= '<brand>Wakai</brand>';
+//	$xml_output .= '<model>' . $dataProducts->BrandID . '</model>';
+            $xml_output .= '</Attributes>';
+            $xml_output .= '<Skus>';
 
 
-          $appkey =  $obj['AppKey'];
-          $appSecret =  $obj['AppSecret'];
-          $accessToken =  $obj['AccessToken'];
-          $merchant_name =  $obj['merchant_name'];
+
+
+            foreach ($dataProducts->skus as $dataSkus) {
+
+              $SkuID = $dataSkus->SkuID;
+              $Stock = $dataSkus->Stock;
+              $PriceRetail = $dataSkus->PriceRetail;
+
+
+              $xml_output .= '<Sku>';
+
+              $xml_output .= '<SellerSku>' . $dataSkus->SkuID . '</SellerSku>';
+              $xml_output .= '<color_family>' . $dataSkus->ProductVariantName . '</color_family>';
+              $xml_output .= '<size>' . $dataSkus->ProductVariantDetailName . '</size>';
+              $xml_output .= '<quantity>' . $dataSkus->Stock . '</quantity>';
+              $xml_output .= '<price>' . $dataSkus->PriceRetail . '</price>';
+              $xml_output .= '<package_length>5</package_length>';
+              $xml_output .= '<package_height>5</package_height>';
+              $xml_output .= '<package_weight>0.5</package_weight>';
+              $xml_output .= '<package_width>5</package_width>';
+              // $xml_output .= '<package_content>44</package_content>';
+              $xml_output .= '<Images>';
+
+              foreach ($dataSkus->Images as $images) {
+
+                $xml_output .= '<Image>' . $images . '</Image>';
+              }
 
 
 
-          foreach($Data as $Datas) {
+              $xml_output .= '</Images>';
 
-
-
-            $PrimaryCategory = $Datas['PrimaryCategory'];
-            $name = $Datas['name'];
-            $short_description = $Datas['short_description'];
-            $brand = $Datas['brand'];
-
-            $model = "Polos";
-
-
-
-            $images = "http://sg.s.alibaba.lzd.co/original/59046bec4d53e74f8ad38d19399205e6.jpg";
-
-            foreach($Datas['variant'] as $Variants) {
-              $SellerSku = $Variants['SellerSku'];
-              $color_family = $Variants['color_family'];
-              $size = $Variants['size'];
-              $quantity = $Variants['quantity'];
-              $price = $Variants['price'];
-              $package_length = "5";
-              $package_height = "5";
-              $package_weight = "0.5";
-              $package_width = "5";
-              $package_content = "Paperbag";
-
-              $dataSkus[] =  '<Sku>
-				  <SellerSku>'.$SellerSku.'</SellerSku>
-				  <color_family>'.$color_family.'</color_family> 
-				  <size>'.$size.'</size>
-				  <quantity>'.$quantity.'</quantity>
-				  <price>'.$price.'</price>
-				  <package_length>'.$package_length.'</package_length> 
-				  <package_height>'.$package_height.'</package_height>
-				  <package_weight>'.$package_weight.'</package_weight> 
-				  <package_width>'.$package_width.'</package_width>  
-				  <package_content>'.$package_content.'</package_content> 
-				  <Images>  
-				  <Image>'.$images.'</Image> 
-				  </Images> 
-				  </Sku>';
-
-
+              $xml_output .= '</Sku>';
 
             }
 
 
-            echo json_encode(simplexml_load_string($dataSkus));die;
+            $xml_output .= '</Skus>';
+            $xml_output .= '</Product>';
+            $xml_output .= '</Request>';
 
-
-
-
-
-            $c = new LazopClient($url,$appkey,$appSecret );
-            $request = new LazopRequest('/product/create' , 'POST');
-            $request->addApiParam('payload','<?xml version="1.0" encoding="UTF-8" ?> 
-					<Request>   
-				  <Product>
-				  <PrimaryCategory>'.$PrimaryCategory.'</PrimaryCategory> 
-				  <SPUId></SPUId>
-				  <AssociatedSku></AssociatedSku> 
-				  
-				  <Attributes>
-				  <name>'.$name.'</name> 
-				  <short_description>sadasdsadsad  asdsadsa</short_description>
-				  <brand>'.$brand.'</brand>
-				  <model>'.$model.'</model>
-				  <kid_years>Kids (6-10yrs)</kid_years> 
-				  <delivery_option_sof>No</delivery_option_sof> 
-				  </Attributes>
-				  
-				<Skus>
-				
-				
-				
-				  </Skus> 
-				  </Product>
-				  </Request>
-				   
-				   ');
-
-
+            //  echo $xml_output;die;
+            $c = new LazopClient($url,$appkey,$appSecret);
+            $request = new LazopRequest('/product/create');
+            // $request = new LazopRequest('/product/update');
+            $request->addApiParam('payload', $xml_output);
             $jdecode=json_decode($c->execute($request, $accessToken));
-
+            //  echo json_encode($jdecode);die;
             $code = $jdecode->code;
-            $msg = $jdecode->message;
-
-            $jencode=json_encode($jdecode, true);
-
-            //echo $jencode;die;
-
-
-
-
+            //$message = $jdecode->message;
 
             if ($code == 0) {
 
               $status = "Sukses";
-              $msg2 = "";
-
+              $message = "";
 
             }else{
-
               $status = "Gagal";
-              $msg2 = "";
-              //foreach ($jdecode->detail as $details) {
-
-              //	$msg2 = $details['message'];
-
-              //}
+              //  $message = $jdecode->message;
+              $message = "Produk sudah ada";
 
             }
 
             $dataResult[]= array (
-
-              "Nama Toko"=>$merchant_name,
-              "Name Product"=>$name,
-              "Status"=>$status,
-              "Msg"=>$msg,
-              "Msg2"=>$msg2,
-              "Code"=>$code,
+              "marketplace"=>$marketplace_name,
+              "merchant_name"=>$merchant_name,
+              "product_name"=>$dataProducts->ProductName,
+              "status"=>$status,
+              "msg"=>$message,
+              "code"=>$code,
             );
+
 
           }
 
-          //cek token expire
-          if ($code == 0) {
+          $return = array(
+            "status" => 200,
+            "message" => "Berhasil",
+            "total_rows" => COUNT($dataResult),
+            "data" => $dataResult
 
-            $sku_list=$jdecode->data->sku_list;
-
-            $count=$sku_list->count;
-
-
-
-            $return = array(
-              "status" => 200,
-              "message" => "Berhasil menambahkan produk",
-              "dataDecode" => $dataResult
-
-            );
+          );
 
 
-          }else{
 
-            $return = array(
-              "status" => 404,
-              "message" => $dataResult
-            );
 
-          }
+        }else{
 
+          $return = array(
+            "status" => 404,
+            "message" => "Belum ada produk",
+            "total_rows" => 0,
+            "data" => []
+
+          );
 
         }
-
-
-      } else {
-        $return = array(
-          "status" => 404,
-          "message" => "Akun lazada belum diatur"
-        );
       }
-
-
-
 
 
 
@@ -1303,13 +1258,234 @@ if (isset($content) && $content != "") {
     } else {
       $return = array(
         "status" => 404,
-        "message" => "Oops sepertinya ada yang salah!"
+        "message" => "Belum ada product yang aktif",
+        "data" => []
       );
     }
+
+
+   }else{
+
+      $return = array(
+        "status" => 404,
+        "message" => "Error",
+        "data" => []
+      );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     echo json_encode($return);
   }
 
+  if ($content == "update_product") {
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $user_id = 5;
+    $marketplace = "lAZADA";
+    $seller_id = $post['seller_id'];
+
+    if (isset($seller_id)) {
+      //Mencari data marketplace
+      $getDataMarketplace = $db->getDataMarketplace($marketplace);
+
+      if ($getDataMarketplace != null) {
+
+        while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
+
+          $appkey = $rowMarketplace['app_key'];
+          $appSecret = $rowMarketplace['app_secret'];
+
+        }
+
+        //mencari data toko
+        $getDataToko= $db->getDataToko($user_id , $seller_id);
+
+        if ($getDataToko != null) {
+
+          while ($rowToko= $getDataToko->fetch_assoc()) {
+
+            $accessToken = $rowToko['access_token'];
+            $merchant_name = $rowToko['merchant_name'];
+            $marketplace_name = $rowToko['marketplace_name'];
+
+          }
+
+
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+          $payload = json_encode( array( "UserID"=> $user_id) );
+          curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+          curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          $productContent = curl_exec($ch);
+          curl_close($ch);
+          $resultProducts=json_decode($productContent);
+
+          // echo json_encode($resultProducts);die;
+          if ($resultProducts->status == 200) {
+
+            foreach($resultProducts->data as $dataProducts) {
+
+              $xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+              $xml_output .= '<Request>';
+              $xml_output .= '<Product>';
+              //$xml_output .= '<ItemId>' . $dataProducts->CategoryID . '</ItemId>';
+              $xml_output .= '<Attributes>';
+              $xml_output .= '<name>' . $dataProducts->ProductName . '</name>';
+              $xml_output .= '<short_description>' . $dataProducts->Description . '</short_description>';
+              $xml_output .= '<brand>Wakai</brand>';
+//	$xml_output .= '<model>' . $dataProducts->BrandID . '</model>';
+              $xml_output .= '</Attributes>';
+              $xml_output .= '<Skus>';
+
+
+
+
+              foreach ($dataProducts->skus as $dataSkus) {
+
+                $SkuID = $dataSkus->SkuID;
+                $Stock = $dataSkus->Stock;
+                $PriceRetail = $dataSkus->PriceRetail;
+
+
+                $xml_output .= '<Sku>';
+
+                $xml_output .= '<SellerSku>' . $dataSkus->SkuID . '</SellerSku>';
+                $xml_output .= '<color_family>' . $dataSkus->ProductVariantName . '</color_family>';
+                $xml_output .= '<size>' . $dataSkus->ProductVariantDetailName . '</size>';
+                $xml_output .= '<quantity>' . $dataSkus->Stock . '</quantity>';
+                $xml_output .= '<price>' . $dataSkus->PriceRetail . '</price>';
+                $xml_output .= '<package_length>5</package_length>';
+                $xml_output .= '<package_height>5</package_height>';
+                $xml_output .= '<package_weight>0.5</package_weight>';
+                $xml_output .= '<package_width>5</package_width>';
+                // $xml_output .= '<package_content>44</package_content>';
+                $xml_output .= '<Images>';
+
+                foreach ($dataSkus->Images as $images) {
+
+                  $xml_output .= '<Image>' . $images . '</Image>';
+                }
+
+
+
+                $xml_output .= '</Images>';
+
+                $xml_output .= '</Sku>';
+
+              }
+
+
+              $xml_output .= '</Skus>';
+              $xml_output .= '</Product>';
+              $xml_output .= '</Request>';
+
+              //  echo $xml_output;die;
+              $c = new LazopClient($url,$appkey,$appSecret);
+             $request = new LazopRequest('/product/update');
+              $request->addApiParam('payload', $xml_output);
+              $jdecode=json_decode($c->execute($request, $accessToken));
+              //  echo json_encode($jdecode);die;
+              $code = $jdecode->code;
+              //$message = $jdecode->message;
+
+              if ($code == 0) {
+
+                $status = "Sukses";
+                $message = "";
+
+              }else{
+                $status = "Gagal";
+                 $message = $jdecode->message;
+                //$message = "Produk sudah ada";
+
+              }
+
+              $dataResult[]= array (
+                "marketplace"=>$marketplace_name,
+                "merchant_name"=>$merchant_name,
+                "product_name"=>$dataProducts->ProductName,
+                "status"=>$status,
+                "msg"=>$message,
+                "code"=>$code,
+              );
+
+
+            }
+
+            $return = array(
+              "status" => 200,
+              "message" => "Berhasil",
+              "total_rows" => COUNT($dataResult),
+              "data" => $dataResult
+
+            );
+
+
+
+
+          }else{
+
+            $return = array(
+              "status" => 404,
+              "message" => "Belum ada produk",
+              "total_rows" => 0,
+              "data" => []
+
+            );
+
+          }
+        }
+
+
+
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "Belum ada product yang aktif",
+          "data" => []
+        );
+      }
+
+
+    }else{
+
+      $return = array(
+        "status" => 404,
+        "message" => "Error",
+        "data" => []
+      );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    echo json_encode($return);
+  }
 
 
   if ($content == "get_document") {
@@ -2372,170 +2548,165 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
 
   if ($content == "sync_marketplace") {
     $post = json_decode(file_get_contents("php://input"), true);
-//                    $user_id = $userid_header;
+
     $user_id = 5;
-
-    $rowProducts = array();
-    $rowVariants = array ();
-    $ProductID = array();
-    $xmlString = array();
-
-    $product_id = null;
-    //$product_id = null;
-
-    if (isset($post['ProductID'])) {
-      $product_id = $post['ProductID'];
-    }
-
-    $merchant_name = null;
-
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
-    }
+    $marketplace = "lAZADA";
+    $seller_id ="1000308198";
 
 
-    //Mencari konfigurasi lazada by user id
-    $getDataLazada = $db->getDataLazada($user_id, $merchant_name);
+    //Mencari data marketplace
+    $getDataMarketplace = $db->getDataMarketplace($marketplace);
 
-    if ($getDataLazada != null) {
+    if ($getDataMarketplace != null) {
 
-      while ($rowLazada = $getDataLazada->fetch_assoc()) {
-        $rows[] = $rowLazada;
+      while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
+
+        $appkey = $rowMarketplace['app_key'];
+        $appSecret = $rowMarketplace['app_secret'];
 
       }
 
+      //mencari data toko
+      $getDataToko= $db->getDataToko($user_id , $seller_id);
+
+      if ($getDataToko != null) {
+
+        while ($rowToko= $getDataToko->fetch_assoc()) {
+
+          $accessToken = $rowToko['access_token'];
+          $merchant_name = $rowToko['merchant_name'];
+          $marketplace_name = $rowToko['marketplace_name'];
+
+        }
 
 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+        $payload = json_encode( array( "UserID"=> $user_id) );
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $productContent = curl_exec($ch);
+        curl_close($ch);
+        $resultProducts=json_decode($productContent);
 
-      foreach ($rows as $obj) {
+        // echo json_encode($resultProducts);die;
+        if ($resultProducts->status == 200) {
 
-        $appkey =  $obj['AppKey'];
-        $appSecret =  $obj['AppSecret'];
-        $accessToken =  $obj['AccessToken'];
-        $merchant_name =  $obj['merchant_name'];
+          foreach($resultProducts->data as $dataProducts) {
 
-
-
-        //Mencari ProductID by user id
-        $getDataProduct = $db->getProductIDByUserID($user_id);
-
-        if ($getDataProduct != null) {
-
-          while ($rowProduct = $getDataProduct->fetch_assoc()) {
-
-            $rowProducts[] = $rowProduct['ProductID'];
-            $ProductID = $rowProducts;
-
-          }
-
-          foreach($rowProducts as $item) {
-
-
-            $getDataVariant = $db->getDataVariantProduct($user_id, $item);
-
-            if ($getDataVariant != null) {
-
-              while ($rowVariant = $getDataVariant->fetch_assoc()) {
-
-
-                $rowsVariant[] = $rowVariant;
-                $SkuID = $rowVariant['SkuID'];
-                $Stock  = $rowVariant['Stock'];
-                $PriceRetail  = $rowVariant['PriceRetail'];
-                $PriceSale = $rowVariant['PriceSale'];
-
-
-
-                $c = new LazopClient($url,$appkey,$appSecret);
-                $request = new LazopRequest('/product/price_quantity/update');
-                $request->addApiParam('payload','
-			<Request>
-			<Product>
-			<Skus>
-			<Sku>
-			<SellerSku>' . $SkuID . '</SellerSku>
-			<Price>' . $PriceRetail .'</Price>
-			<SalePrice>' . $PriceSale .'</SalePrice>
-			<SaleStartDate>2020-08-01</SaleStartDate>
-			<SaleEndDate>2020-09-30</SaleEndDate>
-			<Quantity>' . $Stock .'</Quantity>
-			</Sku> 
-			</Skus>
-			</Product>
-			</Request>');
-
-
-                $jdecode=json_decode($c->execute($request, $accessToken));
-                $code = $jdecode->code;
-                $message = $jdecode->message;
-                $resultData = json_encode($jdecode , true);
-                Thread.sleep(2);
-
-
-
-                if ($code == 0) {
-
-                  $status = "Sukses";
-
-
-                }else{
-                  $status = "Gagal";
+            $xml_output = '<?xml version="1.0" encoding="UTF-8" ?>';
+            $xml_output .= '<Request>';
+            $xml_output .= '<Product>';
+            $xml_output .= '<PrimaryCategory>' . $dataProducts->CategoryID . '</PrimaryCategory>';
+            $xml_output .= '<Attributes>';
+            $xml_output .= '<name>' . $dataProducts->ProductName . '</name>';
+            $xml_output .= '<short_description>' . $dataProducts->Description . '</short_description>';
+            $xml_output .= '<brand>Wakai</brand>';
+//	$xml_output .= '<model>' . $dataProducts->BrandID . '</model>';
+            $xml_output .= '</Attributes>';
+            $xml_output .= '<Skus>';
 
 
 
 
-                }
+            foreach ($dataProducts->skus as $dataSkus) {
 
-                $dataResult[]= array (
-
-                  "Nama Toko"=>$merchant_name,
-                  "SkuID"=>$SkuID,
-                  "Status"=>$status,
-                  "Msg"=>$message,
-                  "Code"=>$code,
-                );
+              $SkuID = $dataSkus->SkuID;
+              $Stock = $dataSkus->Stock;
+              $PriceRetail = $dataSkus->PriceRetail;
 
 
+              $xml_output .= '<Sku>';
+
+              $xml_output .= '<SellerSku>' . $dataSkus->SkuID . '</SellerSku>';
+              $xml_output .= '<color_family>' . $dataSkus->ProductVariantName . '</color_family>';
+              $xml_output .= '<size>' . $dataSkus->ProductVariantDetailName . '</size>';
+              $xml_output .= '<quantity>' . $dataSkus->Stock . '</quantity>';
+              $xml_output .= '<price>' . $dataSkus->PriceRetail . '</price>';
+              $xml_output .= '<package_length>5</package_length>';
+              $xml_output .= '<package_height>5</package_height>';
+              $xml_output .= '<package_weight>0.5</package_weight>';
+              $xml_output .= '<package_width>5</package_width>';
+              // $xml_output .= '<package_content>44</package_content>';
+              $xml_output .= '<Images>';
+
+              foreach ($dataSkus->Images as $images) {
+
+                $xml_output .= '<Image>' . $images . '</Image>';
               }
 
 
-              echo json_encode ($dataResult);die;
 
+              $xml_output .= '</Images>';
 
+              $xml_output .= '</Sku>';
 
-
-
-
-
-
-
-
-
-
-
-              $total = mysqli_num_rows($getDataProduct);
-              $dataEncode = json_encode($dataResult , true);
-
-
-              $return = array(
-                "status" => 200,
-                "message" => "Sync ke marketplace berhasil",
-                "total_rows" => $total,
-                //  "data" => $dataEncode,
-                "dataDecode" => $dataResult
-
-              );
-
-
-            } else {
-              $return = array(
-                "status" => 404,
-                "message" => "Belum ada variant product yang aktif",
-                "data" => []
-              );
             }
 
+
+            $xml_output .= '</Skus>';
+            $xml_output .= '</Product>';
+            $xml_output .= '</Request>';
+
+            //  echo $xml_output;die;
+            $c = new LazopClient($url,$appkey,$appSecret);
+            $request = new LazopRequest('/product/create');
+           // $request = new LazopRequest('/product/update');
+            $request->addApiParam('payload', $xml_output);
+            $jdecode=json_decode($c->execute($request, $accessToken));
+            //  echo json_encode($jdecode);die;
+            $code = $jdecode->code;
+            //$message = $jdecode->message;
+
+            if ($code == 0) {
+
+              $status = "Sukses";
+              $message = "";
+
+            }else{
+              $status = "Gagal";
+              //  $message = $jdecode->message;
+              $message = "Produk sudah ada";
+
+            }
+
+            $dataResult[]= array (
+              "marketplace"=>$marketplace_name,
+              "merchant_name"=>$merchant_name,
+              "product_name"=>$dataProducts->ProductName,
+              "status"=>$status,
+              "msg"=>$message,
+              "code"=>$code,
+            );
+
+
           }
+
+          $return = array(
+            "status" => 200,
+            "message" => "Berhasil",
+            "total_rows" => COUNT($dataResult),
+            "data" => $dataResult
+
+          );
+
+
+
+
+        }else{
+
+        $return = array(
+          "status" => 404,
+          "message" => "Toko tidak aktif",
+          "total_rows" => 0,
+          "data" => []
+
+        );
+
+      }
+    }
+
 
 
 
@@ -2549,17 +2720,11 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
         }
 
 
-      }
+     // }
 
 
 
-    } else {
-      $return = array(
-        "status" => 404,
-        "message" => "Toko anda belum diatur",
-        "data" => []
-      );
-    }
+
 
 
 

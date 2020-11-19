@@ -2,49 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/add.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_marketplace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_toko.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718260.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718337.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718427.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718431.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718432.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718451.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718453.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718471.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718481.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718488.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718493.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718498.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718499.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718555.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718556.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718558.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718559.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718565.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718566.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718568.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session0g4jghci1uld4c0kv7oufgmdesrab20r" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session0v7d4oj4v5471me47ippg1798lr7l2s4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session1b520gt88uabmhikvab06v6vib387p3f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session376b4fc252lr8sr5pd3r7oh0gnnqfhvi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session43lee5v0jh53p2t66kdgshoilarrkdhl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session505mr22dm0hkupc968cuudt3f912o3o8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session6a7g5c49ms4ghj719maajta27ju1aaoq" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session7b584sa6slc5ubgm9ricvohjv8qbanj1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session87pgli5m4hiuc96aoevhahs8mv3jl5gq" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_session8ms0au2q91hll7gvfgmoiv2u2jrm3172" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessione2r2f70g6pg4hm272fuqp899fl3kbpl0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionejqilh12blag35uv09se9mhmn84adhb9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionhpilj8op31fvqb62rva13eo6gq2rudrt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionlhj6raavrof718a16nhdtd69ai5f9984" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionln6c50nv77pceel5lbs0tv6itvf7gi13" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionmev8gnbbp2ke908ndanqiv4a75d7ok2t" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionp1hpvgjbsi5heedbq7is8vv9ms03d1hq" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionud9baeu510n9a3l2mmslae9cect4lds5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/copy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/sync.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_data_copy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_data_sync.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controllers/Marketplace.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Marketplace.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/indexx.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718260.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718337.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718427.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718431.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718432.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718451.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718453.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718471.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718481.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718488.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718493.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718498.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718499.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718555.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718556.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718558.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718559.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718565.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718566.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718568.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/logs/log-2020-11-18.log" beforeDir="false" afterPath="$PROJECT_DIR$/writable/logs/log-2020-11-18.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/writable/session/ci_sessionl9v0ijou65dsrd9da19jfd0mb69ijucr" beforeDir="false" afterPath="$PROJECT_DIR$/writable/session/ci_sessionl9v0ijou65dsrd9da19jfd0mb69ijucr" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +142,7 @@
       <workItem from="1605372907413" duration="240000" />
       <workItem from="1605673913936" duration="422000" />
       <workItem from="1605750988110" duration="243000" />
+      <workItem from="1605753051126" duration="23578000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -395,15 +389,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="penambahan menu add toko" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605232990803">
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605751929062">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605232990803" />
-    <state x="308" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605751162086">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605751929062" />
+    <state x="695" y="71" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605777792663">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1605751162086" />
-    <state x="695" y="71" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605693061987" />
+    <state x="695" y="71" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605777792663" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

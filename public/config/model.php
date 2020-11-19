@@ -9328,7 +9328,25 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
       
         }
 
+  public function getDataToko($user_id , $seller_id)
+  {
 
+    $query = $this->conn->query(" SELECT * from toko
+										where  user_id = '" . $user_id . "' and seller_id = '" . $seller_id . "'
+                                       ");
+
+    if (mysqli_num_rows($query) > 0)
+    {
+      return $query;
+    }
+    else
+    {
+      return null;
+    }
+
+
+
+  }
 
     
     public function getDataLazadaByMerchant($user_id, $merchant_name)

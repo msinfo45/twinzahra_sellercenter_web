@@ -40,6 +40,38 @@ class Marketplace extends BaseController
 
     }
 
+    public function copy()
+    {
+
+
+        return view('marketplace/copy');
+
+    }
+
+    public function load_data_copy()
+    {
+
+
+    return view('marketplace/view/load_data_copy');
+
+    }
+
+    public function sync()
+    {
+
+
+        return view('marketplace/sync');
+
+    }
+    public function load_data_sync()
+    {
+
+
+        return view('marketplace/view/load_data_sync');
+
+    }
+
+
     //--------------------------------------------------------------------
 
 }
