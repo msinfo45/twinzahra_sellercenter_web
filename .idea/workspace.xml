@@ -2,22 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/array/cart-add.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/cart-display.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/cart-remove-all.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/cart-remove.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/menu.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/array/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/contactform/Readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/contactform/contactform.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692700.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692701.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692721.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692759.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692808.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/writable/debugbar/debugbar_1605692809.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/add.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_marketplace.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_toko.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718260.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718337.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718427.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718431.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718432.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718451.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718453.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718471.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718481.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718488.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718493.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718498.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718499.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718555.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718556.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718558.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718559.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718565.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718566.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/debugbar/debugbar_1605718568.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session0g4jghci1uld4c0kv7oufgmdesrab20r" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session0v7d4oj4v5471me47ippg1798lr7l2s4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session1b520gt88uabmhikvab06v6vib387p3f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session376b4fc252lr8sr5pd3r7oh0gnnqfhvi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session43lee5v0jh53p2t66kdgshoilarrkdhl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session505mr22dm0hkupc968cuudt3f912o3o8" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session6a7g5c49ms4ghj719maajta27ju1aaoq" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session7b584sa6slc5ubgm9ricvohjv8qbanj1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session87pgli5m4hiuc96aoevhahs8mv3jl5gq" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_session8ms0au2q91hll7gvfgmoiv2u2jrm3172" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessione2r2f70g6pg4hm272fuqp899fl3kbpl0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionejqilh12blag35uv09se9mhmn84adhb9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionhpilj8op31fvqb62rva13eo6gq2rudrt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionlhj6raavrof718a16nhdtd69ai5f9984" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionln6c50nv77pceel5lbs0tv6itvf7gi13" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionmev8gnbbp2ke908ndanqiv4a75d7ok2t" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionp1hpvgjbsi5heedbq7is8vv9ms03d1hq" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/writable/session/ci_sessionud9baeu510n9a3l2mmslae9cect4lds5" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +148,7 @@
       <workItem from="1605313883436" duration="22226000" />
       <workItem from="1605372907413" duration="240000" />
       <workItem from="1605673913936" duration="422000" />
+      <workItem from="1605750988110" duration="243000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
@@ -325,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605689177338</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="penambahan menu add toko">
+      <created>1605751165163</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1605751165163</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,17 +391,18 @@
     <MESSAGE value="perbaikan cron lazada, order lazada , order satabase" />
     <MESSAGE value="New Commit" />
     <MESSAGE value="perbaikan accept_orders_shopee.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="perbaikan accept_orders_shopee.php" />
+    <MESSAGE value="penambahan menu add toko" />
+    <option name="LAST_COMMIT_MESSAGE" value="penambahan menu add toko" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605232990803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605232990803" />
-    <state x="695" y="71" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605693061987">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="308" y="0" width="1201" height="801" key="CommitChangelistDialog2" timestamp="1605751162086">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1605674187468" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1605751162086" />
     <state x="695" y="71" width="1201" height="801" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605693061987" />
     <state x="116" y="61" key="DiffContextDialog" timestamp="1604452130978">
       <screen x="0" y="0" width="1366" height="728" />
@@ -384,10 +420,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="452" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605690170395" />
-    <state x="387" y="144" key="Vcs.Push.Dialog.v2" timestamp="1605689182116">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1605751169431">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605674271948" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1605751169431" />
     <state x="387" y="144" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605689182116" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1604650166007">
       <screen x="0" y="0" width="1920" height="1040" />
