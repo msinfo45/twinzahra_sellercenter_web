@@ -9428,7 +9428,7 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
       
         }
 
-  public function getDataToko($user_id , $seller_id)
+  public function getDataToko($user_id , $seller_id ,$marketplace)
   {
 
 
@@ -9453,7 +9453,7 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
         $query = $this
         ->conn
         ->query(" SELECT * from toko
-        where  user_id = '" . $user_id . "'
+        where  user_id = '" . $user_id . "' and marketplace_name = '" . $marketplace . "'
                                    ");
 
     if (mysqli_num_rows($query) > 0)

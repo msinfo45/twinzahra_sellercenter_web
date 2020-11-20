@@ -40,6 +40,14 @@ class Marketplace extends BaseController
 
     }
 
+    public function create_token_shopee()
+    {
+
+
+        return view('marketplace/create_token_shopee');
+
+    }
+
     public function copy()
     {
 

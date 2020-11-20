@@ -58,6 +58,17 @@ class v1 extends BaseController
 		
 	}
 
+    public function shopee()
+
+    {
+
+
+   return view('v1/shopee');
+
+
+
+  }
+
 
 	//--------------------------------------------------------------------
 

@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="" />
+    <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="penambahan file copy produk dan sync produk marketplace">
+      <change afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token_shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controllers/Marketplace.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Marketplace.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controllers/V1.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/V1.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/marketplace/view/load_marketplace.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/marketplace/view/load_marketplace.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/lazada.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/contactform/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/contactform/contactform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/accept_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/accept_orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/sync_marketplace.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/sync_lazada.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/update_stock_lazada.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/cron/update_stock_shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/cron/update_stock_shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index1.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/payments.php" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -399,5 +419,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604980881356" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605849835339">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605849835339" />
   </component>
 </project>

@@ -72,7 +72,7 @@ $user_id = "5";
           $name = $jdecodeSeller->data->name;
           $location = $jdecodeSeller->data->location;
 
-        $create = $db->insertDataToko($user_id,$marketplace, $name , $location , $account, $seller_id, $access_token, $refresh_token);
+        $create = $db->insertDataToko($user_id,$marketplace, $name , $location , $account, $seller_id, $access_token, $refresh_token ,$code);
 
         if($create) {
            header("Location: ".base_url('marketplace'));die;

@@ -94,7 +94,7 @@ if (isset($content) && $content != "") {
   if ($content == "get_orders") {
     $post = json_decode(file_get_contents("php://input"), true);
     $user_id = 5;
-    $merchant_name = null;
+
 
     $status = $post['status'];
     $orderArr = array();
@@ -103,10 +103,12 @@ if (isset($content) && $content != "") {
     $result = array();
     $resultOrdersItems = array();
 
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
-    }
+    $seller_id = null;
+    $marketplace = "lAZADA";
 
+    if (isset($post['seller_id'])) {
+      $seller_id = $post['seller_id'];
+    }
 
     if ($status == 1) {
 
@@ -149,26 +151,34 @@ if (isset($content) && $content != "") {
     }
 
 
-
     if (isset($user_id)) {
 
-      $getDataLazada = $db->getDataLazada($user_id, $merchant_name);
+      $getDataMarketplace = $db->getDataMarketplace($marketplace);
 
-      if ($getDataLazada != null) {
+      if ($getDataMarketplace != null) {
 
-        while ($rowLazada = $getDataLazada->fetch_assoc()) {
-          $rows[] = $rowLazada;
+      while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
+
+          $appkey = $rowMarketplace['app_key'];
+          $appSecret = $rowMarketplace['app_secret'];
 
         }
 
+       //mencari data toko
+        $getDataToko= $db->getDataToko($user_id , $seller_id ,$marketplace);
 
-        foreach ($rows as $obj) {
+        if ($getDataToko != null) {
+
+          while ($rowToko= $getDataToko->fetch_assoc()) {
+            $rows[] = $rowToko;
+
+          }
 
 
-          $appkey =  $obj['AppKey'];
-          $appSecret =  $obj['AppSecret'];
-          $accessToken =  $obj['AccessToken'];
-          $merchant_name =  $obj['merchant_name'];
+          foreach ($rows as $rowsToko) {
+            $accessToken = $rowsToko['access_token'];
+            $merchant_name = $rowsToko['merchant_name'];
+            $marketplace_name = $rowsToko['marketplace_name'];
 
 
 
@@ -183,8 +193,6 @@ if (isset($content) && $content != "") {
           //var_dump($c->execute($request, $access_token));
           $jdecode=json_decode($c->execute($request, $accessToken));
           //$jencode=json_encode($jdecode, true);
-
-          //$dataReturn[] = $data;
 
           //	echo json_encode($jdecode);die;
 
@@ -451,25 +459,15 @@ if (isset($content) && $content != "") {
 
           }
 
-          //}else {
-          //  $return = array(
-          //     "status" => 404,
-          //    "message" => "Akun lazada belum ada yang aktif"
-          //);
-          //}
 
         }
 
 
-      } else {
-        $return = array(
-          "status" => 404,
-          "message" => "Akun lazada belum diatur"
-        );
       }
 
 
 
+}
 
 
 
@@ -1111,7 +1109,7 @@ if (isset($content) && $content != "") {
       }
 
       //mencari data toko
-      $getDataToko= $db->getDataToko($user_id , $seller_id);
+      $getDataToko= $db->getDataToko($user_id , $seller_id , $marketplace);
 
       if ($getDataToko != null) {
 
@@ -1316,7 +1314,7 @@ if (isset($content) && $content != "") {
         }
 
         //mencari data toko
-        $getDataToko= $db->getDataToko($user_id , $seller_id);
+        $getDataToko= $db->getDataToko($user_id , $seller_id , $marketplace);
 
         if ($getDataToko != null) {
 

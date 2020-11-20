@@ -10,8 +10,9 @@ if (isset($content) && $content != "") {
 
   //Load Models
   include "../models/Model_Shopee.php";
-
+  include "../config/model.php";
   $db = new Model_Shopee();
+  $dbModel = new Model_user();
   //Timestamp
   $tgl="Y-m-d";
   $waktu="H:i:s";
@@ -83,34 +84,46 @@ if (isset($content) && $content != "") {
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
 
-    $item_id = $post['item_id'];
-//$item_id =   (int)2743844751;
+
     $user_id = 5;
-    $resultArr = [];
-    $merchant_name = null;
+    $marketplace = "SHOPEE";
+    $seller_id = null;
 
-    if (isset($post['merchant_name'])) {
-      $merchant_name = $post['merchant_name'];
+    if (isset($post['seller_id'])) {
+    $seller_id = $post['seller_id'];
     }
-    //$merchant_name = "Twinzahra Shop";
 
+    $resultArr = [];
 
-    $getDataShopee = $db->getDataShopee($user_id, $merchant_name);
+    if (isset($user_id)) {
 
-    if ($getDataShopee != null) {
+      $getDataMarketplace = $dbModel->getDataMarketplace($marketplace);
 
-      while ($rowShopee = $getDataShopee->fetch_assoc()) {
-        $rows[] = $rowShopee;
+      if ($getDataMarketplace != null) {
 
-      }
+        while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
 
-      foreach ($rows as $obj) {
+          $appkey = $rowMarketplace['app_key'];
+          $appSecret = $rowMarketplace['app_secret'];
 
-        $partner_id = $obj['partner_id'];
-        $partner_key = $obj['partner_key'];
-        $shop_id = $obj['shop_id'];
-        $code = $obj['code'];
-        $merchant_name = $obj['merchant_name'];
+        }
+
+        //mencari data toko
+        $getDataToko= $dbModel->getDataToko($user_id , $seller_id , $marketplace);
+
+        if ($getDataToko != null) {
+
+          while ($rowToko= $getDataToko->fetch_assoc()) {
+            $rows[] = $rowToko;
+
+          }
+
+          foreach ($rows as $rowsToko) {
+
+       $accessToken = $rowsToko['access_token'];
+       $merchant_name = $rowsToko['merchant_name'];
+       $marketplace_name = $rowsToko['marketplace_name'];
+       $shop_id = $rowsToko['seller_id'];
 
         $tgl = "Y-m-d";
         $waktu = "H:i:s";
@@ -126,12 +139,13 @@ if (isset($content) && $content != "") {
 
         $convertJson = array("pagination_offset" => $pagination_offset,
           "pagination_entries_per_page" => $pagination_entries_per_page,
-          "partner_id" => (int)$partner_id,
+          "partner_id" => (int)$appkey,
           "shopid" => (int)$shop_id,
           "timestamp" => $timestamp);
 
+
         $base_string = $url . "|" . json_encode($convertJson);
-        $hmac = hash_hmac('sha256', $base_string, $partner_key);
+        $hmac = hash_hmac('sha256', $base_string, $appSecret);
 
         $ch = curl_init($url);
         $payload = json_encode($convertJson);
@@ -143,56 +157,122 @@ if (isset($content) && $content != "") {
         curl_close($ch);
         $jsonDecode = json_decode($result);
         $items = $jsonDecode->items;
-        // echo json_encode($items);die;
 
         foreach ($items as $products) {
 
           $product_id = $products->item_id;
 
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_product_items');
-          $payload = json_encode(array("item_id" => $product_id,
-            "merchant_name" => $merchant_name));
+          $tgl = "Y-m-d";
+          $waktu = "H:i:s";
+          $waktu_sekarang = date("$tgl $waktu");
+          $ditambah_5_menit = date("$tgl $waktu", strtotime('+5 minutes'));
+
+
+          $url = "https://partner.shopeemobile.com/api/v1/item/get";
+          $pagination_offset = 0;
+          $pagination_entries_per_page = 100;
+          $timestamp = strtotime($ditambah_5_menit);
+
+
+          $convertJson = array("pagination_offset" => $pagination_offset,
+            "item_id" => (int)$product_id,
+            "partner_id" => (int)$appkey,
+            "shopid" => (int)$shop_id,
+            "timestamp" => $timestamp);
+
+          $base_string = $url . "|" . json_encode($convertJson);
+
+
+          $hmac = hash_hmac('sha256', $base_string, $appSecret);
+
+
+          $ch = curl_init($url);
+          $payload = json_encode($convertJson);
           curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-          $skuscontent = curl_exec($ch);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmac . ''));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $result = curl_exec($ch);
           curl_close($ch);
+          $jsonDecode = json_decode($result);
 
-          $resultSkus = json_decode($skuscontent, true);
-          $data = $resultSkus['data'];
+         //echo json_encode($jsonDecode);die;
+          $items = $jsonDecode->item;
+
+          $product_name = $items -> name;
+          $description = $items ->description;
+          foreach ($items -> images as $Images) {
+            $image = $Images;
+
+            //$imagesArr[$product_id]['Images'][] = $image;
+
+          }
+
+         // $resultImages = array_values($imagesArr);
+
+          foreach ($items -> variations as $skus) {
 
 
-          $resultArr = array ($data);
+            $skusArr = array (
+              "ProductVariantID" => $skus->variation_id,
+              "ProductVariantName" => "",
+              "ProductVariantDetailName" => $skus->name,
+              "price" => $skus->price,
+              "PriceRetail" => $skus->original_price,
+              "PriceReseller" => "",
+              "Stock" => $skus->stock,
+              "SkuID" => $skus->variation_sku,
+              "Barcode" => "",
+              "Images" => array($image)
+
+            );
+
+
+          }
+
+          $productArr[$product_id]['marketplace'] = $marketplace;
+          $productArr[$product_id]['merchant_name'] = $merchant_name;
+          $productArr[$product_id]['ProductID'] = $product_id;
+          $productArr[$product_id]['UserID'] = $user_id;
+          $productArr[$product_id]['SupplierID'] = "";
+          $productArr[$product_id]['ProductName'] = $product_name;
+          $productArr[$product_id]['CategoryID'] = "";
+          $productArr[$product_id]['BrandID'] = "";
+          $productArr[$product_id]['Description'] = $description;
+          $productArr[$product_id]['Images'][] = $image;
+          $productArr[$product_id]['skus'][]= $skusArr;
+
+
 
         }
+
+            $result = array_values($productArr);
 
 
 
         $return = array(
           "status" => 200,
           "message" => "ok",
-          "total_rows" => COUNT($resultArr),
-          "data" => $resultArr
+          "total_rows" => COUNT($result),
+          "data" => $result
 
         );
 
 
+
+
+
+
+}
+}
       }
 
-    }else{
-      $return= array(
+    } else {
+      $return = array(
         "status" => 404,
-        "message" => "Toko Shopee tidak ada yang aktif",
-        "total_rows" => 0,
-        "data" => []
-
-
+        "message" => "Oops sepertinya ada yang salah!"
       );
-
-
     }
-
 
     //
     echo json_encode($return);
@@ -270,7 +350,7 @@ if ($getDataShopee != null) {
     $jsonDecode = json_decode($result);
 
     $items = $jsonDecode->item;
-   // echo json_encode($items);die;
+ //echo json_encode($items);die;
 
 
     $product_name = $items -> name;
@@ -282,8 +362,9 @@ if ($getDataShopee != null) {
 
     foreach ($items -> variations as $skus) {
 
+
       $skusArr = array ("ProductVariantID" => $skus->variation_id,
-        "ProductVariantDetailName" => $skus->name,
+        "ProductVariantDetailName" => $skus->variation_sku,
         "original_price" => $skus->original_price,
         "price" => $skus->price,
         "Stock" => $skus->stock,
@@ -793,6 +874,244 @@ if ($status == 1) {
     //
     echo json_encode($return);
 
+  }
+
+  if ($content == "create_product") {
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    $user_id = 5;
+    $marketplace = "SHOPEE";
+    $seller_id = $post['seller_id'];
+
+    if (isset($seller_id)) {
+      //Mencari data marketplace
+      $getDataMarketplace = $dbModel->getDataMarketplace($marketplace);
+
+      if ($getDataMarketplace != null) {
+
+        while ($rowMarketplace = $getDataMarketplace->fetch_assoc()) {
+
+          $appkey = $rowMarketplace['app_key'];
+          $appSecret = $rowMarketplace['app_secret'];
+
+        }
+
+        //mencari data toko
+        $getDataToko= $dbModel->getDataToko($user_id , $seller_id , $marketplace);
+
+        if ($getDataToko != null) {
+
+          while ($rowToko= $getDataToko->fetch_assoc()) {
+
+            $accessToken = $rowToko['access_token'];
+            $merchant_name = $rowToko['merchant_name'];
+            $marketplace_name = $rowToko['marketplace_name'];
+            $seller_id = $rowToko['seller_id'];
+          }
+
+          //get logistic
+
+
+          $urlLogistic = "https://partner.shopeemobile.com/api/v1/logistics/channel/get";
+          $tglLogistic="Y-m-d";
+          $waktuLogistic="H:i:s";
+          $waktu_sekarangLogistic=date("$tglLogistic $waktuLogistic");
+          $ditambah_5_menitLogistic = date("$tgl $waktuLogistic", strtotime('+5 minutes'));
+          $timestampLogistic=strtotime($ditambah_5_menitLogistic);
+
+//echo json_encode($timestampLogistic);die;
+
+          $convertJsonLogistic = array(
+            "partner_id" => (int)$appkey,
+            "shopid" => (int)$seller_id,
+            "timestamp" => $timestampLogistic);
+
+
+          $base_stringLogistic = $urlLogistic . "|" . json_encode($convertJsonLogistic);
+
+          $hmacLogistic = hash_hmac('sha256', $base_stringLogistic, $appSecret);
+
+          $chLogistic = curl_init($urlLogistic);
+          $payloadLogistic = json_encode($convertJsonLogistic);
+          curl_setopt($chLogistic, CURLOPT_POSTFIELDS, $payloadLogistic);
+          curl_setopt($chLogistic, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmacLogistic . ''));
+          curl_setopt($chLogistic, CURLOPT_RETURNTRANSFER, true);
+          $resultLogistic = curl_exec($chLogistic);
+          curl_close($chLogistic);
+          $jsonDecodeLogistic = json_decode($resultLogistic);
+
+          foreach ($jsonDecodeLogistic->logistics as $logistics) {
+
+            $dataLogistic[] = array("logistic_id" => $logistics->logistic_id,
+              "enabled" => true ) ;
+          }
+
+
+
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/products.php?request=get_products');
+          $payload = json_encode( array( "UserID"=> $user_id) );
+          curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+          curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          $productContent = curl_exec($ch);
+          curl_close($ch);
+          $resultProducts=json_decode($productContent);
+
+       //   echo json_encode($resultProducts);die;
+          if ($resultProducts->status == 200) {
+
+            foreach($resultProducts->data as $dataProducts) {
+
+
+              $url = "https://partner.shopeemobile.com/api/v1/item/add";
+
+              $category_id = 7276;
+              $ProductName =  $dataProducts->ProductName;
+              $description =  $dataProducts->Description;
+
+              foreach($dataProducts->skus as $dataSkus) {
+
+                $ProductVariantDetailName =  $dataSkus->ProductVariantDetailName;
+                $price =  $dataSkus->PriceRetail;
+                $stock =  $dataSkus->Stock;
+                $sku =  $dataSkus->SkuID;
+
+
+
+                $skusArr[] = array(
+                  "name" => $ProductVariantDetailName,
+                  "stock" =>(int)$stock,
+                  "price" =>(int)$price,
+                  "variation_sku" => $sku);
+
+                foreach($dataSkus->Images as $dataImages) {
+
+                  $imagesArr= array(
+                    "url" => $dataImages
+                  );
+
+                }
+
+              }
+
+
+             $weight = 0.5;
+
+              $tgl="Y-m-d";
+              $waktu="H:i:s";
+              $waktu_sekarang=date("$tgl $waktu");
+              $ditambah_5_menit = date("$tgl $waktu", strtotime('+5 minutes'));
+              $timestamp=strtotime($ditambah_5_menit);
+
+
+
+              $convertJson = array(
+                "category_id" => $category_id,
+                "name" =>$ProductName,
+                "description" =>$description,
+                "price" => (float)$price,
+                "stock" => (int)$stock,
+                "variations" => $skusArr,
+                "images" => array($imagesArr),
+                "logistics" => $dataLogistic,
+                "weight" =>$weight,
+                "partner_id" => (int)$appkey,
+                "shopid" => (int)$seller_id,
+                "timestamp" => $timestamp);
+
+        //echo json_encode($convertJson);die;
+
+              $base_string = $url . "|" . json_encode($convertJson);
+
+              $hmac = hash_hmac('sha256', $base_string, $appSecret);
+
+              $ch = curl_init($url);
+              $payload = json_encode($convertJson);
+              curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+              curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+                'Authorization: ' . $hmac . ''));
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+              $result = curl_exec($ch);
+              curl_close($ch);
+              $jsonDecode = json_decode($result);
+
+              echo json_encode($jsonDecode);die;
+
+
+              $dataResult[]= array (
+                "marketplace"=>$marketplace_name,
+                "merchant_name"=>$merchant_name,
+                "product_name"=>$dataProducts->ProductName,
+                "status"=>$status,
+                "msg"=>$message,
+                "code"=>$code,
+              );
+
+
+            }
+
+            $return = array(
+              "status" => 200,
+              "message" => "Berhasil",
+              "total_rows" => COUNT($dataResult),
+              "data" => $dataResult
+
+            );
+
+
+
+
+          }else{
+
+            $return = array(
+              "status" => 404,
+              "message" => "Belum ada produk",
+              "total_rows" => 0,
+              "data" => []
+
+            );
+
+          }
+        }
+
+
+
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "Belum ada product yang aktif",
+          "data" => []
+        );
+      }
+
+
+    }else{
+
+      $return = array(
+        "status" => 404,
+        "message" => "Error",
+        "data" => []
+      );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    echo json_encode($return);
   }
 
   if ($content == "get_order") {
@@ -1602,27 +1921,23 @@ if ($status == 1) {
         curl_close($chProduct);
         $jsonDecodeProduct = json_decode($resultProduct);
 
-        //echo json_encode($jsonDecodeProduct);die;
+     //echo json_encode($jsonDecodeProduct->data);die;
 
         //looping Array data product
         //if (isset($resultProduct -> data)) {
 
-        foreach ($jsonDecodeProduct -> data as $objProduct)
+        foreach ($jsonDecodeProduct->data as $objProduct)
         {
           $rowProduct[] = $objProduct;
-          $item_id = $objProduct -> item_id;
-          $shopid = $objProduct -> shopid;
-          $update_time = $objProduct -> update_time;
-          $status = $objProduct -> status;
-          $item_sku = $objProduct -> item_sku;
+          $item_id = $objProduct -> ProductID;
 
 
           //looping variants
-          foreach ($objProduct -> variations as $objVariant)
+          foreach ($objProduct -> skus as $objVariant)
           {
             $rowSkus [] = $objVariant;
-            $variation_sku = $objVariant -> variation_sku;
-            $variation_id = $objVariant -> variation_id;
+            $variation_sku = $objVariant -> SkuID;
+            $variation_id = $objVariant -> ProductVariantID;
 
 
             $chSkus = curl_init($base_url . "/public/api/products.php?request=get_skus");

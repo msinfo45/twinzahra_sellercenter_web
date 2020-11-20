@@ -1,7 +1,7 @@
 <?php
 
 include "../config/model.php";
-
+include "../config/config_type.php";
 $db = new Model_user();
 
 
@@ -17,7 +17,7 @@ $jsonDecodeSkus = json_decode($resultSkus);
 
 
 
-$subject  = "Sync otomatis produk lazada berhasil" ;
+$subject  = "Sinkron otomatis produk lazada berhasil" ;
 $message  = '
 
 <div>
@@ -141,7 +141,7 @@ foreach($jsonDecodeSkus->data as $data) {
   $merchant_name = $data ->merchant_name;
   $name = $data ->product_name;
   $Status = $data ->status;
- 
+
 
 
   $message .= '

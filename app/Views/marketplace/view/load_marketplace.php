@@ -25,8 +25,6 @@ function getData(){
 }
 
 
-
-
 $result = getData();
 
 //echo json_encode($result);die;
@@ -41,8 +39,22 @@ if (count($result['data']) > 0) {
         $marketplace = $DataProduct['marketplace_name'] ;
         $active = $DataProduct['active'] ;
         $app_key = $DataProduct['app_key'] ;
+        $app_secret = $DataProduct['app_secret'] ;
 
-        $url = $DataProduct['url'];
+        if ($marketplace == "LAZADA") {
+
+         $url = "https://auth.lazada.com/oauth/authorize?response_type=code&force_auth=true&redirect_url=" . base_url('/marketplace/create_token') . "&client_id=". $app_key ;
+
+        }else if ($marketplace == "SHOPEE") {
+
+            $redirect = base_url('/marketplace/create_token_shopee');
+            $base_string = $app_secret . $redirect;
+            $token = hash('sha256', $base_string);
+            $url = "https://partner.shopeemobile.com/api/v1/shop/auth_partner?id=".$app_key."&redirect=" . $redirect . "&token=".$token;
+
+        }
+
+
         if ($active == "1") {
 
             $active = "AKTIF";

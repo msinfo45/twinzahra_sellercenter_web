@@ -1,7 +1,7 @@
 <?php
 
 include "../config/model.php";
-
+include "../config/config_type.php";
 $db = new Model_user();
 
 
