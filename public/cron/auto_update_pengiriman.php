@@ -127,54 +127,662 @@ if ($getDataLazada != null) {
 
             ///update status data
            
-            if ($statuses != $status ) {
+if ($statuses != $status ) {
 				
 				
-				if ($status == 3){
+if ($status == 3){
 					
-				$ch = curl_init();
-              curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/orders.php?request=set_ship');
-              $payload = json_encode( array( "order_id"=> $order_id ,
-                "created_at"=> $created_at,
-                "name"=> $name,
-                "sku"=> $sku,
-                "paid_price"=> $paid_price,
-                "shipment_provider"=> $shipment_provider,
-                "shipping_amount"=> $shipping_amount) );
-              curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-              curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-              $lazadacontent = curl_exec($ch);
-              curl_close($ch);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_ship');
+$payload = json_encode( array( "order_id"=> $order_id ,
+"created_at"=> $created_at,
+"name"=> $name,
+"sku"=> $sku,
+"paid_price"=> $paid_price,
+"shipment_provider"=> $shipment_provider,
+"shipping_amount"=> $shipping_amount) );
+curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$lazadacontent = curl_exec($ch);
+curl_close($ch);
+$resultLazada=json_decode($lazadacontent,true);
 
-              $resultLazada=json_decode($lazadacontent,true);
+$status = "dalam pengiriman";
 
-              $status = "shipped";
+$subject  = "Pesanan " . $order_id . " dalam pengiriman " . $shipment_provider ;
+$message = '<div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hai Seller,
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Pesanan ' . $order_id . ' dalam pengiriman ' . $shipment_provider .' 
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="1" bgcolor="#ffffff">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%">
+<table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="0">&nbsp;</td></tr><tr><td><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td></tr><tr><td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">
+DETAIL ORDER </td></tr><tr><td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+No. Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">
+'. $order_id .'</td>
+ </tr>
+ 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+Tanggal Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+'. $created_at  .'</td>
+</tr>
+
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td width="560" height="140" align="left">
+<a href="'.$product_detail_url .'" target="_blank">
+<img src="'. $product_main_image. '" alt="" style="display:block;border:none;outline:none;text-decoration:none" class="CToWUd" width="140" height="140" border="0">
+</a>
+</td>
+</tr>
+
+</tbody></table><table cellspacing="0" cellpadding="0" border="0" align="left"> <tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="15">&nbsp;</td></tr></tbody></table><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="20">&nbsp;</td></tr>
+
+<tr>
+<td colspan="2" style="word-break:break-word;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left">
+'. $name.'
+</td>
+</tr>
+
+<tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="15">&nbsp;</td></tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Sku: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $sku .'</td>
+</tr>
+											 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Variasi: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $variation .'</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Jumlah: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+1</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Harga: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Rp. '. $paid_price .'</td>
+</tr>
+
+<tr><td colspan="2" style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="20">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hormat Kami,
+<br>
+Twinzahra Shop
+</td>
+</tr>
+
+</tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#747474;text-align:center;line-height:18px">
+Download Aplikasi Twinzahra Shop
+</td>
+</tr>
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr><tr><td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>
+
+<tr>
+<center><a href="https://play.google.com/store/apps/details?id=com.project.msinfo.twinzahra" 
+target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://play.google.com/store/apps/details?id%3Dcom.shopee.id&amp;source=gmail&amp;ust=1605079754589000&amp;usg=AFQjCNF3Xjc9cfaH08Hol1C6CfYeVZUMTA"><img src="https://ci3.googleusercontent.com/proxy/wMyUGP_9zlO1kmTJ1wI6w5tG3QYq6dXydCJg0ePOV7p6DUBeZlw99BuZZlU0LOW8jD20PqkxMfCK8ZAGJ7m0OnXAWokK0I08RWyEqio=s0-d-e1-ft#https://cf.shopee.sg/file/cacc3e27277d02501b0989fdcbaf18e9" style="width:130px" class="CToWUd" width="130"></a></center>
+                                                         
+</tr></tbody></table></td> </tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:5px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0"></div></div><div class="yj6qo"></div><div class="adL"></div>
+</div>';
+
+
+$sendEmail = $db->send_email($subject , $message);
+
+}else if ($status == 4) {
+					
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_delivery');
+$payload = json_encode( array( "order_id"=> $order_id) );
+curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$lazadacontent = curl_exec($ch);
+curl_close($ch);
+$resultLazada=json_decode($lazadacontent,true);
+
+$status = "delivered";
 	
-					
-					
-			}else if ($status == 4) {
-					
-					
-			$ch = curl_init();
-              curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/orders.php?request=set_delivery');
-              $payload = json_encode( array( "order_id"=> $order_id) );
-              curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-              curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-              $lazadacontent = curl_exec($ch);
-              curl_close($ch);
+$subject  = "Pesanan " . $order_id . " sudah diterima pembeli";
+$message = '<div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hai Seller,
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Pesanan ' . $order_id . ' sudah diterima pembeli 
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="1" bgcolor="#ffffff">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%">
+<table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="0">&nbsp;</td></tr><tr><td><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td></tr><tr><td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">
+DETAIL ORDER </td></tr><tr><td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr>
 
-              $resultLazada=json_decode($lazadacontent,true);
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+No. Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">
+'. $order_id .'</td>
+ </tr>
+ 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+Tanggal Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+'. $created_at  .'</td>
+</tr>
 
-//echo json_encode($resultLazada);die;
-              $status = "delivered";
-	
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td width="560" height="140" align="left">
+<a href="'.$product_detail_url .'" target="_blank">
+<img src="'. $product_main_image. '" alt="" style="display:block;border:none;outline:none;text-decoration:none" class="CToWUd" width="140" height="140" border="0">
+</a>
+</td>
+</tr>
+
+</tbody></table><table cellspacing="0" cellpadding="0" border="0" align="left"> <tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="15">&nbsp;</td></tr></tbody></table><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="20">&nbsp;</td></tr>
+
+<tr>
+<td colspan="2" style="word-break:break-word;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left">
+'. $name.'
+</td>
+</tr>
+
+<tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="15">&nbsp;</td></tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Sku: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $sku .'</td>
+</tr>
+											 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Variasi: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $variation .'</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Jumlah: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+1</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Harga: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Rp. '. $paid_price .'</td>
+</tr>
+
+<tr><td colspan="2" style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="20">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hormat Kami,
+<br>
+Twinzahra Shop
+</td>
+</tr>
+
+</tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#747474;text-align:center;line-height:18px">
+Download Aplikasi Twinzahra Shop
+</td>
+</tr>
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr><tr><td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>
+
+<tr>
+<center><a href="https://play.google.com/store/apps/details?id=com.project.msinfo.twinzahra" 
+target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://play.google.com/store/apps/details?id%3Dcom.shopee.id&amp;source=gmail&amp;ust=1605079754589000&amp;usg=AFQjCNF3Xjc9cfaH08Hol1C6CfYeVZUMTA"><img src="https://ci3.googleusercontent.com/proxy/wMyUGP_9zlO1kmTJ1wI6w5tG3QYq6dXydCJg0ePOV7p6DUBeZlw99BuZZlU0LOW8jD20PqkxMfCK8ZAGJ7m0OnXAWokK0I08RWyEqio=s0-d-e1-ft#https://cf.shopee.sg/file/cacc3e27277d02501b0989fdcbaf18e9" style="width:130px" class="CToWUd" width="130"></a></center>
+                                                         
+</tr></tbody></table></td> </tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:5px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0"></div></div><div class="yj6qo"></div><div class="adL"></div>
+</div>';
+
+
+$sendEmail = $db->send_email($subject , $message);					
+					
+}else if ($status == 5) {
+					
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_return');
+$payload = json_encode( array( "order_id"=> $order_id) );
+curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$lazadacontent = curl_exec($ch);
+curl_close($ch);
+        
+$resultLazada=json_decode($lazadacontent,true);
+        
+$status = "retur";
+          
+$subject  = "Pesanan " . $order_id . " dalam perjalan retur";
+$message = '<div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hai Seller,
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Pesanan ' . $order_id . ' dalam perjalan retur oleh jasa pengiriman ' . $shipment_provider . '
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="1" bgcolor="#ffffff">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%">
+<table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="0">&nbsp;</td></tr><tr><td><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td></tr><tr><td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">
+DETAIL ORDER </td></tr><tr><td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+No. Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">
+'. $order_id .'</td>
+ </tr>
+ 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+Tanggal Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+'. $created_at  .'</td>
+</tr>
+
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td width="560" height="140" align="left">
+<a href="'.$product_detail_url .'" target="_blank">
+<img src="'. $product_main_image. '" alt="" style="display:block;border:none;outline:none;text-decoration:none" class="CToWUd" width="140" height="140" border="0">
+</a>
+</td>
+</tr>
+
+</tbody></table><table cellspacing="0" cellpadding="0" border="0" align="left"> <tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="15">&nbsp;</td></tr></tbody></table><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="20">&nbsp;</td></tr>
+
+<tr>
+<td colspan="2" style="word-break:break-word;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left">
+'. $name.'
+</td>
+</tr>
+
+<tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="15">&nbsp;</td></tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Sku: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $sku .'</td>
+</tr>
+											 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Variasi: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $variation .'</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Jumlah: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+1</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Harga: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Rp. '. $paid_price .'</td>
+</tr>
+
+<tr><td colspan="2" style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="20">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hormat Kami,
+<br>
+Twinzahra Shop
+</td>
+</tr>
+
+</tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#747474;text-align:center;line-height:18px">
+Download Aplikasi Twinzahra Shop
+</td>
+</tr>
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr><tr><td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>
+
+<tr>
+<center><a href="https://play.google.com/store/apps/details?id=com.project.msinfo.twinzahra" 
+target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://play.google.com/store/apps/details?id%3Dcom.shopee.id&amp;source=gmail&amp;ust=1605079754589000&amp;usg=AFQjCNF3Xjc9cfaH08Hol1C6CfYeVZUMTA"><img src="https://ci3.googleusercontent.com/proxy/wMyUGP_9zlO1kmTJ1wI6w5tG3QYq6dXydCJg0ePOV7p6DUBeZlw99BuZZlU0LOW8jD20PqkxMfCK8ZAGJ7m0OnXAWokK0I08RWyEqio=s0-d-e1-ft#https://cf.shopee.sg/file/cacc3e27277d02501b0989fdcbaf18e9" style="width:130px" class="CToWUd" width="130"></a></center>
+                                                         
+</tr></tbody></table></td> </tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:5px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0"></div></div><div class="yj6qo"></div><div class="adL"></div>
+</div>';
+
+
+$sendEmail = $db->send_email($subject , $message);     
+
+ }else if ($status == 6) {
 					
 					
-				}
+                      $ch = curl_init();
+                              curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_cancel');
+                              $payload = json_encode( array( "order_id"=> $order_id) );
+                              curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+                              curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                              $lazadacontent = curl_exec($ch);
+                              curl_close($ch);
+                
+                              $resultLazada=json_decode($lazadacontent,true);
+                
+                //echo json_encode($resultLazada);die;
+                              $status = "dibatalkan";
+ $subject  = "Pesanan " . $order_id . " telah dibatalkan";
+$message = '<div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hai Seller,
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Pesanan ' . $order_id . ' telah dibatalkan
+</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="1" bgcolor="#ffffff">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%">
+<table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="0">&nbsp;</td></tr><tr><td><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td></tr><tr><td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">
+DETAIL ORDER </td></tr><tr><td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr>
 
-            }
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+No. Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">
+'. $order_id .'</td>
+ </tr>
+ 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+Tanggal Order: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+'. $created_at  .'</td>
+</tr>
+
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td width="560" height="140" align="left">
+<a href="'.$product_detail_url .'" target="_blank">
+<img src="'. $product_main_image. '" alt="" style="display:block;border:none;outline:none;text-decoration:none" class="CToWUd" width="140" height="140" border="0">
+</a>
+</td>
+</tr>
+
+</tbody></table><table cellspacing="0" cellpadding="0" border="0" align="left"> <tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="15">&nbsp;</td></tr></tbody></table><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="20">&nbsp;</td></tr>
+
+<tr>
+<td colspan="2" style="word-break:break-word;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left">
+'. $name.'
+</td>
+</tr>
+
+<tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="15">&nbsp;</td></tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Sku: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $sku .'</td>
+</tr>
+											 
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Variasi: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+'. $variation .'</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Jumlah: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+1</td>
+</tr>
+
+<tr>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Harga: </td>
+<td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+Rp. '. $paid_price .'</td>
+</tr>
+
+<tr><td colspan="2" style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div>
+<table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="20">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+Hormat Kami,
+<br>
+Twinzahra Shop
+</td>
+</tr>
+
+</tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+
+<tr>
+<td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#747474;text-align:center;line-height:18px">
+Download Aplikasi Twinzahra Shop
+</td>
+</tr>
+<tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr><tr><td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>
+
+<tr>
+<center><a href="https://play.google.com/store/apps/details?id=com.project.msinfo.twinzahra" 
+target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://play.google.com/store/apps/details?id%3Dcom.shopee.id&amp;source=gmail&amp;ust=1605079754589000&amp;usg=AFQjCNF3Xjc9cfaH08Hol1C6CfYeVZUMTA"><img src="https://ci3.googleusercontent.com/proxy/wMyUGP_9zlO1kmTJ1wI6w5tG3QYq6dXydCJg0ePOV7p6DUBeZlw99BuZZlU0LOW8jD20PqkxMfCK8ZAGJ7m0OnXAWokK0I08RWyEqio=s0-d-e1-ft#https://cf.shopee.sg/file/cacc3e27277d02501b0989fdcbaf18e9" style="width:130px" class="CToWUd" width="130"></a></center>
+                                                         
+</tr></tbody></table></td> </tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:5px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0"></div></div><div class="yj6qo"></div><div class="adL"></div>
+</div>';
+
+
+$sendEmail = $db->send_email($subject , $message);                 
+                          
+                          
+                            }else if ($status == 7) {
+					
+					
+                              $ch = curl_init();
+                                      curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_filed');
+                                      $payload = json_encode( array( "order_id"=> $order_id) );
+                                      curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+                                      curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                                      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                      $lazadacontent = curl_exec($ch);
+                                      curl_close($ch);
+                        
+                                      $resultLazada=json_decode($lazadacontent,true);
+                        
+                        //echo json_encode($resultLazada);die;
+                                      $status = "gagal";
+                          
+                                      $subject  = "Pesanan " . $order_id . " gagal dikirim";
+                                      $message = '<div>
+                                      <table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td>
+                                      </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+                                      Hai Seller,
+                                      </td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr><tr><td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+                                      Pesanan ' . $order_id . ' gagal dikirim oleh jasa pengiriman ' . $shipment_provider . '
+                                      </td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="1" bgcolor="#ffffff">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%">
+                                      <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="0">&nbsp;</td></tr><tr><td><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td></tr><tr><td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">
+                                      DETAIL ORDER </td></tr><tr><td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr>
+                                      
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+                                      No. Order: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top">
+                                      '. $order_id .'</td>
+                                       </tr>
+                                       
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+                                      Tanggal Order: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">
+                                      '. $created_at  .'</td>
+                                      </tr>
+                                      
+                                      <tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr></tbody></table></td></tr><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+                                      
+                                      <tr>
+                                      <td width="560" height="140" align="left">
+                                      <a href="'.$product_detail_url .'" target="_blank">
+                                      <img src="'. $product_main_image. '" alt="" style="display:block;border:none;outline:none;text-decoration:none" class="CToWUd" width="140" height="140" border="0">
+                                      </a>
+                                      </td>
+                                      </tr>
+                                      
+                                      </tbody></table><table cellspacing="0" cellpadding="0" border="0" align="left"> <tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="15">&nbsp;</td></tr></tbody></table><table style="table-layout:fixed" width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="20">&nbsp;</td></tr>
+                                      
+                                      <tr>
+                                      <td colspan="2" style="word-break:break-word;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left">
+                                      '. $name.'
+                                      </td>
+                                      </tr>
+                                      
+                                      <tr><td colspan="2" style="word-break:break-word;font-size:1px;line-height:1px" width="" height="15">&nbsp;</td></tr>
+                                      
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      Sku: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      '. $sku .'</td>
+                                      </tr>
+                                                             
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      Variasi: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      '. $variation .'</td>
+                                      </tr>
+                                      
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      Jumlah: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      1</td>
+                                      </tr>
+                                      
+                                      <tr>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      Harga: </td>
+                                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;vertical-align:top" width="280">
+                                      Rp. '. $paid_price .'</td>
+                                      </tr>
+                                      
+                                      <tr><td colspan="2" style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td> </tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div><div style="width:100%;height:1px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0">&nbsp;</div></div>
+                                      <table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="20">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" width="100%" height="10">&nbsp;</td></tr>
+                                      
+                                      <tr>
+                                      <td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
+                                      Hormat Kami,
+                                      <br>
+                                      Twinzahra Shop
+                                      </td>
+                                      </tr>
+                                      
+                                      </tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table id="m_-8886884629272111825backgroundTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff"><tbody><tr><td><table width="600" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td width="100%"><table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center"><tbody><tr><td style="font-size:1px;line-height:1px" height="10">&nbsp;</td></tr><tr><td><table width="560" cellspacing="0" cellpadding="0" border="0" align="center"><tbody>
+                                      
+                                      <tr>
+                                      <td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#747474;text-align:center;line-height:18px">
+                                      Download Aplikasi Twinzahra Shop
+                                      </td>
+                                      </tr>
+                                      <tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr><tr><td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>
+                                      
+                                      <tr>
+                                      <center><a href="https://play.google.com/store/apps/details?id=com.project.msinfo.twinzahra" 
+                                      target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://play.google.com/store/apps/details?id%3Dcom.shopee.id&amp;source=gmail&amp;ust=1605079754589000&amp;usg=AFQjCNF3Xjc9cfaH08Hol1C6CfYeVZUMTA"><img src="https://ci3.googleusercontent.com/proxy/wMyUGP_9zlO1kmTJ1wI6w5tG3QYq6dXydCJg0ePOV7p6DUBeZlw99BuZZlU0LOW8jD20PqkxMfCK8ZAGJ7m0OnXAWokK0I08RWyEqio=s0-d-e1-ft#https://cf.shopee.sg/file/cacc3e27277d02501b0989fdcbaf18e9" style="width:130px" class="CToWUd" width="130"></a></center>
+                                                                                               
+                                      </tr></tbody></table></td> </tr><tr><td style="font-size:1px;line-height:1px" width="100%" height="5">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><div style="width:100%;height:5px;display:block" align="center"><div style="width:100%;max-width:600px;height:1px;border-top:1px solid #e0e0e0"></div></div><div class="yj6qo"></div><div class="adL"></div>
+                                      </div>';
+                                      
+                                      
+                                      $sendEmail = $db->send_email($subject , $message);                                  
+                                  
+                                    }else if ($status == 8) {
+					
+					
+                                      $ch = curl_init();
+                                              curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_unpaid');
+                                              $payload = json_encode( array( "order_id"=> $order_id) );
+                                              curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+                                              curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                                              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                              $lazadacontent = curl_exec($ch);
+                                              curl_close($ch);
+                                
+                                              $resultLazada=json_decode($lazadacontent,true);
+                                
+                                //echo json_encode($resultLazada);die;
+                                              $status = "belum dibayar";
+                                  
+                                          
+                                          
+                                            }else if ($status == 10) {
+					
+					
+                                              $ch = curl_init();
+                                                      curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_proses');
+                                                      $payload = json_encode( array( "order_id"=> $order_id) );
+                                                      curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+                                                      curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                                                      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                                      $lazadacontent = curl_exec($ch);
+                                                      curl_close($ch);
+                                        
+                                                      $resultLazada=json_decode($lazadacontent,true);
+                                        
+                                        //echo json_encode($resultLazada);die;
+                                                      $status = "menunggu update";
+                                          
+                                                  
+                                                  
+                                                }
+
+            }else{
+				
+			if ($status == 3){
+
+			$status = "Masih dalam pengiriman";
+
+			}else if ($status == 10) {
+
+
+			$status = "Masih dalam menunggu update";
+
+			}				
+				
+				
+			}
 
 
 

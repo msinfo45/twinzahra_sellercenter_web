@@ -2,7 +2,7 @@
 <?php
 error_reporting(error_reporting() & ~E_NOTICE);
 include "../config/db_connection.php";
-
+include "../config/config_type.php";
 include "../config/lazada/LazopSdk.php";
 
 $rows = array();
@@ -329,6 +329,7 @@ if (isset($content) && $content != "") {
     $marketplace = $post['marketplace'];
     $merchant_name = null;
 
+
     if (isset($post['merchant_name'])) {
       $merchant_name = $post['merchant_name'];
     }
@@ -354,7 +355,7 @@ if (isset($content) && $content != "") {
     if ($status == 1) {
 
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada/get_orders');
+      curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/lazada/get_orders');
       $payloadLazada = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -369,7 +370,7 @@ if (isset($content) && $content != "") {
      //echo json_encode($dataLazada);die;
 
       $chShopee = curl_init();
-      curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee/get_orders');
+      curl_setopt($chShopee, CURLOPT_URL, $base_url . '/public/api/shopee/get_orders');
       $payloadShopee = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -777,7 +778,7 @@ if (isset($content) && $content != "") {
     if ($status == 1) {
 
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/lazada/get_order');
+      curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/lazada/get_order');
       $payloadLazada = json_encode(array("user_id" => $user_id,
         "order_id" => $order_id,
         "merchant_name" => $merchant_name,
@@ -793,7 +794,7 @@ if (isset($content) && $content != "") {
 //echo json_encode($resultLazada);die;
 
       $chShopee = curl_init();
-      curl_setopt($chShopee, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee/get_order');
+      curl_setopt($chShopee, CURLOPT_URL, $base_url . '/public/api/shopee/get_order');
       $payloadShopee = json_encode(array("user_id" => $user_id,
         "merchant_name" => $merchant_name,
         "status" => $status));
@@ -1207,7 +1208,7 @@ if ($marketplace == "LAZADA"){
 	   $setRts = $db->setRts($user_id, $order_id);
 	   
 		 $chrts = curl_init();
-           curl_setopt($chrts, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_rts');
+           curl_setopt($chrts, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_rts');
             $payloadRts = json_encode( array( "order_item_ids"=> $order_item_ids,
               "shipping_provider"=> $shipping_provider,
               "delivery_type"=> $delivery_type,
@@ -1421,11 +1422,7 @@ if ($marketplace == "LAZADA"){
 
 
     $order_id = $post['order_id'] ;
-  //  $order_id = "489027798238983";
-
-    //if (isset($order_id)) {
-
-
+  
 
       //cek order id and user id
       $getData = $db->checkHistoryOrderByOrder($order_id);
@@ -1473,14 +1470,294 @@ if ($marketplace == "LAZADA"){
         );
       }
 
+    echo json_encode($return);
+  }
 
-      //Jika user id tidak ada//
-  //  } else {
-     // $return = array(
-       // "status" => 504,
-       // "message" => "ERROR"
-     // );
-   // }
+  if ($content == "set_cancel") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+
+    $order_id = $post['order_id'] ;
+  
+
+      //cek order id and user id
+      $getData = $db->checkHistoryOrderByOrder($order_id);
+
+
+      if ($getData != false) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows = $row;
+          $status = 	$row['statuses'];
+
+        }
+
+
+
+          $create = $db->setCancel($order_id);
+
+          //jika produk berhasil
+          if ($create) {
+           
+            $return = array(
+              "status" => 200,
+              "order_id" => $order_id,
+              "message" => "Berhasil"
+            );
+
+
+            //jika produk gagal
+          } else {
+            $return = array(
+              "status" => 404,
+              "order_id" => $order_id,
+              "message" => "ERROR"
+            );
+          }
+
+        
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "No Order tidak ditemukan"
+        );
+      }
+
+    echo json_encode($return);
+  }
+
+  if ($content == "set_filed") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+
+    $order_id = $post['order_id'] ;
+  
+
+      //cek order id and user id
+      $getData = $db->checkHistoryOrderByOrder($order_id);
+
+
+      if ($getData != false) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows = $row;
+          $status = 	$row['statuses'];
+
+        }
+
+
+
+          $create = $db->setFiled($order_id);
+
+          //jika produk berhasil
+          if ($create) {
+           
+            $return = array(
+              "status" => 200,
+              "order_id" => $order_id,
+              "message" => "Berhasil"
+            );
+
+
+            //jika produk gagal
+          } else {
+            $return = array(
+              "status" => 404,
+              "order_id" => $order_id,
+              "message" => "ERROR"
+            );
+          }
+
+        
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "No Order tidak ditemukan"
+        );
+      }
+
+    echo json_encode($return);
+  }
+
+
+  if ($content == "set_unpaid") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+
+    $order_id = $post['order_id'] ;
+  
+
+      //cek order id and user id
+      $getData = $db->checkHistoryOrderByOrder($order_id);
+
+
+      if ($getData != false) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows = $row;
+          $status = 	$row['statuses'];
+
+        }
+
+
+
+          $create = $db->setUnpaid($order_id);
+
+          //jika produk berhasil
+          if ($create) {
+           
+            $return = array(
+              "status" => 200,
+              "order_id" => $order_id,
+              "message" => "Berhasil"
+            );
+
+
+            //jika produk gagal
+          } else {
+            $return = array(
+              "status" => 404,
+              "order_id" => $order_id,
+              "message" => "ERROR"
+            );
+          }
+
+        
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "No Order tidak ditemukan"
+        );
+      }
+
+    echo json_encode($return);
+  }
+
+  if ($content == "set_proses") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+
+    $order_id = $post['order_id'] ;
+  
+
+      //cek order id and user id
+      $getData = $db->checkHistoryOrderByOrder($order_id);
+
+
+      if ($getData != false) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows = $row;
+          $status = 	$row['statuses'];
+
+        }
+
+
+
+          $create = $db->setProses($order_id);
+
+          //jika produk berhasil
+          if ($create) {
+           
+            $return = array(
+              "status" => 200,
+              "order_id" => $order_id,
+              "message" => "Berhasil"
+            );
+
+
+            //jika produk gagal
+          } else {
+            $return = array(
+              "status" => 404,
+              "order_id" => $order_id,
+              "message" => "ERROR"
+            );
+          }
+
+        
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "No Order tidak ditemukan"
+        );
+      }
+
+    echo json_encode($return);
+  }
+
+
+
+  if ($content == "set_return") {
+    $modeHeader = 0;
+    $post = json_decode(file_get_contents("php://input"), true);
+
+
+    $order_id = $post['order_id'] ;
+  
+
+      //cek order id and user id
+      $getData = $db->checkHistoryOrderByOrder($order_id);
+
+
+      if ($getData != false) {
+
+        while ($row = $getData->fetch_assoc()) {
+
+          $rows = $row;
+          $status = 	$row['statuses'];
+
+        }
+
+
+
+          $create = $db->setReturn($order_id);
+
+          //jika produk berhasil
+          if ($create) {
+           
+            $return = array(
+              "status" => 200,
+              "order_id" => $order_id,
+              "message" => "Berhasil"
+            );
+
+
+            //jika produk gagal
+          } else {
+            $return = array(
+              "status" => 404,
+              "order_id" => $order_id,
+              "message" => "ERROR"
+            );
+          }
+
+        
+
+
+      } else {
+        $return = array(
+          "status" => 404,
+          "message" => "No Order tidak ditemukan"
+        );
+      }
+
     echo json_encode($return);
   }
 
@@ -1523,7 +1800,7 @@ if ($marketplace == "LAZADA"){
 
         //Get data from lazada
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_order_items');
+        curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=get_order_items');
         $payload = json_encode(array("order_id" => $order_id,
           "UserID" => "5",
           "merchant_name" => $merchant_name));
@@ -1550,7 +1827,7 @@ if ($marketplace == "LAZADA"){
 
         //Get data from shopee
 
-        $chShopee = curl_init("https://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_order_items");
+        $chShopee = curl_init($base_url . "/public/api/shopee.php?request=get_order_items");
         $payloadShopee = json_encode(array("ordersn_list" => array($order_id),
           "UserID" => "5",
           "merchant_name" => $merchant_name));
@@ -1819,7 +2096,7 @@ if ($marketplace == "LAZADA"){
 
 
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders/get_order');
+    curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders/get_order');
     $payloadItem = json_encode( array( "order_id"=> $order_id,
       "merchant_name"=> $merchant_name,
       "marketplace"=> $marketplace,
@@ -1938,7 +2215,7 @@ if ($marketplace == "LAZADA"){
 		  	  //set rts
 		 //
 		 //  $chrts = curl_init();
-           //curl_setopt($chrts, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_rts');
+           //curl_setopt($chrts, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_rts');
             //$payloadRts = json_encode( array( "order_item_ids"=> array($order_item_id),
               //"shipping_provider"=> $shipping_provider,
               //"delivery_type"=> $delivery_type,
@@ -2144,7 +2421,7 @@ if ($marketplace == "LAZADA"){
 
           //cek stok
           $chItems = curl_init();
-          curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products/cek_stok');
+          curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/products/cek_stok');
           $payloadItem = json_encode( array( "sku"=> $sku ) );
           curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
           curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -2551,7 +2828,7 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
       $variant_details = array();
 
       $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/orders.php?request=get_order_items');
+      curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders.php?request=get_order_items');
       $payloadItem = json_encode( array( "order_id"=> $order_id ,
         "marketplace"=> $marketplace,
         "merchant_name"=> $merchant_name) );
@@ -2580,7 +2857,7 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
       if($shipping_provider != null && $delivery_type != null ) {
  
 		$chpick = curl_init();
-        curl_setopt($chpick, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_pick');
+        curl_setopt($chpick, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_pick');
         $payloadItem = json_encode( array( "order_item_ids"=> $order_item_ids,
           "shipping_provider"=> $shipping_provider,
           "delivery_type"=> $delivery_type,
@@ -2608,7 +2885,7 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
 
        //Set Invoice
           $chInvoice = curl_init();
-          curl_setopt($chInvoice, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=set_invoice');
+          curl_setopt($chInvoice, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_invoice');
           $payloadInvoice = json_encode( array( "order_item_id"=> $order_item_id,
             "user_id"=> $user_id,
             "merchant_name"=> $merchant_name
@@ -2648,7 +2925,7 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
               );
 
               $context  = stream_context_create( $options );
-            $result = file_get_contents( "https://localhost/twinzahra_sellercenter/public/api/orders.php?request=created_order", false, $context );
+            $result = file_get_contents( $base_url . "/public/api/orders.php?request=created_order", false, $context );
               $response = json_decode($result, true );
 
               //print_r ($response);die;

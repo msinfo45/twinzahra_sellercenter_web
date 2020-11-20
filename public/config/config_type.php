@@ -1,5 +1,8 @@
 <?php
-$BASE_URL = "http://localhost";
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
+defined('BASE') || define('BASE',$protocol);
+
+$base_url = BASE;
 
 $NOTIF_JOB_OFFER = 1;
 $NOTIF_CHAT = 2;
@@ -8,7 +11,7 @@ $NOTIF_HISTORY = 3;
 
 // $UPLOAD_DIR = '/var/www/public_html/dev/image';
 $UPLOAD_DIR = '/var/www/html/public_html/image';
-$UPLOAD_DIR_2 = $BASE_URL.'/image';
+$UPLOAD_DIR_2 = $base_url.'/image';
 $MODE_DELETE_CHAT_FILE = 0;
 $SMS_USERKEY = "ga6wxz"; //userkey lihat di zenziva
 $SMS_PASSKEY = "aid.co.id"; // set passkey di zenziva

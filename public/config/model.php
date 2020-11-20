@@ -5756,6 +5756,106 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
         }
     }
 
+    public function setReturn($order_id)
+    {
+
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
+										statuses 		= 5
+									WHERE 
+										order_id = '" . $order_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function setCancel($order_id)
+    {
+
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
+										statuses 		= 6
+									WHERE 
+										order_id = '" . $order_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function setFiled($order_id)
+    {
+
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
+										statuses 		= 7
+									WHERE 
+										order_id = '" . $order_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function setUnpaid($order_id)
+    {
+
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
+										statuses 		= 8
+									WHERE 
+										order_id = '" . $order_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function setProses($order_id)
+    {
+
+        $update = $this
+            ->conn
+            ->query("UPDATE history_orders SET 
+										statuses 		= 10
+									WHERE 
+										order_id = '" . $order_id . "'");
+
+        if ($update)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     /**
      * Update FirebaseID2
      */
@@ -9331,18 +9431,44 @@ WHERE (ipv.IsDefault = 1 and c.UserID = '" . $user_id . "') and c.TokenSession =
   public function getDataToko($user_id , $seller_id)
   {
 
-    $query = $this->conn->query(" SELECT * from toko
-										where  user_id = '" . $user_id . "' and seller_id = '" . $seller_id . "'
-                                       ");
+
+    if ($seller_id != null) {
+
+        $query = $this->conn->query(" SELECT * from toko
+        where  user_id = '" . $user_id . "' and seller_id = '" . $seller_id . "'
+       ");
 
     if (mysqli_num_rows($query) > 0)
     {
-      return $query;
+        return $query;
     }
     else
     {
-      return null;
+        return null;
     }
+
+
+    }else{
+
+        $query = $this
+        ->conn
+        ->query(" SELECT * from toko
+        where  user_id = '" . $user_id . "'
+                                   ");
+
+    if (mysqli_num_rows($query) > 0)
+    {
+        return $query;
+    }
+    else
+    {
+        return null;
+    }
+
+
+    }
+
+    
 
 
 

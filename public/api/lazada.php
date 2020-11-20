@@ -1125,7 +1125,7 @@ if (isset($content) && $content != "") {
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+        curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/products.php?request=get_products');
         $payload = json_encode( array( "UserID"=> $user_id) );
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1294,9 +1294,15 @@ if (isset($content) && $content != "") {
 
     $user_id = 5;
     $marketplace = "lAZADA";
-    $seller_id = $post['seller_id'];
 
-    if (isset($seller_id)) {
+    $seller_id = null;
+
+    if (isset($post['seller_id'])) {
+      $seller_id = $post['seller_id'];
+    }
+    
+
+   // if (isset($seller_id)) {
       //Mencari data marketplace
       $getDataMarketplace = $db->getDataMarketplace($marketplace);
 
@@ -1315,16 +1321,18 @@ if (isset($content) && $content != "") {
         if ($getDataToko != null) {
 
           while ($rowToko= $getDataToko->fetch_assoc()) {
-
-            $accessToken = $rowToko['access_token'];
-            $merchant_name = $rowToko['merchant_name'];
-            $marketplace_name = $rowToko['marketplace_name'];
+            $rows[] = $rowToko;   
 
           }
 
+        foreach ($rows as $rowsToko2) {
+          $accessToken = $rowsToko2['access_token'];
+          $merchant_name = $rowsToko2['merchant_name'];
+          $marketplace_name = $rowsToko2['marketplace_name'];
 
+        
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+          curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/products.php?request=get_products');
           $payload = json_encode( array( "UserID"=> $user_id) );
           curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
           curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -1425,6 +1433,8 @@ if (isset($content) && $content != "") {
 
             }
 
+          
+
             $return = array(
               "status" => 200,
               "message" => "Berhasil",
@@ -1447,37 +1457,27 @@ if (isset($content) && $content != "") {
             );
 
           }
-        }
+        
+		
 
 
+		}
 
 
-
-      } else {
-        $return = array(
-          "status" => 404,
-          "message" => "Belum ada product yang aktif",
-          "data" => []
-        );
-      }
-
-
-    }else{
+		}else{
+			
+	
 
       $return = array(
         "status" => 404,
-        "message" => "Error",
+        "message" => "Belum ada toko yang aktif",
         "data" => []
-      );
-    }
+     );
+    	
+			
+		}
 
-
-
-
-
-
-
-
+		}
 
 
 
@@ -2313,7 +2313,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
               if ($status == "shipped") {
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=set_ship');
+                curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/orders.php?request=set_ship');
                 $payload = json_encode( array( "order_id"=> $order_id ,
                   "created_at"=> $created_at,
                   "name"=> $name,
@@ -2333,7 +2333,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
               }else if ($status == "delivered") {
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/orders.php?request=set_delivery');
+                curl_setopt($ch, CURLOPT_URL, $base_url . '/api/orders.php?request=set_delivery');
                 $payload = json_encode( array( "order_id"=> $order_id ,
                   "created_at"=> $created_at,
                   "name"=> $name,
@@ -2507,7 +2507,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
     //echo json_encode($result);die;
 
     $chLazada = curl_init();
-    curl_setopt($chLazada, CURLOPT_URL, 'https://sellercenter.twinzahra.com/api/lazada.php?request=create_product');
+    curl_setopt($chLazada, CURLOPT_URL, $base_url . '/api/lazada.php?request=create_product');
     $payloadLazada = json_encode( array(
       "UserID"=> 5 ,
       "Data"=> $result
@@ -2581,7 +2581,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+        curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/products.php?request=get_products');
         $payload = json_encode( array( "UserID"=> $user_id) );
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -3016,7 +3016,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
 
 //get product lazada
 
-        $chProduct = curl_init("https://localhost/twinzahra_sellercenter/public/api/lazada.php?request=get_products");
+        $chProduct = curl_init($base_url . "/public/api/lazada.php?request=get_products");
        // $payloadProduct = json_encode($convertJson);
        // curl_setopt($chProduct, CURLOPT_POSTFIELDS, $payloadProduct);
         curl_setopt($chProduct, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -3045,7 +3045,7 @@ echo 'https://api.lazada.co.id/rest/order/document/get?doc_type='. $doc_type.'&o
             $quantity = $objskus -> quantity;
 
 
-            $chSkus = curl_init("https://localhost/twinzahra_sellercenter/public/api/products.php?request=get_skus");
+            $chSkus = curl_init($base_url . "/public/api/products.php?request=get_skus");
             $payloadSkus = json_encode( array( "skus"=> $SellerSku) );
             curl_setopt($chSkus, CURLOPT_POSTFIELDS, $payloadSkus);
             curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

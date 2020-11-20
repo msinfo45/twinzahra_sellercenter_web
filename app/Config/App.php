@@ -21,8 +21,12 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/twinzahra_sellercenter/';
-	#public $baseURL = 'https://twinzahra.masuk.id/';
+
+	public $baseURL    = BASE;
+
+
+
+	#
 	/*
 	|--------------------------------------------------------------------------
 	| Index File

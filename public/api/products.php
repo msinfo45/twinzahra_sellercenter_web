@@ -1,7 +1,7 @@
 <?php
 
 include "../config/db_connection.php";
-
+include "../config/config_type.php";
 include "../config/lazada/LazopSdk.php";
 include "../include/fpdf/fpdf.php";
 $rows = array();
@@ -79,7 +79,7 @@ foreach ($rows as $obj) {
 							
 //Mencari ProductID by user id
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, 'https://localhost/twinzahra_sellercenter/public/api/products.php?request=get_products');
+					curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/products.php?request=get_products');
 					$payload = json_encode( array( "UserID"=> $user_id,
 													"Status" => 1) );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );

@@ -18,7 +18,7 @@ if (isset($post['merchant_name'])) {
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://twinzahra.masuk.id/public/api/lazada.php?request=get_orders');
+curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=get_orders');
 $payload = json_encode( array(
   "status"=> 1,
   "merchant_name"=> $merchant_name) );
@@ -45,7 +45,7 @@ Foreach($resultOrders['data'] as $dataOrders)
   }
     //echo json_encode($sku);die;
     $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/products.php?request=cek_stok');
+    curl_setopt($chItems, CURLOPT_URL,$base_url . '/public/api/products.php?request=cek_stok');
     $payloadItem = json_encode( array( "sku"=> $sku ) );
     curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
     curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -63,7 +63,7 @@ Foreach($resultOrders['data'] as $dataOrders)
 
 
       $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL,'https://twinzahra.masuk.id/public/api/orders.php?request=accept_order');
+      curl_setopt($chItems, CURLOPT_URL,$base_url . '/public/api/orders.php?request=accept_order');
       $payloadItem = json_encode( array(
         "order_id"=> $order_id ,
         "merchant_name"=> $merchant_name ,

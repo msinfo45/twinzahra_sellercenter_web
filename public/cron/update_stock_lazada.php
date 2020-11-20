@@ -5,7 +5,7 @@ include "../config/model.php";
 $db = new Model_user();
 
 
-$chSkus = curl_init("https://twinzahra.masuk.id/public/api/lazada.php?request=update_stock");
+$chSkus = curl_init($base_url . "/public/api/lazada.php?request=update_product");
 curl_setopt($chSkus, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt($chSkus, CURLOPT_RETURNTRANSFER, true);
 $resultSkus = curl_exec($chSkus);
@@ -77,7 +77,7 @@ $message  = '
                                              </tr>
                                              <tr>
                                                 <td style="font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;text-align:left;line-height:18px">
-										Stok Produk di Lazada berhasil di syncron otomatis
+										Produk dilazada berhasil disinkron otomatis
                                                 </td>
                                              </tr>
                                              <tr>
@@ -129,7 +129,7 @@ $message  = '
                                                 <td colspan="2" style="text-align:left;font-family:Helvetica,arial,sans-serif;color:#1f1f1f;font-size:16px;font-weight:bold;height:10px"> </td>
                                              </tr>
                                              <tr>
-                                                <td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">Rincian Skus </td>
+                                                <td colspan="2" style="text-align:left;font-family:Helveticƒa,arial,sans-serif;color:#1f1f1f;font-size:13px;font-weight:bold">Rincian Produk </td>
                                              </tr>
                                              <tr>
                                                 <td style="font-size:1px;line-height:1px" width="" height="10">&nbsp;</td>
@@ -137,17 +137,17 @@ $message  = '
 
 foreach($jsonDecodeSkus->data as $data) {
 
-  $item_id = $data ->item_id;
+  $marketplace = $data ->marketplace;
   $merchant_name = $data ->merchant_name;
-  $name = $data ->name;
-  $SellerSku = $data ->SellerSku;
-  $Status = $data ->Status;
-  $marketplace = "LAZADA";
+  $name = $data ->product_name;
+  $Status = $data ->status;
+ 
+
 
   $message .= '
 				<tr>
-                   <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Item Id: </td>
-                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $item_id  .'</td>
+                   <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Marketplace: </td>
+                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $marketplace  .'</td>
                     </tr>
 					<tr>
                      <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Merchant: </td>
@@ -157,11 +157,7 @@ foreach($jsonDecodeSkus->data as $data) {
                       <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Nama Produk: </td>
                       <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $name  .'</td>
                       </tr>
-											 
-					<tr>
-                  <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Sku: </td>
-                    <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">'. $SellerSku  .'</td>
-                    </tr>
+											
 											 
 					<tr>
                   <td style="word-break:break-word;text-align:left;font-family:Helvetica,arial,sans-serif;font-size:13px;color:#000000;white-space:nowrap;vertical-align:top" width="280">Status: </td>

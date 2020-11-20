@@ -19,7 +19,7 @@ if (isset($post['merchant_name'])) {
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/shopee.php?request=get_orders');
+curl_setopt($ch, CURLOPT_URL, $base_url . '/public/api/shopee.php?request=get_orders');
 $payload = json_encode( array(
   "status"=> 1,
   "merchant_name"=> $merchant_name) );
@@ -39,7 +39,7 @@ foreach($resultOrders->data as $dataOrders)
   $marketplace = $dataOrders->marketplace ;
 
   $chItems = curl_init();
-  curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=cek_history');
+  curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders.php?request=cek_history');
   $payloadItem = json_encode( array( "order_id"=> $order_id ) );
 
   curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
@@ -55,7 +55,7 @@ foreach($resultOrders->data as $dataOrders)
  if ($resultItem->status == "404") {
 
    $chItems = curl_init();
-   curl_setopt($chItems, CURLOPT_URL, 'http://localhost/twinzahra_sellercenter/public/api/orders.php?request=created_order2');
+   curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders.php?request=created_order2');
    $payloadItem = json_encode(array(
      "data_order" => base64_encode(json_encode($dataOrders)),
      "merchant_name" => $merchant_name,
