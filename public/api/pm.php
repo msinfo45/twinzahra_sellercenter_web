@@ -7,41 +7,71 @@ $PAYMENT_AMOUNT=$_POST['PAYMENT_AMOUNT'];
 $PAYMENT_UNITS=$_POST['PAYMENT_UNITS'];
 $STATUS_URL=$_POST['STATUS_URL'];
 $PAYMENT_URL = $_POST['PAYMENT_URL'];
-$PAYMENT_URL_METHOD=$_POST['PAYMENT_URL_METHOD'];
+//$PAYMENT_URL_METHOD=$_POST['PAYMENT_URL_METHOD'];
 $NOPAYMENT_URL=$_POST['NOPAYMENT_URL'];
-$NOPAYMENT_URL_METHOD=$_POST['NOPAYMENT_URL_METHOD'];
-$email=$_POST['email'];
+//$NOPAYMENT_URL_METHOD=$_POST['NOPAYMENT_URL_METHOD'];
+//$email=$_POST['email'];
+$PAYER_ACCOUNT = "U15512585";
+$passphrase = "";
+$utc_str = gmdate("M d Y H:i:s", time());
+$TIMESTAMPGMT = strtotime($utc_str);
+$PAYMENT_BATCH_NUM = "2242444";
+
+$base_string = $PAYMENT_ID.":".$PAYEE_ACCOUNT.":".$PAYMENT_AMOUNT.":".$PAYMENT_UNITS.":".$PAYMENT_BATCH_NUM.":".$PAYER_ACCOUNT.":".$passphrase.":".$TIMESTAMPGMT;
+
+$V_HASH  = md5($base_string);
 
 
-curl -i -s -k -X $'POST' \
--H $'Host: perfectmoney.is' -H $'Connection: close' -H $'Content-Length: 376' -H $'Cache-Control: max-age=0' -H $'Upgrade-Insecure-Requests: 1' -H $'Origin: https://finrally.com' -H $'Content-Type: application/x-www-form-urlencoded' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' -H $'Sec-Fetch-Site: cross-site' -H $'Sec-Fetch-Mode: navigate' -H $'Sec-Fetch-Dest: document' -H $'Referer: https://finrally.com/' -H $'Accept-Encoding: gzip, deflate' -H $'Accept-Language: en-US,en;q=0.9' \
---data-binary $'PAYEE_ACCOUNT=U14197965&PAYEE_NAME=Finrally&PAYMENT_ID=perfect_fr_2698340941_1605868368&PAYMENT_AMOUNT=250&PAYMENT_UNITS=USD&STATUS_URL=https%3A%2F%2Ffinrally.com%2Fapi%2Ffm%2Fperfect%2Fcallback&PAYMENT_URL=https%3A%2F%2Ffinrally.com%2Fen%2Fsuccess&PAYMENT_URL_METHOD=GET&NOPAYMENT_URL=https%3A%2F%2Ffinrally.com%2Fen%2Ffail&NOPAYMENT_URL_METHOD=GET&email=msinfo45%40gmail.com' \
-$'https://perfectmoney.is/api/step1.asp'
+    $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $STATUS_URL);
+	  $payload = "PAYMENT_ID=" . $PAYMENT_ID . 
+									  "&PAYEE_ACCOUNT=". $PAYEE_ACCOUNT .
+									  "&PAYMENT_AMOUNT=". $PAYMENT_AMOUNT .
+									  "&PAYMENT_UNITS=". $PAYMENT_UNITS .
+									  "&PAYMENT_BATCH_NUM=". $PAYMENT_BATCH_NUM .
+									  "&PAYER_ACCOUNT=" .$PAYER_ACCOUNT .
+									  "&TIMESTAMPGMT=". $TIMESTAMPGMT.
+									  "&V_HASH=". $V_HASH;
+									  
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      $lazadacontent = curl_exec($ch);
+      curl_close($ch);
+      //$resultLazada = json_decode($lazadacontent);
+	  
+	   echo  $lazadacontent;
+	   
+	  $ch2 = curl_init();
+      curl_setopt($ch2, CURLOPT_URL, $STATUS_URL);
+      $payloadLazada2 = json_encode(array("PAYMENT_ID" => $PAYMENT_ID,
+        "PAYEE_ACCOUNT" => $PAYEE_ACCOUNT,
+        "PAYMENT_AMOUNT" => $PAYMENT_AMOUNT,
+		"PAYMENT_UNITS" => $PAYMENT_UNITS,
+		"PAYMENT_BATCH_NUM" => $PAYMENT_BATCH_NUM,
+		"PAYER_ACCOUNT" => $PAYER_ACCOUNT,
+		"TIMESTAMPGMT" => $TIMESTAMPGMT,
+		"V_HASH" => $V_HASH));
+      curl_setopt($ch2, CURLOPT_POSTFIELDS, $payloadLazada2);
+      curl_setopt($ch2, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+      $lazadacontent2 = curl_exec($ch2);
+      curl_close($ch2);
+      $resultLazada2 = json_decode($lazadacontent2);
+	  
+	 echo  json_encode($lazadacontent2);
+	  
+	 // if ($PAYMENT_URL_METHOD == "GET") {
+		   
+		 // echo ' <a href='.$PAYMENT_URL.'?'.$payload.'>Payment</a>';
+		 
+		  
+	 // }
+	  
+	  
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $STATUS_URL);
-$payload = json_encode( array( "PAYEE_ACCOUNT"=> $PAYEE_ACCOUNT,
-                              "PAYEE_NAME" => $PAYEE_NAME,
-                              "PAYMENT_ID"=> $PAYMENT_ID,
-                              "PAYMENT_AMOUNT"=> $PAYMENT_AMOUNT,
-                              "PAYMENT_UNITS"=> $PAYMENT_UNITS) );
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Host:perfectmoney.is,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json,
-Content-Type:application/json'));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-$productContent = curl_exec($ch);
-curl_close($ch);
 
-$resultProducts=json_decode($productContent);
 
-echo $resultProducts;
 
 
 

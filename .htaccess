@@ -12,7 +12,7 @@ RewriteRule ^public/api/marketplace/([^/\.]+)/?$ public/api/marketplace.php?requ
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^(.*)$ index.php/$1 [L]
-RewriteRule !^(public/|index\.php) [NC,F]
+
 
 
 # Disable server signature start

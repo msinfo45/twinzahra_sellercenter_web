@@ -2071,95 +2071,92 @@ if ($marketplace == "LAZADA"){
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
 
-    //Get Value For History Order from post
-
-
-
+	  $user_id = $post['user_id'];
     $marketplace = $post['marketplace']  ;
-    $order_id = $post['order_id']  ;
-    $order_number = $post['order_id']  ;
     $merchant_name = $post['merchant_name']  ;
-    $customer_first_name = $post['name']  ;
-    $shipping_provider = $post['shipping_provider']  ;
-    $delivery_type = $post['delivery_type'];
-  //  $tracking_code = $post['tracking_code']  ;
-    $shipping_amount = $post['shipping_amount']  ;
-    $payment_method = $post['payment_method']  ;
-    $tracking_code_pre = $post['tracking_code_pre']  ;
-    $remarks = $post['remark']  ;
-    $action = $post['action']  ;
-    $user_id = 5;
-
-
-
-    if (isset($order_id) && isset($user_id) && isset($merchant_name)&& isset($marketplace)) {
-
-
-    $chItems = curl_init();
-    curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders/get_order');
-    $payloadItem = json_encode( array( "order_id"=> $order_id,
-      "merchant_name"=> $merchant_name,
-      "marketplace"=> $marketplace,
-      "status"=> 1,
-    ) );
-    curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-    curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-    $contentItem = curl_exec($chItems);
-    curl_close($chItems);
-
-    $resultItem=json_decode($contentItem,true);
-    $dataItems = $resultItem['data'];
-
-  // echo json_encode($resultItem);die;
-   
- foreach ($resultItem ['data'] as $datas) {
-
-
-    $order_number = $datas['order_number'] ;
-    $branch_number = $datas['branch_number'] ;
-    $warehouse_code = $datas['warehouse_code'] ;
-    $customer_first_name = $datas['customer_first_name'] ;
-    $customer_last_name = $datas['customer_last_name'] ;
-    $price = $datas['price'] ;
-    $items_count = $datas['items_count'] ;
-    $payment_method = $datas['payment_method'] ;
-    $voucher = $datas['voucher'] ;
-    $voucher_code = $datas['voucher_code'] ;
-    $voucher_platform = $datas['voucher_platform'] ;
-    $voucher_seller = $datas['voucher_seller'] ;
-    $gift_option = $datas['gift_option'] ;
-    $gift_message = $datas['gift_message'] ;
-    $shipping_fee = $datas['shipping_fee'] ;
-    $shipping_fee_discount_seller = $datas['shipping_fee_discount_seller'] ;
-    $shipping_fee_discount_platform = $datas['shipping_fee_discount_platform'] ;
-    $promised_shipping_times = $datas['promised_shipping_times'] ;
-    $national_registration_number = $datas['national_registration_number'] ;
-    $tax_code = $datas['tax_code'] ;
-    $extra_attributes = $datas['extra_attributes'] ;
-    $remarks = $datas['remarks'] ;
-    $delivery_info = $datas['delivery_info'] ;
-    $statuses = 10;
-    $created_at = $datas['created_at'] ;
-    $updated_at = $datas['updated_at'] ;
-
-
-    foreach($datas['order_items'] as $DataOrderItems)
-
-    {
-
-      //cek stok
-      $tracking_number = $DataOrderItems['tracking_code'];
-      $order_item_id = $DataOrderItems['order_item_id'];
-
-
-
-
-		
-	//	echo json_encode($tracking_number);die;
-          //Set array untuk variable history orders
-          $variant_details[] = array(
+    $data_order = $post['data_order']  ;
     
+
+
+
+    if (isset($user_id) && isset($marketplace) && isset($merchant_name)&& isset($data_order)) {
+
+      if (base64_encode(base64_decode($post['data_order'], true)) === $post['data_order']){
+        $data_order = base64_decode($post['data_order']);
+        $resultOrder = Json_decode($data_order,true);
+      } else {
+        $data_order = $post['data_order'];
+      }
+
+        $order_id = $resultOrder['order_id'] ;
+        $order_number = $resultOrder['order_number'] ;
+        $branch_number = $resultOrder['branch_number'] ;
+        $warehouse_code = $resultOrder['warehouse_code'] ;
+        $customer_first_name = $resultOrder['customer_first_name'] ;
+        $customer_last_name = $resultOrder['customer_last_name'] ;
+        $price = $resultOrder['price'] ;
+        $items_count = $resultOrder['items_count'] ;
+        $payment_method = $resultOrder['payment_method'] ;
+        $voucher = $resultOrder['voucher'] ;
+        $voucher_code = $resultOrder['voucher_code'] ;
+        $voucher_platform = $resultOrder['voucher_platform'] ;
+        $voucher_seller = $resultOrder['voucher_seller'] ;
+        $gift_option = $resultOrder['gift_option'] ;
+        $gift_message = $resultOrder['gift_message'] ;
+        $shipping_fee = $resultOrder['shipping_fee'] ;
+        $shipping_fee_discount_seller = $resultOrder['shipping_fee_discount_seller'] ;
+        $shipping_fee_discount_platform = $resultOrder['shipping_fee_discount_platform'] ;
+        $promised_shipping_times = $resultOrder['promised_shipping_times'] ;
+        $national_registration_number = $resultOrder['national_registration_number'] ;
+        $tax_code = $resultOrder['tax_code'] ;
+        $extra_attributes = $resultOrder['extra_attributes'] ;
+        $remarks = $resultOrder['remarks'] ;
+        $delivery_info = $resultOrder['delivery_info'] ;
+        $statuses = 2;
+        $created_at = $resultOrder['created_at'] ;
+        $updated_at = $resultOrder['updated_at'] ;
+
+      $address_shipping = $resultOrder['address_shipping'];
+      $address_billing = $resultOrder['address_billing'];
+
+
+        foreach($resultOrder['order_items'] as $DataOrderItems)
+
+        {
+
+
+          $tracking_number = $DataOrderItems['tracking_code'];
+          $order_item_id = $DataOrderItems['order_item_id'];
+          $sku = $DataOrderItems['sku'];
+
+          //cek stok
+          $chItems = curl_init();
+          curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/products/cek_stok');
+          $payloadItem = json_encode( array( "sku"=> $sku ) );
+          curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
+          curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+          curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
+          $contentItem = curl_exec($chItems);
+          curl_close($chItems);
+
+          $resultItem=json_decode($contentItem,true);
+
+          $stock =(int)$resultItem['data'];
+
+
+          if ($stock == 0) {
+
+            $return = array(
+              "status" => 404,
+              "message" => "Stok kosong"
+            );
+
+          echo json_encode($return);die;
+
+         }
+
+          $variant_details[] = array(
+
             "order_item_id" =>$DataOrderItems['order_item_id'] ,
             "order_id" =>$DataOrderItems['order_id'] ,
             "purchase_order_id" =>$DataOrderItems['purchase_order_id'] ,
@@ -2206,51 +2203,24 @@ if ($marketplace == "LAZADA"){
             "stage_pay_status" =>$DataOrderItems['stage_pay_status'],
             "warehouse_code" =>$DataOrderItems['warehouse_code'],
             "return_status" =>$DataOrderItems['return_status'],
-            "status" =>$DataOrderItems['status'],
+            "status" =>2,
             "created_at" =>$DataOrderItems['created_at'],
             "updated_at" =>$DataOrderItems['updated_at']
-    
+
           );
-		  
-		  	  //set rts
-		 //
-		 //  $chrts = curl_init();
-           //curl_setopt($chrts, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_rts');
-            //$payloadRts = json_encode( array( "order_item_ids"=> array($order_item_id),
-              //"shipping_provider"=> $shipping_provider,
-              //"delivery_type"=> $delivery_type,
-              //"tracking_number"=> $tracking_number,
-              //"user_id"=> $user_id,
-              //"merchant_name"=> $merchant_name) );
-			  
-			//echo $payloadRts;die;
-			
-            //curl_setopt( $chrts, CURLOPT_POSTFIELDS, $payloadRts );
-            //curl_setopt( $chrts, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-            //curl_setopt($chrts, CURLOPT_RETURNTRANSFER, 1);
-           // $contentRts = curl_exec($chrts);
-           // curl_close($chrts);
 
 
-            //mengubah data json menjadi data array asosiatif
-         //   $resultRts=json_decode($contentRts);
-			//echo json_encode($resultRts);die;
-			
         }
 
- }
-
- 
+       // echo json_encode($variant_details);die;
 
 
       //cek user id
       $getData = $db->checkHistoryOrderByOrder($order_id , $user_id);
 
-      if ($getData == null) {
+    //  echo json_encode($getData);die;
+      if ($getData == false) {
 
-        //print_r ($order_number);die;
-
-        //Isi History Orders
 
         $createHistoryOrders = $db->createHistoryOrders(
           $order_id,
@@ -2284,9 +2254,6 @@ if ($marketplace == "LAZADA"){
           $created_at,
           $updated_at);
 
-
-
-
         //jika produk berhasil
         if ($createHistoryOrders == true) {
 
@@ -2299,21 +2266,22 @@ if ($marketplace == "LAZADA"){
 
 
           if ($createHistoryOrderDetails == true) {
-			  
-			  
-		
+
+            $createHistoryAddressShipping = $db->createHistoryAddressShipping(
+              $order_id , $address_shipping);
+
+            $createHistoryAddressBilling = $db->createHistoryAddressBilling(
+              $order_id , $address_billing);
 
 
             $updateStokBySKU = $db->updateStokBySKU($variant_details);
-
-
 
             $return = array(
               "status" => 200,
               "action" => "createHistoryOrderDetails",
               "message" => "Pesanan berhasil di konfirmasi",
-             // "data" => $createHistoryOrderDetails
-			 "data" => $resultRts
+              // "data" => $createHistoryOrderDetails
+              "data" => $resultRts
             );
 
 
@@ -2352,7 +2320,7 @@ if ($marketplace == "LAZADA"){
     } else {
       $return = array(
         "status" => 404,
-        "message" => "Order Number belum terisi"
+        "message" => "Data order belum terisi"
       );
     }
     echo json_encode($return);
@@ -2813,48 +2781,27 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
 
     $modeHeader = 0;
     $post = json_decode(file_get_contents("php://input"), true);
-    $order_id = $post['order_id'] ;
-    $user_id = 5;
-    $shipping_provider =$post['shipping_provider'];
-    $delivery_type = $post['delivery_type'];
-    $merchant_name = $post['merchant_name'];
-    $marketplace = $post['marketplace'];
+
+    $user_id = $post['user_id'] ;
+    $marketplace = $post['marketplace']  ;
+    $merchant_name = $post['merchant_name']  ;
+    $data_order = $post['data_order']  ;
 
 
 
-    if (isset($order_id) && isset($user_id) && isset($shipping_provider)&& isset($delivery_type)&& isset($merchant_name)&& isset($marketplace)) {
+
+    if (isset($user_id) && isset($marketplace) && isset($merchant_name)&& isset($data_order)) {
 
       ///Variable variant details
       $variant_details = array();
 
-      $chItems = curl_init();
-      curl_setopt($chItems, CURLOPT_URL, $base_url . '/public/api/orders.php?request=get_order_items');
-      $payloadItem = json_encode( array( "order_id"=> $order_id ,
-        "marketplace"=> $marketplace,
-        "merchant_name"=> $merchant_name) );
-      curl_setopt( $chItems, CURLOPT_POSTFIELDS, $payloadItem );
-      curl_setopt( $chItems, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-      curl_setopt($chItems, CURLOPT_RETURNTRANSFER, 1);
-      $contentItem = curl_exec($chItems);
-      curl_close($chItems);
-
     
-      //mengubah data json menjadi data array asosiatif
-      $resultItem=json_decode($contentItem,true);
 
-
-      foreach($resultItem['data'] as $DataOrderItems)
-      {
-
-        $order_item_ids[] = $DataOrderItems['order_item_id'];
-        $order_item_id = $DataOrderItems['order_item_id'];
-
-      }
 
       $order_item_ids = json_encode($order_item_ids, true);
 
      // echo json_encode($order_item_ids);die;
-      if($shipping_provider != null && $delivery_type != null ) {
+      if($marketplace == "LAZADA") {
  
 		$chpick = curl_init();
         curl_setopt($chpick, CURLOPT_URL, $base_url . '/public/api/lazada.php?request=set_pick');
@@ -2870,15 +2817,11 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
         curl_close($chpick);
 
         $resultpick=json_decode($contentpick);
-		$dataPick = $resultpick -> data;
+		   $dataPick = $resultpick -> data;
 		
           
     // echo json_encode ($resultpick);die;
 		
-
-
-
-        //print_r ($order_item_id);die;set_invoice
 
         //jika set pick berhasil
         if ($resultpick->status == 200) {
@@ -2896,7 +2839,7 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
           $contentInvoice = curl_exec($chInvoice);
           curl_close($chInvoice);
           $resultInvoice=json_decode($contentInvoice);
-		  $dataInvoice = $resultInvoice->data;
+		      $dataInvoice = $resultInvoice->data;
 
 
 		// echo json_encode ($resultInvoice);die;
@@ -2915,29 +2858,30 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
 
              // echo json_encode($data1);die;
 
-              $options = array(
-                'http' => array(
-                  'method'  => 'POST',
-                  'content' => json_encode( $data1 ),
-                  'header'=>  "Content-Type: application/json\r\n" .
-                    "Accept: application/json\r\n"
-                )
-              );
+             $chCreated = curl_init();
+             curl_setopt($chCreated , CURLOPT_URL, $base_url . '/public/api/orders/created_order');
+             $payloadCreated  = json_encode( array( "user_id"=> $user_id,
+               "marketplace"=> $marketplace,
+               "merchant_name"=> $merchant_name,
+               "data_order"=> $data_order
+             ) );
+             curl_setopt( $chCreated, CURLOPT_POSTFIELDS, $payloadCreated );
+             curl_setopt( $chCreated, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+             curl_setopt($chInvoice, CURLOPT_RETURNTRANSFER, 1);
+             $contentCreated = curl_exec($chCreated);
+             curl_close($chCreated);
+             $resultCreated=json_decode($contentCreated , true);
 
-              $context  = stream_context_create( $options );
-            $result = file_get_contents( $base_url . "/public/api/orders.php?request=created_order", false, $context );
-              $response = json_decode($result, true );
-
-              //print_r ($response);die;
+             
 
               //jika created order berhasil
-              if ($response['status'] == 200) {
+              if ($resultCreated['status'] == 200) {
 
                 $return = array(
                   "status" => 200,
                   "total_rows" => 1,
-                  "message" => $response['message'],
-                  "data" => $response
+                  "message" => $resultCreated['message'],
+                  "data" => $resultCreated
                 );
 
 
@@ -2945,8 +2889,8 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
               } else {
                 $return = array(
                   "status" => 404,
-				  "action" => "created order",
-                  "message" => $response['message']
+				          "action" => "created order",
+                  "message" => $resultCreated['message']
                 );
               }
 
@@ -2957,8 +2901,8 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
             $return = array(
               "status" => 404,
               "total_rows" => 0,
-			  "action" => "set invoice",
-			   "message" => $resultInvoice['message'],
+			        "action" => "set invoice",
+			         "message" => $resultInvoice['message'],
               "data" => $resultInvoice['data']
               
             );
@@ -2972,21 +2916,50 @@ if ($marketplace == "OFFLINE" && $payment_method == "CASH") {
           $return = array(
             "status" => 404,
             "total_rows" => 0,
-			"action" => "set pick",
-			"message" => $resultpick['message'],
-              "data" => $resultpick
+		      	"action" => "set pick",
+			      "message" => $resultpick['message'],
+             "data" => $resultpick
           );
 
         }
 
       }else{
 
-        $return = array(
-          "status" => 404,
-          "total_rows" => 1,
-          "message" => "Kurir belum di pilih",
-          "data" => []
-        );
+        $chCreated = curl_init();
+        curl_setopt($chCreated , CURLOPT_URL, $base_url . '/public/api/orders/created_order');
+        $payloadCreated  = json_encode( array( "user_id"=> $user_id,
+          "marketplace"=> $marketplace,
+          "merchant_name"=> $merchant_name,
+          "data_order"=> $data_order
+        ) );
+        curl_setopt( $chCreated, CURLOPT_POSTFIELDS, $payloadCreated );
+        curl_setopt( $chCreated, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($chInvoice, CURLOPT_RETURNTRANSFER, 1);
+        $contentCreated = curl_exec($chCreated);
+        curl_close($chCreated);
+        $resultCreated=json_decode($contentCreated , true);
+
+        
+
+         //jika created order berhasil
+         if ($resultCreated['status'] == 200) {
+
+           $return = array(
+             "status" => 200,
+             "total_rows" => 1,
+             "message" => $resultCreated['message'],
+             "data" => $resultCreated
+           );
+
+
+           //jika tidak
+         } else {
+           $return = array(
+             "status" => 404,
+             "action" => "created order",
+             "message" => $resultCreated['message']
+           );
+         }
 
       }
 

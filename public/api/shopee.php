@@ -658,7 +658,7 @@ if ($status == 1) {
               $return_status= "";
               $voucher_seller = "";
 
-            }
+           
 
               $tglImageVariant = "Y-m-d";
               $waktuImageVariant = "H:i:s";
@@ -703,9 +703,12 @@ if ($status == 1) {
               // $images = $items ->description;
               foreach ($itemsImageVariant -> images as $ImagesImageVariant) {
                 $imageImageVariant = $ImagesImageVariant;
+              
               }
 
-        // echo json_encode($imageImageVariant);die;
+              
+
+      // echo json_encode($imageImageVariant);die;
       
 
 			
@@ -825,7 +828,7 @@ if ($status == 1) {
 			
 
 			  
-            
+    }
 
             }
 			
@@ -909,9 +912,82 @@ if ($status == 1) {
             $seller_id = $rowToko['seller_id'];
           }
 
+          //get category
+          $urlCategory = "https://partner.shopeemobile.com/api/v1/item/categories/get";
+          $tglCategory ="Y-m-d";
+          $waktuCategory ="H:i:s";
+          $waktu_sekarangCategory =date("$tglCategory  $waktuCategory ");
+          $ditambah_5_menitCategory  = date("$tglCategory  $waktuCategory ", strtotime('+5 minutes'));
+          $timestampCategory =strtotime($ditambah_5_menitCategory);
+
+
+          $convertJsonCategory = array(
+            "partner_id" => (int)$appkey,
+            "shopid" => (int)$seller_id,
+            "timestamp" => $timestampCategory);
+
+
+          $base_stringCategory= $urlCategory . "|" . json_encode($convertJsonCategory);
+          $hmacCategory = hash_hmac('sha256', $base_stringCategory, $appSecret);
+
+          $chCategory = curl_init($urlCategory);
+          $payloadCategory = json_encode($convertJsonCategory);
+          curl_setopt($chCategory, CURLOPT_POSTFIELDS, $payloadCategory);
+          curl_setopt($chCategory, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+            'Authorization: ' . $hmacCategory . ''));
+          curl_setopt($chCategory, CURLOPT_RETURNTRANSFER, true);
+          $resultCategory = curl_exec($chCategory);
+          curl_close($chCategory);
+          $jsonDecodeCategory= json_decode($resultCategory);
+
+          //echo json_encode($jsonDecodeCategory);die;
+          $category_id = 1027;
+
+           //get atribut
+           $urlAttributes = "https://partner.shopeemobile.com/api/v1/item/attributes/get";
+           $tglAttributes ="Y-m-d";
+           $waktuAttributes ="H:i:s";
+           $waktu_sekarangAttributes =date("$tglAttributes $waktuAttributes ");
+           $ditambah_5_menitAttributes  = date("$tglAttributes  $waktuAttributes ", strtotime('+5 minutes'));
+           $timestampAttributes =strtotime($ditambah_5_menitAttributes);
+ 
+ 
+           $convertJsonAttributes = array(
+            "category_id" => 7276,
+             "partner_id" => (int)$appkey,
+             "shopid" => (int)$seller_id,
+             "timestamp" => $timestampAttributes);
+ 
+ 
+           $base_stringAttributes= $urlAttributes . "|" . json_encode($convertJsonAttributes);
+           $hmacAttributes = hash_hmac('sha256', $base_stringAttributes, $appSecret);
+ 
+           $chAttributes = curl_init($urlAttributes);
+           $payloadAttributes = json_encode($convertJsonAttributes);
+           curl_setopt($chAttributes, CURLOPT_POSTFIELDS, $payloadAttributes);
+           curl_setopt($chAttributes, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+             'Authorization: ' . $hmacAttributes . ''));
+           curl_setopt($chAttributes, CURLOPT_RETURNTRANSFER, true);
+           $resultAttributes = curl_exec($chAttributes);
+           curl_close($chAttributes);
+           $jsonDecodeAttributes= json_decode($resultAttributes);
+ 
+           
+
+           foreach ($jsonDecodeAttributes->attributes as $rowAttributes) {
+
+            foreach ($rowAttributes->values as $rowValues) {
+            $values = $rowValues->original_value;
+            }
+
+            $attributesArr[] = array(
+              "attributes_id" => $rowAttributes->attribute_id,
+              "value" =>$values);
+           }
+
+          // echo json_encode($attributesArr);die;
+
           //get logistic
-
-
           $urlLogistic = "https://partner.shopeemobile.com/api/v1/logistics/channel/get";
           $tglLogistic="Y-m-d";
           $waktuLogistic="H:i:s";
@@ -919,7 +995,6 @@ if ($status == 1) {
           $ditambah_5_menitLogistic = date("$tgl $waktuLogistic", strtotime('+5 minutes'));
           $timestampLogistic=strtotime($ditambah_5_menitLogistic);
 
-//echo json_encode($timestampLogistic);die;
 
           $convertJsonLogistic = array(
             "partner_id" => (int)$appkey,
@@ -928,7 +1003,6 @@ if ($status == 1) {
 
 
           $base_stringLogistic = $urlLogistic . "|" . json_encode($convertJsonLogistic);
-
           $hmacLogistic = hash_hmac('sha256', $base_stringLogistic, $appSecret);
 
           $chLogistic = curl_init($urlLogistic);
@@ -943,7 +1017,7 @@ if ($status == 1) {
 
           foreach ($jsonDecodeLogistic->logistics as $logistics) {
 
-            $dataLogistic[] = array("logistic_id" => $logistics->logistic_id,
+            $dataLogistic = array("logistic_id" => $logistics->logistic_id,
               "enabled" => true ) ;
           }
 
@@ -964,13 +1038,6 @@ if ($status == 1) {
 
             foreach($resultProducts->data as $dataProducts) {
 
-
-              $url = "https://partner.shopeemobile.com/api/v1/item/add";
-
-              $category_id = 7276;
-              $ProductName =  $dataProducts->ProductName;
-              $description =  $dataProducts->Description;
-
               foreach($dataProducts->skus as $dataSkus) {
 
                 $ProductVariantDetailName =  $dataSkus->ProductVariantDetailName;
@@ -986,18 +1053,66 @@ if ($status == 1) {
                   "price" =>(int)$price,
                   "variation_sku" => $sku);
 
+
+
                 foreach($dataSkus->Images as $dataImages) {
 
-                  $imagesArr= array(
-                    "url" => $dataImages
-                  );
+                  $dataImage[] =  array("url"=>"https://cf.shopee.co.id/file/e2353534fc51609e68fc2cf09838db2f");
 
                 }
 
               }
 
+             //cek sku produk shopee jika produk tidak ada maka created produk
+              foreach($skusArr as $skusProduct) {
+              $rowSkusProducts = $skusProduct['variation_sku'];
 
-             $weight = 0.5;
+                  //get produk shopee
+                  $chShopee = curl_init();
+                  curl_setopt($chShopee, CURLOPT_URL, $base_url . '/public/api/shopee/get_products');
+                  $payloadShopee = json_encode( array( "UserID"=> $user_id,
+                  "seller_id"=> $seller_id) );
+                  curl_setopt( $chShopee, CURLOPT_POSTFIELDS, $payloadShopee );
+                  curl_setopt( $chShopee, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                  curl_setopt($chShopee, CURLOPT_RETURNTRANSFER, 1);
+                  $productContentShopee = curl_exec($chShopee);
+                  curl_close($chShopee);
+                  $resultProductsShopee=json_decode($productContentShopee);
+                  
+                  foreach($resultProductsShopee -> data as $dataProductShopee) {
+                    foreach($dataProductShopee -> skus as $dataProductSkusShopee) {
+
+                      $rowSkusProductShopee = $dataProductSkusShopee ->SkuID;
+
+                      if ($rowSkusProducts ==  $rowSkusProductShopee) {
+
+                      $status = "Gagal produk sudah ada";
+
+                      }else{
+
+                      $status = "Berhasil";
+
+                      }}}
+                  
+                  echo json_encode($status);die;
+             
+              }
+
+             
+
+              $url = "https://partner.shopeemobile.com/api/v1/item/add";
+
+              $category_id = 7276;
+              $category_name = "Sepatu Pria";
+              $ProductName =  $dataProducts->ProductName;
+              $description =  $dataProducts->Description;
+
+              $wholesalesArr = array(
+                  "min" => 3,
+                  "max" =>100,
+                  "unit_price" =>50000);
+
+              $weight = 0.5;
 
               $tgl="Y-m-d";
               $waktu="H:i:s";
@@ -1007,28 +1122,39 @@ if ($status == 1) {
 
 
 
-              $convertJson = array(
+              $payloadCreated = array(
                 "category_id" => $category_id,
                 "name" =>$ProductName,
                 "description" =>$description,
+                "item_sku"=> "seller_item_sku",
                 "price" => (float)$price,
                 "stock" => (int)$stock,
                 "variations" => $skusArr,
-                "images" => array($imagesArr),
-                "logistics" => $dataLogistic,
+                "images" => $dataImage,
+                "attributes" => $attributesArr,
+                "logistics" => array($dataLogistic),
                 "weight" =>$weight,
+                "package_length"=> 30,
+	              "package_width"=> 30,
+	              "package_height"=>15,
+	              "days_to_ship"=> 7,
+                "wholesales" => array($wholesalesArr ),
+                "size_chart"=> "https://cf.shopee.co.id/file/8dde95c5c8d81c9cb8789367912157b6",
                 "partner_id" => (int)$appkey,
                 "shopid" => (int)$seller_id,
-                "timestamp" => $timestamp);
+                "timestamp" => $timestamp,
+                "condition"=> "NEW",
+                "status"=> "NORMAL",
+                "is_pre_order"=> true);
+ 
+   // echo json_encode($convertJson);die;
 
-        //echo json_encode($convertJson);die;
-
-              $base_string = $url . "|" . json_encode($convertJson);
+              $base_string = $url . "|" . json_encode($payloadCreated);
 
               $hmac = hash_hmac('sha256', $base_string, $appSecret);
 
               $ch = curl_init($url);
-              $payload = json_encode($convertJson);
+              $payload = json_encode($payloadCreated);
               curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
               curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json',
                 'Authorization: ' . $hmac . ''));

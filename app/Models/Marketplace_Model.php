@@ -29,66 +29,70 @@ class Marketplace_Model
 
   {
 
-      $getDataToko = $this->getDataToko($user_id ,$seller_id );
-      if ($getDataToko == false) {
+      $getDataToko = $this->getDataToko($user_id ,$seller_id);
 
-          $insert = $this->conn->query("INSERT INTO toko 
-                                  (user_id,
-                                  marketplace_name,
-                                  merchant_name,
-                                  location, 
-                                  account, 
-                                  seller_id, 
-                                  access_token,
-                                  refresh_token,
-                                  code,
-                                  created_date,
-                                  active
-                                  ) 
-                              VALUES 
-                                  ('" . $user_id . "', 
-                                  '" . $marketplace . "', 
-                                  '" . $name . "', 
-                                  '" . $location . "', 
-                                  '" . $account . "',
-                                  '" . $seller_id . "',
-                                  '" . $access_token . "',
-                                  '" . $refresh_token . "',
-                                   '" . $code . "',
-                                    '" .date("Y-m-d H:i:s") . "',
-                                  1
-                                  ) ");
+  
+      if ($getDataToko == true) {
 
-          if ($insert)
-          {
-              return true;
-          }
-          else
-          {
-              return false;
-          }
+    
+        $update = $this->conn->query("UPDATE toko SET 
+        merchant_name = '" . $name . "',
+          location = '" . $location . "',
+          account = '" . $account . "',
+          access_token = '" . $access_token . "',
+        refresh_token = '" . $refresh_token . "',
+        code = '" . $code . "',
+        update_date = '" . date("Y-m-d H:i:s") . "'
+        WHERE 
+        user_id = '" . $user_id . "' AND seller_id = '" . $seller_id . "' AND marketplace_name = '" . $marketplace . "' ");
+
+if ($update)
+{
+return true;
+}
+else
+{
+return false;
+}
 
       }else{
 
-          $update = $this->conn->query("UPDATE toko SET 
-								merchant_name = '" . $name . "',
-                      			location = '" . $location . "',
-                  				account = '" . $account . "',
-              					access_token = '" . $access_token . "',
-								refresh_token = '" . $refresh_token . "',
-								code = '" . $code . "',
-								update_date = '" . date("Y-m-d H:i:s") . "'
-								WHERE 
-								user_id = '" . $user_id . "' AND seller_id = '" . $seller_id . "' AND marketplace_name = '" . $marketplace . "' ");
+        $insert = $this->conn->query("INSERT INTO toko 
+        (user_id,
+        marketplace_name,
+        merchant_name,
+        location, 
+        account, 
+        seller_id, 
+        access_token,
+        refresh_token,
+        code,
+        created_date,
+        active
+        ) 
+    VALUES 
+        ('" . $user_id . "', 
+        '" . $marketplace . "', 
+        '" . $name . "', 
+        '" . $location . "', 
+        '" . $account . "',
+        '" . $seller_id . "',
+        '" . $access_token . "',
+        '" . $refresh_token . "',
+         '" . $code . "',
+          '" .date("Y-m-d H:i:s") . "',
+        1
+        ) ");
 
-          if ($update)
-          {
-              return true;
-          }
-          else
-          {
-              return false;
-          }
+if ($insert)
+{
+return true;
+}
+else
+{
+return false;
+}
+
 
       }
 
@@ -99,25 +103,27 @@ class Marketplace_Model
 
    if ($seller_id == null)    {
 
-       $query = $this->conn->query("SELECT * FROM toko WHERE user_id = '" . $user_id . "'  and seller_id = '" . $seller_id . "' 
-     order by active desc");
+    $query = $this->conn->query("SELECT * FROM toko WHERE user_id = '" . $user_id . "' 
+    order by active desc");
 
-       if (mysqli_num_rows($query) > 0) {
-           return $query;
-       } else {
-           return false;
-       }
+      if (mysqli_num_rows($query) > 0) {
+          return $query;
+      } else {
+          return false;
+      }
 
    }else{
 
-       $query = $this->conn->query("SELECT * FROM toko WHERE user_id = '" . $user_id . "' 
-     order by active desc");
+    $query = $this->conn->query("SELECT * FROM toko WHERE user_id = '" . $user_id . "'  and seller_id = '" . $seller_id . "' 
+    order by active desc");
 
-       if (mysqli_num_rows($query) > 0) {
-           return $query;
-       } else {
-           return false;
-       }
+      if (mysqli_num_rows($query) > 0) {
+          return true;
+      } else {
+          return false;
+      }
+
+ 
    }
 
   }

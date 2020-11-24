@@ -78,12 +78,13 @@ if (isset($code)){
 
             $name = $jsonDecode->shop_name;
             $location = $jsonDecode->country;
-
+           
             $create = $db->insertDataToko($user_id,$marketplace, $name , $location , "", $shop_id, "", "" , $code);
-
+          
+           
             if($create) {
 
-                header("Location: ".base_url('marketplace'));die;
+         header("Location: ".base_url('marketplace'));die;
 
             }else{
 

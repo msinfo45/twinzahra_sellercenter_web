@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f518f7c-0bf0-491b-832b-e6e319714f3a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/api/pm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Marketplace_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/auth/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/auth/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/layout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Views/marketplace/create_token_shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Views/marketplace/create_token_shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/pm.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/pm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/api/shopee.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/api/shopee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/cart-add.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/cart-display.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/cart-remove-all.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/cart-remove.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/menu.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/array/readme.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +124,7 @@
       <workItem from="1605750988110" duration="243000" />
       <workItem from="1605753051126" duration="23578000" />
       <workItem from="1605867851887" duration="525000" />
+      <workItem from="1606258419781" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="Migration to framework codeigniter 4">
       <created>1603359971136</created>
