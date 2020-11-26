@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ApiMart - Login</title>
+  <title>Twinzahra Seller Center</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -26,7 +26,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="<?= base_url('public/plugins/jqvmap/jqvmap.min.css') ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url('public/dist/css/adminlte.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('public/themes/default/css/adminlte.min.css') ?>">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= base_url('public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') ?>">
   <!-- Daterange picker -->
@@ -67,7 +67,7 @@
 <!-- overlayScrollbars -->
 <script src="<?= base_url('public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 <!-- AdminLTE App -->
-<script src="<?= base_url('public/dist/js/adminlte.js') ?>"></script>
+<script src="<?= base_url('public/themes/default/js/adminlte.js') ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
 </head>

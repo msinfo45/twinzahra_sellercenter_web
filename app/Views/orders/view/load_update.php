@@ -156,7 +156,7 @@ if (count($result['data']) > 0) {
             echo ' </div>';
 
             echo '<div class="col">';
-            echo '<div class="card-title "><a href=' . $DataOrderItems['product_detail_url'] . '  target="_blank"> ';
+            echo '<div class="product_title font-weight-bold "><a href=' . $DataOrderItems['product_detail_url'] . '  target="_blank"> ';
             echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");
             echo '</a></div>';
 
@@ -197,18 +197,18 @@ if (count($result['data']) > 0) {
 
 if ($DataProduct['address_shipping']['address1'] != "") {
         echo'<div  class="col-2">';
-        echo '<div class="card-title font-weight-bold">Alamat Pengiriman</div> ';
+        echo '<div class="product_title font-weight-bold">Alamat Pengiriman</div> ';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['first_name'].'</div>';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['address1'].'</div>';
         echo ' <div class="card-text">'.$DataProduct['address_shipping']['phone'].'</div>';
         echo '</div>';//end div col-auto
 }
         echo'<div  class="col-2">';
-        echo '<div class="card-title font-weight-bold">Jasa Pengiriman</div> ';
+        echo '<div class="product_title font-weight-bold">Jasa Pengiriman</div> ';
         echo ' <div class="card-text">'.$DataOrderItems['shipment_provider'].'</div>';
 
         if ($DataOrderItems['tracking_code'] != "") {
-            echo '<div class="card-title font-weight-bold">No Resi</div> ';
+            echo '<div class="product_title font-weight-bold">No Resi</div> ';
             echo ' <div class="card-text">' . $DataOrderItems['tracking_code'] . '</div>';
         }
 
@@ -217,7 +217,7 @@ if ($DataProduct['address_shipping']['address1'] != "") {
 
 
         echo'<div  class="col-1">';
-        echo '<div class="card-title font-weight-bold">Total Harga</div> ';
+        echo '<div class="product_title font-weight-bold">Total Harga</div> ';
         echo ' <div class="card-text">'.$price.'</div>';
         echo '</div>';//end div col-auto
 

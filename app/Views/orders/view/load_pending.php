@@ -2,11 +2,12 @@
  <?php
 
  	function getOrders(){
-		
+		$page = 1;
 
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, base_url('public/api/orders/get_orders'));
 					$payload = json_encode( array( "user_id"=> "5",
+                                                    "page"=> "1",
 										"status"=> 1
 										) );
 					curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
@@ -160,7 +161,7 @@ function getHistory($order_id){
                 echo ' </div>';
 
                 echo '<div class="col">';
-                echo '<div class="card-title "><a href=' . $DataOrderItems['product_detail_url'] . '  target="_blank"> ';
+                echo '<div class="product_title font-weight-bold"><a href=' . $DataOrderItems['product_detail_url'] . '  target="_blank"> ';
                 echo mb_strimwidth($DataOrderItems['name'], 0, 40, "...");
                 echo '</a></div>';
 
@@ -198,18 +199,18 @@ function getHistory($order_id){
 
 
                 echo'<div  class="col-2">';
-                echo '<div class="card-title font-weight-bold">Alamat Pengiriman</div> ';
+                echo '<div class="product_title font-weight-bold">Alamat Pengiriman</div> ';
                 echo ' <div class="card-text">'.$DataProduct['address_shipping']['first_name'].'</div>';
                 echo ' <div class="card-text">'.$DataProduct['address_shipping']['address1'].'</div>';
                 echo ' <div class="card-text">'.$DataProduct['address_shipping']['phone'].'</div>';
                 echo '</div>';//end div col-auto
 
                 echo'<div  class="col-2">';
-                echo '<div class="card-title font-weight-bold">Jasa Pengiriman</div> ';
+                echo '<div class="product_title font-weight-bold">Jasa Pengiriman</div> ';
                 echo ' <div class="card-text">'.$DataOrderItems['shipment_provider'].'</div>';
 
                 if ($DataOrderItems['tracking_code'] != "") {
-                    echo '<div class="card-title font-weight-bold">No Resi</div> ';
+                    echo '<div class="product_title font-weight-bold">No Resi</div> ';
                     echo ' <div class="card-text">' . $DataOrderItems['tracking_code'] . '</div>';
                 }
 
@@ -218,7 +219,7 @@ function getHistory($order_id){
 
 
                 echo'<div  class="col-1">';
-                echo '<div class="card-title font-weight-bold">Total Harga</div> ';
+                echo '<div class="product_title font-weight-bold">Total Harga</div> ';
                 echo ' <div class="card-text">'.$price.'</div>';
                 echo '</div>';//end div col-auto
 
@@ -283,15 +284,10 @@ function getHistory($order_id){
 
                     }else{
 
-                        if ($marketplace == "LAZADA") {
 
-                            echo'<a data-toggle="modal" data-id="'.$order_id.'" data-merchant_name="'.$merchant_name.'" data-marketplace="'.$marketplace.'"  title="Atur Pengiriman"  class="AcceptOrder btn btn-primary" href="#AcceptOrder">Proses</a>';
+                            echo'<a data-toggle="modal" data-data_order="'.$data_order.'" data-merchant_name="'.$merchant_name.'"  data-marketplace="'.$marketplace.'" title="Terima Pesanan"  class="AcceptOrder btn btn-primary" href="#acceptorder">Proses</a>';
 
-                        }else{
 
-                            echo'<a data-toggle="modal" data-data_order="'.$data_order.'" data-merchant_name="'.$merchant_name.'"  data-marketplace="'.$marketplace.'" title="Terima Pesanan"  class="AcceptOrderShopee btn btn-primary" href="#AcceptOrderShopee">Proses</a>';
-
-                        }
 
                     }
                     }
@@ -329,6 +325,7 @@ function getHistory($order_id){
 	 
 <script>
 
+
 $(document).on("click", ".EditOrder", function () {
      var order_id = $(this).data('id');
 	  var name = $(this).data('name');
@@ -350,57 +347,9 @@ $(document).on("click", ".EditOrder", function () {
 
 
 
+
+
 $(document).on("click", ".AcceptOrder", function () {
-     var order_id = $(this).data('id');
-	 var merchant_name = $(this).data('merchant_name');
-	 var marketplace = $(this).data('marketplace');
-
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        processData: false,
-        data: '{"order_id": "'+ order_id +'", "merchant_name": "'+ merchant_name +'", "marketplace": "'+ marketplace +'","shipping_provider": "dropship", "delivery_type": "dropship"}',
-
-        url:'<?= base_url('public/api/orders/accept_order') ?>',
-
-        beforeSend: function () {
-            $('.btn').attr("disabled","disabled");
-            $('#AcceptOrder .modal-body').css('opacity', '.5');
-        },
-        success:function(data){
-
-            console.log(data.message);
-            console.log(data.status);
-
-            if(data.status == '200'){
-                $('#AcceptOrder #order_id').val('');
-                $('#AcceptOrder #shipping_provider').val('');
-                $('#AcceptOrder #delivery_type').val('');
-
-                $('.statusMsg').html('<span style="color:green;"></p>' +data.message );
-                alert(data.message);
-                window.location.href = '<?= base_url('orders') ?>';
-            }else{
-
-                $('.statusMsg').html('<span style="color:red;"></p>'+data.message);
-                alert(data.message);
-                window.location.href = '<?= base_url('orders') ?>';
-            }
-            $('.btn').removeAttr("disabled");
-            $('#AcceptOrder .modal-body').css('opacity', '');
-
-
-
-        },
-        error: function(){
-            alert("Cannot get data");
-        }
-
-    });
-});
-
-$(document).on("click", ".AcceptOrderShopee", function () {
     var data_order = $(this).data('data_order');
     var merchant_name = $(this).data('merchant_name');
     var marketplace = $(this).data('marketplace');
@@ -449,7 +398,6 @@ $(document).on("click", ".AcceptOrderShopee", function () {
 
     });
 });
-
 
 
 
